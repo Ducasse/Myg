@@ -2,10 +2,11 @@ Class {
 	#name : #MTile,
 	#superclass : #Object,
 	#instVars : [
-		'position',
 		'board',
 		'x',
-		'y'
+		'y',
+		'status',
+		'neighBouring'
 	],
 	#category : #'Myg-Mine'
 }
@@ -39,6 +40,24 @@ MTile >> character [
 MTile >> initialize [ 
 	super initialize.
 	self basicPosition: 1@1
+]
+
+{ #category : #accessing }
+MTile >> isBomb [
+
+	^ false
+]
+
+{ #category : #accessing }
+MTile >> neighBouring [
+
+	^ neighBouring
+]
+
+{ #category : #accessing }
+MTile >> neighBouring: aBlock [
+
+	neighBouring := aBlock
 ]
 
 { #category : #accessing }

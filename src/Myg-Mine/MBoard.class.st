@@ -66,6 +66,19 @@ MBoard >> bottomUpDo: aBlock [
 ]
 
 { #category : #building }
+MBoard >> buildLandcape [
+	
+	"for now we define the same neighbor computation"
+	map leftToRightFromBottomToTopDo: [ :each |
+		each neighbouring: [ :aTile | 
+				aTile position eightNeighbors
+					do: [ :position |
+							| status |
+							status := 0.
+							(each board at: position) isBomb ifTrue: [ status := status + 1 ] ] ] ]
+]
+
+{ #category : #building }
 MBoard >> buildMapWidth: x height: y [
 
 	map := CTArray2D 
@@ -95,7 +108,7 @@ MBoard >> extent: aPoint [
 { #category : #building }
 MBoard >> groundClass [
 
-	^ RbsGround
+	^ MTile
 ]
 
 { #category : #accessing }

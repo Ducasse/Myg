@@ -28,7 +28,7 @@ MBoard >> asciiString [
 
 ]
 
-{ #category : #'low level access' }
+{ #category : #'element access' }
 MBoard >> at: anInteger at: anInteger2 put: anElement [
 	map at: anInteger at: anInteger2 put: anElement 
 ]
@@ -38,13 +38,13 @@ MBoard >> atPosition: aCpPositionable [
 	^ (map atX: aCpPositionable x atY: aCpPositionable y)
 ]
 
-{ #category : #'low level access' }
+{ #category : #'element access' }
 MBoard >> atX: xCoord atY: yCoord [
 
 	^ map atX: xCoord atY: yCoord
 ]
 
-{ #category : #'low level access' }
+{ #category : #'element access' }
 MBoard >> atX: anInteger atY: anInteger2 put: anElement [
 	map atX: anInteger atY: anInteger2 put: anElement 
 ]
@@ -82,7 +82,7 @@ MBoard >> buildMapWidth: x height: y [
 
 	map := CTArray2D width: x height: y.
 	map rowsAndColumnsDo: [ :row :column |
-			self initializeElement: self groundClass new atX: column Y: row ]
+		self initializeElement: self groundClass new atX: column Y: row ]
 ]
 
 { #category : #accessing }
@@ -94,10 +94,10 @@ MBoard >> columnNumber [
 MBoard >> cornersDo: aBlock [
 	"Execute the block on each corner of the board"
 	
-	(self atX: 1 atY: 1) value: aBlock.
-	(self atX: 1 atY: self width) value: aBlock.
-	(self atX: self width atY: self height) value: aBlock.
-	(self atX: self width atY: 1) value: aBlock.
+	aBlock value: (self atX: 1 atY: 1).
+	aBlock value: (self atX: 1 atY: self lineNumber).
+	aBlock value:  (self atX: self columnNumber atY: self lineNumber).
+	aBlock value:  (self atX: self columnNumber atY: 1).
 	
 ]
 
@@ -110,7 +110,7 @@ MBoard >> do: aBlock [
 
 { #category : #accessing }
 MBoard >> extent: aPoint [
-
+	
 	self buildMapWidth: aPoint x height: aPoint y 
 ]
 
@@ -118,11 +118,6 @@ MBoard >> extent: aPoint [
 MBoard >> groundClass [
 
 	^ MTile
-]
-
-{ #category : #accessing }
-MBoard >> height [
-	^ map height
 ]
 
 { #category : #building }
@@ -142,16 +137,11 @@ MBoard >> lineNumber [
 { #category : #printing }
 MBoard >> printNicelyOn: aStream [
 	
-	(self height to: 1 by: -1) 
+	(self lineNumber to: 1 by: -1) 
 		do: [ :yCoord |
-			1 to: self width do: [ :xCoord |
+			1 to: self columnNumber do: [ :xCoord |
 				| el |
 				el := (self atX: xCoord atY: yCoord).
 				aStream nextPut: el class textualMapCharacter]]
 		separatedBy: [ aStream cr ]
-]
-
-{ #category : #accessing }
-MBoard >> width [
-	^ map width
 ]

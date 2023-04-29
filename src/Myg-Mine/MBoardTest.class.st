@@ -29,7 +29,7 @@ MBoardTest >> testGroundIsSet [
 
 	| b |
 	b := MBoard new.
-	self assert: (b atX: 1 atY: 1) class equals: RbsGround
+	self assert: (b atX: 1 atY: 1) class equals: MTile
 ]
 
 { #category : #tests }
@@ -58,7 +58,7 @@ MBoardTest >> testTilePositionUpdatesBoard [
 	b := MBoard new.
 	t := MTile new.
 	t setBoard: b.
-	t x: 2; y: 2.
+	t x: 2 y: 2.
 	self assert: (b atX: 2 atY: 2) equals: t
 ]
 
@@ -69,6 +69,6 @@ MBoardTest >> testTilePositionUpdatesBoard2 [
 	b := MBoard new.
 	t := MTile new.
 	t setBoard: b.
-	t x: 3; y: 1.
+	t x: 3 y: 1.
 	self assert: (b atX: 3 atY: 1) equals: t
 ]

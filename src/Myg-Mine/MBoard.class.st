@@ -80,8 +80,7 @@ MBoard >> buildLandcape [
 { #category : #building }
 MBoard >> buildMapWidth: x height: y [
 
-	map := CTArray2D 
-				width: x height: y.
+	map := CTArray2D width: x height: y.
 	map rowsAndColumnsDo: [ :row :column |
 			self initializeElement: self groundClass new atX: column Y: row ]
 ]
@@ -89,6 +88,17 @@ MBoard >> buildMapWidth: x height: y [
 { #category : #accessing }
 MBoard >> columnNumber [
 	^ map numberOfColumns
+]
+
+{ #category : #building }
+MBoard >> cornersDo: aBlock [
+	"Execute the block on each corner of the board"
+	
+	(self atX: 1 atY: 1) value: aBlock.
+	(self atX: 1 atY: self width) value: aBlock.
+	(self atX: self width atY: self height) value: aBlock.
+	(self atX: self width atY: 1) value: aBlock.
+	
 ]
 
 { #category : #building }

@@ -7,7 +7,7 @@ Class {
 { #category : #'default encoding' }
 MBomb class >> textualMapCharacter [
 
-	^ '*'
+	^ $*
 ]
 
 { #category : #accessing }

@@ -14,7 +14,7 @@ Class {
 { #category : #'default encoding' }
 MTile class >> textualMapCharacter [
 
-	^ '_'
+	^ $_
 ]
 
 { #category : #protected }
@@ -36,7 +36,7 @@ MTile >> character [
 	^ self class textualMapCharacter
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #status }
 MTile >> incrementStatus [
 
 	status := status + 1

@@ -14,7 +14,7 @@ Class {
 { #category : #'default encoding' }
 MTile class >> textualMapCharacter [
 
-	^ self subclassResponsibility
+	^ '_'
 ]
 
 { #category : #protected }
@@ -36,16 +36,28 @@ MTile >> character [
 	^ self class textualMapCharacter
 ]
 
+{ #category : #'as yet unclassified' }
+MTile >> incrementStatus [
+
+	status := status + 1
+]
+
 { #category : #initialization }
-MTile >> initialize [ 
+MTile >> initialize [
+
 	super initialize.
-	self basicPosition: 1@1
+	status := 0.
 ]
 
 { #category : #accessing }
 MTile >> isBomb [
 
 	^ false
+]
+
+{ #category : #testing }
+MTile >> isClean [
+	^ status = 0
 ]
 
 { #category : #accessing }
@@ -86,7 +98,7 @@ MTile >> printOn: aStream [
 	super printOn: aStream.
 	aStream 
 		space ; 
-		nextPut: self character; 
+		print: status ; 
 		space ; 
 		print: x ; 
 		space ; 
@@ -96,6 +108,17 @@ MTile >> printOn: aStream [
 { #category : #protected }
 MTile >> setBoard: aBoard [
 	board := aBoard
+]
+
+{ #category : #accessing }
+MTile >> status [
+	^ status
+]
+
+{ #category : #accessing }
+MTile >> textualMapCharacter [
+
+	^ status asString
 ]
 
 { #category : #accessing }

@@ -70,12 +70,11 @@ MBoard >> buildLandcape [
 	
 	"for now we define the same neighbor computation"
 	map leftToRightFromBottomToTopDo: [ :each |
-		each neighbouring: [ :aTile | 
+		each neighBouring: [ :aTile | 
+	
 				aTile position eightNeighbors
-					do: [ :position |
-							| status |
-							status := 0.
-							(each board at: position) isBomb ifTrue: [ status := status + 1 ] ] ] ]
+					do: [ :position |		
+							(each board atPosition: position) isBomb ifTrue: [ each incrementStatus ] ] ] ]
 ]
 
 { #category : #building }

@@ -4,6 +4,11 @@ Class {
 	#category : #'Myg-Mine-Core'
 }
 
+{ #category : #visiting }
+MyCleanSurrounding >> accept: aMVisitor [
+	^ aMVisitor visitClean: self
+]
+
 { #category : #testing }
 MyCleanSurrounding >> isClean [
 

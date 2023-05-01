@@ -10,6 +10,11 @@ MyBomb class >> textualMapCharacter [
 	^ $*
 ]
 
+{ #category : #visiting }
+MyBomb >> accept: aMVisitor [
+	^ aMVisitor visitBomb: self
+]
+
 { #category : #accessing }
 MyBomb >> isBomb [ 
 

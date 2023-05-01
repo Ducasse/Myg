@@ -8,3 +8,9 @@ Class {
 	],
 	#category : #'Myg-Mine-Debug'
 }
+
+{ #category : #initialization }
+MyBoardPrinter >> initialize [
+	super initialize.
+	writeStream := (WriteStream on: String new)
+]

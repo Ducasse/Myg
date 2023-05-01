@@ -21,6 +21,11 @@ MyBoard class >> new [
 	^ self extent: 30@12
 ]
 
+{ #category : #visiting }
+MyBoard >> accept: aMVisitor [
+	^ aMVisitor visitBoard: self
+]
+
 { #category : #printing }
 MyBoard >> asciiString [ 
 
@@ -53,7 +58,7 @@ MyBoard >> basicPrintOnInspector [
 		yourself
 ]
 
-{ #category : #building }
+{ #category : #iterating }
 MyBoard >> bottomUpDo: aBlock [
 	"Execute the block on each element of the board"
 	
@@ -85,7 +90,7 @@ MyBoard >> columnNumber [
 	^ map numberOfColumns
 ]
 
-{ #category : #building }
+{ #category : #iterating }
 MyBoard >> cornersDo: aBlock [
 	"Execute the block on each corner of the board"
 	
@@ -96,7 +101,7 @@ MyBoard >> cornersDo: aBlock [
 	
 ]
 
-{ #category : #building }
+{ #category : #iterating }
 MyBoard >> do: aBlock [
 	"Execute the block on each element of the board"
 	

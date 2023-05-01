@@ -1,56 +1,51 @@
 Class {
-	#name : #MBoard,
+	#name : #MyBoard,
 	#superclass : #Object,
 	#instVars : [
 		'map',
 		'groundCharacters',
 		'onTopCharacters'
 	],
-	#category : #'Myg-Mine'
+	#category : #'Myg-Mine-Core'
 }
 
 { #category : #'instance creation' }
-MBoard class >> extent: aPoint [
+MyBoard class >> extent: aPoint [
 
 	^ self basicNew extent: aPoint; yourself
 ]
 
 { #category : #'instance creation' }
-MBoard class >> new [
+MyBoard class >> new [
 
 	^ self extent: 30@12
 ]
 
 { #category : #printing }
-MBoard >> asciiString [ 
+MyBoard >> asciiString [ 
 
 	^ String streamContents: [ :st | self printNicelyOn: st ]	
 
 ]
 
-{ #category : #'element access' }
-MBoard >> at: anInteger at: anInteger2 put: anElement [
-	map at: anInteger at: anInteger2 put: anElement 
-]
-
 { #category : #accessing }
-MBoard >> atPosition: aCpPositionable [ 
+MyBoard >> atPosition: aCpPositionable [ 
 	^ (map atX: aCpPositionable x atY: aCpPositionable y)
 ]
 
 { #category : #'element access' }
-MBoard >> atX: xCoord atY: yCoord [
+MyBoard >> atX: xCoord atY: yCoord [
 
 	^ map atX: xCoord atY: yCoord
 ]
 
 { #category : #'element access' }
-MBoard >> atX: anInteger atY: anInteger2 put: anElement [
+MyBoard >> atX: anInteger atY: anInteger2 put: anElement [
 	map atX: anInteger atY: anInteger2 put: anElement 
 ]
 
 { #category : #inspector }
-MBoard >> basicPrintOnInspector [
+MyBoard >> basicPrintOnInspector [
 	<inspectorPresentationOrder: 35 title: 'Myg'>
 
 	^ SpTextPresenter new 
@@ -59,14 +54,14 @@ MBoard >> basicPrintOnInspector [
 ]
 
 { #category : #building }
-MBoard >> bottomUpDo: aBlock [
+MyBoard >> bottomUpDo: aBlock [
 	"Execute the block on each element of the board"
 	
 	map leftToRightFromBottomToTopDo: aBlock
 ]
 
 { #category : #building }
-MBoard >> buildLandcape [
+MyBoard >> buildLandcape [
 	
 	"for now we define the same neighbor computation"
 	map leftToRightFromBottomToTopDo: [ :each |
@@ -78,7 +73,7 @@ MBoard >> buildLandcape [
 ]
 
 { #category : #building }
-MBoard >> buildMapWidth: x height: y [
+MyBoard >> buildMapWidth: x height: y [
 
 	map := CTArray2D width: x height: y.
 	map rowsAndColumnsDo: [ :row :column |
@@ -86,12 +81,12 @@ MBoard >> buildMapWidth: x height: y [
 ]
 
 { #category : #accessing }
-MBoard >> columnNumber [
+MyBoard >> columnNumber [
 	^ map numberOfColumns
 ]
 
 { #category : #building }
-MBoard >> cornersDo: aBlock [
+MyBoard >> cornersDo: aBlock [
 	"Execute the block on each corner of the board"
 	
 	aBlock value: (self atX: 1 atY: 1).
@@ -102,26 +97,26 @@ MBoard >> cornersDo: aBlock [
 ]
 
 { #category : #building }
-MBoard >> do: aBlock [
+MyBoard >> do: aBlock [
 	"Execute the block on each element of the board"
 	
 	map do: aBlock
 ]
 
 { #category : #accessing }
-MBoard >> extent: aPoint [
+MyBoard >> extent: aPoint [
 	
 	self buildMapWidth: aPoint x height: aPoint y 
 ]
 
 { #category : #building }
-MBoard >> groundClass [
+MyBoard >> groundClass [
 
-	^ MTile
+	^ MyTile
 ]
 
 { #category : #building }
-MBoard >> initializeElement: anElement atX: xCoord Y: yCoord [
+MyBoard >> initializeElement: anElement atX: xCoord Y: yCoord [
 
 	anElement setBoard: self.
 	anElement basicPosition: xCoord @ yCoord.
@@ -130,12 +125,12 @@ MBoard >> initializeElement: anElement atX: xCoord Y: yCoord [
 ]
 
 { #category : #accessing }
-MBoard >> lineNumber [
+MyBoard >> lineNumber [
 	^ map numberOfRows
 ]
 
 { #category : #printing }
-MBoard >> printNicelyOn: aStream [
+MyBoard >> printNicelyOn: aStream [
 	
 	(self lineNumber to: 1 by: -1) 
 		do: [ :yCoord |

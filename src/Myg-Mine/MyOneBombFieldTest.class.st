@@ -15,20 +15,20 @@ We have a field with only one bomb
 ```
 "
 Class {
-	#name : #MOneBombFieldTest,
+	#name : #MyOneBombFieldTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'b',
 		'bomb'
 	],
-	#category : #'Myg-Mine'
+	#category : #'Myg-Mine-Core'
 }
 
 { #category : #tests }
-MOneBombFieldTest >> setUp [
+MyOneBombFieldTest >> setUp [
 
-	b := MBoard extent: 100@200.
-	bomb := MBomb new.
+	b := MyBoard extent: 100@200.
+	bomb := MyBomb new.
 	bomb setBoard: b.
 	bomb x: 10 y: 10.
 	b buildLandcape.
@@ -37,7 +37,7 @@ MOneBombFieldTest >> setUp [
 ]
 
 { #category : #tests }
-MOneBombFieldTest >> testClean [
+MyOneBombFieldTest >> testClean [
 
 	| clean |
 	clean := (b atX: 5 atY: 5).
@@ -48,7 +48,7 @@ MOneBombFieldTest >> testClean [
 ]
 
 { #category : #tests }
-MOneBombFieldTest >> testOneBombAroundE [
+MyOneBombFieldTest >> testOneBombAroundE [
 
 	| oneBomb |
 	oneBomb := (b atX: 11 atY: 10).
@@ -59,7 +59,7 @@ MOneBombFieldTest >> testOneBombAroundE [
 ]
 
 { #category : #tests }
-MOneBombFieldTest >> testOneBombAroundN [
+MyOneBombFieldTest >> testOneBombAroundN [
 
 	| oneBomb |
 	oneBomb := (b atX: 10 atY: 9).
@@ -70,7 +70,7 @@ MOneBombFieldTest >> testOneBombAroundN [
 ]
 
 { #category : #tests }
-MOneBombFieldTest >> testOneBombAroundNE [
+MyOneBombFieldTest >> testOneBombAroundNE [
 
 	| oneBomb |
 	oneBomb := b atX: 11 atY: 9.
@@ -81,7 +81,7 @@ MOneBombFieldTest >> testOneBombAroundNE [
 ]
 
 { #category : #tests }
-MOneBombFieldTest >> testOneBombAroundNW [
+MyOneBombFieldTest >> testOneBombAroundNW [
 
 	| oneBomb |
 	oneBomb := (b atX: 9 atY: 9).
@@ -92,7 +92,7 @@ MOneBombFieldTest >> testOneBombAroundNW [
 ]
 
 { #category : #tests }
-MOneBombFieldTest >> testOneBombAroundS [
+MyOneBombFieldTest >> testOneBombAroundS [
 
 	| oneBomb |
 	oneBomb := (b atX: 10 atY: 11).
@@ -103,7 +103,7 @@ MOneBombFieldTest >> testOneBombAroundS [
 ]
 
 { #category : #tests }
-MOneBombFieldTest >> testOneBombAroundSE [
+MyOneBombFieldTest >> testOneBombAroundSE [
 
 	| oneBomb |
 	oneBomb := (b atX: 11 atY: 11).
@@ -114,7 +114,7 @@ MOneBombFieldTest >> testOneBombAroundSE [
 ]
 
 { #category : #tests }
-MOneBombFieldTest >> testOneBombAroundSW [
+MyOneBombFieldTest >> testOneBombAroundSW [
 
 	| oneBomb |
 	oneBomb := (b atX: 9 atY: 11).
@@ -125,7 +125,7 @@ MOneBombFieldTest >> testOneBombAroundSW [
 ]
 
 { #category : #tests }
-MOneBombFieldTest >> testOneBombAroundW [
+MyOneBombFieldTest >> testOneBombAroundW [
 
 	| oneBomb |
 	oneBomb := (b atX: 9 atY: 10).

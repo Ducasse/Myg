@@ -1,14 +1,14 @@
 Class {
-	#name : #MBoardTest,
+	#name : #MyBoardTest,
 	#superclass : #TestCase,
-	#category : #'Myg-Mine'
+	#category : #'Myg-Mine-Core'
 }
 
 { #category : #tests }
-MBoardTest >> testAccess [
+MyBoardTest >> testAccess [
 
 	| b | 
-	b := MBoard new. 
+	b := MyBoard new. 
 	self assert: b columnNumber equals: 30.
 	self assert: b lineNumber equals: 12.
 	self assert: (b atX: 1 atY: 1) x equals: 1.
@@ -16,10 +16,10 @@ MBoardTest >> testAccess [
 ]
 
 { #category : #tests }
-MBoardTest >> testAccess2 [
+MyBoardTest >> testAccess2 [
 
 	| b | 
-	b := MBoard new. 
+	b := MyBoard new. 
 	self assert: b columnNumber equals: 30.
 	self assert: b lineNumber equals: 12.
 	self assert: (b atX: 1 atY: 12) x equals: 1.
@@ -27,20 +27,20 @@ MBoardTest >> testAccess2 [
 ]
 
 { #category : #tests }
-MBoardTest >> testCornerDo [
+MyBoardTest >> testCornerDo [
 
 	| b sum |
-	b := MBoard new.
+	b := MyBoard new.
 	sum := 0.
 	b cornersDo: [:aCorner | sum := sum + 1].
 	self assert: sum equals: 4
 ]
 
 { #category : #tests }
-MBoardTest >> testCreatedBoard [
+MyBoardTest >> testCreatedBoard [
 
 	| b |
-	b := MBoard extent: 5@2.
+	b := MyBoard extent: 5@2.
 	"	xxxxx
 		xxxxx"
 	self assert: b columnNumber equals: 5.
@@ -48,27 +48,27 @@ MBoardTest >> testCreatedBoard [
 ]
 
 { #category : #tests }
-MBoardTest >> testCreatedBoardWithExtent [
+MyBoardTest >> testCreatedBoardWithExtent [
 
 	| b |
-	b := MBoard extent: 100@200.
+	b := MyBoard extent: 100@200.
 	self assert: b columnNumber equals: 100.
 	self assert: b lineNumber equals: 200.
 ]
 
 { #category : #tests }
-MBoardTest >> testGroundIsSet [
+MyBoardTest >> testGroundIsSet [
 
 	| b |
-	b := MBoard new.
-	self assert: (b atX: 1 atY: 1) class equals: MTile
+	b := MyBoard new.
+	self assert: (b atX: 1 atY: 1) class equals: MyTile
 ]
 
 { #category : #tests }
-MBoardTest >> testPrintingCreatedBoard [
+MyBoardTest >> testPrintingCreatedBoard [
 
 	| b |
-	b := MBoard extent: 5@2.
+	b := MyBoard extent: 5@2.
 	self assert: b columnNumber equals: 5.
 	self assert: b lineNumber equals: 2.
 	self assert: b asciiString equals: '_____
@@ -76,30 +76,30 @@ _____'
 ]
 
 { #category : #tests }
-MBoardTest >> testTileKnowsItsBoard [
+MyBoardTest >> testTileKnowsItsBoard [
 
 	| b |
-	b := MBoard new.
+	b := MyBoard new.
 	self assert: (b atX: 2 atY: 2) board equals: b
 ]
 
 { #category : #tests }
-MBoardTest >> testTilePositionUpdatesBoard [
+MyBoardTest >> testTilePositionUpdatesBoard [
 
 	| b t |
-	b := MBoard new.
-	t := MTile new.
+	b := MyBoard new.
+	t := MyTile new.
 	t setBoard: b.
 	t x: 2 y: 2.
 	self assert: (b atX: 2 atY: 2) equals: t
 ]
 
 { #category : #tests }
-MBoardTest >> testTilePositionUpdatesBoard2 [
+MyBoardTest >> testTilePositionUpdatesBoard2 [
 
 	| b t |
-	b := MBoard new.
-	t := MTile new.
+	b := MyBoard new.
+	t := MyTile new.
 	t setBoard: b.
 	t x: 3 y: 1.
 	self assert: (b atX: 3 atY: 1) equals: t

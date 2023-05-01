@@ -1,17 +1,17 @@
 Class {
-	#name : #MCleanSurrounding,
-	#superclass : #MTile,
-	#category : #'Myg-Mine'
+	#name : #MyCleanSurrounding,
+	#superclass : #MyTile,
+	#category : #'Myg-Mine-Core'
 }
 
 { #category : #testing }
-MCleanSurrounding >> isClean [
+MyCleanSurrounding >> isClean [
 
 	^ true
 ]
 
 { #category : #printing }
-MCleanSurrounding >> printOn: aStream [ 
+MyCleanSurrounding >> printOn: aStream [ 
 
 	super printOn: aStream.
 	aStream 

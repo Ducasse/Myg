@@ -1,28 +1,28 @@
 Class {
-	#name : #MBomb,
-	#superclass : #MTile,
-	#category : #'Myg-Mine'
+	#name : #MyBomb,
+	#superclass : #MyTile,
+	#category : #'Myg-Mine-Core'
 }
 
 { #category : #'default encoding' }
-MBomb class >> textualMapCharacter [
+MyBomb class >> textualMapCharacter [
 
 	^ $*
 ]
 
 { #category : #accessing }
-MBomb >> isBomb [ 
+MyBomb >> isBomb [ 
 
 	^ true
 ]
 
 { #category : #accessing }
-MBomb >> isClean [ 
+MyBomb >> isClean [ 
 	^ false
 ]
 
 { #category : #printing }
-MBomb >> printOn: aStream [ 
+MyBomb >> printOn: aStream [ 
 
 	super printOn: aStream.
 	aStream 

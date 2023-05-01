@@ -1,5 +1,5 @@
 Class {
-	#name : #MTile,
+	#name : #MyTile,
 	#superclass : #Object,
 	#instVars : [
 		'board',
@@ -8,17 +8,17 @@ Class {
 		'status',
 		'neighBouring'
 	],
-	#category : #'Myg-Mine'
+	#category : #'Myg-Mine-Core'
 }
 
 { #category : #'default encoding' }
-MTile class >> textualMapCharacter [
+MyTile class >> textualMapCharacter [
 
 	^ $_
 ]
 
 { #category : #protected }
-MTile >> basicPosition: aPosition [
+MyTile >> basicPosition: aPosition [
 	"A position is a x,y kind of object."
 	"to probably remove and introduce basicX: and basicY:"
 	x := aPosition x.
@@ -26,74 +26,74 @@ MTile >> basicPosition: aPosition [
 ]
 
 { #category : #accessing }
-MTile >> board [
+MyTile >> board [
 	^ board 
 ]
 
 { #category : #accessing }
-MTile >> character [
+MyTile >> character [
 
 	^ self class textualMapCharacter
 ]
 
 { #category : #status }
-MTile >> incrementStatus [
+MyTile >> incrementStatus [
 
 	status := status + 1
 ]
 
 { #category : #initialization }
-MTile >> initialize [
+MyTile >> initialize [
 
 	super initialize.
 	status := 0.
 ]
 
 { #category : #accessing }
-MTile >> isBomb [
+MyTile >> isBomb [
 
 	^ false
 ]
 
 { #category : #testing }
-MTile >> isClean [
+MyTile >> isClean [
 	^ status = 0
 ]
 
 { #category : #accessing }
-MTile >> neighBouring [
+MyTile >> neighBouring [
 
 	^ neighBouring
 ]
 
 { #category : #accessing }
-MTile >> neighBouring: aBlock [
+MyTile >> neighBouring: aBlock [
 
 	neighBouring := aBlock
 ]
 
 { #category : #accessing }
-MTile >> position [
+MyTile >> position [
 
 	^ x @ y
 ]
 
 { #category : #protected }
-MTile >> position: aPoint [
+MyTile >> position: aPoint [
 
 	self basicPosition: aPoint.
 	self board atX: aPoint x atY: aPoint y put: self
 ]
 
 { #category : #move }
-MTile >> postCreationAction [
+MyTile >> postCreationAction [
 	"nothing by default"
 	
 	^ self
 ]
 
 { #category : #printing }
-MTile >> printOn: aStream [ 
+MyTile >> printOn: aStream [ 
 
 	super printOn: aStream.
 	aStream 
@@ -106,36 +106,36 @@ MTile >> printOn: aStream [
 ]
 
 { #category : #protected }
-MTile >> setBoard: aBoard [
+MyTile >> setBoard: aBoard [
 	board := aBoard
 ]
 
 { #category : #accessing }
-MTile >> status [
+MyTile >> status [
 	^ status
 ]
 
 { #category : #accessing }
-MTile >> textualMapCharacter [
+MyTile >> textualMapCharacter [
 
 	^ status asString
 ]
 
 { #category : #accessing }
-MTile >> x [
+MyTile >> x [
 
 	^ x
 ]
 
 { #category : #accessing }
-MTile >> x: anInteger [
+MyTile >> x: anInteger [
 	"may be we should update the previous position."
 	x := anInteger.
 	self board atX: x atY: y put: self
 ]
 
 { #category : #accessing }
-MTile >> x: xCoord y: yCoord [
+MyTile >> x: xCoord y: yCoord [
 	"may be we should update the previous position."
 	x := xCoord.
 	y := yCoord.
@@ -143,13 +143,13 @@ MTile >> x: xCoord y: yCoord [
 ]
 
 { #category : #accessing }
-MTile >> y [
+MyTile >> y [
 
 	^ y
 ]
 
 { #category : #accessing }
-MTile >> y: anInteger [
+MyTile >> y: anInteger [
 	"may be we should update the previous position."
 
 	y := anInteger.

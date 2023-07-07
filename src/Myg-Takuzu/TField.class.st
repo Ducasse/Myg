@@ -529,13 +529,13 @@ TField class >> size: aNumber [
 				   tabulate: [ :x :y | TSetBox value: nil ])
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 TField >> checkIfFinished [
 
 	(self isFull and: [ self isValid ]) ifTrue: [ self endGame ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #actions }
 TField >> clickOnBox: aTBox [
 
 	| box |
@@ -544,7 +544,7 @@ TField >> clickOnBox: aTBox [
 	self checkIfFinished
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #actions }
 TField >> endGame [
 
 	| container space |
@@ -666,7 +666,7 @@ TField >> isValid [
 	^ true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #actions }
 TField >> permutateLine: aFirstNumber with: aSecondNumber [
 
 	| tmp |
@@ -676,7 +676,7 @@ TField >> permutateLine: aFirstNumber with: aSecondNumber [
 		self grid atRow: aSecondNumber put: tmp
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #actions }
 TField >> permutateLines [
 
 	| array |
@@ -703,7 +703,7 @@ TField >> removeRandomBoxesWithRatio: aNumber [
 			self grid at: column @ row put: (TUnknownBox new position: column @ row) ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #actions }
 TField >> solve [
 
 	^ (self solveTheField: self atColumn: 1 atRow: 1) ifTrue: [ 
@@ -711,7 +711,7 @@ TField >> solve [
 	ifFalse: [ Error signal: 'Field not solvable' ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #actions }
 TField >> solveTheField: aTField atColumn: columnIndex atRow: rowIndex [
 
 	| box currentColumn currentRow |

@@ -11,10 +11,6 @@ BaselineOfMyg >> baseline: spec [
 	spec
 		baseline: 'Bloc'
 		with: [ spec repository: 'github://pharo-graphics/Bloc:dev-1.0/src' ].
-	spec
-		baseline: 'LevelImporter'
-		with: [
-		spec repository: 'github://Enzo-Demeulenaere/LevelImporter:main' ].
 
 	spec
 		baseline: 'Toplo'
@@ -23,10 +19,13 @@ BaselineOfMyg >> baseline: spec [
 	spec baseline: 'ContainersArray2D' with: [
 		spec repository:
 			'github://Enzo-Demeulenaere/Containers-Array2D:master/src' ].
-		
+	
 	spec
 		package: 'MygCore' with: [
-			spec requires: #( 'Bloc' 'Toplo' 'LevelImporter' 'ContainersArray2D' ) ];
+			spec requires: #( 'Bloc' 'Toplo' 'ContainersArray2D' ) ];
+		
+		package: 'MygCore-Tests' with: [
+			spec requires: #( 'MygCore' ) ];
 			
 		package: 'Myg-Takuzu' with: [ spec requires:  #( 'MygCore' ) ];
 		package: 'Myg-Takuzu-Tests' with: [ spec requires: #( 'Myg-Takuzu' ) ];

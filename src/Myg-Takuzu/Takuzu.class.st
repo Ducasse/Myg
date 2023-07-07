@@ -1,7 +1,7 @@
 Class {
 	#name : #Takuzu,
 	#superclass : #Object,
-	#category : #'Myg-Takuzu-Core'
+	#category : #'Myg-Takuzu-UI'
 }
 
 { #category : #'as yet unclassified' }

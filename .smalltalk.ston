@@ -1,0 +1,17 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'Myg',
+      #onConflict : #useIncoming,
+      #onUpgrade : #useIncoming,
+      #ignoreImage : true,
+      #directory : 'src',
+      #platforms : [ #pharo ]
+    }
+  ],
+  #testing : {
+    #include : {
+      #packages : [ 'Myg-Takuzu-Tests.*' ]
+    }
+}
+}

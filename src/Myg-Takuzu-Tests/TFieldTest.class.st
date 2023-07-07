@@ -38,7 +38,7 @@ TFieldTest >> testIsColumnValidAtIndex [
 TFieldTest >> testIsFull [
 
 	| field |
-	field := TField grid:
+	field := TField configureGrid:
 		         (CTNewArray2D
 			          width: 4
 			          height: 4

@@ -1,19 +1,8 @@
 Class {
 	#name : #TField,
-	#superclass : #Object,
-	#instVars : [
-		'grid'
-	],
+	#superclass : #MygBoard,
 	#category : #'Myg-Takuzu-Core'
 }
-
-{ #category : #'point functions' }
-TField class >> emptyGridWithSize: aNumber [
-
-	^ self new
-		  grid: (CTNewArray2D width: aNumber height: aNumber) ;
-		  yourself
-]
 
 { #category : #translating }
 TField class >> generate [
@@ -24,23 +13,12 @@ TField class >> generate [
 { #category : #translating }
 TField class >> generateWithSize: aNumber [
 
-	^ (self
-		  size: aNumber)
-		  solve;
-		  permutateLines;
-		  removeRandomBoxes;
+	^ (self newSquaredSize: aNumber)
+		  initializeRandomized;
 		  yourself
 ]
 
-{ #category : #'point functions' }
-TField class >> grid: aCTNewArray2D [
-
-	^ self new
-		  grid: aCTNewArray2D;
-		  yourself
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : #'for tests' }
 TField class >> gridForTest [
 	"represents this grid: 
 	
@@ -49,7 +27,7 @@ TField class >> gridForTest [
 	| _ | 1 | 1 | _ |
 	| _ | _ | _ | _ |"
 
-	^ self grid: ((CTNewArray2D width: 4 height: 4)
+	^ self configureGrid: ((CTNewArray2D width: 4 height: 4)
 			   at: 1 @ 1 put: (TBox createFixedBox: 1);
 			   at: 1 @ 2 put: TBox createUnknownBox;
 			   at: 1 @ 3 put: TBox createUnknownBox;
@@ -85,7 +63,7 @@ _0____1_1_
 1______11_'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -105,7 +83,7 @@ __0__1____
 _0__0_0___'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -125,7 +103,7 @@ _____11___
 ___0____1_'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -145,7 +123,7 @@ _____1__1_
 1_1_1_____'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -165,7 +143,7 @@ __1___1_1_
 ___0__1_1_'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -187,7 +165,7 @@ _______0__01
 ____1__11___'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -209,7 +187,7 @@ ______11_1__
 1______00___'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -231,7 +209,7 @@ _____0_0_0_1
 __0___1_____'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -253,7 +231,7 @@ ___1_1__00__
 1_0__1____0_'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -275,7 +253,7 @@ __10__1_1___
 _____1____0_'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -289,7 +267,7 @@ _00_
 ____'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -303,7 +281,7 @@ ____
 _00_'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -317,7 +295,7 @@ _10_
 ___0'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -331,7 +309,7 @@ _0__
 ____'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -345,7 +323,7 @@ ____
 ___0'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -361,7 +339,7 @@ ______
 ____1_'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -377,7 +355,7 @@ ___1__
 _0____'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -393,7 +371,7 @@ ____1_
 _11___'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -409,7 +387,7 @@ ______
 ______'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -425,7 +403,7 @@ ___1__
 ___1__'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -443,7 +421,7 @@ _0______
 11___10_'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -461,7 +439,7 @@ __00____
 _1______'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -479,7 +457,7 @@ __11__01
 ______0_'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -497,7 +475,7 @@ ________
 ___1____'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
@@ -515,15 +493,15 @@ ________
 0_____01'.
 
 
-	^ self grid:
+	^ self configureGrid:
 		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
-{ #category : #accessing }
-TField class >> size: aNumber [
+{ #category : #'instance creation' }
+TField class >> newSquaredSize: aNumber [
 
 	^ self new
-		  grid: (CTNewArray2D
+		  configureGrid: (CTNewArray2D
 				   width: aNumber
 				   height: aNumber
 				   tabulate: [ :x :y | TFixedBox value: nil ])
@@ -571,24 +549,13 @@ TField >> endGame [
 	^ space
 ]
 
-{ #category : #accessing }
-TField >> grid [ 
-	^ grid 
-]
-
-{ #category : #accessing }
-TField >> grid: aCTNewArray2D [
-
-	grid := aCTNewArray2D.
-	grid withIndexes: [ :column :row |
-		(grid at: column @ row) position: column @ row;
-		field: self   ]
-]
-
 { #category : #initialization }
-TField >> initialize [
+TField >> initializeRandomized [
 
-	super initialize.
+	self 
+		 solve;
+		  permutateLines;
+		  removeRandomBoxes
 ]
 
 { #category : #testing }

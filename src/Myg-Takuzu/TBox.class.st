@@ -1,10 +1,8 @@
 Class {
 	#name : #TBox,
-	#superclass : #Object,
+	#superclass : #MygAbstractBox,
 	#instVars : [
 		'value',
-		'field',
-		'position',
 		'valueDictionary'
 	],
 	#category : #'Myg-Takuzu-Core'

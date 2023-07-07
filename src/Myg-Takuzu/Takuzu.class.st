@@ -1,3 +1,10 @@
+"
+To open the game
+
+```
+Takuzu openWithMenuBar
+```
+"
 Class {
 	#name : #Takuzu,
 	#superclass : #Object,

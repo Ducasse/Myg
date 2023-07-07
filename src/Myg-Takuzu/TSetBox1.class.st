@@ -1,6 +1,6 @@
 Class {
 	#name : #TSetBox1,
-	#superclass : #TSetBox,
+	#superclass : #TFixedBox,
 	#category : #'Myg-Takuzu-Core'
 }
 

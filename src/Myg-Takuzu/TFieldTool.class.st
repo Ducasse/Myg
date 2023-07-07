@@ -103,16 +103,16 @@ TFieldTool >> buildMapFor: aString [
 
 { #category : #private }
 TFieldTool >> classFor: aCharacter [ 
-	^ characterClassBinding at: aCharacter ifAbsent: [ TBox unknown ]
+	^ characterClassBinding at: aCharacter ifAbsent: [ TBox createUnknownBox ]
 ]
 
 { #category : #'as yet unclassified' }
 TFieldTool >> fillBindingDictionary [
 
 	characterClassBinding := Dictionary new.
-	characterClassBinding at: '_' put: TBox unknown.
-	characterClassBinding at: '1' put: (TBox set: 1).
-	characterClassBinding at: '0' put: (TBox set: 0)
+	characterClassBinding at: '_' put: TBox createUnknownBox.
+	characterClassBinding at: '1' put: (TBox createFixedBox: 1).
+	characterClassBinding at: '0' put: (TBox createFixedBox: 0)
 ]
 
 { #category : #initialization }

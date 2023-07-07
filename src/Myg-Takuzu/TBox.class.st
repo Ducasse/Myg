@@ -10,17 +10,17 @@ Class {
 	#category : #'Myg-Takuzu-Core'
 }
 
-{ #category : #initialization }
-TBox class >> set: aNumber [
-	^ TSetBox value: aNumber
+{ #category : #factory }
+TBox class >> createFixedBox: aNumber [
+	^ TFixedBox value: aNumber
 ]
 
-{ #category : #'as yet unclassified' }
-TBox class >> unknown [
+{ #category : #factory }
+TBox class >> createUnknownBox [
 	^ TUnknownBox new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #interaction }
 TBox >> click [
 	self subclassResponsibility
 ]

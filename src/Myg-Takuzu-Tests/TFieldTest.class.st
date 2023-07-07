@@ -8,8 +8,8 @@ Class {
 TFieldTest >> testIsColumnUniqueAtIndex [
 
 	| field box0 box1 |
-	box0 := TSetBox value: 0.
-	box1 := TSetBox value: 1.
+	box0 := TFixedBox value: 0.
+	box1 := TFixedBox value: 1.
 	field := self gridForTest.
 	field grid atColumn: 2 atRow: 2 put: box1.
 
@@ -21,8 +21,8 @@ TFieldTest >> testIsColumnUniqueAtIndex [
 TFieldTest >> testIsColumnValidAtIndex [
 
 	| field box0 box1 |
-	box0 := TSetBox value: 0.
-	box1 := TSetBox value: 1.
+	box0 := TFixedBox value: 0.
+	box1 := TFixedBox value: 1.
 	field := self gridForTest.
 	field grid atColumn: 2 atRow: 1 put: box1.
 	self assert: (field isColumnValidAtIndex: 2).
@@ -52,8 +52,8 @@ TFieldTest >> testIsFull [
 TFieldTest >> testIsRowUniqueAtIndex [
 
 	| field box0 box1 |
-	box0 := TSetBox value: 0.
-	box1 := TSetBox value: 1.
+	box0 := TFixedBox value: 0.
+	box1 := TFixedBox value: 1.
 	field := self gridForTest.
 	field grid atColumn: 2 atRow: 2 put: box1.
 
@@ -66,8 +66,8 @@ TFieldTest >> testIsRowUniqueAtIndex [
 TFieldTest >> testIsRowValidAtIndex [
 
 	| field box0 box1 |
-	box0 := TSetBox value: 0.
-	box1 := TSetBox value: 1.
+	box0 := TFixedBox value: 0.
+	box1 := TFixedBox value: 1.
 	field := self gridForTest.
 	field grid atColumn: 1 atRow: 2 put: box1.
 	self assert: (field isRowValidAtIndex: 2).
@@ -84,8 +84,8 @@ TFieldTest >> testIsThisLineUniqueAmongArray [
 
 	| field box0 box1 boxNil originalLine line1 line2 line3 |
 	field := TField new.
-	box0 := TSetBox value: 0.
-	box1 := TSetBox value: 1.
+	box0 := TFixedBox value: 0.
+	box1 := TFixedBox value: 1.
 	boxNil := TUnknownBox.
 	originalLine := TLine new contents: (OrderedCollection
 			                 with: box0
@@ -119,18 +119,18 @@ TFieldTest >> testIsThisLineUniqueAmongArray [
 TFieldTest >> testIsValid [
 
 	| field box0 box1 |
-	box0 := TSetBox value: 0.
-	box1 := TSetBox value: 1.
+	box0 := TFixedBox value: 0.
+	box1 := TFixedBox value: 1.
 	field := self gridForTest.
 	self assert: field isValid.
 	field grid atColumn: 2 atRow: 2 put: box1.
 	"we try to unvalidate it with similar lines"
 	self deny: field isValid.
-	field grid atColumn: 2 atRow: 2 put: TBox unknown.
+	field grid atColumn: 2 atRow: 2 put: TBox createUnknownBox.
 	field grid atColumn: 3 atRow: 1 put: box1.
 	"we try to unvalidate it with unvalid row"
 	self deny: field isValid.
-	field grid atColumn: 3 atRow: 1 put: TBox unknown.
+	field grid atColumn: 3 atRow: 1 put: TBox createUnknownBox.
 	field grid atColumn: 1 atRow: 3 put: box1.
 	"we try to unvalidate it with unvalid column"
 	self deny: field isValid
@@ -152,7 +152,7 @@ TFieldTest >> testSolveTheFieldAtColumnAtRow [
 
 	| field box1 |
 	field := TField gridForTest.
-	box1 := TSetBox value: 1.
+	box1 := TFixedBox value: 1.
 	self assert: (field solveTheField: field atColumn: 1 atRow: 1).
 	field := TField gridForTest.
 	field grid at: 1 @ 3 put: box1.

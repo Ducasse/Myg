@@ -1,5 +1,5 @@
 Class {
-	#name : #LevelImporterTest,
+	#name : #MygLevelImporterTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'importer'
@@ -8,21 +8,21 @@ Class {
 }
 
 { #category : #accessing }
-LevelImporterTest >> importer [ 
+MygLevelImporterTest >> importer [ 
 	^ importer
 ]
 
 { #category : #running }
-LevelImporterTest >> setUp [
+MygLevelImporterTest >> setUp [
 
 	| dictionary |
 	super setUp.
 	dictionary := self setUpDictionary.
-	importer := LevelImporter new fillBindingDictionary: dictionary.
+	importer := MygLevelImporter new fillBindingDictionary: dictionary.
 ]
 
 { #category : #running }
-LevelImporterTest >> setUpDictionary [
+MygLevelImporterTest >> setUpDictionary [
 
 	| dictionary |
 	dictionary := Dictionary new
@@ -34,7 +34,7 @@ LevelImporterTest >> setUpDictionary [
 ]
 
 { #category : #tests }
-LevelImporterTest >> testBuildArrayFor [
+MygLevelImporterTest >> testBuildArrayFor [
 
 	| string res |
 	string := '01
@@ -46,7 +46,7 @@ __'.
 ]
 
 { #category : #tests }
-LevelImporterTest >> testBuildMapFor [
+MygLevelImporterTest >> testBuildMapFor [
 
 	| string res |
 	string := 'aa

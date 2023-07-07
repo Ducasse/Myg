@@ -86,7 +86,7 @@ _0____1_1_
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level10 }
@@ -106,7 +106,7 @@ _0__0_0___'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level10 }
@@ -126,7 +126,7 @@ ___0____1_'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level10 }
@@ -146,7 +146,7 @@ _____1__1_
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level10 }
@@ -166,7 +166,7 @@ ___0__1_1_'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level12 }
@@ -188,7 +188,7 @@ ____1__11___'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level12 }
@@ -210,7 +210,7 @@ ______11_1__
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level12 }
@@ -232,7 +232,7 @@ __0___1_____'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level12 }
@@ -254,7 +254,7 @@ ___1_1__00__
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level12 }
@@ -276,7 +276,7 @@ _____1____0_'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level4 }
@@ -290,7 +290,7 @@ ____'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level4 }
@@ -304,7 +304,7 @@ _00_'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level4 }
@@ -318,7 +318,7 @@ ___0'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level4 }
@@ -332,7 +332,7 @@ ____'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level4 }
@@ -346,7 +346,7 @@ ___0'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level6 }
@@ -362,7 +362,7 @@ ____1_'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level6 }
@@ -378,7 +378,7 @@ _0____'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level6 }
@@ -394,7 +394,7 @@ _11___'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level6 }
@@ -410,7 +410,7 @@ ______'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level6 }
@@ -426,7 +426,7 @@ ___1__'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level8 }
@@ -444,7 +444,7 @@ _0______
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level8 }
@@ -462,7 +462,7 @@ _1______'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level8 }
@@ -480,7 +480,7 @@ ______0_'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level8 }
@@ -498,7 +498,7 @@ ___1____'.
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #level8 }
@@ -516,7 +516,7 @@ ________
 
 
 	^ self grid:
-		  (LevelImporter fromString: level fromPackage: self package)
+		  (MygLevelImporter fromString: level fromPackage: self package)
 ]
 
 { #category : #accessing }

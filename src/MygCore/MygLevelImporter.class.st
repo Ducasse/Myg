@@ -1,5 +1,5 @@
 Class {
-	#name : #LevelImporter,
+	#name : #MygLevelImporter,
 	#superclass : #Object,
 	#instVars : [
 		'lines',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-LevelImporter class >> createDictionaryFromPackage: aRPackage [
+MygLevelImporter class >> createDictionaryFromPackage: aRPackage [
 
 	| dictionary classes |
 	dictionary := Dictionary new.
@@ -26,7 +26,7 @@ LevelImporter class >> createDictionaryFromPackage: aRPackage [
 ]
 
 { #category : #'instance creation' }
-LevelImporter class >> fromString: aString fromPackage: aPackage [
+MygLevelImporter class >> fromString: aString fromPackage: aPackage [
 
 	| dictionary|
 	dictionary := self createDictionaryFromPackage: aPackage.
@@ -34,14 +34,14 @@ LevelImporter class >> fromString: aString fromPackage: aPackage [
 ]
 
 { #category : #'instance creation' }
-LevelImporter class >> fromString: aString withDictionary: aDictionary [
+MygLevelImporter class >> fromString: aString withDictionary: aDictionary [
 	|tool|
 	tool := self new fillBindingDictionary: aDictionary.
 	^ tool buildMapFor: aString
 ]
 
 { #category : #'as yet unclassified' }
-LevelImporter >> buildArrayFor: aString [
+MygLevelImporter >> buildArrayFor: aString [
 
 	| tmpArray array |
 	lines := self splitLines: aString.
@@ -55,7 +55,7 @@ LevelImporter >> buildArrayFor: aString [
 ]
 
 { #category : #private }
-LevelImporter >> buildMapFor: aString [
+MygLevelImporter >> buildMapFor: aString [
 
 	| array2D |
 	array2D := self buildArrayFor: aString.
@@ -63,24 +63,24 @@ LevelImporter >> buildMapFor: aString [
 ]
 
 { #category : #private }
-LevelImporter >> classFor: aCharacter [
+MygLevelImporter >> classFor: aCharacter [
 
 	^ characterClassBinding at: aCharacter ifAbsent: [ "maybe add a default value" ]
 ]
 
 { #category : #private }
-LevelImporter >> fillBindingDictionary: aDictionary [
+MygLevelImporter >> fillBindingDictionary: aDictionary [
 
 	characterClassBinding := aDictionary
 ]
 
 { #category : #'as yet unclassified' }
-LevelImporter >> maxLineLength [
+MygLevelImporter >> maxLineLength [
 
 	^ (lines max: [ :each | each size ]) 
 ]
 
 { #category : #'as yet unclassified' }
-LevelImporter >> splitLines: aString [
+MygLevelImporter >> splitLines: aString [
 	^ aString splitOn: Character cr
 ]

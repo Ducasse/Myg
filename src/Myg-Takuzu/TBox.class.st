@@ -10,7 +10,7 @@ Class {
 
 { #category : #factory }
 TBox class >> createFixedBox: aNumber [
-	^ TFixedBox value: aNumber
+	^ TFixedBox createBoxWithValue: aNumber
 ]
 
 { #category : #factory }
@@ -23,14 +23,9 @@ TBox >> click [
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
-TBox >> field [ 
-	^ field 
-]
-
-{ #category : #accessing }
-TBox >> field: aTField [ 
-	field := aTField 
+{ #category : #evaluating }
+TBox >> createBoxWithValue: aNumber [
+	value := aNumber 
 ]
 
 { #category : #initialization }
@@ -54,16 +49,6 @@ TBox >> isTUnknownBox [
 	^ false
 ]
 
-{ #category : #accessing }
-TBox >> position [ 
-	^ position
-]
-
-{ #category : #accessing }
-TBox >> position: aPoint [ 
-	position := aPoint 
-]
-
 { #category : #printing }
 TBox >> printOn: aStream [
 
@@ -75,11 +60,6 @@ TBox >> printOn: aStream [
 { #category : #evaluating }
 TBox >> value [ 
 	^ value 
-]
-
-{ #category : #evaluating }
-TBox >> value: aNumber [
-	value := aNumber 
 ]
 
 { #category : #accessing }

@@ -72,12 +72,12 @@ TLine >> isValid [
 		  nbOf0 <= (length // 2) and: [ nbOf1 <= (length // 2) ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 TLine >> nbOf0 [ 
 	^ self contents count: [ :box | box value = 0] 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 TLine >> nbOf1 [
 
 	^ self contents count: [ :box | box value = 1 ]

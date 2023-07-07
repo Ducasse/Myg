@@ -8,8 +8,8 @@ Class {
 	#category : #MygCore
 }
 
-{ #category : #'as yet unclassified' }
-MygLevelImporter class >> createDictionaryFromPackage: aRPackage [
+{ #category : #helpers }
+MygLevelImporter class >> createBindingDictionaryFromPackage: aRPackage [
 
 	| dictionary classes |
 	dictionary := Dictionary new.
@@ -29,19 +29,21 @@ MygLevelImporter class >> createDictionaryFromPackage: aRPackage [
 MygLevelImporter class >> fromString: aString fromPackage: aPackage [
 
 	| dictionary|
-	dictionary := self createDictionaryFromPackage: aPackage.
-	^ self fromString: aString withDictionary: dictionary
+	dictionary := self createBindingDictionaryFromPackage: aPackage.
+	^ self fromString: aString withBindings: dictionary
 ]
 
 { #category : #'instance creation' }
-MygLevelImporter class >> fromString: aString withDictionary: aDictionary [
-	|tool|
-	tool := self new fillBindingDictionary: aDictionary.
-	^ tool buildMapFor: aString
+MygLevelImporter class >> fromString: aString withBindings: aDictionary [
+
+	| tool |
+	tool := self new.
+	tool fillBindingDictionary: aDictionary.
+	^ tool buildGridFor: aString
 ]
 
-{ #category : #'as yet unclassified' }
-MygLevelImporter >> buildArrayFor: aString [
+{ #category : #private }
+MygLevelImporter >> buildCharacterArrayFor: aString [
 
 	| tmpArray array |
 	lines := self splitLines: aString.
@@ -55,17 +57,21 @@ MygLevelImporter >> buildArrayFor: aString [
 ]
 
 { #category : #private }
-MygLevelImporter >> buildMapFor: aString [
+MygLevelImporter >> buildGridFor: aString [
 
 	| array2D |
-	array2D := self buildArrayFor: aString.
-	^ array2D collect: [ :each | (self classFor: each) new ]
+	array2D := self buildCharacterArrayFor: aString.
+	array2D withIndexesDo: [ :columnIndex :rowIndex :value | 
+		array2D atColumn: columnIndex atRow: rowIndex put: (self classFor: value) new ].
+	^ array2D
 ]
 
-{ #category : #private }
+{ #category : #'public api' }
 MygLevelImporter >> classFor: aCharacter [
 
-	^ characterClassBinding at: aCharacter ifAbsent: [ "maybe add a default value" ]
+	^ characterClassBinding
+		  at: aCharacter
+		  ifAbsent: [ MygMissingCharacterError signal: 'Unknown character please specify a class textualMapCharacter method in your box domain.' ]
 ]
 
 { #category : #private }
@@ -74,13 +80,13 @@ MygLevelImporter >> fillBindingDictionary: aDictionary [
 	characterClassBinding := aDictionary
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 MygLevelImporter >> maxLineLength [
 
 	^ (lines max: [ :each | each size ]) 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 MygLevelImporter >> splitLines: aString [
 	^ aString splitOn: Character cr
 ]

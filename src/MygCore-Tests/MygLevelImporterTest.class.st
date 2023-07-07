@@ -40,19 +40,30 @@ MygLevelImporterTest >> testBuildArrayFor [
 	string := '01
 __'.
 
-	res := self importer buildArrayFor: string.
+	res := self importer buildCharacterArrayFor: string.
 
 	self assert: res contents equals: #( $0 $1 $_ $_ )
 ]
 
 { #category : #tests }
-MygLevelImporterTest >> testBuildMapFor [
+MygLevelImporterTest >> testBuildCharacterArrayFor [
+
+	| string res |
+	string := '01
+__'.
+
+	res := self importer buildCharacterArrayFor: string.
+	self assert: res contents equals: #( $0 $1 $_ $_ )
+]
+
+{ #category : #tests }
+MygLevelImporterTest >> testBuildGridFor [
 
 	| string res |
 	string := 'aa
 so'.
 
-	res := self importer buildMapFor: string.
+	res := self importer buildGridFor: string.
 
 	self assert: (res contents at: 1) class equals: Array.
 	self assert: (res contents at: 2) class equals: Array.

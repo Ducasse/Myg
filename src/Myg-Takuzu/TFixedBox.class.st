@@ -5,11 +5,11 @@ Class {
 }
 
 { #category : #accessing }
-TFixedBox class >> value: aNumber [
-	^ self new value: aNumber 
+TFixedBox class >> createBoxWithValue: aNumber [
+	^ self new createBoxWithValue: aNumber 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #interaction }
 TFixedBox >> click [
 	"will send an announcements for the ui to show other TBoxSet"
 	^ self 

@@ -504,7 +504,7 @@ TField class >> newSquaredSize: aNumber [
 		  configureGrid: (CTNewArray2D
 				   width: aNumber
 				   height: aNumber
-				   tabulate: [ :x :y | TFixedBox value: nil ])
+				   tabulate: [ :x :y | TFixedBox createBoxWithValue: nil ])
 ]
 
 { #category : #testing }
@@ -518,7 +518,7 @@ TField >> clickOnBox: aTBox [
 
 	| box |
 	box := self grid atColumn: aTBox position x atRow: aTBox position y.
-	box value: (box valueDictionary at: box value).
+	box createBoxWithValue: (box valueDictionary at: box value).
 	self checkIfFinished
 ]
 
@@ -598,9 +598,8 @@ TField >> isRowUniqueAtIndex: aNumber [
 { #category : #testing }
 TField >> isRowValidAtIndex: aNumber [
 
-	| testedRow |
-	testedRow := TLine new contents: (self grid atRow: aNumber).
-	^ testedRow isValid
+	^ (TLine new contents: (self grid atRow: aNumber)) isValid.
+
 ]
 
 { #category : #testing }
@@ -700,13 +699,13 @@ TField >> solveTheField: aTField atColumn: columnIndex atRow: rowIndex [
 				  atRow: currentRow ]
 		ifNil: [
 			0 to: 1 do: [ :i |
-				box value: i.
+				box createBoxWithValue: i.
 				self isValid
 					ifTrue: [
 						(self
 							  solveTheField: aTField
 							  atColumn: currentColumn + 1
 							  atRow: currentRow) ifTrue: [ ^ true ] ]
-					ifFalse: [ box value: nil ] ].
+					ifFalse: [ box createBoxWithValue: nil ] ].
 			^ false ]
 ]

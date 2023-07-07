@@ -4,7 +4,7 @@ Class {
 	#category : #'Myg-Takuzu-Core'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #description }
 TSetBox0 class >> textualMapCharacter [
 
 	^ $0

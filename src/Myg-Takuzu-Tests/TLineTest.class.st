@@ -8,9 +8,9 @@ Class {
 TLineTest >> testIsSimilarTo [
 
 	| line1 line2 box0 box1 boxNil |
-	box0 := TFixedBox value: 0.
-	box1 := TFixedBox value: 1.
-	boxNil := TFixedBox value: nil.
+	box0 := TFixedBox createBoxWithValue: 0.
+	box1 := TFixedBox createBoxWithValue: 1.
+	boxNil := TFixedBox createBoxWithValue: nil.
 	line1 := {
 		         box0.
 		         box0.
@@ -48,8 +48,8 @@ TLineTest >> testIsSimilarTo [
 TLineTest >> testIsValid [
 
 	| line box0 box1 |
-	box0 := TFixedBox value: 0.
-	box1 := TFixedBox value: 1.
+	box0 := TFixedBox createBoxWithValue: 0.
+	box1 := TFixedBox createBoxWithValue: 1.
 	line := TLine new contents: (OrderedCollection
 			         with: box0
 			         with: box0

@@ -5,11 +5,25 @@ Class {
 }
 
 { #category : #tests }
+TFieldTest >> testConfigureGridIsOK [
+
+	| field |
+	field := TField configureGrid:
+		         (CTNewArray2D
+			          width: 4
+			          height: 4
+			          tabulate: [ :x :y | TSetBox0 new ]).
+	self assert: (field grid at: 1 @ 1) field equals: field.
+	self assert: (field grid at: 1 @ 1) position equals: 1 @ 1.
+	self assert: (field grid at: 2 @ 1) position equals: 2 @ 1
+]
+
+{ #category : #tests }
 TFieldTest >> testIsColumnUniqueAtIndex [
 
 	| field box0 box1 |
-	box0 := TFixedBox value: 0.
-	box1 := TFixedBox value: 1.
+	box0 := TFixedBox createBoxWithValue: 0.
+	box1 := TFixedBox createBoxWithValue: 1.
 	field := self gridForTest.
 	field grid atColumn: 2 atRow: 2 put: box1.
 
@@ -21,8 +35,8 @@ TFieldTest >> testIsColumnUniqueAtIndex [
 TFieldTest >> testIsColumnValidAtIndex [
 
 	| field box0 box1 |
-	box0 := TFixedBox value: 0.
-	box1 := TFixedBox value: 1.
+	box0 := TFixedBox createBoxWithValue: 0.
+	box1 := TFixedBox createBoxWithValue: 1.
 	field := self gridForTest.
 	field grid atColumn: 2 atRow: 1 put: box1.
 	self assert: (field isColumnValidAtIndex: 2).
@@ -44,7 +58,7 @@ TFieldTest >> testIsFull [
 			          height: 4
 			          tabulate: [ :x :y | TSetBox0 new]).
 	self assert: field isFull.
-	(field grid at: 1 @ 1) value: nil.
+	(field grid at: 1 @ 1) createBoxWithValue: nil.
 	self deny: field isFull
 ]
 
@@ -52,8 +66,8 @@ TFieldTest >> testIsFull [
 TFieldTest >> testIsRowUniqueAtIndex [
 
 	| field box0 box1 |
-	box0 := TFixedBox value: 0.
-	box1 := TFixedBox value: 1.
+	box0 := TFixedBox createBoxWithValue: 0.
+	box1 := TFixedBox createBoxWithValue: 1.
 	field := self gridForTest.
 	field grid atColumn: 2 atRow: 2 put: box1.
 
@@ -66,8 +80,8 @@ TFieldTest >> testIsRowUniqueAtIndex [
 TFieldTest >> testIsRowValidAtIndex [
 
 	| field box0 box1 |
-	box0 := TFixedBox value: 0.
-	box1 := TFixedBox value: 1.
+	box0 := TFixedBox createBoxWithValue: 0.
+	box1 := TFixedBox createBoxWithValue: 1.
 	field := self gridForTest.
 	field grid atColumn: 1 atRow: 2 put: box1.
 	self assert: (field isRowValidAtIndex: 2).
@@ -84,8 +98,8 @@ TFieldTest >> testIsThisLineUniqueAmongArray [
 
 	| field box0 box1 boxNil originalLine line1 line2 line3 |
 	field := TField new.
-	box0 := TFixedBox value: 0.
-	box1 := TFixedBox value: 1.
+	box0 := TFixedBox createBoxWithValue: 0.
+	box1 := TFixedBox createBoxWithValue: 1.
 	boxNil := TUnknownBox.
 	originalLine := TLine new contents: (OrderedCollection
 			                 with: box0
@@ -119,8 +133,8 @@ TFieldTest >> testIsThisLineUniqueAmongArray [
 TFieldTest >> testIsValid [
 
 	| field box0 box1 |
-	box0 := TFixedBox value: 0.
-	box1 := TFixedBox value: 1.
+	box0 := TFixedBox createBoxWithValue: 0.
+	box1 := TFixedBox createBoxWithValue: 1.
 	field := self gridForTest.
 	self assert: field isValid.
 	field grid atColumn: 2 atRow: 2 put: box1.
@@ -152,7 +166,7 @@ TFieldTest >> testSolveTheFieldAtColumnAtRow [
 
 	| field box1 |
 	field := TField gridForTest.
-	box1 := TFixedBox value: 1.
+	box1 := TFixedBox createBoxWithValue: 1.
 	self assert: (field solveTheField: field atColumn: 1 atRow: 1).
 	field := TField gridForTest.
 	field grid at: 1 @ 3 put: box1.

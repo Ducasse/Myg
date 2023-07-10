@@ -3,8 +3,8 @@ Class {
 	#superclass : #BlElement,
 	#instVars : [
 		'box',
-		'field',
-		'colorDictionary'
+		'colorDictionary',
+		'board'
 	],
 	#category : #'Myg-Takuzu-UI'
 }
@@ -22,15 +22,27 @@ TBoxElement >> backgroundPaint [
 ]
 
 { #category : #'as yet unclassified' }
+TBoxElement >> board [
+
+	^ board
+]
+
+{ #category : #'as yet unclassified' }
+TBoxElement >> board: aTBoard [
+
+	board := aTBoard
+]
+
+{ #category : #'as yet unclassified' }
 TBoxElement >> box [
 
 	^ box
 ]
 
 { #category : #accessing }
-TBoxElement >> box: aMBox [
+TBoxElement >> box: aTBox [
 
-	box := aMBox.
+	box := aTBox.
 	self updateBackgroundColor
 ]
 
@@ -39,7 +51,7 @@ TBoxElement >> click [
 
 	self box isTSetBox
 		ifTrue: [ self lock ]
-		ifFalse: [ self field clickOnBox: self box.
+		ifFalse: [ self board clickOnBox: self box.
 			self updateBackgroundColor ]
 ]
 
@@ -47,18 +59,6 @@ TBoxElement >> click [
 TBoxElement >> colorDictionary [
 
 	^ colorDictionary 
-]
-
-{ #category : #'as yet unclassified' }
-TBoxElement >> field [
-
-	^ field
-]
-
-{ #category : #'as yet unclassified' }
-TBoxElement >> field: aMField [
-
-	field := aMField.
 ]
 
 { #category : #'as yet unclassified' }

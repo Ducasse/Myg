@@ -13,7 +13,7 @@ TAbstractTest >> gridForTest [
 	| _ | 1 | 1 | _ |
 	| _ | _ | _ | _ |"
 
-	^ TField configureGrid: ((CTNewArray2D width: 4 height: 4)
+	^ TBoard configureGrid: ((CTNewArray2D width: 4 height: 4)
 			   at: 1 @ 1 put: (TBox createFixedBox: 1);
 			   at: 1 @ 2 put: TBox createUnknownBox;
 			   at: 1 @ 3 put: TBox createUnknownBox;

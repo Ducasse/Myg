@@ -22,7 +22,7 @@ MygBoard >> configureGrid: anArray2D [
 	self grid: anArray2D.
 	grid withIndexes: [ :column :row |
 		(grid at: column @ row) position: column @ row;
-		field: self   ]
+		board: self   ]
 ]
 
 { #category : #accessing }

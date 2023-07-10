@@ -1,56 +1,56 @@
 Class {
-	#name : #TFieldElement,
+	#name : #TBoardElement,
 	#superclass : #BlElement,
 	#instVars : [
-		'field'
+		'board'
 	],
 	#category : #'Myg-Takuzu-UI'
 }
 
 { #category : #'as yet unclassified' }
-TFieldElement class >> launch10 [
+TBoardElement class >> launch10 [
 
-	^ self openWithModel: (TField generateWithSize: 10)
+	^ self openWithModel: (TBoard generateWithSize: 10)
 ]
 
 { #category : #'as yet unclassified' }
-TFieldElement class >> launch12 [
+TBoardElement class >> launch12 [
 
-	^ self openWithModel: (TField generateWithSize: 12)
+	^ self openWithModel: (TBoard generateWithSize: 12)
 ]
 
 { #category : #'as yet unclassified' }
-TFieldElement class >> launch4 [
+TBoardElement class >> launch4 [
 
-	^ self openWithModel: (TField generateWithSize: 4)
+	^ self openWithModel: (TBoard generateWithSize: 4)
 ]
 
 { #category : #'as yet unclassified' }
-TFieldElement class >> launch6 [
+TBoardElement class >> launch6 [
 
-	^ self openWithModel: (TField generateWithSize: 6)
+	^ self openWithModel: (TBoard generateWithSize: 6)
 ]
 
 { #category : #'as yet unclassified' }
-TFieldElement class >> launch8 [
+TBoardElement class >> launch8 [
 
-	^ self openWithModel: (TField generateWithSize: 8)
+	^ self openWithModel: (TBoard generateWithSize: 8)
 ]
 
 { #category : #'as yet unclassified' }
-TFieldElement class >> openGridForTest [
+TBoardElement class >> openGridForTest [
 
-	^ self openWithModel: TField gridForTest 
+	^ self openWithModel: TBoard gridForTest 
 ]
 
 { #category : #'as yet unclassified' }
-TFieldElement class >> openRandom [
+TBoardElement class >> openRandom [
 
-	^ self openWithModel: TField generate
+	^ self openWithModel: TBoard generate
 ]
 
 { #category : #'as yet unclassified' }
-TFieldElement class >> openRandomFromTestGrids [ 
+TBoardElement class >> openRandomFromTestGrids [ 
 	| sel res |
 	sel := (TFieldTool class selectors select: [ :each | each  beginsWith: 'grid_' ]) atRandom.
 	res := TFieldTool perform: sel.
@@ -58,12 +58,12 @@ TFieldElement class >> openRandomFromTestGrids [
 ]
 
 { #category : #'as yet unclassified' }
-TFieldElement class >> openWithModel: aTField [
+TBoardElement class >> openWithModel: aTField [
 
 	| aFieldElement space |
 	space := BlSpace new.
 	aFieldElement := self new
-		                 field: aTField;
+		                 board: aTField;
 		                 yourself.
 	space addChild: aFieldElement.
 	space pulse
@@ -73,28 +73,30 @@ TFieldElement class >> openWithModel: aTField [
 ]
 
 { #category : #accessing }
-TFieldElement >> field [ 
-	^field
+TBoardElement >> board [
+
+	^ board
 ]
 
 { #category : #accessing }
-TFieldElement >> field: aTField [
+TBoardElement >> board: aTBoard [
 
-	field := aTField.
-	self layout: (BlGridLayout horizontal cellSpacing: 5 - (field grid width // 5 )).
+	board := aTBoard.
+	self layout:
+		(BlGridLayout horizontal cellSpacing: 5 - (board grid width // 5)).
 	self constraintsDo: [ :aLayoutConstraints |
 		aLayoutConstraints horizontal matchParent.
 		aLayoutConstraints vertical matchParent ].
 	self padding: (BlInsets all: 5).
-	self layout columnCount: field grid width.
-	field grid do: [ :aBox |
+	self layout columnCount: board grid width.
+	board grid do: [ :aBox |
 		| boxElement |
-		boxElement := (TBoxElement box: aBox) field: aTField.
+		boxElement := (TBoxElement box: aBox) board: aTBoard.
 		self addChild: boxElement ]
 ]
 
 { #category : #initialization }
-TFieldElement >> initialize [
+TBoardElement >> initialize [
 
 	super initialize.
 	self background: (BlBackground paint: Color veryVeryDarkGray).

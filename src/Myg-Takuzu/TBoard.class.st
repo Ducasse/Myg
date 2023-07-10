@@ -1,17 +1,17 @@
 Class {
-	#name : #TField,
+	#name : #TBoard,
 	#superclass : #MygBoard,
 	#category : #'Myg-Takuzu-Core'
 }
 
 { #category : #translating }
-TField class >> generate [
+TBoard class >> generate [
 
 	^ self generateWithSize: 4
 ]
 
 { #category : #translating }
-TField class >> generateWithSize: aNumber [
+TBoard class >> generateWithSize: aNumber [
 
 	^ (self newSquaredSize: aNumber)
 		  initializeRandomized;
@@ -19,7 +19,7 @@ TField class >> generateWithSize: aNumber [
 ]
 
 { #category : #'for tests' }
-TField class >> gridForTest [
+TBoard class >> gridForTest [
 	"represents this grid: 
 	
 	| 1 | _ | _ | _ |
@@ -48,7 +48,7 @@ TField class >> gridForTest [
 ]
 
 { #category : #level10 }
-TField class >> level10Grid1 [
+TBoard class >> level10Grid1 [
 
 	| level |
 	level := '_11__1__1_
@@ -68,7 +68,7 @@ _0____1_1_
 ]
 
 { #category : #level10 }
-TField class >> level10Grid2 [
+TBoard class >> level10Grid2 [
 
 	| level |
 	level := '0_0__01_10
@@ -88,7 +88,7 @@ _0__0_0___'.
 ]
 
 { #category : #level10 }
-TField class >> level10Grid3 [
+TBoard class >> level10Grid3 [
 
 	| level |
 	level := '_1______10
@@ -108,7 +108,7 @@ ___0____1_'.
 ]
 
 { #category : #level10 }
-TField class >> level10Grid4 [
+TBoard class >> level10Grid4 [
 
 	| level |
 	level := '0_0___1___
@@ -128,7 +128,7 @@ _____1__1_
 ]
 
 { #category : #level10 }
-TField class >> level10Grid5 [
+TBoard class >> level10Grid5 [
 
 	| level |
 	level := '01_1______
@@ -148,7 +148,7 @@ ___0__1_1_'.
 ]
 
 { #category : #level12 }
-TField class >> level12Grid1 [
+TBoard class >> level12Grid1 [
 
 	| level |
 	level := '_1__11______
@@ -170,7 +170,7 @@ ____1__11___'.
 ]
 
 { #category : #level12 }
-TField class >> level12Grid2 [
+TBoard class >> level12Grid2 [
 
 	| level |
 	level := '_____0______
@@ -192,7 +192,7 @@ ______11_1__
 ]
 
 { #category : #level12 }
-TField class >> level12Grid3 [
+TBoard class >> level12Grid3 [
 
 	| level |
 	level := '0_01__01___1
@@ -214,7 +214,7 @@ __0___1_____'.
 ]
 
 { #category : #level12 }
-TField class >> level12Grid4 [
+TBoard class >> level12Grid4 [
 
 	| level |
 	level := '__1_______0_
@@ -236,7 +236,7 @@ ___1_1__00__
 ]
 
 { #category : #level12 }
-TField class >> level12Grid5 [
+TBoard class >> level12Grid5 [
 
 	| level |
 	level := '__1_1__0____
@@ -258,7 +258,7 @@ _____1____0_'.
 ]
 
 { #category : #level4 }
-TField class >> level4Grid1 [
+TBoard class >> level4Grid1 [
 
 	| level |
 	level := '_1_1
@@ -272,7 +272,7 @@ ____'.
 ]
 
 { #category : #level4 }
-TField class >> level4Grid2 [
+TBoard class >> level4Grid2 [
 
 	| level |
 	level := '___0
@@ -286,7 +286,7 @@ _00_'.
 ]
 
 { #category : #level4 }
-TField class >> level4Grid3 [
+TBoard class >> level4Grid3 [
 
 	| level |
 	level := '1___
@@ -300,7 +300,7 @@ ___0'.
 ]
 
 { #category : #level4 }
-TField class >> level4Grid4 [
+TBoard class >> level4Grid4 [
 
 	| level |
 	level := '1___
@@ -314,7 +314,7 @@ ____'.
 ]
 
 { #category : #level4 }
-TField class >> level4Grid5 [
+TBoard class >> level4Grid5 [
 
 	| level |
 	level := '_1_1
@@ -328,7 +328,7 @@ ___0'.
 ]
 
 { #category : #level6 }
-TField class >> level6Grid1 [
+TBoard class >> level6Grid1 [
 
 	| level |
 	level := '______
@@ -344,7 +344,7 @@ ____1_'.
 ]
 
 { #category : #level6 }
-TField class >> level6Grid2 [
+TBoard class >> level6Grid2 [
 
 	| level |
 	level := '______
@@ -360,7 +360,7 @@ _0____'.
 ]
 
 { #category : #level6 }
-TField class >> level6Grid3 [
+TBoard class >> level6Grid3 [
 
 	| level |
 	level := '___0__
@@ -376,7 +376,7 @@ _11___'.
 ]
 
 { #category : #level6 }
-TField class >> level6Grid4 [
+TBoard class >> level6Grid4 [
 
 	| level |
 	level := '0____1
@@ -392,7 +392,7 @@ ______'.
 ]
 
 { #category : #level6 }
-TField class >> level6Grid5 [
+TBoard class >> level6Grid5 [
 
 	| level |
 	level := '_____0
@@ -408,7 +408,7 @@ ___1__'.
 ]
 
 { #category : #level8 }
-TField class >> level8Grid1 [
+TBoard class >> level8Grid1 [
 
 	| level |
 	level := '0__0____
@@ -426,7 +426,7 @@ _0______
 ]
 
 { #category : #level8 }
-TField class >> level8Grid2 [
+TBoard class >> level8Grid2 [
 
 	| level |
 	level := '____1___
@@ -444,7 +444,7 @@ _1______'.
 ]
 
 { #category : #level8 }
-TField class >> level8Grid3 [
+TBoard class >> level8Grid3 [
 
 	| level |
 	level := '__11____
@@ -462,7 +462,7 @@ ______0_'.
 ]
 
 { #category : #level8 }
-TField class >> level8Grid4 [
+TBoard class >> level8Grid4 [
 
 	| level |
 	level := '__11____
@@ -480,7 +480,7 @@ ___1____'.
 ]
 
 { #category : #level8 }
-TField class >> level8Grid5 [
+TBoard class >> level8Grid5 [
 
 	| level |
 	level := '___0___1
@@ -498,7 +498,7 @@ ________
 ]
 
 { #category : #'instance creation' }
-TField class >> newSquaredSize: aNumber [
+TBoard class >> newSquaredSize: aNumber [
 
 	^ self new
 		  configureGrid: (CTNewArray2D
@@ -508,13 +508,13 @@ TField class >> newSquaredSize: aNumber [
 ]
 
 { #category : #testing }
-TField >> checkIfFinished [
+TBoard >> checkIfFinished [
 
 	(self isFull and: [ self isValid ]) ifTrue: [ self endGame ]
 ]
 
 { #category : #actions }
-TField >> clickOnBox: aTBox [
+TBoard >> clickOnBox: aTBox [
 
 	| box |
 	box := self grid atColumn: aTBox position x atRow: aTBox position y.
@@ -523,7 +523,7 @@ TField >> clickOnBox: aTBox [
 ]
 
 { #category : #actions }
-TField >> endGame [
+TBoard >> endGame [
 
 	| container space |
 	container := BlElement new
@@ -550,7 +550,7 @@ TField >> endGame [
 ]
 
 { #category : #initialization }
-TField >> initializeRandomized [
+TBoard >> initializeRandomized [
 
 	self 
 		 solve;
@@ -559,7 +559,7 @@ TField >> initializeRandomized [
 ]
 
 { #category : #testing }
-TField >> isColumnUniqueAtIndex: aNumber [
+TBoard >> isColumnUniqueAtIndex: aNumber [
 
 	| testedColumn columns |
 	testedColumn := TLine new contents: (self grid atColumn: aNumber).
@@ -571,7 +571,7 @@ TField >> isColumnUniqueAtIndex: aNumber [
 ]
 
 { #category : #testing }
-TField >> isColumnValidAtIndex: aNumber [
+TBoard >> isColumnValidAtIndex: aNumber [
 
 	| testedColumn |
 	testedColumn := TLine new contents: (self grid atColumn: aNumber).
@@ -579,13 +579,13 @@ TField >> isColumnValidAtIndex: aNumber [
 ]
 
 { #category : #testing }
-TField >> isFull [ 
+TBoard >> isFull [ 
 	
 	^ (self grid contents anySatisfy: [ :each | each value isNil ]) not
 ]
 
 { #category : #testing }
-TField >> isRowUniqueAtIndex: aNumber [
+TBoard >> isRowUniqueAtIndex: aNumber [
 
 	| testedRow rows |
 	testedRow := TLine new contents: (self grid atRow: aNumber).
@@ -596,14 +596,14 @@ TField >> isRowUniqueAtIndex: aNumber [
 ]
 
 { #category : #testing }
-TField >> isRowValidAtIndex: aNumber [
+TBoard >> isRowValidAtIndex: aNumber [
 
 	^ (TLine new contents: (self grid atRow: aNumber)) isValid.
 
 ]
 
 { #category : #testing }
-TField >> isThisLineUnique: aTLine amongArray: anArray [
+TBoard >> isThisLineUnique: aTLine amongArray: anArray [
 		
 
 	^ (anArray anySatisfy: [ :line |
@@ -611,7 +611,7 @@ TField >> isThisLineUnique: aTLine amongArray: anArray [
 ]
 
 { #category : #testing }
-TField >> isValid [
+TBoard >> isValid [
 
 	| columnIndex rowIndex |
 	columnIndex := 1.
@@ -633,7 +633,7 @@ TField >> isValid [
 ]
 
 { #category : #actions }
-TField >> permutateLine: aFirstNumber with: aSecondNumber [
+TBoard >> permutateLine: aFirstNumber with: aSecondNumber [
 
 	| tmp |
 	aFirstNumber = aSecondNumber ifTrue: [ ^ self ].
@@ -643,7 +643,7 @@ TField >> permutateLine: aFirstNumber with: aSecondNumber [
 ]
 
 { #category : #actions }
-TField >> permutateLines [
+TBoard >> permutateLines [
 
 	| array |
 	array := 1 to: self grid width.
@@ -655,13 +655,13 @@ TField >> permutateLines [
 ]
 
 { #category : #removing }
-TField >> removeRandomBoxes [
+TBoard >> removeRandomBoxes [
 
 	self removeRandomBoxesWithRatio: 65
 ]
 
 { #category : #removing }
-TField >> removeRandomBoxesWithRatio: aNumber [
+TBoard >> removeRandomBoxesWithRatio: aNumber [
 
 	(aNumber > 0 and: [ aNumber < 100 ]) ifFalse: [ ^ self ].
 	self grid withIndexes: [ :column :row |
@@ -670,7 +670,7 @@ TField >> removeRandomBoxesWithRatio: aNumber [
 ]
 
 { #category : #actions }
-TField >> solve [
+TBoard >> solve [
 
 	^ (self solveTheField: self atColumn: 1 atRow: 1) ifTrue: [ 
 		  self grid ]
@@ -678,7 +678,7 @@ TField >> solve [
 ]
 
 { #category : #actions }
-TField >> solveTheField: aTField atColumn: columnIndex atRow: rowIndex [
+TBoard >> solveTheField: aTField atColumn: columnIndex atRow: rowIndex [
 
 	| box currentColumn currentRow |
 	currentColumn := columnIndex.

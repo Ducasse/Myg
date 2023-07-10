@@ -105,11 +105,11 @@ Takuzu class >> menuLevel [
 					            print: index;
 					            nextPutAll: 'Grid';
 					            print: i ].
-			tmp := TFieldElement class selectors select: [ :each |
+			tmp := TBoardElement class selectors select: [ :each |
 				       each = selector ].
 			subMenu addItem:
 				((ToButtonMenuItem new labelText: stream) whenClickedDo: [
-					 TFieldElement openWithModel: (TField perform: selector asSymbol) ]) ].
+					 TBoardElement openWithModel: (TBoard perform: selector asSymbol) ]) ].
 		menu addItem: subMenu ].
 
 	^ menu
@@ -125,10 +125,10 @@ Takuzu class >> menuRandom [
 		(ToImage inner: (Smalltalk ui icons iconNamed: #solidMenu)).
 	menu addItem:
 		((ToButtonMenuItem new labelText: '4x4') whenClickedDo: [
-			 TFieldElement launch4 ]).
+			 TBoardElement launch4 ]).
 	menu addItem:
 		((ToButtonMenuItem new labelText: '6x6') whenClickedDo: [
-			 TFieldElement launch6 ]).
+			 TBoardElement launch6 ]).
 	"menu addItem:
 		((ToButtonMenuItem new labelText: '8x8') whenClickedDo: [
 			 TFieldElement launch8 ]).

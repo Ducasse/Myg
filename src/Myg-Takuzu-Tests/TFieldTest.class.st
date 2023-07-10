@@ -8,12 +8,12 @@ Class {
 TFieldTest >> testConfigureGridIsOK [
 
 	| field |
-	field := TField configureGrid:
+	field := TBoard configureGrid:
 		         (CTNewArray2D
 			          width: 4
 			          height: 4
 			          tabulate: [ :x :y | TSetBox0 new ]).
-	self assert: (field grid at: 1 @ 1) field equals: field.
+	self assert: (field grid at: 1 @ 1) board equals: field.
 	self assert: (field grid at: 1 @ 1) position equals: 1 @ 1.
 	self assert: (field grid at: 2 @ 1) position equals: 2 @ 1
 ]
@@ -52,7 +52,7 @@ TFieldTest >> testIsColumnValidAtIndex [
 TFieldTest >> testIsFull [
 
 	| field |
-	field := TField configureGrid:
+	field := TBoard configureGrid:
 		         (CTNewArray2D
 			          width: 4
 			          height: 4
@@ -97,7 +97,7 @@ TFieldTest >> testIsRowValidAtIndex [
 TFieldTest >> testIsThisLineUniqueAmongArray [
 
 	| field box0 box1 boxNil originalLine line1 line2 line3 |
-	field := TField new.
+	field := TBoard new.
 	box0 := TFixedBox createBoxWithValue: 0.
 	box1 := TFixedBox createBoxWithValue: 1.
 	boxNil := TUnknownBox.
@@ -153,7 +153,7 @@ TFieldTest >> testIsValid [
 { #category : #tests }
 TFieldTest >> testPermutateLineWith [ 
 	|field line1 line2|
-	field := TField gridForTest.
+	field := TBoard gridForTest.
 	line1 := field grid atRow: 1.
 	line2 := field grid atRow: 2.
 	field permutateLine: 1 with: 2.
@@ -165,10 +165,10 @@ TFieldTest >> testPermutateLineWith [
 TFieldTest >> testSolveTheFieldAtColumnAtRow [
 
 	| field box1 |
-	field := TField gridForTest.
+	field := TBoard gridForTest.
 	box1 := TFixedBox createBoxWithValue: 1.
 	self assert: (field solveTheField: field atColumn: 1 atRow: 1).
-	field := TField gridForTest.
+	field := TBoard gridForTest.
 	field grid at: 1 @ 3 put: box1.
 	self deny: (field solveTheField: field atColumn: 1 atRow: 1)
 ]

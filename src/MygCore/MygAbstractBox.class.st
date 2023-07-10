@@ -9,12 +9,12 @@ Class {
 }
 
 { #category : #accessing }
-MygAbstractBox >> field [ 
+MygAbstractBox >> board [ 
 	^ field 
 ]
 
 { #category : #accessing }
-MygAbstractBox >> field: aTField [ 
+MygAbstractBox >> board: aTField [ 
 	field := aTField 
 ]
 

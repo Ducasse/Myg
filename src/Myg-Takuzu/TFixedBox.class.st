@@ -6,7 +6,8 @@ Class {
 
 { #category : #accessing }
 TFixedBox class >> createBoxWithValue: aNumber [
-	^ self new createBoxWithValue: aNumber 
+
+	^ self new value: aNumber
 ]
 
 { #category : #interaction }

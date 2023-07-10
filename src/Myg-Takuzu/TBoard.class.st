@@ -518,7 +518,8 @@ TBoard >> clickOnBox: aTBox [
 
 	| box |
 	box := self grid atColumn: aTBox position x atRow: aTBox position y.
-	box createBoxWithValue: (box valueDictionary at: box value).
+
+	box configureValue.
 	self checkIfFinished
 ]
 
@@ -699,13 +700,13 @@ TBoard >> solveTheField: aTField atColumn: columnIndex atRow: rowIndex [
 				  atRow: currentRow ]
 		ifNil: [
 			0 to: 1 do: [ :i |
-				box createBoxWithValue: i.
+				box value: i.
 				self isValid
 					ifTrue: [
 						(self
-							  solveTheField: aTField
-							  atColumn: currentColumn + 1
-							  atRow: currentRow) ifTrue: [ ^ true ] ]
-					ifFalse: [ box createBoxWithValue: nil ] ].
+							 solveTheField: aTField
+							 atColumn: currentColumn + 1
+							 atRow: currentRow) ifTrue: [ ^ true ] ]
+					ifFalse: [ box value: nil ] ].
 			^ false ]
 ]

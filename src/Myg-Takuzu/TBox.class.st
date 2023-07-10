@@ -2,8 +2,10 @@ Class {
 	#name : #TBox,
 	#superclass : #MygAbstractBox,
 	#instVars : [
-		'value',
-		'valueDictionary'
+		'value'
+	],
+	#classVars : [
+		'ValueDictionary'
 	],
 	#category : #'Myg-Takuzu-Core'
 }
@@ -18,24 +20,31 @@ TBox class >> createUnknownBox [
 	^ TUnknownBox new
 ]
 
+{ #category : #'class initialization' }
+TBox class >> initialize [
+	"self initialize"
+	ValueDictionary := {
+		                   (0 -> 1).
+		                   (1 -> nil).
+		                   (nil -> 0) } asDictionary
+]
+
+{ #category : #accessing }
+TBox class >> valueDictionary [ 
+
+	^ ValueDictionary 
+]
+
 { #category : #interaction }
 TBox >> click [
 	self subclassResponsibility
 ]
 
-{ #category : #evaluating }
-TBox >> createBoxWithValue: aNumber [
-	value := aNumber 
-]
+{ #category : #accessing }
+TBox >> configureValue [
 
-{ #category : #initialization }
-TBox >> initialize [ 
-	super initialize.
-	valueDictionary := Dictionary new.
-	valueDictionary
-			  at: 0 put: 1;
-			  at: 1 put: nil;
-			  at: nil put: 0
+	
+	self value: (self valueDictionary at: self value).
 ]
 
 { #category : #testing }
@@ -62,7 +71,14 @@ TBox >> value [
 	^ value 
 ]
 
+{ #category : #evaluating }
+TBox >> value: aNumber [
+
+	value := aNumber
+]
+
 { #category : #accessing }
-TBox >> valueDictionary [ 
-	^ valueDictionary 
+TBox >> valueDictionary [
+
+	^ ValueDictionary
 ]

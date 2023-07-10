@@ -58,7 +58,7 @@ TFieldTest >> testIsFull [
 			          height: 4
 			          tabulate: [ :x :y | TSetBox0 new]).
 	self assert: field isFull.
-	(field grid at: 1 @ 1) createBoxWithValue: nil.
+	(field grid at: 1 @ 1) value: nil.
 	self deny: field isFull
 ]
 

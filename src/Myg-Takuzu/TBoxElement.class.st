@@ -3,8 +3,10 @@ Class {
 	#superclass : #BlElement,
 	#instVars : [
 		'box',
-		'colorDictionary',
 		'board'
+	],
+	#classVars : [
+		'ColorDictionary'
 	],
 	#category : #'Myg-Takuzu-UI'
 }
@@ -13,6 +15,16 @@ Class {
 TBoxElement class >> box: aMBox [
 
 	^ self new box: aMBox
+]
+
+{ #category : #'class initialization' }
+TBoxElement class >> initialize [ 
+
+
+	ColorDictionary := { 0 -> Color red.
+	1 -> Color lightBlue.
+	nil -> Color veryDarkGray } asDictionary 
+
 ]
 
 { #category : #'as yet unclassified' }
@@ -48,17 +60,18 @@ TBoxElement >> box: aTBox [
 
 { #category : #public }
 TBoxElement >> click [
-
+	
 	self box isTSetBox
 		ifTrue: [ self lock ]
-		ifFalse: [ self board clickOnBox: self box.
+		ifFalse: [
+			self board clickOnBox: self box.
 			self updateBackgroundColor ]
 ]
 
 { #category : #'as yet unclassified' }
 TBoxElement >> colorDictionary [
 
-	^ colorDictionary 
+	^ ColorDictionary
 ]
 
 { #category : #'as yet unclassified' }
@@ -66,11 +79,6 @@ TBoxElement >> initialize [
 
 	super initialize.
 
-	colorDictionary := Dictionary new.
-	colorDictionary
-		at: 0 put: Color red;
-		at: 1 put: Color lightBlue;
-		at: nil put: Color veryDarkGray.
 	self background: self backgroundPaint.
 	self geometry: (BlRoundedRectangleGeometry cornerRadius: 5).
 	self constraintsDo: [ :aLayoutConstraints |

@@ -143,7 +143,7 @@ Takuzu class >> menuRandom [
 ]
 
 { #category : #'as yet unclassified' }
-Takuzu class >> openWithMenuBar [
+Takuzu class >> open [
 
 	| space randomMenu levelMenu helpMenu bar title |
 	randomMenu := self menuRandom.

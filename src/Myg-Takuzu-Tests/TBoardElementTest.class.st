@@ -7,18 +7,25 @@ Class {
 { #category : #'tests - ui' }
 TBoardElementTest >> testClickChangeBackground [
 
-	| board unk space |
-	
+	| board unk |
 	board := TBoardElement new board: TAbstractTest new gridForTest.
-	space := BlSpace new.
-	space root addChild: board.
-	space show.
 	unk := board children second.
 	self assert: unk box isTUnknownBox.
 	self assert: unk background paint color equals: Color veryDarkGray.
 	unk click.
 	self assert: unk background paint color equals: Color red.
-	space close
+]
+
+{ #category : #'tests - ui' }
+TBoardElementTest >> testClickDoesntChangeBackground [
+
+	| board unk |
+	board := TBoardElement new board: TAbstractTest new gridForTest.
+	unk := board children first.
+	self assert: unk box isTFixedBox.
+	self assert: unk background paint color equals: Color lightBlue.
+	unk click.
+	self assert: unk background paint color equals: Color lightBlue.
 ]
 
 { #category : #'tests - model' }
@@ -68,14 +75,29 @@ TBoardElementTest >> testElementGetCorrectPosition [
 ]
 
 { #category : #'tests - ui' }
-TBoardElementTest >> testFirstClick [
+TBoardElementTest >> testMouseClickChangeBackground [
 
-	|board unk|
-	
+	| board unk elt |
 	board := TBoardElement new board: TAbstractTest new gridForTest.
-	unk := board children second.
+	elt := board children second.
+	elt forceLayout.
+	unk := elt findMouseEventTargetAt: 250 @ 50.
 	self assert: unk box isTUnknownBox.
+	self assert: unk background paint color equals: Color veryDarkGray.
 	unk click.
-	self assert: unk box value equals: 0
+	self assert: unk background paint color equals: Color red
+]
 
+{ #category : #'tests - ui' }
+TBoardElementTest >> testMouseClickDoesntChangeBackground [
+
+	| board unk elt |
+	board := TBoardElement new board: TAbstractTest new gridForTest.
+	elt := board children first.
+	elt forceLayout.
+	unk := elt findMouseEventTargetAt: 100 @ 50.
+	self assert: unk box isTFixedBox.
+	self assert: unk background paint color equals: Color lightBlue.
+	unk click.
+	self assert: unk background paint color equals: Color lightBlue
 ]

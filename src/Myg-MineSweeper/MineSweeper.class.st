@@ -1,11 +1,33 @@
+"
+Please comment me using the following template inspired by Class Responsibility Collaborator (CRC) design:
+
+For the Class part:  State a one line summary. For example, ""I represent a paragraph of text"".
+
+For the Responsibility part: Three sentences about my main responsibilities - what I do, what I know.
+
+For the Collaborators Part: State my main collaborators and one line about how I interact with them.
+
+Public API and Key Messages
+
+- message one
+- message two
+- (for bonus points) how to create instances.
+
+   One simple example is simply gorgeous.
+
+Internal Representation and Key Implementation Points.
+
+
+    Implementation Points
+"
 Class {
-	#name : #MMineSweeper,
+	#name : #MineSweeper,
 	#superclass : #Object,
-	#category : #'Myg-MineSweeper-Elements'
+	#category : #'Myg-MineSweeper-Model'
 }
 
 { #category : #'as yet unclassified' }
-MMineSweeper class >> menuBar [
+MineSweeper class >> menuBar [
 
 	| bar |
 	bar := ToMenuBar new
@@ -18,7 +40,7 @@ MMineSweeper class >> menuBar [
 ]
 
 { #category : #'as yet unclassified' }
-MMineSweeper class >> menuHelp [
+MineSweeper class >> menuHelp [
 
 	| menu |
 	menu := ToMenu new.
@@ -62,7 +84,7 @@ Have fun !'.
 ]
 
 { #category : #'as yet unclassified' }
-MMineSweeper class >> menuPlay [ 
+MineSweeper class >> menuPlay [ 
 	|menu|
 	menu := ToMenu new.
 	menu label: (ToLabel text: 'Play').
@@ -85,14 +107,14 @@ MMineSweeper class >> menuPlay [
 ]
 
 { #category : #'instance creation' }
-MMineSweeper class >> openWithMenuBar [
+MineSweeper class >> open [
 
 	| space playMenu helpMenu bar title |
 	playMenu := self menuPlay.
 	helpMenu := self menuHelp.
 	bar := self menuBar.
 	title := self title.
-	
+
 	bar addMenu: playMenu.
 	bar addMenu: helpMenu.
 	space := OBlSpace new.
@@ -105,7 +127,7 @@ MMineSweeper class >> openWithMenuBar [
 ]
 
 { #category : #accessing }
-MMineSweeper class >> title [ 
+MineSweeper class >> title [ 
 	|title|
 	title := BlElement new background: Color lightBlue.
 	title constraintsDo: [ :c |

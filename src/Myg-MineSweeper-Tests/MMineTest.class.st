@@ -12,11 +12,13 @@ Class {
 
 { #category : #running }
 MMineTest >> setUp [
-	field := MField matrix: self matrixForField
+
+	field := MBoard createWithMatrix: self matrixForField
 ]
 
 { #category : #'tests-clicking' }
 MMineTest >> testClickInAtAt [
+
 	| loose |
 	loose := false.
 	field announcer when: MPlayerLoose do: [ loose := true ].

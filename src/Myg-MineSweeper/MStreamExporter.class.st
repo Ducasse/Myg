@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'writeStream'
 	],
-	#category : #'Myg-MineSweeper-Visitors'
+	#category : #'Myg-MineSweeper-Visitor'
 }
 
 { #category : #'instance creation' }

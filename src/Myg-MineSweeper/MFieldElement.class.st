@@ -1,10 +1,35 @@
+"
+Please comment me using the following template inspired by Class Responsibility Collaborator (CRC) design:
+
+For the Class part:  State a one line summary. For example, ""I represent a paragraph of text"".
+
+For the Responsibility part: Three sentences about my main responsibilities - what I do, what I know.
+
+For the Collaborators Part: State my main collaborators and one line about how I interact with them.
+
+Public API and Key Messages
+
+- message one
+- message two
+- (for bonus points) how to create instances.
+
+   One simple example is simply gorgeous.
+
+Internal Representation and Key Implementation Points.
+
+    Instance Variables
+	game:		<Object>
+
+
+    Implementation Points
+"
 Class {
 	#name : #MFieldElement,
 	#superclass : #BlElement,
 	#instVars : [
 		'game'
 	],
-	#category : #'Myg-MineSweeper-Elements'
+	#category : #'Myg-MineSweeper-UI'
 }
 
 { #category : #'as yet unclassified' }
@@ -82,41 +107,6 @@ MFieldElement class >> open [
 	space show
 ]
 
-{ #category : #'instance creation' }
-MFieldElement class >> openWithMenuBar [
-
-	| space menu bar |
-	menu := ToMenu new.
-	menu label: (ToLabel text: 'Play').
-	menu icon:
-		(ToImage inner: (Smalltalk ui icons iconNamed: #solidMenu)).
-	menu addItem:
-		((ToButtonMenuItem new labelText: 'Small') whenClickedDo: [
-			 self launchSmall ]).
-	menu addItem:
-		((ToButtonMenuItem new labelText: 'Regular') whenClickedDo: [
-			 self launchRegular ]).
-	menu addItem:
-		((ToButtonMenuItem new labelText: 'Large') whenClickedDo: [
-			 self launchLarge ]).
-	menu addItem:
-		((ToButtonMenuItem new labelText: 'Very Large') whenClickedDo: [
-			 self launchVeryLarge ]).
-
-	bar := ToMenuBar new
-		       hMatchParent;
-		       vFitContent.
-	bar addMenu: menu.
-	bar background: Color veryVeryLightGray.
-	bar addFiller.
-	bar border: (BlBorder paint: Color veryDarkGray).
-	space := OBlSpace new.
-
-	space root addChild: bar.
-	space extent: 300 @ 300.
-	space show
-]
-
 { #category : #'as yet unclassified' }
 MFieldElement class >> openWithModel: aModel [
 
@@ -148,25 +138,25 @@ MFieldElement class >> openWithModel: aModel withMagnifier: aNumber [
 { #category : #execution }
 MFieldElement class >> withMatrixForField [
 
-	^ self openWithModel: MField matrixForField
+	^ self openWithModel: MBoard matrixForField
 ]
 
 { #category : #execution }
 MFieldElement class >> withMatrixForFieldWithMagnifier: aNumber [
 
-	^ self openWithModel: MField matrixForField withMagnifier: aNumber 
+	^ self openWithModel: MBoard matrixForField withMagnifier: aNumber 
 ]
 
 { #category : #execution }
 MFieldElement class >> withMatrixTest5x5 [
 
-	^ self openWithModel: MField matrixTest5x5
+	^ self openWithModel: MBoard matrixTest5x5
 ]
 
 { #category : #execution }
 MFieldElement class >> withMatrixTest5x5WithMagnifier: aNumber [
 
-	^ self openWithModel: MField matrixTest5x5 withMagnifier: aNumber 
+	^ self openWithModel: MBoard matrixTest5x5 withMagnifier: aNumber 
 ]
 
 { #category : #accessing }

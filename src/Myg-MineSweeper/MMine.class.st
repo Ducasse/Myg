@@ -5,7 +5,7 @@ If I am clicked by the player, he dies.
 Class {
 	#name : #MMine,
 	#superclass : #MBox,
-	#category : #'Myg-MineSweeper-Core'
+	#category : #'Myg-MineSweeper-Model'
 }
 
 { #category : #visiting }

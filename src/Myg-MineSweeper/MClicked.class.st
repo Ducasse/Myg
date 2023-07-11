@@ -4,7 +4,7 @@ I am an empty box in the mine field that has already been clicked.
 Class {
 	#name : #MClicked,
 	#superclass : #MBox,
-	#category : #'Myg-MineSweeper-Core'
+	#category : #'Myg-MineSweeper-Model'
 }
 
 { #category : #visiting }

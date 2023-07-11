@@ -4,7 +4,7 @@ I am an abstract visitor for a MField object.
 Class {
 	#name : #MFieldVisitor,
 	#superclass : #Object,
-	#category : #'Myg-MineSweeper-Visitors'
+	#category : #'Myg-MineSweeper-Visitor'
 }
 
 { #category : #visiting }

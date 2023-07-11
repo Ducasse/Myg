@@ -4,7 +4,7 @@ I'm a box whose status is unknown. It did have been clicked yet.
 Class {
 	#name : #MUnknown,
 	#superclass : #MBox,
-	#category : #'Myg-MineSweeper-Core'
+	#category : #'Myg-MineSweeper-Model'
 }
 
 { #category : #visiting }

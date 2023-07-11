@@ -9,7 +9,7 @@ Class {
 		'currentRow',
 		'currentColumn'
 	],
-	#category : #'Myg-MineSweeper-Visitors'
+	#category : #'Myg-MineSweeper-Visitor'
 }
 
 { #category : #initialization }

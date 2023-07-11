@@ -3,13 +3,12 @@ I am an abstract box held by the mine field.
 "
 Class {
 	#name : #MBox,
-	#superclass : #MVisitableObject,
+	#superclass : #MygAbstractBox,
 	#instVars : [
 		'announcer',
-		'flagged',
-		'position'
+		'flagged'
 	],
-	#category : #'Myg-MineSweeper-Core'
+	#category : #'Myg-MineSweeper-Model'
 }
 
 { #category : #'subclass instance creation' }
@@ -79,16 +78,4 @@ MBox >> isMineBox [
 { #category : #testing }
 MBox >> isUnknownBox [
 	^ false
-]
-
-{ #category : #accessing }
-MBox >> position [
-
-	^ position
-]
-
-{ #category : #accessing }
-MBox >> position: aPoint [
-
-	position := aPoint
 ]

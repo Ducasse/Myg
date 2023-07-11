@@ -4,7 +4,7 @@ I do the same thing as my mother class but I show mines on the field by printing
 Class {
 	#name : #MDebugFieldPrinter,
 	#superclass : #MFieldPrinter,
-	#category : #'Myg-MineSweeper-Visitors'
+	#category : #'Myg-MineSweeper-Visitor'
 }
 
 { #category : #visiting }

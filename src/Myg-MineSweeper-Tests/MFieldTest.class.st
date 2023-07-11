@@ -12,7 +12,8 @@ Class {
 
 { #category : #running }
 MFieldTest >> setUp [
-	field := MField matrix: self matrixForField
+
+	field := MBoard createWithMatrix: self matrixForField
 ]
 
 { #category : #'tests-accessing' }
@@ -72,12 +73,13 @@ MFieldTest >> testBoxesAroundBoxAtAtDoWithIndexes [
 
 { #category : #'tests-box api' }
 MFieldTest >> testFieldUpdate [
+
 	| update |
 	update := false.
 	field announcer when: MFieldUpdate do: [ update := true ].
 	field clickOnBoxAt: 1 at: 1.
-	
-	self assert: update.
+
+	self assert: update
 ]
 
 { #category : #tests }
@@ -148,18 +150,20 @@ MFieldTest >> testMineCountAroundBoxAtAt [
 
 { #category : #'tests-box api' }
 MFieldTest >> testPlayerLoose [
+
 	| loose |
 	loose := false.
 	field announcer when: MPlayerLoose do: [ loose := true ].
 	field clickOnBoxAt: 1 at: 3.
-	
+
 	self
 		assert: loose;
-		assert: field playerLost.
+		assert: field playerLost
 ]
 
 { #category : #'tests-box api' }
 MFieldTest >> testPlayerWin [
+
 	| win |
 	win := false.
 	field announcer when: MPlayerWin do: [ win := true ].
@@ -196,6 +200,7 @@ MFieldTest >> testPropagateWhenEnoughFlagsAround [
 
 { #category : #'tests-box api' }
 MFieldTest >> testReplaceBoxAtRowColumnBy [
+
 	| actual new |
 	actual := field boxAt: 2 at: 2.
 	new := MBox clicked.

@@ -12,7 +12,8 @@ Class {
 
 { #category : #running }
 MUnknownTest >> setUp [
-	field := MField matrix: self matrixForField
+
+	field := MBoard createWithMatrix: self matrixForField
 ]
 
 { #category : #'tests-clicking' }

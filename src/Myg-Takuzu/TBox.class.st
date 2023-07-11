@@ -48,7 +48,7 @@ TBox >> configureValue [
 ]
 
 { #category : #testing }
-TBox >> isTSetBox [ 
+TBox >> isTFixedBox [ 
 	^ false
 ]
 

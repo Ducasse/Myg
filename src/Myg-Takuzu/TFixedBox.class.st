@@ -17,7 +17,7 @@ TFixedBox >> click [
 ]
 
 { #category : #testing }
-TFixedBox >> isTSetBox [ 
+TFixedBox >> isTFixedBox [ 
 	
 	^ true 
 ]

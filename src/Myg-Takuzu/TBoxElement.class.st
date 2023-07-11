@@ -61,7 +61,7 @@ TBoxElement >> box: aTBox [
 { #category : #public }
 TBoxElement >> click [
 	
-	self box isTSetBox
+	self box isTFixedBox
 		ifTrue: [ self lock ]
 		ifFalse: [
 			self board clickOnBox: self box.

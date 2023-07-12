@@ -74,6 +74,60 @@ MygMBoard >> boxAt: x at: y [
 	^ grid at: x @ y
 ]
 
+{ #category : #enumerating2 }
+MygMBoard >> boxesAroundBox: aBox anySatisfy: aBlock [
+
+	self
+		boxesAroundBox: aBox
+		do: [ :box | (aBlock value: box) ifTrue: [ ^ true ] ].
+	^ false
+]
+
+{ #category : #enumerating2 }
+MygMBoard >> boxesAroundBox: aBox collect: aBlock [
+
+	| collected |
+	collected := OrderedCollection new.
+	self
+		boxesAroundBox: aBox
+		do: [ :box | collected add: (aBlock value: box) ].
+	^ collected
+]
+
+{ #category : #enumerating2 }
+MygMBoard >> boxesAroundBox: aBox do: aBlock [
+
+	self
+		boxesAroundBox: aBox
+		doWithIndexes: [ :box :i :j | aBlock value: box ]
+]
+
+{ #category : #enumerating2 }
+MygMBoard >> boxesAroundBox: aBox doWithIndexes: aBlock [
+
+	|x y|
+	x := aBox position x.
+	y := aBox position y.
+	^ (x - 1 to: x + 1) collect: [ :i |
+		  (y - 1 to: y + 1) collect: [ :j |
+			  ((i = x and: [ j = y ]) or: [
+				   i < 1 or: [
+					   j < 1 or: [ i > self height or: [ j > self width ] ] ] ])
+				  ifFalse: [
+				  aBlock value: (self boxAt: i at: j) value: i value: j ] ] ]
+]
+
+{ #category : #enumerating2 }
+MygMBoard >> boxesAroundBox: aBox select: aBlock [
+
+	| collected |
+	collected := OrderedCollection new.
+	self
+		boxesAroundBox: aBox
+		do: [ :box | (aBlock value: box) ifTrue: [ collected add: box ] ].
+	^ collected
+]
+
 { #category : #enumerating }
 MygMBoard >> boxesAroundBoxAt: x at: y anySatisfy: aBlock [
 	self boxesAroundBoxAt: x at: y do: [ :box |
@@ -133,12 +187,21 @@ MygMBoard >> boxesDoWithIndices: aBlock [
 
 { #category : #enumerating }
 MygMBoard >> boxesSelect: aBlock [
-
+	
 	| selected |
 	selected := OrderedCollection new.
-	grid do: [ :box |
-		(aBlock value: box) ifTrue: [ selected add: box ] ].
+	grid do: [ :box | (aBlock value: box) ifTrue: [ selected add: box ] ].
 	^ selected
+]
+
+{ #category : #'player api' }
+MygMBoard >> clickOnBox: aBox [
+
+	| x y |
+	gameEnded ifTrue: [ ^ self ].
+	x := aBox position x.
+	y := aBox position y.
+	(self boxAt: x at: y) click
 ]
 
 { #category : #'player api' }
@@ -147,12 +210,13 @@ MygMBoard >> clickOnBoxAt: x at: y [
 	(self boxAt: x at: y) clickIn: self at: x at: y
 ]
 
-{ #category : #'debug api' }
-MygMBoard >> debugTextualRepresentation [
-	| visitor |
-	visitor := MygMDebugFieldPrinter new.
-	self accept: visitor.
-	^ visitor streamContents
+{ #category : #'box api' }
+MygMBoard >> flagCountAroundBox: aBox [
+
+	^ (self boxesAroundBox: aBox collect: [ :box |
+		   box isFlagged
+			   ifTrue: [ 1 ]
+			   ifFalse: [ 0 ] ]) sum
 ]
 
 { #category : #'box api' }
@@ -169,8 +233,20 @@ MygMBoard >> gameEnded [
 ]
 
 { #category : #testing }
+MygMBoard >> hasClickedBoxAroundBox: aBox [
+
+	^ self boxesAroundBox: aBox anySatisfy: #isClickedBox
+]
+
+{ #category : #testing }
 MygMBoard >> hasClickedBoxAroundBoxAt: x at: y [
 	^ self boxesAroundBoxAt: x at: y anySatisfy: #isClickedBox
+]
+
+{ #category : #testing }
+MygMBoard >> hasMineBoxAroundBox: aBox [
+
+	^ self boxesAroundBox: aBox anySatisfy: #isMineBox 
 ]
 
 { #category : #testing }
@@ -216,6 +292,15 @@ MygMBoard >> magnifier: aNumber [
 { #category : #'player api' }
 MygMBoard >> mineCount [
 	^ (self boxesSelect: #isMineBox) size
+]
+
+{ #category : #'box api' }
+MygMBoard >> mineCountAroundBox: aBox [
+
+	^ (self boxesAroundBox: aBox collect: [ :box |
+		   box isMineBox
+			   ifTrue: [ 1 ]
+			   ifFalse: [ 0 ] ]) sum
 ]
 
 { #category : #'box api' }
@@ -283,16 +368,8 @@ MygMBoard >> printOn: aStream [
 		i = self width ifFalse: [ aStream	<< Smalltalk os lineEnding ] ]
 ]
 
-{ #category : #'player api' }
-MygMBoard >> readableTextualRepresentation [
-	| visitor |
-	visitor := MygMFieldPrinter new.
-	self accept: visitor.
-	^ visitor streamContents
-]
-
 { #category : #'box api' }
-MygMBoard >> replaceBoxAtRow: x column: y by: aMBox [
+MygMBoard >> replaceBoxAtColumn: x atRow: y by: aMBox [
 
 	grid at: x @ y put: aMBox
 ]
@@ -300,6 +377,13 @@ MygMBoard >> replaceBoxAtRow: x column: y by: aMBox [
 { #category : #accessing }
 MygMBoard >> rightFlagCountAroundAt: x at: y [ 
 	^ (self flagCountAroundBoxAt: x at: y) = (self mineCountAroundBoxAt: x at: y)
+]
+
+{ #category : #accessing }
+MygMBoard >> rightFlagCountAroundBox: aBox [
+
+	^ (self flagCountAroundBox: aBox)
+	  = (self mineCountAroundBox: aBox)
 ]
 
 { #category : #accessing }

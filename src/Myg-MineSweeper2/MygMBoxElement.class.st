@@ -36,13 +36,14 @@ Class {
 		'positionInField'
 	],
 	#classVars : [
-		'icons'
+		'Icons'
 	],
 	#category : #'Myg-MineSweeper2-UI'
 }
 
 { #category : #accessing }
-MygMBoxElement class >> box: aMBox [ 
+MygMBoxElement class >> createWithBox: aMBox [
+
 	^ self new box: aMBox
 ]
 
@@ -64,7 +65,7 @@ MygMBoxElement class >> flagContents [
 
 { #category : #'as yet unclassified' }
 MygMBoxElement class >> icons [
-	^ icons ifNil: [ icons := Dictionary new ]
+	^ Icons ifNil: [ Icons := Dictionary new ]
 ]
 
 { #category : #'class initialization' }
@@ -93,14 +94,7 @@ MygMBoxElement >> box: aMBox [
 
 	box := aMBox.
 
-	box announcer
-		when: MygMBoxClickAndReplaceAnnouncement
-		send: #click:
-		to: self.
-	box announcer
-		when: MygMBoxExplosionAnnouncement
-		send: #explosion
-		to: self
+	self initializeAnnouncements 
 ]
 
 { #category : #public }
@@ -150,7 +144,7 @@ MygMBoxElement >> explosion [
 					 transformDo: [ :t |
 						 t translateBy: relativeFinalPosition.
 						 t rotateBy: 180 ];
-					 onFinishedDo: [ "Transcript show: anElement position ; cr; open."
+					 onFinishedDo: [
 						 anElement removeFromParent ];
 					 yourself) yourself ]
 ]
@@ -200,8 +194,7 @@ MygMBoxElement >> flag [
 	| pngElement |
 	self box isClickedBox ifTrue: [ ^ self ].
 	pngElement := BlElement new.
-	pngElement background:
-		(self class flag scaledToSize: self size).
+	pngElement background: (self class flag scaledToSize: self size).
 
 	pngElement constraintsDo: [ :c |
 		c horizontal matchParent.
@@ -215,7 +208,6 @@ MygMBoxElement >> flag [
 { #category : #initialization }
 MygMBoxElement >> initialize [
 
-	| posX posY |
 	super initialize.
 	self background: self backgroundPaint.
 	self geometry: (BlRoundedRectangleGeometry cornerRadius: 5).
@@ -232,11 +224,34 @@ MygMBoxElement >> initialize [
 		c frame horizontal alignCenter ].
 
 	self addEventHandlerOn: BlMouseUpEvent do: [ :anEvent |
-		posX := self box position x.
-		posY := self box position y.
 		anEvent secondaryButtonPressed
-			ifTrue: [ box announceFlag ]
-			ifFalse: [
-				self box isFlagged ifFalse: [
-					box clickIn: field at: posX at: posY ] ] ]
+			ifTrue: [
+				self flag.
+				box flagged: box isFlagged not ]
+			ifFalse: [ self box isFlagged ifFalse: [ box click ] ] ]
+]
+
+{ #category : #initialization }
+MygMBoxElement >> initializeAnnouncements [
+
+	box announcer
+		when: MygMBoxClickAndReplaceAnnouncement
+		send: #click:
+		to: self.
+	box announcer
+		when: MygMBoxExplosionAnnouncement
+		send: #explosion
+		to: self
+]
+
+{ #category : #accessing }
+MygMBoxElement >> positionInField [ 
+
+	^ positionInField 
+]
+
+{ #category : #accessing }
+MygMBoxElement >> positionInField: aPoint [
+
+	positionInField := aPoint 
 ]

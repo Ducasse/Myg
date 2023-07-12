@@ -14,6 +14,15 @@ MygMMine >> accept: aMFieldVisitor [
 ]
 
 { #category : #clicking }
+MygMMine >> click [
+
+	self isFlagged ifTrue: [ ^ self ].
+
+	self announcer announce: MygMBoxExplosionAnnouncement new.
+	self board gameEnded ifFalse: [ self board playerLoose ]
+]
+
+{ #category : #clicking }
 MygMMine >> clickIn: aMField at: x at: y [
 
 	self isFlagged ifTrue: [ ^self].

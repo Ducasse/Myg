@@ -13,6 +13,13 @@ MygMClicked >> accept: aMFieldVisitor [
 ]
 
 { #category : #clicking }
+MygMClicked >> click [
+	"Nothing to be done, player should click somewhere else..."
+
+	self propagateClick
+]
+
+{ #category : #clicking }
 MygMClicked >> clickIn: aMField at: x at: y [
 	"Nothing to be done, player should click somewhere else..."
 
@@ -27,6 +34,17 @@ MygMClicked >> isClickedBox [
 { #category : #printing }
 MygMClicked >> printOn: aStream [
 	aStream << '_'
+]
+
+{ #category : #clicking }
+MygMClicked >> propagateClick [
+
+
+	((self board hasMineBoxAroundBox: self) not or: [
+		 self board rightFlagCountAroundBox: self ]) ifTrue: [
+		self board boxesAroundBox: self doWithIndexes: [ :box :i :j |
+			box isClickedBox ifFalse: [
+				(self board boxAt: i at: j) click ] ] ]
 ]
 
 { #category : #clicking }

@@ -34,13 +34,6 @@ MygMBox class >> unknown [
 ]
 
 { #category : #accessing }
-MygMBox >> announceFlag [
-
-	self announcer announce: MygMBoxFlaggedAnnouncement new.
-	self flagged: flagged not
-]
-
-{ #category : #accessing }
 MygMBox >> announcer [ 
 	^ announcer ifNil: [ announcer := Announcer new ]
 ]

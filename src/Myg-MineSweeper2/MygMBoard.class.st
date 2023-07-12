@@ -156,11 +156,6 @@ MygMBoard >> debugTextualRepresentation [
 ]
 
 { #category : #'box api' }
-MygMBoard >> fieldUpdate [
-	self announcer announce: (MygMFieldUpdate field: self)
-]
-
-{ #category : #'box api' }
 MygMBoard >> flagCountAroundBoxAt: x at: y [
 	^ (self boxesAroundBoxAt: x at: y collect: [ :box | 
 		box isFlagged
@@ -236,12 +231,11 @@ MygMBoard >> playerLoose [
 
 	playerWon := false.
 	gameEnded := true.
-	self announcer announce: (MygMPlayerLoose field: self).
 
-	"Transcript
+	Transcript
 		clear;
 		show: 'Defaite';
-		open."
+		open.
 
 	self boxesDoWithIndices: [ :aBox :i :j |
 		aBox announcer announce:
@@ -260,11 +254,10 @@ MygMBoard >> playerWin [
 	gameEnded ifTrue: [ ^ self ].
 	playerWon := true.
 	gameEnded := true.
-	self announcer announce: (MygMPlayerWin field: self).
-	"Transcript
+	Transcript
 		clear;
 		show: 'Victoire';
-		open."
+		open.
 	self boxesDoWithIndices: [ :aBox :i :j |
 		aBox announcer announce:
 			(MygMBoxClickAndReplaceAnnouncement replaceBy:

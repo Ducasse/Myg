@@ -172,7 +172,7 @@ MygMFieldElement >> game: aMField [
 	self layout columnCount: game width.
 	game grid do: [ :aBox |
 		| boxElement |
-		boxElement := (MygMBoxElement box: aBox) field: aMField.
+		boxElement := (MygMBoxElement box: aBox) field: aMField; positionInField: aBox position.
 		self addChild: boxElement ]
 ]
 

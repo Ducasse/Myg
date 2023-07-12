@@ -32,8 +32,8 @@ Class {
 	#instVars : [
 		'box',
 		'field',
-		'size',
-		'text'
+		'text',
+		'positionInField'
 	],
 	#classVars : [
 		'icons'
@@ -95,9 +95,8 @@ MygMBoxElement >> box: aMBox [
 
 	box announcer
 		when: MygMBoxClickAndReplaceAnnouncement
-		send: #click: 
+		send: #click:
 		to: self.
-	box announcer when: MygMBoxFlaggedAnnouncement send: #flag to: self.
 	box announcer
 		when: MygMBoxExplosionAnnouncement
 		send: #explosion

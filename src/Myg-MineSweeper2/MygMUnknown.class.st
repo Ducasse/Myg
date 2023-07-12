@@ -27,7 +27,6 @@ MygMUnknown >> clickIn: aMField at: x at: y [
 	An alternate solution would be that he tagged all the possible bombs and they are effectively bombs."
 	aMField hasUnknownBox
 		ifFalse: [ aMField playerWin ]
-		ifTrue: [ aMField fieldUpdate ]
 ]
 
 { #category : #testing }

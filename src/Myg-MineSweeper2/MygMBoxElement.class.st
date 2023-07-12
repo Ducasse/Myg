@@ -117,7 +117,7 @@ MygMBoxElement >> click: anAnnouncement [
 			boxPosX := self box position x.
 			boxPosY := self box position y.
 			text text:
-				(self field mineCountAroundBoxAt: boxPosX at: boxPosY) asString
+				(self field mineCountAroundBox: self box) asString
 					asRopedText ].
 
 	text text fontSize:  (self width min: self height).

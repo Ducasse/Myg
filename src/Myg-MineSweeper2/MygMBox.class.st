@@ -44,11 +44,6 @@ MygMBox >> click [
 	self subclassResponsibility
 ]
 
-{ #category : #clicking }
-MygMBox >> clickIn: aMField at: x at: y [
-	self subclassResponsibility
-]
-
 { #category : #accessing }
 MygMBox >> flagged: aBoolean [
 	flagged:= aBoolean 

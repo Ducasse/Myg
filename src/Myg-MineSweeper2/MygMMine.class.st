@@ -22,15 +22,6 @@ MygMMine >> click [
 	self board gameEnded ifFalse: [ self board playerLoose ]
 ]
 
-{ #category : #clicking }
-MygMMine >> clickIn: aMField at: x at: y [
-
-	self isFlagged ifTrue: [ ^self].
-	
-	self announcer announce: MygMBoxExplosionAnnouncement new.
-	aMField gameEnded ifFalse: [ aMField playerLoose ]
-]
-
 { #category : #testing }
 MygMMine >> isMineBox [
 	^ true

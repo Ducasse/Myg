@@ -28,14 +28,3 @@ MygMClicked >> isClickedBox [
 MygMClicked >> printOn: aStream [
 	aStream << '_'
 ]
-
-{ #category : #clicking }
-MygMClicked >> propagateClick [
-
-
-	((self board hasMineBoxAroundBox: self) not or: [
-		 self board rightFlagCountAroundBox: self ]) ifTrue: [
-		self board boxesAroundBox: self doWithIndexes: [ :box :i :j |
-			box isClickedBox ifFalse: [
-				(self board boxAt: i at: j) click ] ] ]
-]

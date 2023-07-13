@@ -84,6 +84,18 @@ MygMFieldTest >> testBoxesAroundBoxAtAtDoWithIndexes [
 ]
 
 { #category : #tests }
+MygMFieldTest >> testClickOnFlaggedBox [
+
+	| box |
+	box := field boxAt: 1 at: 1.
+	self assert: box class equals: MygMUnknown.
+	box flag.
+	self assert: box isFlagged.
+	box click.
+	self assert: box class equals: MygMUnknown 
+]
+
+{ #category : #tests }
 MygMFieldTest >> testFlagIsWorking [
 
 	|box|

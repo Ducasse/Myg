@@ -79,3 +79,12 @@ MygMBox >> isMineBox [
 MygMBox >> isUnknownBox [
 	^ false
 ]
+
+{ #category : #clicking }
+MygMBox >> propagateClick [
+
+	((self board hasMineBoxAroundBox: self) not or: [
+		 self board rightFlagCountAroundBox: self ]) ifTrue: [
+		self board boxesAroundBox: self do: [ :box |
+			box isClickedBox ifFalse: [ box click ] ] ]
+]

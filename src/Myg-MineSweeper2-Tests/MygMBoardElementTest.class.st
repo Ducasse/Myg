@@ -66,16 +66,15 @@ MygMBoardElementTest >> testMouseClickOnMine [
 { #category : #'tests - ui' }
 MygMBoardElementTest >> testMouseClickOnUnknown [
 
-	<skip>
 	| box unk |
-	self skip.
-	box := board children third.
+	box := board children first.
 	box forceLayout.
-	unk := box findMouseEventTargetAt: 200 @ 50.
+	unk := box findMouseEventTargetAt: 50 @ 50.
 	unk box click.
 	self
-		assert: box background image
-		equals: (MygMBoxElement mine scaledToSize: box size)
+		assert: unk background paint color
+		equals: Color white darker darker.
+	self assert: box children first text asString equals: '0'
 ]
 
 { #category : #'tests - ui' }

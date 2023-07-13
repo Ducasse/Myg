@@ -234,11 +234,8 @@ MygMBoard >> playerLoose [
 
 	playerWon := false.
 	gameEnded := true.
-
-	self boxesDoWithIndices: [ :aBox :i :j |
-		aBox announcer announce:
-			(MygMBoxClickAndReplaceAnnouncement replaceBy:
-				 (MygMClicked new position: i @ j)) ]
+	self revealBoard.
+	
 ]
 
 { #category : #accessing }
@@ -252,10 +249,7 @@ MygMBoard >> playerWin [
 	gameEnded ifTrue: [ ^ self ].
 	playerWon := true.
 	gameEnded := true.
-	self boxesDoWithIndices: [ :aBox :i :j |
-		aBox announcer announce:
-			(MygMBoxClickAndReplaceAnnouncement replaceBy:
-				 (MygMClicked new position: i @ j)) ]
+	self revealBoard
 ]
 
 { #category : #accessing }
@@ -284,6 +278,20 @@ MygMBoard >> replaceBox: aBox by: aNewBox [
 	x := aBox position x.
 	y := aBox position y.
 	grid at: x @ y put: aNewBox
+]
+
+{ #category : #'as yet unclassified' }
+MygMBoard >> revealBoard [
+
+	self boxesDoWithIndices: [ :aBox :i :j |
+		| newBox |
+		newBox := MygMClicked new
+			          position: i @ j;
+			          board: self.
+		aBox isUnknownBox ifTrue: [
+			self replaceBox: aBox by: newBox].
+			aBox announcer announce:
+				(MygMBoxClickAndReplaceAnnouncement replaceBy: newBox)]
 ]
 
 { #category : #accessing }

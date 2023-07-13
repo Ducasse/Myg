@@ -7,6 +7,20 @@ Class {
 	#category : #'Myg-MineSweeper2-Tests'
 }
 
+{ #category : #tests }
+MygMFieldTest >> testAllClickedWhenLost [
+
+	field playerLoose.
+	field grid do: [ :each | self deny: each isUnknownBox ]
+]
+
+{ #category : #tests }
+MygMFieldTest >> testAllClickedWhenWon [
+
+	field playerWin.
+	field grid do: [ :each | self deny: each isUnknownBox ]
+]
+
 { #category : #'tests-accessing' }
 MygMFieldTest >> testBoxAtAt [
 

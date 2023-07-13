@@ -212,7 +212,8 @@ MygMBoxElement >> flag [
 
 	self box isFlagged
 		ifFalse: [ self addChild: pngElement as: 'png' ]
-		ifTrue: [ self removeChildNamed: 'png' ]
+		ifTrue: [ self removeChildNamed: 'png' ].
+	self box flag.
 ]
 
 { #category : #initialization }
@@ -236,8 +237,7 @@ MygMBoxElement >> initialize [
 	self addEventHandlerOn: BlMouseUpEvent do: [ :anEvent |
 		anEvent secondaryButtonPressed
 			ifTrue: [
-				self flag.
-				box flagged: box isFlagged not ]
+				self flag ]
 			ifFalse: [ self box isFlagged ifFalse: [ box click ] ] ]
 ]
 

@@ -45,6 +45,12 @@ MygMBox >> click [
 ]
 
 { #category : #accessing }
+MygMBox >> flag [
+
+	self flagged: self isFlagged not
+]
+
+{ #category : #accessing }
 MygMBox >> flagged: aBoolean [
 	flagged:= aBoolean 
 ]

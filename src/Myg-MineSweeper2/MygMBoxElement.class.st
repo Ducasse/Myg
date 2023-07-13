@@ -130,8 +130,8 @@ MygMBoxElement >> click: anAnnouncement [
 			self box: anAnnouncement box.
 			text text:
 				(self field mineCountAroundBox: self box) asString asRopedText.
-				text text fontSize: (self width min: self height).
-	text text fontName: 'Source Sans Pro'. ]
+			text text fontSize: (self width min: self height).
+			text text fontName: 'Source Sans Pro' ]
 ]
 
 { #category : #'as yet unclassified' }

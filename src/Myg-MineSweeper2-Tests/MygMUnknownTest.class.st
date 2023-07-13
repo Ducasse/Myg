@@ -4,17 +4,8 @@ A MEmptyTest is a test class for testing the behavior of MEmpty
 Class {
 	#name : #MygMUnknownTest,
 	#superclass : #MygMAbstractTest,
-	#instVars : [
-		'field'
-	],
 	#category : #'Myg-MineSweeper2-Tests'
 }
-
-{ #category : #running }
-MygMUnknownTest >> setUp [
-
-	field := MygMBoard createWithMatrix: self matrixForField
-]
 
 { #category : #'tests-clicking' }
 MygMUnknownTest >> testClickInAtAtProduceAPropagateTONeighbour [

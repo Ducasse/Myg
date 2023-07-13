@@ -4,6 +4,9 @@ This class contains tests
 Class {
 	#name : #MygMAbstractTest,
 	#superclass : #TestCase,
+	#instVars : [
+		'field'
+	],
 	#category : #'Myg-MineSweeper2-Tests'
 }
 
@@ -23,4 +26,10 @@ MygMAbstractTest >> matrixForField [
 			   at: 4 @ 4 put: MygMBox mine;
 			   at: 5 @ 4 put: MygMBox mine;
 			   yourself
+]
+
+{ #category : #running }
+MygMAbstractTest >> setUp [
+
+	field := MygMBoard createWithMatrix: self matrixForField
 ]

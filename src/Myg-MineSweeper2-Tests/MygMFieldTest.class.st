@@ -4,17 +4,8 @@ A MFieldTest is a test class for testing the behavior of MField
 Class {
 	#name : #MygMFieldTest,
 	#superclass : #MygMAbstractTest,
-	#instVars : [
-		'field'
-	],
 	#category : #'Myg-MineSweeper2-Tests'
 }
-
-{ #category : #running }
-MygMFieldTest >> setUp [
-
-	field := MygMBoard createWithMatrix: self matrixForField
-]
 
 { #category : #'tests-accessing' }
 MygMFieldTest >> testBoxAtAt [
@@ -224,7 +215,7 @@ MygMFieldTest >> testPlayerWin [
 { #category : #tests }
 MygMFieldTest >> testPropagateWhenEnoughFlagsAround [
 
-	|box|
+	| box |
 	box := field boxAt: 2 at: 5.
 	box click.
 	(field boxAt: 1 at: 5) flag.
@@ -236,7 +227,8 @@ MygMFieldTest >> testPropagateWhenEnoughFlagsAround [
 	self assert: (field boxAt: 1 at: 4) isClickedBox.
 	self assert: (field boxAt: 2 at: 4) isClickedBox.
 	self assert: (field boxAt: 3 at: 4) isClickedBox.
-	self assert: (field boxAt: 3 at: 5) isClickedBox
+	self assert: (field boxAt: 3 at: 5) isClickedBox.
+	self assert: (field boxAt: 1 at: 5) isMineBox.
 ]
 
 { #category : #'tests-box api' }

@@ -31,6 +31,8 @@ BaselineOfMyg >> baseline: spec [
 		package: 'Myg-Takuzu-Tests' with: [ spec requires: #( 'Myg-Takuzu' ) ];
 		package: 'Myg-MineSweeper' with: [ spec requires: #( 'MygCore' )];
 		package: 'Myg-MineSweeper-Tests' with: [ spec requires: #( 'Myg-MineSweeper' ) ];
+		package: 'Myg-Sokoban' with: [ spec requires: #( 'MygCore' ) ];
+		package: 'Myg-Sokoban-Tests' with: [ spec requires: #('Myg-Sokoban') ];
 		yourself
 	
 ]

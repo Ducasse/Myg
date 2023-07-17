@@ -6589,7 +6589,7 @@ MygSkGameManager class >> mazesSasquatchVI [
 { #category : #'as yet unclassified' }
 MygSkGameManager class >> mazesTest [
 
-	^ IdentityDictionary new at: 1 put: '#@*..#$$'; yourself
+	^ IdentityDictionary new at: 1 put: '#@$ .#'; yourself
 ]
 
 { #category : #'as yet unclassified' }

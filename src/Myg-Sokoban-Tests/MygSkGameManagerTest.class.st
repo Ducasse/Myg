@@ -10,7 +10,7 @@ Class {
 { #category : #tests }
 MygSkGameManagerTest >> testIsBoardReset [
 
-	| string manager boardElement |
+	| string manager boardElement space|
 	string := '#@$ .#'.
 	manager := MygSkGameManager new.
 	manager launchFromString: string.
@@ -22,13 +22,15 @@ MygSkGameManagerTest >> testIsBoardReset [
 	boardElement eventDispatcher handlers first handleEvent:
 		(KeyboardEvent new key: KeyboardKey space).
 	boardElement := manager currentBoardElement.
-	self assert: boardElement board printString equals: '#@$ .#'
+	self assert: boardElement board printString equals: '#@$ .#'.
+	space := manager currentBoardElement space.
+	space universe closeSpaceSynchronously: space
 ]
 
 { #category : #tests }
 MygSkGameManagerTest >> testMoveCount [
 
-	| string manager boardElement |
+	| string manager boardElement space |
 	string := '#@$ .#'.
 	manager := MygSkGameManager new.
 	manager launchFromString: string.
@@ -41,13 +43,15 @@ MygSkGameManagerTest >> testMoveCount [
 	self assert: manager currentMoveCount equals: 0.
 	boardElement board player moveEast.
 	self assert: boardElement board printString equals: '# @$.#'.
-	self assert: manager currentMoveCount equals: 1
+	self assert: manager currentMoveCount equals: 1.
+	space := manager currentBoardElement space.
+	space universe closeSpaceSynchronously: space
 ]
 
 { #category : #tests }
 MygSkGameManagerTest >> testRegisterLevel [
 
-	| manager board string |
+	| manager board string space |
 	manager := MygSkGameManager new.
 	string := MygSkGameManager mazesTest at: 1.
 	manager launchFromString: string inDictionary: 'mazesTest' at: 1.
@@ -63,13 +67,15 @@ MygSkGameManagerTest >> testRegisterLevel [
 	self assert:
 		((manager packDictionary at: 'mazesTest') levelDictionary at: 1)
 			isNotNil.
-	self assert: ((manager packDictionary at: 'mazesTest') levelDictionary at: 1) bestCount equals: 2 
+	self assert: ((manager packDictionary at: 'mazesTest') levelDictionary at: 1) bestCount equals: 2.
+	space := manager currentBoardElement space.
+	space universe closeSpaceSynchronously: space
 ]
 
 { #category : #tests }
 MygSkGameManagerTest >> testRegisterLevelWithBetterMoveCount [
 
-	| manager board string registered |
+	| manager board string registered space |
 	manager := MygSkGameManager new.
 	string := MygSkGameManager mazesTest at: 1.
 	manager launchFromString: string inDictionary: 'mazesTest' at: 1.
@@ -90,6 +96,8 @@ MygSkGameManagerTest >> testRegisterLevelWithBetterMoveCount [
 	self assert: registered isNotNil.
 	self assert: registered bestCount equals: 4.
 	
+	space := manager currentBoardElement space.
+	space universe closeSpaceSynchronously: space.
 	manager launchAgain.
 
 	board := manager currentBoardElement board.
@@ -100,13 +108,15 @@ MygSkGameManagerTest >> testRegisterLevelWithBetterMoveCount [
 		assert:
 			((manager packDictionary at: 'mazesTest') levelDictionary at: 1)
 				bestCount
-		equals: 2
+		equals: 2.
+	space := manager currentBoardElement space.
+	space universe closeSpaceSynchronously: space
 ]
 
 { #category : #tests }
 MygSkGameManagerTest >> testRegisterLevelWithWorseMoveCount [
 
-	| manager board string registered |
+	| manager board string registered space |
 	manager := MygSkGameManager new.
 	string := MygSkGameManager mazesTest at: 1.
 	manager launchFromString: string inDictionary: 'mazesTest' at: 1.
@@ -126,7 +136,9 @@ MygSkGameManagerTest >> testRegisterLevelWithWorseMoveCount [
 
 	self assert: registered isNotNil.
 	self assert: registered bestCount equals: 2.
-
+	
+	space := manager currentBoardElement space.
+	space universe closeSpaceSynchronously: space.
 	manager launchAgain.
 	board := manager currentBoardElement board.
 	
@@ -136,10 +148,12 @@ MygSkGameManagerTest >> testRegisterLevelWithWorseMoveCount [
 	board player moveEast.
 
 		
-self
+	self
 		assert:
 			((manager packDictionary at: 'mazesTest') levelDictionary at: 1)
 				bestCount
 		equals: 2.
+	space := manager currentBoardElement space.
+	space universe closeSpaceSynchronously: space
 
 ]

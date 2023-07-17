@@ -28,9 +28,9 @@ MygSkStructuralBoardTest >> testAtPositionLowLevel [
 
 	| board |
 	board := MygSkBoard board:
-		         (LevelImporter
+		         ((MygLevelImporter
 			          fromString: self map1
-			          fromPackage: MygSkBoard package).
+			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).
 	self assert:
 		((board atPosition: CpDirection north * board player position)
 			 isKindOf: MygSkGround).
@@ -50,9 +50,9 @@ MygSkStructuralBoardTest >> testIsBoxOnTargetPlaygroundCorrectlySet [
 
 	| board box1 box2 |
 	board := MygSkBoard board:
-		         (LevelImporter
+		         ((MygLevelImporter
 			          fromString: '#@ $.*#'
-			          fromPackage: MygSkBoard package).
+			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).
 	box1 := board atRow: 1 atColumn: 4.
 	box2 := board atRow: 1 atColumn: 6.
 	self assert: box1 background class equals: MygSkGround.
@@ -64,9 +64,9 @@ MygSkStructuralBoardTest >> testIsBoxPlaygroundCorrectlySet [
 
 	| board |
 	board := MygSkBoard board:
-		         (LevelImporter
+		         ((MygLevelImporter
 			          fromString: self map1
-			          fromPackage: MygSkBoard package).
+			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).
 	board do: [ :anEl |
 		(anEl isKindOf: MygSkBox) ifTrue: [
 			self assert: anEl position x equals: anEl background position x.
@@ -78,9 +78,9 @@ MygSkStructuralBoardTest >> testIsPalyerOnTargetPlaygroundCorrectlySet [
 
 	| board box |
 	board := MygSkBoard board:
-		         (LevelImporter
+		         ((MygLevelImporter
 			          fromString: '#+ $#'
-			          fromPackage: MygSkBoard package).
+			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).
 	box := board atRow: 1 atColumn: 2.
 	self assert: box background class equals: MygSkTarget
 ]
@@ -90,9 +90,9 @@ MygSkStructuralBoardTest >> testIsPlayerPlaygroundCorrectlySet [
 
 	| board |
 	board := MygSkBoard board:
-		         (LevelImporter
+		         ((MygLevelImporter
 			          fromString: self map1
-			          fromPackage: MygSkBoard package).
+			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).
 	self assert: board player position x equals: 12.
 	self assert: board player position y equals: 9.
 
@@ -105,9 +105,9 @@ MygSkStructuralBoardTest >> testPlayerIsAvailable [
 
 	| board |
 	board := MygSkBoard board:
-		         (LevelImporter
+		         ((MygLevelImporter
 			          fromString: self map1
-			          fromPackage: MygSkBoard package).
+			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).
 	self assert: board player position x equals: 12.
 	self assert: board player position y equals: 9
 ]
@@ -117,9 +117,9 @@ MygSkStructuralBoardTest >> testPrintOn [
 
 	| board |
 	board := MygSkBoard board:
-		         (LevelImporter
+		         ((MygLevelImporter
 			          fromString: self map1
-			          fromPackage: MygSkBoard package).
+			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).
 	self assert: board asciiString equals: '    #####          
     #   #          
     #$  #          
@@ -138,9 +138,9 @@ MygSkStructuralBoardTest >> testPrintOnOneLine [
 
 	| board |
 	board := MygSkBoard board:
-		         (LevelImporter
+		         ((MygLevelImporter
 			          fromString: '#@  #'
-			          fromPackage: MygSkBoard package).
+			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).
 	self assert: board height equals: 1.
 	self assert: board width equals: '#@  #' size.
 	self assert: board asciiString equals: '#@  #'

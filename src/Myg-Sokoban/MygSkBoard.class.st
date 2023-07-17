@@ -20,7 +20,6 @@ Class {
 		'player',
 		'boxes',
 		'ended',
-		'initialMap',
 		'gameManager'
 	],
 	#category : #'Myg-Sokoban-Model'
@@ -8197,7 +8196,7 @@ MygSkBoard >> endGame [
 
 	ended ifTrue: [ ^ self ].
 	ended := true.
-	gameManager registerLevel
+	gameManager ifNotNil: [gameManager registerLevel]
 ]
 
 { #category : #accessing }
@@ -8221,18 +8220,6 @@ MygSkBoard >> gameManager: aSkGameManager [
 { #category : #accessing }
 MygSkBoard >> height [
 	^ map height
-]
-
-{ #category : #accessing }
-MygSkBoard >> initialMap [ 
-	
-	^ initialMap 
-]
-
-{ #category : #accessing }
-MygSkBoard >> initialMap: aCTNewArray2D [
-
-	initialMap := aCTNewArray2D.
 ]
 
 { #category : #initialization }
@@ -8270,7 +8257,6 @@ MygSkBoard >> map [
 { #category : #accessing }
 MygSkBoard >> map: aCTNewArray2D [
 
-	"self initialMap: aCTNewArray2D copy."
 	map := aCTNewArray2D.
 	map withIndexes: [ :column :row |
 		(map at: column @ row)
@@ -8315,7 +8301,7 @@ MygSkBoard >> reset [
 MygSkBoard >> setBoxes [
 
 	map do: [ :each |
-		each className = 'SkBox' ifTrue: [ self addBox: each ] ]
+		each class = MygSkBox ifTrue: [ self addBox: each ] ]
 ]
 
 { #category : #initialization }

@@ -2,24 +2,24 @@
 I am a visitor that print the MField on a WriteStream  on a String.
 "
 Class {
-	#name : #MFieldPrinter,
-	#superclass : #MStreamExporter,
+	#name : #MygMFieldPrinter,
+	#superclass : #MygMStreamExporter,
 	#instVars : [
 		'field',
 		'currentRow',
 		'currentColumn'
 	],
-	#category : #'Myg-MineSweeper-Visitor'
+	#category : #'Myg-MineSweeper2-Visitor'
 }
 
 { #category : #initialization }
-MFieldPrinter >> initialize [
+MygMFieldPrinter >> initialize [
 	super initialize.
 	self writeStream: (WriteStream on: String new)
 ]
 
 { #category : #visiting }
-MFieldPrinter >> visitMClicked: aMClicked [
+MygMFieldPrinter >> visitMClicked: aMClicked [
 	|count|
 	count := (field mineCountAroundBoxAt: currentRow at: currentColumn).
 	count = 0
@@ -30,7 +30,7 @@ MFieldPrinter >> visitMClicked: aMClicked [
 ]
 
 { #category : #visiting }
-MFieldPrinter >> visitMField: aMField [
+MygMFieldPrinter >> visitMField: aMField [
 	field := aMField.
 	aMField boxesDoWithIndices: [ :box :row :column |
 		currentRow := row.
@@ -42,11 +42,11 @@ MFieldPrinter >> visitMField: aMField [
 ]
 
 { #category : #visiting }
-MFieldPrinter >> visitMMine: aMMine [
+MygMFieldPrinter >> visitMMine: aMMine [
 	self writeStream << $*
 ]
 
 { #category : #visiting }
-MFieldPrinter >> visitMUnknown: aMEmpty [
+MygMFieldPrinter >> visitMUnknown: aMEmpty [
 	self writeStream << $*
 ]

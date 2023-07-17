@@ -24,36 +24,36 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MFieldElement,
+	#name : #MygMFieldElement,
 	#superclass : #BlElement,
 	#instVars : [
 		'game'
 	],
-	#category : #'Myg-MineSweeper-UI'
+	#category : #'Myg-MineSweeper2-UI'
 }
 
 { #category : #'as yet unclassified' }
-MFieldElement class >> launchLarge [
+MygMFieldElement class >> launchLarge [
 	^ self withMatrixTest5x5WithMagnifier: 2
 ]
 
 { #category : #'as yet unclassified' }
-MFieldElement class >> launchRegular [
+MygMFieldElement class >> launchRegular [
 	^ self withMatrixTest5x5 
 ]
 
 { #category : #'as yet unclassified' }
-MFieldElement class >> launchSmall [
+MygMFieldElement class >> launchSmall [
 	^ self withMatrixTest5x5WithMagnifier: 0.5
 ]
 
 { #category : #'as yet unclassified' }
-MFieldElement class >> launchVeryLarge [
+MygMFieldElement class >> launchVeryLarge [
 	^ self withMatrixTest5x5WithMagnifier: 4
 ]
 
 { #category : #'instance creation' }
-MFieldElement class >> open [
+MygMFieldElement class >> open [
 
 	| butSmall butRegular butLarge butVeryLarge space elt |
 	butSmall := ToButtonModel new label:
@@ -108,13 +108,13 @@ MFieldElement class >> open [
 ]
 
 { #category : #'as yet unclassified' }
-MFieldElement class >> openWithModel: aModel [
+MygMFieldElement class >> openWithModel: aModel [
 
 	^ self openWithModel: aModel withMagnifier: 1
 ]
 
 { #category : #'as yet unclassified' }
-MFieldElement class >> openWithModel: aModel withMagnifier: aNumber [
+MygMFieldElement class >> openWithModel: aModel withMagnifier: aNumber [
 
 	| aGameElement space |
 	space := BlSpace new.
@@ -136,50 +136,50 @@ MFieldElement class >> openWithModel: aModel withMagnifier: aNumber [
 ]
 
 { #category : #execution }
-MFieldElement class >> withMatrixForField [
+MygMFieldElement class >> withMatrixForField [
 
-	^ self openWithModel: MBoard matrixForField
+	^ self openWithModel: MygMBoard matrixForField
 ]
 
 { #category : #execution }
-MFieldElement class >> withMatrixForFieldWithMagnifier: aNumber [
+MygMFieldElement class >> withMatrixForFieldWithMagnifier: aNumber [
 
-	^ self openWithModel: MBoard matrixForField withMagnifier: aNumber 
+	^ self openWithModel: MygMBoard matrixForField withMagnifier: aNumber 
 ]
 
 { #category : #execution }
-MFieldElement class >> withMatrixTest5x5 [
+MygMFieldElement class >> withMatrixTest5x5 [
 
-	^ self openWithModel: MBoard matrixTest5x5
+	^ self openWithModel: MygMBoard matrixTest5x5
 ]
 
 { #category : #execution }
-MFieldElement class >> withMatrixTest5x5WithMagnifier: aNumber [
+MygMFieldElement class >> withMatrixTest5x5WithMagnifier: aNumber [
 
-	^ self openWithModel: MBoard matrixTest5x5 withMagnifier: aNumber 
+	^ self openWithModel: MygMBoard matrixTest5x5 withMagnifier: aNumber 
 ]
 
 { #category : #accessing }
-MFieldElement >> game [ 
+MygMFieldElement >> game [ 
 	^ game
 ]
 
 { #category : #accessing }
-MFieldElement >> game: aMField [
+MygMFieldElement >> game: aMField [
 
 	game := aMField.
 	self padding: (BlInsets all: 5 * game magnifier).
 	self layout columnCount: game width.
 	game grid do: [ :aBox |
 		| boxElement |
-		boxElement := (MBoxElement createWithBox: aBox)
+		boxElement := (MygMBoxElement createWithBox: aBox)
 			              field: aMField;
 			              positionInField: aBox position.
 		self addChild: boxElement ]
 ]
 
 { #category : #initialization }
-MFieldElement >> initialize [
+MygMFieldElement >> initialize [
 
 	super initialize.
 	self background: (BlBackground paint: Color veryVeryLightGray).

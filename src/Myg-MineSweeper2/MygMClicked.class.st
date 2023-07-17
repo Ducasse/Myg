@@ -2,29 +2,29 @@
 I am an empty box in the mine field that has already been clicked.
 "
 Class {
-	#name : #MClicked,
-	#superclass : #MBox,
-	#category : #'Myg-MineSweeper-Model'
+	#name : #MygMClicked,
+	#superclass : #MygMBox,
+	#category : #'Myg-MineSweeper2-Model'
 }
 
 { #category : #visiting }
-MClicked >> accept: aMFieldVisitor [
+MygMClicked >> accept: aMFieldVisitor [
 	^ aMFieldVisitor visitMClicked: self
 ]
 
 { #category : #clicking }
-MClicked >> click [
+MygMClicked >> click [
 	"Nothing to be done, player should click somewhere else..."
 
 	self propagateClick
 ]
 
 { #category : #testing }
-MClicked >> isClickedBox [
+MygMClicked >> isClickedBox [
 	^ true
 ]
 
 { #category : #printing }
-MClicked >> printOn: aStream [
+MygMClicked >> printOn: aStream [
 	aStream << '_'
 ]

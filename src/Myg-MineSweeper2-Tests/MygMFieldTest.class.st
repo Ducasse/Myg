@@ -2,27 +2,27 @@
 A MFieldTest is a test class for testing the behavior of MField
 "
 Class {
-	#name : #MFieldTest,
-	#superclass : #MAbstractTest,
-	#category : #'Myg-MineSweeper-Tests'
+	#name : #MygMFieldTest,
+	#superclass : #MygMAbstractTest,
+	#category : #'Myg-MineSweeper2-Tests'
 }
 
 { #category : #tests }
-MFieldTest >> testAllClickedWhenLost [
+MygMFieldTest >> testAllClickedWhenLost [
 
 	field playerLoose.
 	field grid do: [ :each | self deny: each isUnknownBox ]
 ]
 
 { #category : #tests }
-MFieldTest >> testAllClickedWhenWon [
+MygMFieldTest >> testAllClickedWhenWon [
 
 	field playerWin.
 	field grid do: [ :each | self deny: each isUnknownBox ]
 ]
 
 { #category : #'tests-accessing' }
-MFieldTest >> testBoxAtAt [
+MygMFieldTest >> testBoxAtAt [
 
 	self
 		assert: (field boxAt: 1 at: 1) isUnknownBox;
@@ -53,7 +53,7 @@ MFieldTest >> testBoxAtAt [
 ]
 
 { #category : #'tests-enumerating' }
-MFieldTest >> testBoxesAroundBoxAtAtDoWithIndexes [
+MygMFieldTest >> testBoxesAroundBoxAtAtDoWithIndexes [
 
 	| expected |
 	expected := {
@@ -89,19 +89,19 @@ MFieldTest >> testBoxesAroundBoxAtAtDoWithIndexes [
 ]
 
 { #category : #tests }
-MFieldTest >> testClickOnFlaggedBox [
+MygMFieldTest >> testClickOnFlaggedBox [
 
 	| box |
 	box := field boxAt: 1 at: 1.
-	self assert: box class equals: MUnknown.
+	self assert: box class equals: MygMUnknown.
 	box flag.
 	self assert: box isFlagged.
 	box click.
-	self assert: box class equals: MUnknown 
+	self assert: box class equals: MygMUnknown 
 ]
 
 { #category : #tests }
-MFieldTest >> testFlagIsWorking [
+MygMFieldTest >> testFlagIsWorking [
 
 	|box|
 	box := (field boxAt: 1 at: 1).
@@ -111,7 +111,7 @@ MFieldTest >> testFlagIsWorking [
 ]
 
 { #category : #'tests-testing' }
-MFieldTest >> testHasClickedBoxAroundBoxAtAt [
+MygMFieldTest >> testHasClickedBoxAroundBoxAtAt [
 
 	| box boxToClick|
 	box := field boxAt: 1 at: 2.
@@ -122,7 +122,7 @@ MFieldTest >> testHasClickedBoxAroundBoxAtAt [
 ]
 
 { #category : #'tests-testing' }
-MFieldTest >> testHasUnknownBox [
+MygMFieldTest >> testHasUnknownBox [
 
 	self assert: field hasUnknownBox.
 	field
@@ -139,12 +139,12 @@ MFieldTest >> testHasUnknownBox [
 ]
 
 { #category : #'tests-accessing' }
-MFieldTest >> testHeight [
+MygMFieldTest >> testHeight [
 	self assert: field height equals: 5
 ]
 
 { #category : #'tests-box api' }
-MFieldTest >> testMineCountAroundBoxAtAt [
+MygMFieldTest >> testMineCountAroundBoxAtAt [
 
 	self
 		assert: (field mineCountAroundBox: (field boxAt: 1 at: 1))
@@ -200,7 +200,7 @@ MFieldTest >> testMineCountAroundBoxAtAt [
 ]
 
 { #category : #'tests-box api' }
-MFieldTest >> testPlayerLoose [
+MygMFieldTest >> testPlayerLoose [
 
 	self deny: field gameEnded.
 	(field boxAt: 3 at: 3) click.
@@ -209,7 +209,7 @@ MFieldTest >> testPlayerLoose [
 ]
 
 { #category : #'tests-box api' }
-MFieldTest >> testPlayerWin [
+MygMFieldTest >> testPlayerWin [
 
 	self deny: field gameEnded.
 	field
@@ -227,7 +227,7 @@ MFieldTest >> testPlayerWin [
 ]
 
 { #category : #tests }
-MFieldTest >> testPropagateWhenEnoughFlagsAround [
+MygMFieldTest >> testPropagateWhenEnoughFlagsAround [
 
 	| box |
 	box := field boxAt: 2 at: 5.
@@ -246,11 +246,11 @@ MFieldTest >> testPropagateWhenEnoughFlagsAround [
 ]
 
 { #category : #'tests-box api' }
-MFieldTest >> testReplaceBoxAtRowColumnBy [
+MygMFieldTest >> testReplaceBoxAtRowColumnBy [
 
 	| actual new |
 	actual := field boxAt: 2 at: 2.
-	new := MBox clicked.
+	new := MygMBox clicked.
 	field replaceBox: actual by: new.
 	self
 		assert: (field boxAt: 2 at: 2) ~= actual;
@@ -258,6 +258,6 @@ MFieldTest >> testReplaceBoxAtRowColumnBy [
 ]
 
 { #category : #'tests-accessing' }
-MFieldTest >> testWidth [
+MygMFieldTest >> testWidth [
 	self assert: field width equals: 5
 ]

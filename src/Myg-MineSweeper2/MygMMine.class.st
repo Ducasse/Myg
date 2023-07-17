@@ -3,31 +3,31 @@ I am a box with a mine in the mine field.
 If I am clicked by the player, he dies.
 "
 Class {
-	#name : #MMine,
-	#superclass : #MBox,
-	#category : #'Myg-MineSweeper-Model'
+	#name : #MygMMine,
+	#superclass : #MygMBox,
+	#category : #'Myg-MineSweeper2-Model'
 }
 
 { #category : #visiting }
-MMine >> accept: aMFieldVisitor [
+MygMMine >> accept: aMFieldVisitor [
 	^ aMFieldVisitor visitMMine: self
 ]
 
 { #category : #clicking }
-MMine >> click [
+MygMMine >> click [
 
 	self isFlagged ifTrue: [ ^ self ].
 
-	self announcer announce: MBoxExplosionAnnouncement new.
+	self announcer announce: MygMBoxExplosionAnnouncement new.
 	self board gameEnded ifFalse: [ self board playerLoose ]
 ]
 
 { #category : #testing }
-MMine >> isMineBox [
+MygMMine >> isMineBox [
 	^ true
 ]
 
 { #category : #printing }
-MMine >> printOn: aStream [
+MygMMine >> printOn: aStream [
 	aStream << 'o'
 ]

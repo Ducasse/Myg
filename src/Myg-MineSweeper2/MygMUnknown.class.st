@@ -2,25 +2,25 @@
 I'm a box whose status is unknown. It did have been clicked yet.
 "
 Class {
-	#name : #MUnknown,
-	#superclass : #MBox,
-	#category : #'Myg-MineSweeper-Model'
+	#name : #MygMUnknown,
+	#superclass : #MygMBox,
+	#category : #'Myg-MineSweeper2-Model'
 }
 
 { #category : #visiting }
-MUnknown >> accept: aMFieldVisitor [
+MygMUnknown >> accept: aMFieldVisitor [
 	^ aMFieldVisitor visitMUnknown: self
 ]
 
 { #category : #clicking }
-MUnknown >> click [
+MygMUnknown >> click [
 
 	| box |
-	box := MClicked new
+	box := MygMClicked new
 		       position: self position;
 		       board: self board.
 	self announcer announce:
-		(MBoxClickAndReplaceAnnouncement replaceBy: box).
+		(MygMBoxClickAndReplaceAnnouncement replaceBy: box).
 	self board replaceBox: self by: box.
 
 	self propagateClick.
@@ -28,11 +28,11 @@ MUnknown >> click [
 ]
 
 { #category : #testing }
-MUnknown >> isUnknownBox [
+MygMUnknown >> isUnknownBox [
 	^ true 
 ]
 
 { #category : #printing }
-MUnknown >> printOn: aStream [
+MygMUnknown >> printOn: aStream [
 	aStream << '*'
 ]

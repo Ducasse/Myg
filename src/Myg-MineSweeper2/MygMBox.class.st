@@ -2,86 +2,86 @@
 I am an abstract box held by the mine field.
 "
 Class {
-	#name : #MBox,
+	#name : #MygMBox,
 	#superclass : #MygAbstractBox,
 	#instVars : [
 		'announcer',
 		'flagged'
 	],
-	#category : #'Myg-MineSweeper-Model'
+	#category : #'Myg-MineSweeper2-Model'
 }
 
 { #category : #'subclass instance creation' }
-MBox class >> clicked [
-	^ MClicked new
+MygMBox class >> clicked [
+	^ MygMClicked new
 ]
 
 { #category : #'subclass instance creation' }
-MBox class >> mine [
-	^ MMine new
+MygMBox class >> mine [
+	^ MygMMine new
 ]
 
 { #category : #'random subclass instance creation' }
-MBox class >> randomCase [
+MygMBox class >> randomCase [
 	^ (1 to: 7) atRandom > 6
 			ifTrue: [ self mine ]
 			ifFalse: [ self unknown ].
 ]
 
 { #category : #'subclass instance creation' }
-MBox class >> unknown [
-	^ MUnknown new
+MygMBox class >> unknown [
+	^ MygMUnknown new
 ]
 
 { #category : #accessing }
-MBox >> announcer [ 
+MygMBox >> announcer [ 
 	^ announcer ifNil: [ announcer := Announcer new ]
 ]
 
 { #category : #clicking }
-MBox >> click [
+MygMBox >> click [
 
 	self subclassResponsibility
 ]
 
 { #category : #accessing }
-MBox >> flag [
+MygMBox >> flag [
 
 	self flagged: self isFlagged not
 ]
 
 { #category : #accessing }
-MBox >> flagged: aBoolean [
+MygMBox >> flagged: aBoolean [
 	flagged:= aBoolean 
 ]
 
 { #category : #initialization }
-MBox >> initialize [ 
+MygMBox >> initialize [ 
 	flagged := false
 ]
 
 { #category : #testing }
-MBox >> isClickedBox [
+MygMBox >> isClickedBox [
 	^ false
 ]
 
 { #category : #testing }
-MBox >> isFlagged [ 
+MygMBox >> isFlagged [ 
 	^ flagged
 ]
 
 { #category : #testing }
-MBox >> isMineBox [
+MygMBox >> isMineBox [
 	^ false
 ]
 
 { #category : #testing }
-MBox >> isUnknownBox [
+MygMBox >> isUnknownBox [
 	^ false
 ]
 
 { #category : #clicking }
-MBox >> propagateClick [
+MygMBox >> propagateClick [
 
 	((self board hasMineBoxAroundBox: self) not or: [
 		 self board rightFlagCountAroundBox: self ]) ifTrue: [

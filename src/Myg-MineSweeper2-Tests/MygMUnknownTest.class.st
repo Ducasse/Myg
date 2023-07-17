@@ -2,13 +2,13 @@
 A MEmptyTest is a test class for testing the behavior of MEmpty
 "
 Class {
-	#name : #MUnknownTest,
-	#superclass : #MAbstractTest,
-	#category : #'Myg-MineSweeper-Tests'
+	#name : #MygMUnknownTest,
+	#superclass : #MygMAbstractTest,
+	#category : #'Myg-MineSweeper2-Tests'
 }
 
 { #category : #'tests-clicking' }
-MUnknownTest >> testClickInAtAtProduceAPropagateTONeighbour [
+MygMUnknownTest >> testClickInAtAtProduceAPropagateTONeighbour [
 
 	field clickOnBox: (field boxAt: 1 at: 1).
 	self

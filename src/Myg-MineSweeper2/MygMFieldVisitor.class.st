@@ -2,27 +2,27 @@
 I am an abstract visitor for a MField object.
 "
 Class {
-	#name : #MFieldVisitor,
+	#name : #MygMFieldVisitor,
 	#superclass : #Object,
-	#category : #'Myg-MineSweeper-Visitor'
+	#category : #'Myg-MineSweeper2-Visitor'
 }
 
 { #category : #visiting }
-MFieldVisitor >> visitMClicked: aMClicked [
+MygMFieldVisitor >> visitMClicked: aMClicked [
 	^ self subclassResponsibility
 ]
 
 { #category : #visiting }
-MFieldVisitor >> visitMField: aMField [
+MygMFieldVisitor >> visitMField: aMField [
 	^ self subclassResponsibility
 ]
 
 { #category : #visiting }
-MFieldVisitor >> visitMMine: aMMine [
+MygMFieldVisitor >> visitMMine: aMMine [
 	^ self subclassResponsibility
 ]
 
 { #category : #visiting }
-MFieldVisitor >> visitMUnknown: aMEmpty [
+MygMFieldVisitor >> visitMUnknown: aMEmpty [
 	^ self subclassResponsibility
 ]

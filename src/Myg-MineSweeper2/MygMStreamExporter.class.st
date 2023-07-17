@@ -2,37 +2,37 @@
 I am an abstract visitor exporting the MField on the stream in #writeStream instance variable.
 "
 Class {
-	#name : #MStreamExporter,
-	#superclass : #MFieldVisitor,
+	#name : #MygMStreamExporter,
+	#superclass : #MygMFieldVisitor,
 	#instVars : [
 		'writeStream'
 	],
-	#category : #'Myg-MineSweeper-Visitor'
+	#category : #'Myg-MineSweeper2-Visitor'
 }
 
 { #category : #'instance creation' }
-MStreamExporter class >> on: aWriteStream [
+MygMStreamExporter class >> on: aWriteStream [
 	^ self writeStream: aWriteStream
 ]
 
 { #category : #'instance creation' }
-MStreamExporter class >> writeStream: aWriteStream [
+MygMStreamExporter class >> writeStream: aWriteStream [
 	^ self new
 		writeStream: aWriteStream;
 		yourself
 ]
 
 { #category : #accessing }
-MStreamExporter >> streamContents [
+MygMStreamExporter >> streamContents [
 	^ self writeStream contents
 ]
 
 { #category : #accessing }
-MStreamExporter >> writeStream [
+MygMStreamExporter >> writeStream [
 	^ writeStream
 ]
 
 { #category : #accessing }
-MStreamExporter >> writeStream: anObject [
+MygMStreamExporter >> writeStream: anObject [
 	writeStream := anObject
 ]

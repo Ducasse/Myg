@@ -6,7 +6,7 @@ I you want to play with me, have a look at 'player api' protocol.
 You may want to subscribe to my announcer to react to what is going on during the game. Access it using #announcer accessor. See MFieldAnnouncement to know what I can announce.
 "
 Class {
-	#name : #MBoard,
+	#name : #MygMBoard,
 	#superclass : #MygBoard,
 	#instVars : [
 		'round',
@@ -15,11 +15,11 @@ Class {
 		'announcer',
 		'magnifier'
 	],
-	#category : #'Myg-MineSweeper-Model'
+	#category : #'Myg-MineSweeper2-Model'
 }
 
 { #category : #'instance creation' }
-MBoard class >> createWithMatrix: aMatrix [
+MygMBoard class >> createWithMatrix: aMatrix [
 
 	^ self new
 		  configureGrid: aMatrix;
@@ -27,55 +27,55 @@ MBoard class >> createWithMatrix: aMatrix [
 ]
 
 { #category : #'test ressources' }
-MBoard class >> matrixForField [
+MygMBoard class >> matrixForField [
 
 	^ self createWithMatrix: ((CTNewArray2D
 			    width: 5
 			    height: 5
-			    tabulate: [ :column :row | MBox unknown ])
-			   at: 1 @ 3 put: MBox mine;
-			at: 1 @ 5 put: MBox mine;
-			   at: 2 @ 3 put: MBox mine;
-			   at: 3 @ 1 put: MBox mine;
-			   at: 3 @ 2 put: MBox mine;
-			   at: 3 @ 3 put: MBox mine;
-			   at: 4 @ 4 put: MBox mine;
-			   at: 5 @ 4 put: MBox mine;
+			    tabulate: [ :column :row | MygMBox unknown ])
+			   at: 1 @ 3 put: MygMBox mine;
+			at: 1 @ 5 put: MygMBox mine;
+			   at: 2 @ 3 put: MygMBox mine;
+			   at: 3 @ 1 put: MygMBox mine;
+			   at: 3 @ 2 put: MygMBox mine;
+			   at: 3 @ 3 put: MygMBox mine;
+			   at: 4 @ 4 put: MygMBox mine;
+			   at: 5 @ 4 put: MygMBox mine;
 			   yourself)
 ]
 
 { #category : #'instance creation' }
-MBoard class >> matrixTest5x5 [
+MygMBoard class >> matrixTest5x5 [
 
 	^ self createWithMatrix:
 		  (CTNewArray2D width: 5 height: 5 tabulate: [ :column :row |
-			   MBox randomCase ])
+			   MygMBox randomCase ])
 ]
 
 { #category : #visiting }
-MBoard >> accept: aMFieldVisitor [
+MygMBoard >> accept: aMFieldVisitor [
 	^ aMFieldVisitor visitMField: self
 ]
 
 { #category : #accessing }
-MBoard >> announcer [
+MygMBoard >> announcer [
 	^ announcer
 ]
 
 { #category : #enumerating }
-MBoard >> anyBoxSatisfy: aBlock [
+MygMBoard >> anyBoxSatisfy: aBlock [
 
 	^ grid anySatisfy: aBlock
 ]
 
 { #category : #accessing }
-MBoard >> boxAt: x at: y [
+MygMBoard >> boxAt: x at: y [
 
 	^ grid at: x @ y
 ]
 
 { #category : #enumerating2 }
-MBoard >> boxesAroundBox: aBox anySatisfy: aBlock [
+MygMBoard >> boxesAroundBox: aBox anySatisfy: aBlock [
 
 	self
 		boxesAroundBox: aBox
@@ -84,7 +84,7 @@ MBoard >> boxesAroundBox: aBox anySatisfy: aBlock [
 ]
 
 { #category : #enumerating2 }
-MBoard >> boxesAroundBox: aBox collect: aBlock [
+MygMBoard >> boxesAroundBox: aBox collect: aBlock [
 
 	| collected |
 	collected := OrderedCollection new.
@@ -95,7 +95,7 @@ MBoard >> boxesAroundBox: aBox collect: aBlock [
 ]
 
 { #category : #enumerating2 }
-MBoard >> boxesAroundBox: aBox do: aBlock [
+MygMBoard >> boxesAroundBox: aBox do: aBlock [
 
 	self
 		boxesAroundBox: aBox
@@ -103,7 +103,7 @@ MBoard >> boxesAroundBox: aBox do: aBlock [
 ]
 
 { #category : #enumerating2 }
-MBoard >> boxesAroundBox: aBox doWithIndexes: aBlock [
+MygMBoard >> boxesAroundBox: aBox doWithIndexes: aBlock [
 
 	|x y|
 	x := aBox position x.
@@ -118,7 +118,7 @@ MBoard >> boxesAroundBox: aBox doWithIndexes: aBlock [
 ]
 
 { #category : #enumerating2 }
-MBoard >> boxesAroundBox: aBox select: aBlock [
+MygMBoard >> boxesAroundBox: aBox select: aBlock [
 
 	| collected |
 	collected := OrderedCollection new.
@@ -129,14 +129,14 @@ MBoard >> boxesAroundBox: aBox select: aBlock [
 ]
 
 { #category : #enumerating }
-MBoard >> boxesDoWithIndices: aBlock [
+MygMBoard >> boxesDoWithIndices: aBlock [
 	1 to: self height do: [ :i |
 		1 to: self width do: [ :j |
 			aBlock value: (self boxAt: i at: j) value: i value: j ] ]
 ]
 
 { #category : #enumerating }
-MBoard >> boxesSelect: aBlock [
+MygMBoard >> boxesSelect: aBlock [
 	
 	| selected |
 	selected := OrderedCollection new.
@@ -145,7 +145,7 @@ MBoard >> boxesSelect: aBlock [
 ]
 
 { #category : #'player api' }
-MBoard >> clickOnBox: aBox [
+MygMBoard >> clickOnBox: aBox [
 
 	| x y |
 	gameEnded ifTrue: [ ^ self ].
@@ -155,7 +155,7 @@ MBoard >> clickOnBox: aBox [
 ]
 
 { #category : #'box api' }
-MBoard >> flagCountAroundBox: aBox [
+MygMBoard >> flagCountAroundBox: aBox [
 
 	^ (self boxesAroundBox: aBox collect: [ :box |
 		   box isFlagged
@@ -164,40 +164,40 @@ MBoard >> flagCountAroundBox: aBox [
 ]
 
 { #category : #accessing }
-MBoard >> gameEnded [
+MygMBoard >> gameEnded [
 	^ gameEnded
 ]
 
 { #category : #testing }
-MBoard >> hasClickedBoxAroundBox: aBox [
+MygMBoard >> hasClickedBoxAroundBox: aBox [
 
 	^ self boxesAroundBox: aBox anySatisfy: #isClickedBox
 ]
 
 { #category : #testing }
-MBoard >> hasMineBoxAroundBox: aBox [
+MygMBoard >> hasMineBoxAroundBox: aBox [
 
 	^ self boxesAroundBox: aBox anySatisfy: #isMineBox 
 ]
 
 { #category : #testing }
-MBoard >> hasUnknownBox [
+MygMBoard >> hasUnknownBox [
 	^ self anyBoxSatisfy: #isUnknownBox
 ]
 
 { #category : #accessing }
-MBoard >> height [
+MygMBoard >> height [
 
 	^ grid height
 ]
 
 { #category : #'box api' }
-MBoard >> incrementRound [
+MygMBoard >> incrementRound [
 	round := round + 1
 ]
 
 { #category : #initialization }
-MBoard >> initialize [
+MygMBoard >> initialize [
 	super initialize.
 	round := 0.
 	announcer := Announcer new.
@@ -206,22 +206,22 @@ MBoard >> initialize [
 ]
 
 { #category : #accessing }
-MBoard >> magnifier [ 
+MygMBoard >> magnifier [ 
 	^ magnifier
 ]
 
 { #category : #accessing }
-MBoard >> magnifier: aNumber [
+MygMBoard >> magnifier: aNumber [
 	magnifier := aNumber 
 ]
 
 { #category : #'player api' }
-MBoard >> mineCount [
+MygMBoard >> mineCount [
 	^ (self boxesSelect: #isMineBox) size
 ]
 
 { #category : #'box api' }
-MBoard >> mineCountAroundBox: aBox [
+MygMBoard >> mineCountAroundBox: aBox [
 
 	^ (self boxesAroundBox: aBox collect: [ :box |
 		   box isMineBox
@@ -230,7 +230,7 @@ MBoard >> mineCountAroundBox: aBox [
 ]
 
 { #category : #'box api' }
-MBoard >> playerLoose [
+MygMBoard >> playerLoose [
 
 	playerWon := false.
 	gameEnded := true.
@@ -239,12 +239,12 @@ MBoard >> playerLoose [
 ]
 
 { #category : #accessing }
-MBoard >> playerLost [
+MygMBoard >> playerLost [
 	^ self playerWon not
 ]
 
 { #category : #'box api' }
-MBoard >> playerWin [
+MygMBoard >> playerWin [
 
 	gameEnded ifTrue: [ ^ self ].
 	playerWon := true.
@@ -253,12 +253,12 @@ MBoard >> playerWin [
 ]
 
 { #category : #accessing }
-MBoard >> playerWon [
+MygMBoard >> playerWon [
 	^ playerWon
 ]
 
 { #category : #printing }
-MBoard >> printOn: aStream [
+MygMBoard >> printOn: aStream [
 	aStream
 		<< self width asString;
 		<< self height asString;
@@ -272,7 +272,7 @@ MBoard >> printOn: aStream [
 ]
 
 { #category : #'box api' }
-MBoard >> replaceBox: aBox by: aNewBox [
+MygMBoard >> replaceBox: aBox by: aNewBox [
 
 	| x y |
 	x := aBox position x.
@@ -281,33 +281,33 @@ MBoard >> replaceBox: aBox by: aNewBox [
 ]
 
 { #category : #'as yet unclassified' }
-MBoard >> revealBoard [
+MygMBoard >> revealBoard [
 
 	self boxesDoWithIndices: [ :aBox :i :j |
 		| newBox |
-		newBox := MClicked new
+		newBox := MygMClicked new
 			          position: i @ j;
 			          board: self.
 		aBox isUnknownBox ifTrue: [
 			self replaceBox: aBox by: newBox].
 			aBox announcer announce:
-				(MBoxClickAndReplaceAnnouncement replaceBy: newBox)]
+				(MygMBoxClickAndReplaceAnnouncement replaceBy: newBox)]
 ]
 
 { #category : #accessing }
-MBoard >> rightFlagCountAroundBox: aBox [
+MygMBoard >> rightFlagCountAroundBox: aBox [
 
 	^ (self flagCountAroundBox: aBox)
 	  = (self mineCountAroundBox: aBox)
 ]
 
 { #category : #accessing }
-MBoard >> round [
+MygMBoard >> round [
 	^ round
 ]
 
 { #category : #accessing }
-MBoard >> width [
+MygMBoard >> width [
 
 	^ grid width
 ]

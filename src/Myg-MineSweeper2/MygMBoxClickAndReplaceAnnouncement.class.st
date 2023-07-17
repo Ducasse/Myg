@@ -17,11 +17,32 @@ Public API and Key Messages
 
 Internal Representation and Key Implementation Points.
 
+    Instance Variables
+	box:		<Object>
+
 
     Implementation Points
 "
 Class {
-	#name : #MBoxFlaggedAnnouncement,
+	#name : #MygMBoxClickAndReplaceAnnouncement,
 	#superclass : #Announcement,
-	#category : #'Myg-MineSweeper-Announcements'
+	#instVars : [
+		'box'
+	],
+	#category : #'Myg-MineSweeper2-Announcements'
 }
+
+{ #category : #replacement }
+MygMBoxClickAndReplaceAnnouncement class >> replaceBy: aMClickedBox [
+	^ self new box: aMClickedBox 
+]
+
+{ #category : #accessing }
+MygMBoxClickAndReplaceAnnouncement >> box [
+	^ box
+]
+
+{ #category : #accessing }
+MygMBoxClickAndReplaceAnnouncement >> box: aMBox [
+	box:= aMBox 
+]

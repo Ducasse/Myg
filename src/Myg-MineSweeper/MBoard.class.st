@@ -9,7 +9,6 @@ Class {
 	#name : #MBoard,
 	#superclass : #MygBoard,
 	#instVars : [
-		'matrix',
 		'round',
 		'gameEnded',
 		'playerWon',
@@ -23,52 +22,34 @@ Class {
 MBoard class >> createWithMatrix: aMatrix [
 
 	^ self new
-		  matrix: aMatrix;
+		  configureGrid: aMatrix;
 		  yourself
 ]
 
 { #category : #'test ressources' }
 MBoard class >> matrixForField [
 
-	^ self createWithMatrix: ((Array2D rows: 5 columns: 5)
-			   at: 1 at: 1 put: MBox unknown;
-			   at: 1 at: 2 put: MBox unknown;
-			   at: 1 at: 3 put: MBox mine;
-			   at: 1 at: 4 put: MBox unknown;
-			   at: 1 at: 5 put: MBox unknown;
-			   at: 2 at: 1 put: MBox unknown;
-			   at: 2 at: 2 put: MBox unknown;
-			   at: 2 at: 3 put: MBox mine;
-			   at: 2 at: 4 put: MBox unknown;
-			   at: 2 at: 5 put: MBox unknown;
-			   at: 3 at: 1 put: MBox mine;
-			   at: 3 at: 2 put: MBox mine;
-			   at: 3 at: 3 put: MBox mine;
-			   at: 3 at: 4 put: MBox unknown;
-			   at: 3 at: 5 put: MBox unknown;
-			   at: 4 at: 1 put: MBox unknown;
-			   at: 4 at: 2 put: MBox unknown;
-			   at: 4 at: 3 put: MBox unknown;
-			   at: 4 at: 4 put: MBox mine;
-			   at: 4 at: 5 put: MBox mine;
-			   at: 5 at: 1 put: MBox mine;
-			   at: 5 at: 2 put: MBox unknown;
-			   at: 5 at: 3 put: MBox unknown;
-			   at: 5 at: 4 put: MBox unknown;
-			   at: 5 at: 5 put: MBox unknown;
+	^ self createWithMatrix: ((CTNewArray2D
+			    width: 5
+			    height: 5
+			    tabulate: [ :column :row | MBox unknown ])
+			   at: 1 @ 3 put: MBox mine;
+			at: 1 @ 5 put: MBox mine;
+			   at: 2 @ 3 put: MBox mine;
+			   at: 3 @ 1 put: MBox mine;
+			   at: 3 @ 2 put: MBox mine;
+			   at: 3 @ 3 put: MBox mine;
+			   at: 4 @ 4 put: MBox mine;
+			   at: 5 @ 4 put: MBox mine;
 			   yourself)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 MBoard class >> matrixTest5x5 [
 
 	^ self createWithMatrix:
-		  ((Array2D rows: 5 columns: 5) collect: [ :e | MBox randomCase ])
-]
-
-{ #category : #'instance creation' }
-MBoard class >> width: width height: height [
-	^ self matrix: ((Matrix rows: height columns: width) collect: [ :e | MBox randomCase ])
+		  (CTNewArray2D width: 5 height: 5 tabulate: [ :column :row |
+			   MBox randomCase ])
 ]
 
 { #category : #visiting }
@@ -83,61 +64,67 @@ MBoard >> announcer [
 
 { #category : #enumerating }
 MBoard >> anyBoxSatisfy: aBlock [
-	^ matrix anySatisfy: aBlock
+
+	^ grid anySatisfy: aBlock
 ]
 
 { #category : #accessing }
 MBoard >> boxAt: x at: y [
-	^ matrix at: x at: y
+
+	^ grid at: x @ y
 ]
 
-{ #category : #enumerating }
-MBoard >> boxesAroundBoxAt: x at: y anySatisfy: aBlock [
-	self boxesAroundBoxAt: x at: y do: [ :box |
-		(aBlock value: box)
-			ifTrue: [ ^ true ] ].
+{ #category : #enumerating2 }
+MBoard >> boxesAroundBox: aBox anySatisfy: aBlock [
+
+	self
+		boxesAroundBox: aBox
+		do: [ :box | (aBlock value: box) ifTrue: [ ^ true ] ].
 	^ false
 ]
 
-{ #category : #enumerating }
-MBoard >> boxesAroundBoxAt: x at: y collect: aBlock [
+{ #category : #enumerating2 }
+MBoard >> boxesAroundBox: aBox collect: aBlock [
+
 	| collected |
 	collected := OrderedCollection new.
-	self boxesAroundBoxAt: x at: y do: [ :box |
-		collected add: (aBlock value: box) ].
+	self
+		boxesAroundBox: aBox
+		do: [ :box | collected add: (aBlock value: box) ].
 	^ collected
 ]
 
-{ #category : #enumerating }
-MBoard >> boxesAroundBoxAt: x at: y do: aBlock [
-	self boxesAroundBoxAt: x at: y doWithIndexes: [ :box :i :j |
-		aBlock value: box ]
+{ #category : #enumerating2 }
+MBoard >> boxesAroundBox: aBox do: aBlock [
+
+	self
+		boxesAroundBox: aBox
+		doWithIndexes: [ :box :i :j | aBlock value: box ]
 ]
 
-{ #category : #enumerating }
-MBoard >> boxesAroundBoxAt: x at: y doWithIndexes: aBlock [
+{ #category : #enumerating2 }
+MBoard >> boxesAroundBox: aBox doWithIndexes: aBlock [
+
+	|x y|
+	x := aBox position x.
+	y := aBox position y.
 	^ (x - 1 to: x + 1) collect: [ :i |
-			(y - 1 to: y + 1) collect: [ :j |
-				((i = x and: [ j = y ])
-					or: [ i < 1
-					or: [ j < 1
-					or: [ i > self height
-					or: [ j > self width ] ] ] 
-				])
-					ifFalse: [ 
-						aBlock
-							value: (self boxAt: i at: j)
-							value: i
-							value: j ] ] ]
+		  (y - 1 to: y + 1) collect: [ :j |
+			  ((i = x and: [ j = y ]) or: [
+				   i < 1 or: [
+					   j < 1 or: [ i > self height or: [ j > self width ] ] ] ])
+				  ifFalse: [
+				  aBlock value: (self boxAt: i at: j) value: i value: j ] ] ]
 ]
 
-{ #category : #enumerating }
-MBoard >> boxesAroundBoxAt: x at: y select: aBlock [
+{ #category : #enumerating2 }
+MBoard >> boxesAroundBox: aBox select: aBlock [
+
 	| collected |
 	collected := OrderedCollection new.
-	self boxesAroundBoxAt: x at: y do: [ :box |
-		(aBlock value: box)
-			ifTrue: [ collected add: box ] ].
+	self
+		boxesAroundBox: aBox
+		do: [ :box | (aBlock value: box) ifTrue: [ collected add: box ] ].
 	^ collected
 ]
 
@@ -150,39 +137,30 @@ MBoard >> boxesDoWithIndices: aBlock [
 
 { #category : #enumerating }
 MBoard >> boxesSelect: aBlock [
+	
 	| selected |
 	selected := OrderedCollection new.
-	matrix do: [ :box |
-		(aBlock value: box)
-			ifTrue: [ selected add: box ] ].
+	grid do: [ :box | (aBlock value: box) ifTrue: [ selected add: box ] ].
 	^ selected
 ]
 
 { #category : #'player api' }
-MBoard >> clickOnBoxAt: x at: y [
+MBoard >> clickOnBox: aBox [
+
+	| x y |
 	gameEnded ifTrue: [ ^ self ].
-	(self boxAt: x at: y) clickIn: self at: x at: y
-]
-
-{ #category : #'debug api' }
-MBoard >> debugTextualRepresentation [
-	| visitor |
-	visitor := MDebugFieldPrinter new.
-	self accept: visitor.
-	^ visitor streamContents
+	x := aBox position x.
+	y := aBox position y.
+	(self boxAt: x at: y) click
 ]
 
 { #category : #'box api' }
-MBoard >> fieldUpdate [
-	self announcer announce: (MFieldUpdate field: self)
-]
+MBoard >> flagCountAroundBox: aBox [
 
-{ #category : #'box api' }
-MBoard >> flagCountAroundBoxAt: x at: y [
-	^ (self boxesAroundBoxAt: x at: y collect: [ :box | 
-		box isFlagged
-			ifTrue: [ 1 ]
-			ifFalse: [ 0 ] ]) sum
+	^ (self boxesAroundBox: aBox collect: [ :box |
+		   box isFlagged
+			   ifTrue: [ 1 ]
+			   ifFalse: [ 0 ] ]) sum
 ]
 
 { #category : #accessing }
@@ -191,13 +169,15 @@ MBoard >> gameEnded [
 ]
 
 { #category : #testing }
-MBoard >> hasClickedBoxAroundBoxAt: x at: y [
-	^ self boxesAroundBoxAt: x at: y anySatisfy: #isClickedBox
+MBoard >> hasClickedBoxAroundBox: aBox [
+
+	^ self boxesAroundBox: aBox anySatisfy: #isClickedBox
 ]
 
 { #category : #testing }
-MBoard >> hasMineBoxAroundBoxAt: x at: y [
-	^ (self mineCountAroundBoxAt: x at: y) > 0
+MBoard >> hasMineBoxAroundBox: aBox [
+
+	^ self boxesAroundBox: aBox anySatisfy: #isMineBox 
 ]
 
 { #category : #testing }
@@ -207,7 +187,8 @@ MBoard >> hasUnknownBox [
 
 { #category : #accessing }
 MBoard >> height [
-	^ matrix numberOfRows
+
+	^ grid height
 ]
 
 { #category : #'box api' }
@@ -234,30 +215,18 @@ MBoard >> magnifier: aNumber [
 	magnifier := aNumber 
 ]
 
-{ #category : #accessing }
-MBoard >> matrix [ 
-	^ matrix
-]
-
-{ #category : #'private - accessing' }
-MBoard >> matrix: anObject [
-
-	matrix := anObject.
-	matrix indicesDo: [ :line :column |
-		(matrix at: line at: column) position: line @ column ].
-]
-
 { #category : #'player api' }
 MBoard >> mineCount [
 	^ (self boxesSelect: #isMineBox) size
 ]
 
 { #category : #'box api' }
-MBoard >> mineCountAroundBoxAt: x at: y [
-	^ (self boxesAroundBoxAt: x at: y collect: [ :box | 
-		box isMineBox
-			ifTrue: [ 1 ]
-			ifFalse: [ 0 ] ]) sum
+MBoard >> mineCountAroundBox: aBox [
+
+	^ (self boxesAroundBox: aBox collect: [ :box |
+		   box isMineBox
+			   ifTrue: [ 1 ]
+			   ifFalse: [ 0 ] ]) sum
 ]
 
 { #category : #'box api' }
@@ -265,16 +234,8 @@ MBoard >> playerLoose [
 
 	playerWon := false.
 	gameEnded := true.
-	self announcer announce: (MPlayerLoose field: self).
-
-	Transcript
-		clear;
-		show: 'Defaite';
-		open.
-
-	self boxesDoWithIndices: [ :aBox :i :j |
-		aBox announcer announce:
-			(MBoxClickAndReplaceAnnouncement replaceBy: (MClicked new position: i@j)) ]
+	self revealBoard.
+	
 ]
 
 { #category : #accessing }
@@ -284,18 +245,11 @@ MBoard >> playerLost [
 
 { #category : #'box api' }
 MBoard >> playerWin [
-	gameEnded ifTrue: [ ^self ].
+
+	gameEnded ifTrue: [ ^ self ].
 	playerWon := true.
 	gameEnded := true.
-	self announcer announce: (MPlayerWin field: self).
-	Transcript
-		clear;
-		show: 'Victoire';
-		open.
-	self boxesDoWithIndices: [ :aBox :i :j |
-		aBox announcer announce:
-			(MBoxClickAndReplaceAnnouncement replaceBy:
-				 (MClicked new position: i @ j)) ]
+	self revealBoard
 ]
 
 { #category : #accessing }
@@ -317,22 +271,34 @@ MBoard >> printOn: aStream [
 		i = self width ifFalse: [ aStream	<< Smalltalk os lineEnding ] ]
 ]
 
-{ #category : #'player api' }
-MBoard >> readableTextualRepresentation [
-	| visitor |
-	visitor := MFieldPrinter new.
-	self accept: visitor.
-	^ visitor streamContents
+{ #category : #'box api' }
+MBoard >> replaceBox: aBox by: aNewBox [
+
+	| x y |
+	x := aBox position x.
+	y := aBox position y.
+	grid at: x @ y put: aNewBox
 ]
 
-{ #category : #'box api' }
-MBoard >> replaceBoxAtRow: x column: y by: aMBox [
-	matrix at: x at: y put: aMBox
+{ #category : #'as yet unclassified' }
+MBoard >> revealBoard [
+
+	self boxesDoWithIndices: [ :aBox :i :j |
+		| newBox |
+		newBox := MClicked new
+			          position: i @ j;
+			          board: self.
+		aBox isUnknownBox ifTrue: [
+			self replaceBox: aBox by: newBox].
+			aBox announcer announce:
+				(MBoxClickAndReplaceAnnouncement replaceBy: newBox)]
 ]
 
 { #category : #accessing }
-MBoard >> rightFlagCountAroundAt: x at: y [ 
-	^ (self flagCountAroundBoxAt: x at: y) = (self mineCountAroundBoxAt: x at: y)
+MBoard >> rightFlagCountAroundBox: aBox [
+
+	^ (self flagCountAroundBox: aBox)
+	  = (self mineCountAroundBox: aBox)
 ]
 
 { #category : #accessing }
@@ -342,5 +308,6 @@ MBoard >> round [
 
 { #category : #accessing }
 MBoard >> width [
-	^ matrix numberOfColumns
+
+	^ grid width
 ]

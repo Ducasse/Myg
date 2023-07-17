@@ -170,9 +170,11 @@ MFieldElement >> game: aMField [
 	game := aMField.
 	self padding: (BlInsets all: 5 * game magnifier).
 	self layout columnCount: game width.
-	game matrix do: [ :aBox |
+	game grid do: [ :aBox |
 		| boxElement |
-		boxElement := (MBoxElement box: aBox) field: aMField.
+		boxElement := (MBoxElement createWithBox: aBox)
+			              field: aMField;
+			              positionInField: aBox position.
 		self addChild: boxElement ]
 ]
 

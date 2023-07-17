@@ -14,12 +14,12 @@ MMine >> accept: aMFieldVisitor [
 ]
 
 { #category : #clicking }
-MMine >> clickIn: aMField at: x at: y [
+MMine >> click [
 
-	self isFlagged ifTrue: [ ^self].
-	
+	self isFlagged ifTrue: [ ^ self ].
+
 	self announcer announce: MBoxExplosionAnnouncement new.
-	aMField gameEnded ifFalse: [ aMField playerLoose ]
+	self board gameEnded ifFalse: [ self board playerLoose ]
 ]
 
 { #category : #testing }

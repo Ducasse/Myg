@@ -4,36 +4,32 @@ This class contains tests
 Class {
 	#name : #MAbstractTest,
 	#superclass : #TestCase,
+	#instVars : [
+		'field'
+	],
 	#category : #'Myg-MineSweeper-Tests'
 }
 
 { #category : #'test ressources' }
 MAbstractTest >> matrixForField [
-	^ (Array2D rows: 5 columns: 5)
-			at: 1 at: 1 put: MymBox unknown;
-			at: 1 at: 2 put: MymBox unknown;
-			at: 1 at: 3 put: MymBox mine;
-			at: 1 at: 4 put: MymBox unknown;
-			at: 1 at: 5 put: MymBox unknown;
-			at: 2 at: 1 put: MymBox unknown;
-			at: 2 at: 2 put: MymBox unknown;
-			at: 2 at: 3 put: MymBox mine;
-			at: 2 at: 4 put: MymBox unknown;
-			at: 2 at: 5 put: MymBox unknown;
-			at: 3 at: 1 put: MymBox mine;
-			at: 3 at: 2 put: MymBox mine;
-			at: 3 at: 3 put: MymBox mine;
-			at: 3 at: 4 put: MymBox unknown;
-			at: 3 at: 5 put: MymBox unknown;
-			at: 4 at: 1 put: MymBox unknown;
-			at: 4 at: 2 put: MymBox unknown;
-			at: 4 at: 3 put: MymBox unknown;
-			at: 4 at: 4 put: MymBox mine;
-			at: 4 at: 5 put: MymBox mine;
-			at: 5 at: 1 put: MymBox mine;
-			at: 5 at: 2 put: MymBox unknown;
-			at: 5 at: 3 put: MymBox unknown;
-			at: 5 at: 4 put: MymBox unknown;
-			at: 5 at: 5 put: MymBox unknown;
-			yourself
+
+	^ (CTNewArray2D
+			    width: 5
+			    height: 5
+			    tabulate: [ :column :row | MBox unknown ])
+			   at: 1 @ 3 put: MBox mine;
+			   at: 1 @ 5 put: MBox mine;
+			   at: 2 @ 3 put: MBox mine;
+			   at: 3 @ 1 put: MBox mine;
+			   at: 3 @ 2 put: MBox mine;
+			   at: 3 @ 3 put: MBox mine;
+			   at: 4 @ 4 put: MBox mine;
+			   at: 5 @ 4 put: MBox mine;
+			   yourself
+]
+
+{ #category : #running }
+MAbstractTest >> setUp [
+
+	field := MBoard createWithMatrix: self matrixForField
 ]

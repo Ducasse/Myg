@@ -34,20 +34,20 @@ MBox class >> unknown [
 ]
 
 { #category : #accessing }
-MBox >> announceFlag [
-
-	self announcer announce: MBoxFlaggedAnnouncement new.
-	self flagged: flagged not
-]
-
-{ #category : #accessing }
 MBox >> announcer [ 
 	^ announcer ifNil: [ announcer := Announcer new ]
 ]
 
 { #category : #clicking }
-MBox >> clickIn: aMField at: x at: y [
+MBox >> click [
+
 	self subclassResponsibility
+]
+
+{ #category : #accessing }
+MBox >> flag [
+
+	self flagged: self isFlagged not
 ]
 
 { #category : #accessing }
@@ -78,4 +78,13 @@ MBox >> isMineBox [
 { #category : #testing }
 MBox >> isUnknownBox [
 	^ false
+]
+
+{ #category : #clicking }
+MBox >> propagateClick [
+
+	((self board hasMineBoxAroundBox: self) not or: [
+		 self board rightFlagCountAroundBox: self ]) ifTrue: [
+		self board boxesAroundBox: self do: [ :box |
+			box isClickedBox ifFalse: [ box click ] ] ]
 ]

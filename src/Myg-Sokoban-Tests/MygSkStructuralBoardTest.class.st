@@ -1,0 +1,147 @@
+"
+This class contains tests
+"
+Class {
+	#name : #MygSkStructuralBoardTest,
+	#superclass : #TestCase,
+	#category : #'Myg-Sokoban-Tests'
+}
+
+{ #category : #data }
+MygSkStructuralBoardTest >> map1 [ 
+	"Pay attention that there is no return on the last line."
+^ '    #####
+    #   #
+    #$  #
+  ###  $##
+  #  $ $ #
+### # ## #   ######
+#   # ## #####  ..#
+# $  $          ..#
+##### ### #@##  ..#
+    #     #########
+    #######'
+]
+
+{ #category : #'tests - building' }
+MygSkStructuralBoardTest >> testAtPositionLowLevel [
+
+	| board |
+	board := MygSkBoard board:
+		         (LevelImporter
+			          fromString: self map1
+			          fromPackage: MygSkBoard package).
+	self assert:
+		((board atPosition: CpDirection north * board player position)
+			 isKindOf: MygSkGround).
+	self assert:
+		((board atPosition: CpDirection south * board player position)
+			 isKindOf: MygSkWall).
+	self assert:
+		((board atPosition: CpDirection east * board player position)
+			 isKindOf: MygSkWall).
+	self assert:
+		((board atPosition: CpDirection west * board player position)
+			 isKindOf: MygSkWall)
+]
+
+{ #category : #'tests - building' }
+MygSkStructuralBoardTest >> testIsBoxOnTargetPlaygroundCorrectlySet [
+
+	| board box1 box2 |
+	board := MygSkBoard board:
+		         (LevelImporter
+			          fromString: '#@ $.*#'
+			          fromPackage: MygSkBoard package).
+	box1 := board atRow: 1 atColumn: 4.
+	box2 := board atRow: 1 atColumn: 6.
+	self assert: box1 background class equals: MygSkGround.
+	self assert: box2 background class equals: MygSkTarget
+]
+
+{ #category : #'tests - building' }
+MygSkStructuralBoardTest >> testIsBoxPlaygroundCorrectlySet [
+
+	| board |
+	board := MygSkBoard board:
+		         (LevelImporter
+			          fromString: self map1
+			          fromPackage: MygSkBoard package).
+	board do: [ :anEl |
+		(anEl isKindOf: MygSkBox) ifTrue: [
+			self assert: anEl position x equals: anEl background position x.
+			self assert: anEl position y equals: anEl background position y ] ]
+]
+
+{ #category : #'tests - building' }
+MygSkStructuralBoardTest >> testIsPalyerOnTargetPlaygroundCorrectlySet [
+
+	| board box |
+	board := MygSkBoard board:
+		         (LevelImporter
+			          fromString: '#+ $#'
+			          fromPackage: MygSkBoard package).
+	box := board atRow: 1 atColumn: 2.
+	self assert: box background class equals: MygSkTarget
+]
+
+{ #category : #'tests - building' }
+MygSkStructuralBoardTest >> testIsPlayerPlaygroundCorrectlySet [
+
+	| board |
+	board := MygSkBoard board:
+		         (LevelImporter
+			          fromString: self map1
+			          fromPackage: MygSkBoard package).
+	self assert: board player position x equals: 12.
+	self assert: board player position y equals: 9.
+
+	self assert: board player background position x equals: 12.
+	self assert: board player background position y equals: 9
+]
+
+{ #category : #'tests - building' }
+MygSkStructuralBoardTest >> testPlayerIsAvailable [
+
+	| board |
+	board := MygSkBoard board:
+		         (LevelImporter
+			          fromString: self map1
+			          fromPackage: MygSkBoard package).
+	self assert: board player position x equals: 12.
+	self assert: board player position y equals: 9
+]
+
+{ #category : #tests }
+MygSkStructuralBoardTest >> testPrintOn [
+
+	| board |
+	board := MygSkBoard board:
+		         (LevelImporter
+			          fromString: self map1
+			          fromPackage: MygSkBoard package).
+	self assert: board asciiString equals: '    #####          
+    #   #          
+    #$  #          
+  ###  $##         
+  #  $ $ #         
+### # ## #   ######
+#   # ## #####  ..#
+# $  $          ..#
+##### ### #@##  ..#
+    #     #########
+    #######        '
+]
+
+{ #category : #tests }
+MygSkStructuralBoardTest >> testPrintOnOneLine [
+
+	| board |
+	board := MygSkBoard board:
+		         (LevelImporter
+			          fromString: '#@  #'
+			          fromPackage: MygSkBoard package).
+	self assert: board height equals: 1.
+	self assert: board width equals: '#@  #' size.
+	self assert: board asciiString equals: '#@  #'
+]

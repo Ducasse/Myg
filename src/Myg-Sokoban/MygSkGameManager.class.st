@@ -8184,7 +8184,7 @@ MygSkGameManager >> launchFromString: aString [
 	board := MygSkBoard
 		         createWithBoard: (self class importFromString: aString)
 		         managedBy: self.
-	board grid: (board grid collect: [ :each | each configured ]).
+	board grid: (board grid collect: [ :each | each configureBoard: board ]).
 	self currentBoardElement openWithModel: board
 ]
 

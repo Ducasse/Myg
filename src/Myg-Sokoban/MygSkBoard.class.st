@@ -8187,7 +8187,7 @@ MygSkBoard >> endGame [
 
 	ended ifTrue: [ ^ self ].
 	ended := true.
-	gameManager ifNotNil: [gameManager registerLevel]
+	gameManager ifNotNil: [ gameManager registerLevel ]
 ]
 
 { #category : #accessing }
@@ -8265,7 +8265,7 @@ MygSkBoard >> reset [
 MygSkBoard >> setBoxes [
 
 	grid do: [ :each |
-		each class = MygSkBox ifTrue: [ self addBox: each ] ]
+		each class = MygSkBox ifTrue: [ self addBox: each ] ].
 ]
 
 { #category : #initialization }

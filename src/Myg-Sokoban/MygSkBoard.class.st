@@ -8274,11 +8274,6 @@ MygSkBoard >> setPlayer [
 	player := grid contents detect: #isPlayer
 ]
 
-{ #category : #initialization }
-MygSkBoard >> setPlayer: aPlayer [
-	player := aPlayer
-]
-
 { #category : #move }
 MygSkBoard >> updatePositionOf: aSkMovable from: previousPosition [
 	"Put back the previous position element."

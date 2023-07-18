@@ -80,7 +80,6 @@ MygSkGameManagerTest >> testRegisterLevelWithBetterMoveCount [
 	string := MygSkGameManager mazesTest at: 1.
 	manager launchFromString: string inDictionary: 'mazesTest' at: 1.
 	board := manager currentBoardElement board.
-	board grid: (board grid collect: [ :each | each configured ]).
 
 	self
 		should: [
@@ -96,7 +95,7 @@ MygSkGameManagerTest >> testRegisterLevelWithBetterMoveCount [
 
 	self assert: registered isNotNil.
 	self assert: registered bestCount equals: 4.
-	
+
 	space := manager currentBoardElement space.
 	space universe closeSpaceSynchronously: space.
 	manager launchAgain.
@@ -122,35 +121,33 @@ MygSkGameManagerTest >> testRegisterLevelWithWorseMoveCount [
 	string := MygSkGameManager mazesTest at: 1.
 	manager launchFromString: string inDictionary: 'mazesTest' at: 1.
 	board := manager currentBoardElement board.
-		board grid: (board grid collect: [ :each | each configured ]).
 
 	self
 		should: [
 		(manager packDictionary at: 'mazesTest') levelDictionary at: 1 ]
 		raise: KeyNotFound.
-		
-		board player moveEast.
+
 	board player moveEast.
-	
+	board player moveEast.
+
 	registered := (manager packDictionary at: 'mazesTest')
 		              levelDictionary at: 1.
 
 
 	self assert: registered isNotNil.
 	self assert: registered bestCount equals: 2.
-	
+
 	space := manager currentBoardElement space.
 	space universe closeSpaceSynchronously: space.
 	manager launchAgain.
 	board := manager currentBoardElement board.
-		board grid: (board grid collect: [ :each | each configured ]).
-	
+
 	board player moveEast.
 	board player moveWest.
 	board player moveEast.
 	board player moveEast.
 
-		
+
 	self
 		assert:
 			((manager packDictionary at: 'mazesTest') levelDictionary at: 1)
@@ -158,5 +155,4 @@ MygSkGameManagerTest >> testRegisterLevelWithWorseMoveCount [
 		equals: 2.
 	space := manager currentBoardElement space.
 	space universe closeSpaceSynchronously: space
-
 ]

@@ -44,6 +44,13 @@ MygSkMovable >> background: anObject [
 	background := anObject
 ]
 
+{ #category : #accessing }
+MygSkMovable >> configureBoard: aBoard [
+	
+	self board: aBoard.
+	self background board: aBoard
+]
+
 { #category : #initialization }
 MygSkMovable >> configured [
 
@@ -53,11 +60,11 @@ MygSkMovable >> configured [
 
 { #category : #initialization }
 MygSkMovable >> defaultBackground [
-
 	"self class = SkPlayer ifTrue: [ self halt ]."
+
 	^ MygSkGround new
-		  basicPosition: self position;
-		  board: board;
+		  position: self position;
+		  board: self board;
 		  yourself
 ]
 
@@ -66,8 +73,8 @@ MygSkMovable >> move: aCpDirection [
 
 	| newPosition neighbor |
 	newPosition := aCpDirection * self position.
-	neighbor := board atPosition: newPosition.
-	^ self moveIn: neighbor going: aCpDirection.
+	neighbor := self board atPosition: newPosition.
+	^ self moveIn: neighbor going: aCpDirection
 ]
 
 { #category : #move }

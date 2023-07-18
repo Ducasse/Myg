@@ -42,10 +42,10 @@ MygSkPlayer >> backgroundRepresentation [
 
 	| dict |
 	dict := {
-		        (CpNorthDirection -> MyIcons playerUpIcon).
-		        (CpWestDirection -> MyIcons playerLeftIcon).
-		        (CpSouthDirection -> MyIcons playerDownIcon).
-		        (CpEastDirection -> MyIcons playerRightIcon) } asDictionary.
+		        (CpNorthDirection -> MygSkBoxElement playerUpIcon).
+		        (CpWestDirection -> MygSkBoxElement playerLeftIcon).
+		        (CpSouthDirection -> MygSkBoxElement playerDownIcon).
+		        (CpEastDirection -> MygSkBoxElement playerRightIcon) } asDictionary.
 	^ dict at: self facing
 ]
 
@@ -78,11 +78,4 @@ MygSkPlayer >> move: aCpDirection [
 
 	self facing: aCpDirection class.
 	^ super move: aCpDirection
-]
-
-{ #category : #move }
-MygSkPlayer >> postCreationAction [ 
-
-	board setPlayer: self.
-	self background: (MygSkGround new basicPosition: self position; yourself).
 ]

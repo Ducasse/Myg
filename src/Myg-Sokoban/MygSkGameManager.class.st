@@ -8182,7 +8182,7 @@ MygSkGameManager >> launchFromString: aString [
 	self currentLevelString: aString.
 	self currentBoardElement: MygSkBoardElement new.
 	board := MygSkBoard
-		         board: (self class importFromString: aString)
+		         createWithBoard: (self class importFromString: aString)
 		         managedBy: self.
 	self currentBoardElement openWithModel: board
 ]

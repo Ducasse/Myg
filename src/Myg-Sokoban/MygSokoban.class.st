@@ -130,9 +130,6 @@ MygSokoban class >> menuLevel [
 	menu addItem: subMenuUAlberta.
 	menu addItem: (self subMenuTest: manager).
 
-
-
-
 	^ menu
 ]
 
@@ -153,7 +150,7 @@ MygSokoban class >> openWithMenuBar [
 	space root addChild: title.
 	space root addChild: bar.
 	space extent: 1000 @ 1000.
-	space show
+	space show.
 ]
 
 { #category : #'as yet unclassified' }

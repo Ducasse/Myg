@@ -14,9 +14,8 @@ Extensions
 "
 Class {
 	#name : #MygSkBoard,
-	#superclass : #Object,
+	#superclass : #MygBoard,
 	#instVars : [
-		'map',
 		'player',
 		'boxes',
 		'ended',
@@ -25,20 +24,6 @@ Class {
 	#category : #'Myg-Sokoban-Model'
 }
 
-{ #category : #initialization }
-MygSkBoard class >> board: aCTNewArray2D [
-
-	^ self new
-		  map: aCTNewArray2D;
-		  yourself
-]
-
-{ #category : #initialization }
-MygSkBoard class >> board: aCTNewArray2D managedBy: aSkGameManager [
-
-	^ (self board: aCTNewArray2D) gameManager: aSkGameManager; yourself 
-]
-
 { #category : #'as yet unclassified' }
 MygSkBoard class >> boardTest [
 
@@ -46,7 +31,23 @@ MygSkBoard class >> boardTest [
 	string := self mazesMicroban1 at: 19.
 	tmp := LevelImporter fromString: string fromPackage: self package.
 	tmp width < tmp height ifTrue: [ tmp := tmp rotateLeft ].
-	^ self board: tmp
+	^ self createWithBoard: tmp
+]
+
+{ #category : #initialization }
+MygSkBoard class >> createWithBoard: aCTNewArray2D [
+
+	^ self new
+		  configureGrid: aCTNewArray2D;
+		  yourself
+]
+
+{ #category : #initialization }
+MygSkBoard class >> createWithBoard: aCTNewArray2D managedBy: aSkGameManager [
+
+	^ (self createWithBoard: aCTNewArray2D)
+		  gameManager: aSkGameManager;
+		  yourself
 ]
 
 { #category : #example }
@@ -8139,56 +8140,46 @@ MygSkBoard >> asciiString [
 
 { #category : #'low level access' }
 MygSkBoard >> at: anInteger at: anInteger2 [
-	^ map at: anInteger at: anInteger2
+
+	^ grid at: anInteger @ anInteger2
 ]
 
 { #category : #'low level access' }
 MygSkBoard >> at: anInteger at: anInteger2 put: anElement [
-	map at: anInteger at: anInteger2 put: anElement 
+
+	grid at: anInteger @ anInteger2 put: anElement
+]
+
+{ #category : #'low level access' }
+MygSkBoard >> atColumn: anInteger atRow: anInteger2 [
+
+	^ grid at: anInteger @ anInteger2
+]
+
+{ #category : #'low level access' }
+MygSkBoard >> atColumn: anInteger atRow: anInteger2 put: anElement [
+
+	grid at: anInteger @ anInteger2 put: anElement
 ]
 
 { #category : #accessing }
 MygSkBoard >> atPosition: aCpPositionable [ 
-	^ (map at: aCpPositionable x @ aCpPositionable y)
-]
-
-{ #category : #'low level access' }
-MygSkBoard >> atRow: anInteger atColumn: anInteger2 [
-	^ map at: anInteger2 @ anInteger
-]
-
-{ #category : #'low level access' }
-MygSkBoard >> atRow: anInteger atColumn: anInteger2 put: anElement [
-	map at: anInteger2 @ anInteger put: anElement 
-]
-
-{ #category : #inspector }
-MygSkBoard >> basicPrintOnInspector [
-	<inspectorPresentationOrder: 35 title: 'Game'>
-
-	^ SpTextPresenter new 
-		text: self printString;
-		yourself
-]
-
-{ #category : #building }
-MygSkBoard >> buildMapWidth: x height: y [
-
-	map := Array2D 
-				rows: y 
-				columns: x 
-				tabulate: [ :row :column | MygSkGround new basicPosition: column @ row ]
+	^ (grid at: aCpPositionable x @ aCpPositionable y)
 ]
 
 { #category : #accessing }
-MygSkBoard >> columnNumber [
-	^ map numberOfColumns
+MygSkBoard >> configureGrid: aCTNewArray2D [
+
+	super configureGrid: aCTNewArray2D.
+	self
+		setBoxes;
+		setPlayer
 ]
 
 { #category : #building }
 MygSkBoard >> do: aBlock [
 
-	map do: aBlock
+	grid do: aBlock
 ]
 
 { #category : #'as yet unclassified' }
@@ -8219,7 +8210,7 @@ MygSkBoard >> gameManager: aSkGameManager [
 
 { #category : #accessing }
 MygSkBoard >> height [
-	^ map height
+	^ grid height
 ]
 
 { #category : #initialization }
@@ -8230,41 +8221,9 @@ MygSkBoard >> initialize [
 	boxes := OrderedCollection new
 ]
 
-{ #category : #initialization }
-MygSkBoard >> initializeElement: anElement atLine: lineNumber column: columnNumber [
-
-	anElement board: self.
-	anElement basicPosition: columnNumber @ lineNumber.
-	self atRow: lineNumber atColumn: columnNumber put: anElement.
-	anElement postCreationAction.
-]
-
 { #category : #testing }
 MygSkBoard >> isFinished [
 	^ boxes allSatisfy: [ :each | each background isTarget ]
-]
-
-{ #category : #accessing }
-MygSkBoard >> lineNumber [
-	^ map numberOfRows
-]
-
-{ #category : #accessing }
-MygSkBoard >> map [ 
-	^ map
-]
-
-{ #category : #accessing }
-MygSkBoard >> map: aCTNewArray2D [
-
-	map := aCTNewArray2D.
-	map withIndexes: [ :column :row |
-		(map at: column @ row)
-			position: column @ row;
-			board: self ].
-	self
-		setBoxes;
-		setPlayer
 ]
 
 { #category : #move }
@@ -8281,12 +8240,17 @@ MygSkBoard >> player [
 { #category : #printing }
 MygSkBoard >> printOn: aStream [
 
-	(1 to: map height)
+	(1 to: grid height)
 		do: [ :rowNumber |
-			1 to: map width do: [ :columnNumber |
+			1 to: grid width do: [ :columnNumber |
 				| el elClass |
-				el := (self atRow: rowNumber atColumn: columnNumber).
-				elClass := (el class inheritsFrom: MygSkMovable) ifFalse: [ el class ] ifTrue: [ el background class = MygSkGround ifTrue: [ el class ] ifFalse: [ (el class asString, 'OnTarget') asClass ] ].
+				el := self atColumn: columnNumber atRow: rowNumber .
+				elClass := (el class inheritsFrom: MygSkMovable)
+					           ifFalse: [ el class ]
+					           ifTrue: [
+						           el background class = MygSkGround
+							           ifTrue: [ el class ]
+							           ifFalse: [ (el class asString , 'OnTarget') asClass ] ].
 				aStream nextPut: elClass textualMapCharacter ] ]
 		separatedBy: [ aStream cr ]
 ]
@@ -8300,14 +8264,14 @@ MygSkBoard >> reset [
 { #category : #initialization }
 MygSkBoard >> setBoxes [
 
-	map do: [ :each |
+	grid do: [ :each |
 		each class = MygSkBox ifTrue: [ self addBox: each ] ]
 ]
 
 { #category : #initialization }
 MygSkBoard >> setPlayer [
 
-	player := map contents detect: #isPlayer
+	player := grid contents detect: #isPlayer
 ]
 
 { #category : #initialization }
@@ -8320,21 +8284,21 @@ MygSkBoard >> updatePositionOf: aSkMovable from: previousPosition [
 	"Put back the previous position element."
 
 	self
-		atRow: previousPosition y
 		atColumn: previousPosition x
+		atRow: previousPosition y
 		put: aSkMovable background.
 	"put the current position element as previous background of the moving element."
 	aSkMovable background:
-		(self atRow: aSkMovable position y atColumn: aSkMovable position x).
+		(self atColumn: aSkMovable position x atRow: aSkMovable position y).
 	"finally place the moving element to its new location"
 	self
-		atRow: aSkMovable position y
 		atColumn: aSkMovable position x
+		atRow: aSkMovable position y
 		put: aSkMovable.
-			self isFinished ifTrue: [ self endGame ]
+	self isFinished ifTrue: [ self endGame ]
 ]
 
 { #category : #accessing }
 MygSkBoard >> width [
-	^ map width
+	^ grid width
 ]

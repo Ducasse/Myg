@@ -31,11 +31,11 @@ MygSkMoveInSituationTest >> testBasicMoveInformation [
 MygSkMoveInSituationTest >> testBoxBumpingInBox [
 
 	| board box |
-	board := MygSkBoard board:
-		         ((MygLevelImporter
-			          fromString: '#@$$ ..#'
-			          fromPackage: MygSkBoard package) do: [ :each | each configured ]).
-	box := board atRow: 1 atColumn: 3.
+	board := MygSkBoard board: ((MygLevelImporter
+			           fromString: '#@$$ ..#'
+			           fromPackage: MygSkBoard package) do: [ :each |
+			          each configured ]).
+	box := board atColumn: 3 atRow: 1.
 	self assert: (box isKindOf: MygSkBox).
 	self deny: box moveEast.
 
@@ -46,11 +46,11 @@ MygSkMoveInSituationTest >> testBoxBumpingInBox [
 MygSkMoveInSituationTest >> testBoxBumpingInWall [
 
 	| board box |
-	board := MygSkBoard board:
-		         ((MygLevelImporter
-			          fromString: '#@ .$#'
-			          fromPackage: MygSkBoard package) do: [ :each | each configured ]).
-	box := board atRow: 1 atColumn: 5.
+	board := MygSkBoard board: ((MygLevelImporter
+			           fromString: '#@ .$#'
+			           fromPackage: MygSkBoard package) do: [ :each |
+			          each configured ]).
+	box := board atColumn: 5 atRow: 1 .
 	self assert: (box isKindOf: MygSkBox).
 	self deny: box moveEast.
 
@@ -61,11 +61,11 @@ MygSkMoveInSituationTest >> testBoxBumpingInWall [
 MygSkMoveInSituationTest >> testBoxMovingOnGround [
 
 	| board box |
-	board := MygSkBoard board:
-		         ((MygLevelImporter
-			          fromString: '#@ .$ #'
-			          fromPackage: MygSkBoard package) do: [ :each | each configured ]).
-	box := board atRow: 1 atColumn: 5.
+	board := MygSkBoard board: ((MygLevelImporter
+			           fromString: '#@ .$ #'
+			           fromPackage: MygSkBoard package) do: [ :each |
+			          each configured ]).
+	box := board atColumn: 5 atRow: 1 .
 	self assert: (box isKindOf: MygSkBox).
 	self assert: box moveEast.
 
@@ -76,11 +76,11 @@ MygSkMoveInSituationTest >> testBoxMovingOnGround [
 MygSkMoveInSituationTest >> testBoxMovingOnTarget [
 
 	| board box |
-	board := MygSkBoard board:
-		         ((MygLevelImporter
-			          fromString: '#@ $. #'
-			          fromPackage: MygSkBoard package) do: [ :each | each configured ]).
-	box := board atRow: 1 atColumn: 4.
+	board := MygSkBoard board: ((MygLevelImporter
+			           fromString: '#@ $. #'
+			           fromPackage: MygSkBoard package) do: [ :each |
+			          each configured ]).
+	box := board atColumn: 4 atRow: 1 .
 	self assert: (box isKindOf: MygSkBox).
 	self assert: box moveEast.
 	self assert: box position x equals: 5.
@@ -91,11 +91,11 @@ MygSkMoveInSituationTest >> testBoxMovingOnTarget [
 MygSkMoveInSituationTest >> testBoxMovingOnTargetAndRestore [
 
 	| board box |
-	board := MygSkBoard board:
-		         ((MygLevelImporter
-			          fromString: '#@ $. #'
-			          fromPackage: MygSkBoard package) do: [ :each | each configured ]).
-	box := board atRow: 1 atColumn: 4.
+	board := MygSkBoard board: ((MygLevelImporter
+			           fromString: '#@ $. #'
+			           fromPackage: MygSkBoard package) do: [ :each |
+			          each configured ]).
+	box := board atColumn: 4 atRow: 1 .
 	self assert: (box isKindOf: MygSkBox).
 	self assert: box moveEast.
 
@@ -111,9 +111,10 @@ MygSkMoveInSituationTest >> testPlayerBumpingInWall [
 	| board position player |
 	board := MygSkBoard board:
 		         ((MygLevelImporter
-			          fromString: '# @#'
-			          fromPackage: MygSkBoard package) do: [ :each | each configured ]).
-	player := board atRow: 1 atColumn: 3.
+			           fromString: '# @#'
+			           fromPackage: MygSkBoard package) do: [ :each |
+			          each configured ]).
+	player := board atColumn: 3 atRow: 1 .
 	position := board player position.
 	self deny: (board player move: CpDirection east).
 	self assert: board player position equals: position.
@@ -127,10 +128,11 @@ MygSkMoveInSituationTest >> testPlayerMovingOnGround [
 	| board position player |
 	board := MygSkBoard board:
 		         ((MygLevelImporter
-			          fromString: '#@ #'
-			          fromPackage: MygSkBoard package) do: [ :each | each configured ]).
+			           fromString: '#@ #'
+			           fromPackage: MygSkBoard package) do: [ :each |
+			          each configured ]).
 	position := board player position.
-	player := board atRow: 1 atColumn: 2.
+	player := board atColumn: 2 atRow: 1 .
 	self assert: (board player move: CpDirection east).
 	self
 		assert: board player position x
@@ -264,21 +266,22 @@ MygSkMoveInSituationTest >> testPushingABoxOnWall [
 	| board position player box |
 	board := MygSkBoard board:
 		         ((MygLevelImporter
-			          fromString: '#.@$#'
-			          fromPackage: MygSkBoard package) do: [ :each | each configured ]).
-	player := board atRow: 1 atColumn: 3.
+			           fromString: '#.@$#'
+			           fromPackage: MygSkBoard package) do: [ :each |
+			          each configured ]).
+	player := board atColumn: 3 atRow: 1.
 	position := board player position.
 	self assert: board player position x equals: 3.
 	self assert: player position x equals: 3.
 	self assert: board asciiString equals: '#.@$#'.
-	box := board atRow: 1 atColumn: 4.
+	box := board atColumn: 4 atRow: 1.
 	self assert: box position x equals: 4.
 	self deny: board player moveEast.
 	"The player has moved!"
 
 	self assert: board player position x equals: 3.
 	self assert: player position x equals: 3.
-	box := board atRow: 1 atColumn: 4.
+	box := board atColumn: 4 atRow: 1 .
 	self assert: (box isKindOf: MygSkBox).
 	self assert: box position x equals: 4
 ]

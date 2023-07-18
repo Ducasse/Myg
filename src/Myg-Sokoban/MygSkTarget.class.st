@@ -35,7 +35,7 @@ MygSkTarget class >> textualMapCharacter [
 { #category : #accessing }
 MygSkTarget >> backgroundRepresentation [
 
-	^ MyIcons targetIcon 
+	^ MygSkBoxElement  targetIcon
 ]
 
 { #category : #move }

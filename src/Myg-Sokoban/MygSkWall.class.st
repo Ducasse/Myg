@@ -35,7 +35,7 @@ MygSkWall class >> textualMapCharacter [
 { #category : #accessing }
 MygSkWall >> backgroundRepresentation [
 
-	^ MyIcons wallIcon 
+	^ MygSkBoxElement wallIcon
 ]
 
 { #category : #move }

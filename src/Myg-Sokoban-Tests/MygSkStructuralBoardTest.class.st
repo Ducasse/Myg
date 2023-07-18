@@ -49,12 +49,12 @@ MygSkStructuralBoardTest >> testAtPositionLowLevel [
 MygSkStructuralBoardTest >> testIsBoxOnTargetPlaygroundCorrectlySet [
 
 	| board box1 box2 |
-	board := MygSkBoard board:
-		         ((MygLevelImporter
-			          fromString: '#@ $.*#'
-			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).
-	box1 := board atRow: 1 atColumn: 4.
-	box2 := board atRow: 1 atColumn: 6.
+	board := MygSkBoard board: ((MygLevelImporter
+			           fromString: '#@ $.*#'
+			           fromPackage: MygSkBoard package) collect: [ :each |
+			          each configured ]).
+	box1 := board atColumn: 4 atRow: 1.
+	box2 := board atColumn: 6 atRow: 1 .
 	self assert: box1 background class equals: MygSkGround.
 	self assert: box2 background class equals: MygSkTarget
 ]
@@ -79,9 +79,10 @@ MygSkStructuralBoardTest >> testIsPalyerOnTargetPlaygroundCorrectlySet [
 	| board box |
 	board := MygSkBoard board:
 		         ((MygLevelImporter
-			          fromString: '#+ $#'
-			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).
-	box := board atRow: 1 atColumn: 2.
+			           fromString: '#+ $#'
+			           fromPackage: MygSkBoard package) collect: [ :each |
+			          each configured ]).
+	box := board atColumn: 2 atRow: 1.
 	self assert: box background class equals: MygSkTarget
 ]
 

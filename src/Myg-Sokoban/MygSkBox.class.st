@@ -36,8 +36,8 @@ MygSkBox class >> textualMapCharacter [
 MygSkBox >> backgroundRepresentation [
 
 	^ self background className = 'SkTarget'
-		  ifTrue: [ MyIcons boxIcon darker darker]
-		  ifFalse: [ MyIcons boxIcon ]
+		  ifTrue: [ MygSkBoxElement boxIcon darker darker ]
+		  ifFalse: [ MygSkBoxElement boxIcon ]
 ]
 
 { #category : #move }
@@ -63,11 +63,4 @@ MygSkBox >> bringIn: aPlayer going: aDirection [
 MygSkBox >> isBox [ 
 
 	^ true
-]
-
-{ #category : #move }
-MygSkBox >> postCreationAction [
-
-	board addBox: self.
-	self background: self defaultBackground
 ]

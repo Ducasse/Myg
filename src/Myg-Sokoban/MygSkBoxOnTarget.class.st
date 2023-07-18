@@ -40,7 +40,4 @@ MygSkBoxOnTarget >> configured [
 MygSkBoxOnTarget >> defaultBackground [
 
 	^ MygSkTarget new
-		  position: self position;
-		  board: self board;
-		  yourself
 ]

@@ -45,9 +45,9 @@ MygSkMovable >> background: anObject [
 ]
 
 { #category : #accessing }
-MygSkMovable >> configureBoard: aBoard [
-	
-	self board: aBoard.
+MygSkMovable >> board: aBoard [ 
+
+	super board: aBoard.
 	self background board: aBoard
 ]
 
@@ -60,12 +60,8 @@ MygSkMovable >> configured [
 
 { #category : #initialization }
 MygSkMovable >> defaultBackground [
-	"self class = SkPlayer ifTrue: [ self halt ]."
 
 	^ MygSkGround new
-		  position: self position;
-		  board: self board;
-		  yourself
 ]
 
 { #category : #move }

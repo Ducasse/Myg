@@ -40,8 +40,6 @@ MygSkPlayerOnTarget >> configured [
 { #category : #initialization }
 MygSkPlayerOnTarget >> defaultBackground [
 
-	^ MygSkTarget new
-		  position: self position;
-		  board: self board;
-		  yourself
+	^ MygSkTarget
+		  new
 ]

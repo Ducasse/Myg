@@ -27,7 +27,7 @@ MygSkStructuralBoardTest >> map1 [
 MygSkStructuralBoardTest >> testAtPositionLowLevel [
 
 	| board |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			          fromString: self map1
 			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).
@@ -49,7 +49,7 @@ MygSkStructuralBoardTest >> testAtPositionLowLevel [
 MygSkStructuralBoardTest >> testIsBoxOnTargetPlaygroundCorrectlySet [
 
 	| board box1 box2 |
-	board := MygSkBoard board: ((MygLevelImporter
+	board := MygSkBoard createWithBoard: ((MygLevelImporter
 			           fromString: '#@ $.*#'
 			           fromPackage: MygSkBoard package) collect: [ :each |
 			          each configured ]).
@@ -63,7 +63,7 @@ MygSkStructuralBoardTest >> testIsBoxOnTargetPlaygroundCorrectlySet [
 MygSkStructuralBoardTest >> testIsBoxPlaygroundCorrectlySet [
 
 	| board |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			          fromString: self map1
 			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).
@@ -77,7 +77,7 @@ MygSkStructuralBoardTest >> testIsBoxPlaygroundCorrectlySet [
 MygSkStructuralBoardTest >> testIsPalyerOnTargetPlaygroundCorrectlySet [
 
 	| board box |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			           fromString: '#+ $#'
 			           fromPackage: MygSkBoard package) collect: [ :each |
@@ -90,7 +90,7 @@ MygSkStructuralBoardTest >> testIsPalyerOnTargetPlaygroundCorrectlySet [
 MygSkStructuralBoardTest >> testIsPlayerPlaygroundCorrectlySet [
 
 	| board |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			          fromString: self map1
 			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).
@@ -105,7 +105,7 @@ MygSkStructuralBoardTest >> testIsPlayerPlaygroundCorrectlySet [
 MygSkStructuralBoardTest >> testPlayerIsAvailable [
 
 	| board |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			          fromString: self map1
 			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).
@@ -117,7 +117,7 @@ MygSkStructuralBoardTest >> testPlayerIsAvailable [
 MygSkStructuralBoardTest >> testPrintOn [
 
 	| board |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			          fromString: self map1
 			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).
@@ -138,7 +138,7 @@ MygSkStructuralBoardTest >> testPrintOn [
 MygSkStructuralBoardTest >> testPrintOnOneLine [
 
 	| board |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			          fromString: '#@  #'
 			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).

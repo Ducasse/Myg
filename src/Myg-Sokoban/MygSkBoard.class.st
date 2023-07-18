@@ -29,7 +29,7 @@ MygSkBoard class >> boardTest [
 
 	| string tmp |
 	string := self mazesMicroban1 at: 19.
-	tmp := LevelImporter fromString: string fromPackage: self package.
+	tmp := MygLevelImporter fromString: string fromPackage: self package.
 	tmp width < tmp height ifTrue: [ tmp := tmp rotateLeft ].
 	^ self createWithBoard: tmp
 ]
@@ -54,7 +54,7 @@ MygSkBoard class >> createWithBoard: aCTNewArray2D managedBy: aSkGameManager [
 MygSkBoard class >> example [ 
 	<sampleInstance>
 	
-	^ LevelImporter fromString: '    #####
+	^ MygLevelImporter fromString: '    #####
     #   #
     #$  #
   ###  $##
@@ -70,7 +70,7 @@ MygSkBoard class >> example [
 { #category : #'as yet unclassified' }
 MygSkBoard class >> importFromString: aString [
 	|tmp|
-	tmp := LevelImporter fromString: aString fromPackage: self package.
+	tmp := MygLevelImporter fromString: aString fromPackage: self package.
 	tmp width < tmp height ifTrue: [ tmp := tmp rotateLeft ].
 	^ tmp
 ]

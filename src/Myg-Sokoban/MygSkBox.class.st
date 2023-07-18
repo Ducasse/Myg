@@ -47,7 +47,7 @@ MygSkBox >> bringIn: aPlayer going: aDirection [
 	aPlayer class = self class ifTrue: [ ^ false ].
 	boxPreviousPosition := self position.
 	"we store the current position because if I can move, I will have to move the player to my old position."
-	neighbor := board atPosition: aDirection * self position.
+	neighbor := self board atPosition: aDirection * self position.
 	"First I tried to move in by asking my neighbor"
 	didMove := self moveIn: neighbor going: aDirection.
 	"If I moved them moved the player to move into my previous position"
@@ -55,7 +55,7 @@ MygSkBox >> bringIn: aPlayer going: aDirection [
 		| playerPreviousPosition |
 		playerPreviousPosition := aPlayer position.
 		aPlayer basicPosition: boxPreviousPosition.
-		board updatePositionOf: aPlayer from: playerPreviousPosition ].
+		self board updatePositionOf: aPlayer from: playerPreviousPosition ].
 	^ didMove
 ]
 

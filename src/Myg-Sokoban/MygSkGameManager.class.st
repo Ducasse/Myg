@@ -46,7 +46,7 @@ Class {
 MygSkGameManager class >> importFromString: aString [
 
 	| tmp |
-	tmp := LevelImporter fromString: aString fromPackage: MygSkBoard package.
+	tmp := MygLevelImporter fromString: aString fromPackage: MygSkBoard package.
 	tmp := tmp collect: [ :each | each configured ].
 	tmp width < tmp height ifTrue: [ tmp := tmp rotateLeft ].
 	^ tmp
@@ -8184,6 +8184,7 @@ MygSkGameManager >> launchFromString: aString [
 	board := MygSkBoard
 		         createWithBoard: (self class importFromString: aString)
 		         managedBy: self.
+	board grid: (board grid collect: [ :each | each configured ]).
 	self currentBoardElement openWithModel: board
 ]
 

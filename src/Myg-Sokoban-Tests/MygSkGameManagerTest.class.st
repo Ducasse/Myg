@@ -80,6 +80,7 @@ MygSkGameManagerTest >> testRegisterLevelWithBetterMoveCount [
 	string := MygSkGameManager mazesTest at: 1.
 	manager launchFromString: string inDictionary: 'mazesTest' at: 1.
 	board := manager currentBoardElement board.
+	board grid: (board grid collect: [ :each | each configured ]).
 
 	self
 		should: [
@@ -121,6 +122,7 @@ MygSkGameManagerTest >> testRegisterLevelWithWorseMoveCount [
 	string := MygSkGameManager mazesTest at: 1.
 	manager launchFromString: string inDictionary: 'mazesTest' at: 1.
 	board := manager currentBoardElement board.
+		board grid: (board grid collect: [ :each | each configured ]).
 
 	self
 		should: [
@@ -141,6 +143,7 @@ MygSkGameManagerTest >> testRegisterLevelWithWorseMoveCount [
 	space universe closeSpaceSynchronously: space.
 	manager launchAgain.
 	board := manager currentBoardElement board.
+		board grid: (board grid collect: [ :each | each configured ]).
 	
 	board player moveEast.
 	board player moveWest.

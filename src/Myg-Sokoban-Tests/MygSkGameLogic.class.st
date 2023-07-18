@@ -15,7 +15,7 @@ MygSkGameLogic >> setUp [
 
 	super setUp.
 	
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			          fromString: '#@$ . #'
 			          fromPackage: MygSkBoard package) do: [ :each | each configured ]).

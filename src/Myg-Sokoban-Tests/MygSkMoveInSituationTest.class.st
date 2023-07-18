@@ -11,7 +11,7 @@ Class {
 MygSkMoveInSituationTest >> testBasicMoveInformation [
 
 	| board position |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			          fromString: '#@  $.#'
 			          fromPackage: MygSkBoard package) do: [ :each | each configured ]).
@@ -31,7 +31,7 @@ MygSkMoveInSituationTest >> testBasicMoveInformation [
 MygSkMoveInSituationTest >> testBoxBumpingInBox [
 
 	| board box |
-	board := MygSkBoard board: ((MygLevelImporter
+	board := MygSkBoard createWithBoard: ((MygLevelImporter
 			           fromString: '#@$$ ..#'
 			           fromPackage: MygSkBoard package) do: [ :each |
 			          each configured ]).
@@ -46,7 +46,7 @@ MygSkMoveInSituationTest >> testBoxBumpingInBox [
 MygSkMoveInSituationTest >> testBoxBumpingInWall [
 
 	| board box |
-	board := MygSkBoard board: ((MygLevelImporter
+	board := MygSkBoard createWithBoard: ((MygLevelImporter
 			           fromString: '#@ .$#'
 			           fromPackage: MygSkBoard package) do: [ :each |
 			          each configured ]).
@@ -61,7 +61,7 @@ MygSkMoveInSituationTest >> testBoxBumpingInWall [
 MygSkMoveInSituationTest >> testBoxMovingOnGround [
 
 	| board box |
-	board := MygSkBoard board: ((MygLevelImporter
+	board := MygSkBoard createWithBoard: ((MygLevelImporter
 			           fromString: '#@ .$ #'
 			           fromPackage: MygSkBoard package) do: [ :each |
 			          each configured ]).
@@ -76,7 +76,7 @@ MygSkMoveInSituationTest >> testBoxMovingOnGround [
 MygSkMoveInSituationTest >> testBoxMovingOnTarget [
 
 	| board box |
-	board := MygSkBoard board: ((MygLevelImporter
+	board := MygSkBoard createWithBoard: ((MygLevelImporter
 			           fromString: '#@ $. #'
 			           fromPackage: MygSkBoard package) do: [ :each |
 			          each configured ]).
@@ -91,7 +91,7 @@ MygSkMoveInSituationTest >> testBoxMovingOnTarget [
 MygSkMoveInSituationTest >> testBoxMovingOnTargetAndRestore [
 
 	| board box |
-	board := MygSkBoard board: ((MygLevelImporter
+	board := MygSkBoard createWithBoard: ((MygLevelImporter
 			           fromString: '#@ $. #'
 			           fromPackage: MygSkBoard package) do: [ :each |
 			          each configured ]).
@@ -109,7 +109,7 @@ MygSkMoveInSituationTest >> testBoxMovingOnTargetAndRestore [
 MygSkMoveInSituationTest >> testPlayerBumpingInWall [
 
 	| board position player |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			           fromString: '# @#'
 			           fromPackage: MygSkBoard package) do: [ :each |
@@ -126,7 +126,7 @@ MygSkMoveInSituationTest >> testPlayerBumpingInWall [
 MygSkMoveInSituationTest >> testPlayerMovingOnGround [
 
 	| board position player |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			           fromString: '#@ #'
 			           fromPackage: MygSkBoard package) do: [ :each |
@@ -148,7 +148,7 @@ MygSkMoveInSituationTest >> testPlayerMovingOnGround [
 MygSkMoveInSituationTest >> testPlayerMovingOnGroundRestoreCorrectlyGround [
 
 	| board |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			          fromString: '#@   #'
 			          fromPackage: MygSkBoard package) do: [ :each | each configured ]).
@@ -162,7 +162,7 @@ MygSkMoveInSituationTest >> testPlayerMovingOnGroundRestoreCorrectlyGround [
 MygSkMoveInSituationTest >> testPlayerMovingOnTarget [
 
 	| board |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			          fromString: '#@.   $#'
 			          fromPackage: MygSkBoard package) do: [ :each | each configured ]).
@@ -177,7 +177,7 @@ MygSkMoveInSituationTest >> testPlayerMovingOnTarget [
 MygSkMoveInSituationTest >> testPlayerMovingTwoTimesOnGroundRestoreCorrectlyGround [
 
 	| board |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			          fromString: '#@  #'
 			          fromPackage: MygSkBoard package) do: [ :each | each configured ]).
@@ -195,7 +195,7 @@ MygSkMoveInSituationTest >> testPlayerMovingTwoTimesOnGroundRestoreCorrectlyGrou
 MygSkMoveInSituationTest >> testPushingABoxAlreadyOnTarget [
 
 	| board position |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			          fromString: '#@* #'
 			          fromPackage: MygSkBoard package) collect: [ :each | each configured ]).
@@ -218,7 +218,7 @@ MygSkMoveInSituationTest >> testPushingABoxAlreadyOnTarget [
 MygSkMoveInSituationTest >> testPushingABoxOnGround [
 
 	| board position |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			          fromString: '#@$ .#'
 			          fromPackage: MygSkBoard package) do: [ :each | each configured ]).
@@ -241,7 +241,7 @@ MygSkMoveInSituationTest >> testPushingABoxOnGround [
 MygSkMoveInSituationTest >> testPushingABoxOnTarget [
 
 	| board position |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			          fromString: '#@$.#'
 			          fromPackage: MygSkBoard package) do: [ :each | each configured ]).
@@ -264,7 +264,7 @@ MygSkMoveInSituationTest >> testPushingABoxOnTarget [
 MygSkMoveInSituationTest >> testPushingABoxOnWall [
 
 	| board position player box |
-	board := MygSkBoard board:
+	board := MygSkBoard createWithBoard:
 		         ((MygLevelImporter
 			           fromString: '#.@$#'
 			           fromPackage: MygSkBoard package) do: [ :each |

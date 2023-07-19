@@ -8227,7 +8227,7 @@ MygSkGameManager >> registerLevel [
 	(self packDictionary at: pack)
 		at: index
 		put: (MygSkLevelInformation count: self currentMoveCount).
-	self menu ifNotNil: [ self updateButton ].
+	self menu ifNotNil: [ self updateButton ]
 ]
 
 { #category : #accessing }

@@ -29,7 +29,7 @@ Class {
 { #category : #'as yet unclassified' }
 MygSokoban class >> levelPaging [
 
-	| aNotebook manager lomaPage microbanPage |
+	| aNotebook manager lomaPage microbanPage packPage |
 	aNotebook := ToNotebook new
 		             background: Color lightRed darker;
 		             margin: (BlInsets all: 100).
@@ -37,9 +37,14 @@ MygSokoban class >> levelPaging [
 
 	lomaPage := aNotebook
 		            addPageTitle: 'Loma'
-		            bodyFactory: [ self pagingLoma: manager ].
-	microbanPage := aNotebook addPageTitle: 'Microban' bodyFactory: [
-		                self pagingMicroban: manager ].
+		            bodyFactory: [ self pagingPack: 'mazesLoma' managedBy: manager ].
+	microbanPage := aNotebook
+		                addPageTitle: 'Microban'
+		                bodyFactory: [ self pagingPack: 'mazesMicroban' managedBy: manager ].
+	packPage := aNotebook
+		            addPageTitle: 'Pack'
+		            bodyFactory: [
+		            self pagingPack: 'mazesPack' managedBy: manager ].
 
 	^ aNotebook
 ]
@@ -179,46 +184,14 @@ MygSokoban class >> openWithMenuBar [
 ]
 
 { #category : #'as yet unclassified' }
-MygSokoban class >> pagingLoma: aManager [
-
-	| container |
-		            container := BlElement new layout:
-			                         (BlGridLayout horizontal
-				                          columnCount: 5;
-				                          cellSpacing: 10).
-
-		            1 to: MygSkGameManager mazesLoma size do: [ :i |
-			            | stream |
-			            stream := String streamContents: [ :out |
-				                      out
-					                      nextPutAll: 'Level ';
-					                      print: i ].
-			            container addChild: ((ToButton new
-					              labelText: stream;
-					              constraintsDo: [ :c | c horizontal matchParent ])
-					             whenClickedDo: [
-						             | string |
-						             string := MygSkGameManager mazesLoma at: i.
-						             aManager
-							             launchFromString: string
-							             inDictionary: 'mazesLoma'
-							             at: i ];
-					             layout: BlFrameLayout new;
-					             constraintsDo: [ :c |
-						             c frame vertical alignCenter.
-						             c frame horizontal alignCenter ]) ].
-		            ^ container
-]
-
-{ #category : #'as yet unclassified' }
-MygSokoban class >> pagingMicroban: aManager [
+MygSokoban class >> pagingPack: aPack managedBy: aManager [
 
 	| container |
 	container := BlElement new layout: (BlGridLayout horizontal
 			              columnCount: 5;
 			              cellSpacing: 10).
 
-	1 to: MygSkGameManager mazesMicroban size do: [ :i |
+	1 to: (MygSkGameManager perform: aPack asSymbol) size do: [ :i |
 		| stream |
 		stream := String streamContents: [ :out |
 			          out
@@ -229,11 +202,8 @@ MygSokoban class >> pagingMicroban: aManager [
 				  constraintsDo: [ :c | c horizontal matchParent ])
 				 whenClickedDo: [
 					 | string |
-					 string := MygSkGameManager mazesMicroban at: i.
-					 aManager
-						 launchFromString: string
-						 inDictionary: 'mazesMicroban'
-						 at: i ];
+					 string := (MygSkGameManager perform: aPack asSymbol) at: i.
+					 aManager launchFromString: string inDictionary: aPack at: i ];
 				 layout: BlFrameLayout new;
 				 constraintsDo: [ :c |
 					 c frame vertical alignCenter.

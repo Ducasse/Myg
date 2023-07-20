@@ -29,22 +29,35 @@ Class {
 { #category : #'as yet unclassified' }
 MygSokoban class >> levelPaging [
 
-	| aNotebook manager lomaPage microbanPage packPage |
+	| aNotebook manager |
 	aNotebook := ToNotebook new
 		             background: Color lightRed darker;
-		             margin: (BlInsets all: 100).
+		             margin: (BlInsets all: 50).
 	manager := MygSkGameManager new.
 
-	lomaPage := aNotebook
-		            addPageTitle: 'Loma'
-		            bodyFactory: [ self pagingPack: 'mazesLoma' managedBy: manager ].
-	microbanPage := aNotebook
-		                addPageTitle: 'Microban'
-		                bodyFactory: [ self pagingPack: 'mazesMicroban' managedBy: manager ].
-	packPage := aNotebook
-		            addPageTitle: 'Pack'
-		            bodyFactory: [
-		            self pagingPack: 'mazesPack' managedBy: manager ].
+	aNotebook
+		addPageTitle: 'Loma'
+		bodyFactory: [ self pagingPack: 'mazesLoma' managedBy: manager ];
+		addPageTitle: 'Microban'
+		bodyFactory: [ self pagingPack: 'mazesMicroban' managedBy: manager ];
+		addPageTitle: 'Pack'
+		bodyFactory: [ self pagingPack: 'mazesPack' managedBy: manager ];
+		addPageTitle: 'Sasquatch'
+		bodyFactory: [ self pagingPack: 'mazesSasquatch' managedBy: manager ];
+		addPageTitle: 'SasquatchIII'
+		bodyFactory: [
+			self pagingPack: 'mazesSasquatchIII' managedBy: manager ];
+		addPageTitle: 'SasquatchIV'
+		bodyFactory: [
+			self pagingPack: 'mazesSasquatchIV' managedBy: manager ];
+		addPageTitle: 'SasquatchV'
+		bodyFactory: [
+			self pagingPack: 'mazesSasquatchV' managedBy: manager ];
+		addPageTitle: 'SasquatchVI'
+		bodyFactory: [
+			self pagingPack: 'mazesSasquatchVI' managedBy: manager ];
+		addPageTitle: 'UAlberta'
+		bodyFactory: [ self pagingPack: 'mazesUAlberta' managedBy: manager ].
 
 	^ aNotebook
 ]
@@ -164,7 +177,7 @@ MygSokoban class >> openWithMenuBar [
 	title := self title.
 	paging := self levelPaging.
 	container := BlElement new
-		background: Color lightRed;
+		             background: Color lightRed;
 		             layout: BlLinearLayout vertical;
 		             constraintsDo: [ :c |
 			             c horizontal matchParent.
@@ -179,7 +192,7 @@ MygSokoban class >> openWithMenuBar [
 	space := BlSpace new.
 
 	space root addChild: container.
-	space extent: 1000 @ 1000.
+	space extent: 1750 @ 1750.
 	space show
 ]
 

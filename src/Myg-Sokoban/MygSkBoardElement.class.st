@@ -243,7 +243,7 @@ MygSkBoardElement >> openWithModel: aSkBoard [
 	space root background: Color red muchLighter.
 	space root layout: BlFrameLayout new.
 	space pulse
-		extent: 1000 @ 1000;
+		extent: 1750 @ 1750;
 		resizable: false;
 		show
 ]

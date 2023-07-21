@@ -192,7 +192,7 @@ MygSokoban class >> openWithMenuBar [
 	space := BlSpace new.
 
 	space root addChild: container.
-	space extent: 1750 @ 1750.
+	space extent: 1000 @ 1000.
 	space show
 ]
 

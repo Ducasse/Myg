@@ -212,7 +212,6 @@ MygSkBoardElement >> manageEvent: anEvent [
 	direction := self directionDict
 		             at: anEvent key name
 		             ifAbsent: [ ^ self ].
-
 	elements := self
 		            elementsToUpdateAtPosition: player position
 		            goingIn: direction.
@@ -243,7 +242,7 @@ MygSkBoardElement >> openWithModel: aSkBoard [
 	space root background: Color red muchLighter.
 	space root layout: BlFrameLayout new.
 	space pulse
-		extent: 1750 @ 1750;
+		extent: 1000 @ 1000;
 		resizable: false;
 		show
 ]

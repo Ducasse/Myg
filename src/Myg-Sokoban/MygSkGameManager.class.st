@@ -7823,6 +7823,12 @@ MygSkGameManager class >> menu: aToMenu [
 ]
 
 { #category : #accessing }
+MygSkGameManager class >> notebook: aNotebook [
+
+	^ self new notebook: aNotebook 
+]
+
+{ #category : #accessing }
 MygSkGameManager >> currentBoardElement [
 
 	^ currentBoardElement 

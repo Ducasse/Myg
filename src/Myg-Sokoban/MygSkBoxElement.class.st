@@ -221,7 +221,6 @@ MygSkBoxElement >> initialize [
 		background: self backgroundPaint;
 		geometry: BlSquareGeometry new;
 		layout: BlSquaredLayout new
-		
 ]
 
 { #category : #'geometry position' }
@@ -263,9 +262,9 @@ MygSkBoxElement >> updateBackgroundColor [
 	bg class = Form ifTrue: [
 		| size |
 		"magic numbers :
-		- 1750 is the size of the space
+		- 1000 is the size of the space
 		- 2 is the size of the cellSpacing"
-		size := 1750 / self parent parent board width - 2.
+		size := 1000 / self parent parent board width - 2.
 		bg := bg scaledIntoFormOfSize: size ].
 	self background: bg
 ]

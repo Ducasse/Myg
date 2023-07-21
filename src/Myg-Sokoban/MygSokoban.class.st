@@ -33,7 +33,7 @@ MygSokoban class >> levelPaging [
 	aNotebook := ToNotebook new
 		             background: Color lightRed darker;
 		             margin: (BlInsets all: 50).
-	manager := MygSkGameManager new.
+	manager := MygSkGameManager notebook: aNotebook.
 
 	aNotebook
 		addPageTitle: 'Loma'
@@ -220,7 +220,7 @@ MygSokoban class >> pagingPack: aPack managedBy: aManager [
 				 layout: BlFrameLayout new;
 				 constraintsDo: [ :c |
 					 c frame vertical alignCenter.
-					 c frame horizontal alignCenter ]) ].
+					 c frame horizontal alignCenter ]) as: i asString ].
 	^ container
 ]
 

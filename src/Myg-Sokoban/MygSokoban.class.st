@@ -29,11 +29,16 @@ Class {
 { #category : #'as yet unclassified' }
 MygSokoban class >> levelPaging [
 
-	| aNotebook manager |
+	| aNotebook manager scrollbar |
 	aNotebook := ToNotebook new
 		             background: Color lightRed darker;
 		             margin: (BlInsets all: 50).
 	manager := MygSkGameManager notebook: aNotebook.
+	
+	scrollbar := BlVerticalScrollbarElement new.
+	scrollbar
+		constraintsDo: [ :c | c margin: (BlInsets right: 5) ];
+		attachTo: aNotebook.
 
 	aNotebook
 		addPageTitle: 'Loma'
@@ -199,10 +204,18 @@ MygSokoban class >> openWithMenuBar [
 { #category : #'as yet unclassified' }
 MygSokoban class >> pagingPack: aPack managedBy: aManager [
 
-	| container |
-	container := BlElement new layout: (BlGridLayout horizontal
-			              columnCount: 5;
-			              cellSpacing: 10).
+	| grid bigContainer root scrollbar |
+	bigContainer := BlElement new
+		                constraintsDo: [ :c |
+			                c horizontal matchParent.
+			                c vertical matchParent ];
+		                yourself.
+	grid := BlElement new
+		        layout: (BlGridLayout horizontal
+				         columnCount: 5;
+				         cellSpacing: 10);
+		        constraintsDo: [ :c |
+		        c horizontal matchParent. c vertical fitContent ].
 
 	1 to: (MygSkGameManager perform: aPack asSymbol) size do: [ :i |
 		| stream |
@@ -210,18 +223,33 @@ MygSokoban class >> pagingPack: aPack managedBy: aManager [
 			          out
 				          nextPutAll: 'Level ';
 				          print: i ].
-		container addChild: ((ToButton new
-				  labelText: stream;
-				  constraintsDo: [ :c | c horizontal matchParent ])
-				 whenClickedDo: [
-					 | string |
-					 string := (MygSkGameManager perform: aPack asSymbol) at: i.
-					 aManager launchFromString: string inDictionary: aPack at: i ];
-				 layout: BlFrameLayout new;
-				 constraintsDo: [ :c |
-					 c frame vertical alignCenter.
-					 c frame horizontal alignCenter ]) as: i asString ].
-	^ container
+		grid
+			addChild: ((ToButton new
+					  labelText: stream;
+					  constraintsDo: [ :c | c horizontal matchParent ])
+					 whenClickedDo: [
+						 | string |
+						 string := (MygSkGameManager perform: aPack asSymbol) at: i.
+						 aManager launchFromString: string inDictionary: aPack at: i ];
+					 layout: BlFrameLayout new;
+					 constraintsDo: [ :c |
+						 c frame vertical alignCenter.
+						 c frame horizontal alignCenter ])
+			as: i asString ].
+
+	root := grid asScrollableElement.
+
+	scrollbar := BlVerticalScrollbarElement new
+		             constraintsDo: [ :c |
+			             c ignoreByLayout.
+			             c margin: (BlInsets right: 2).
+			             c ignored horizontal alignRight.
+			             c ignored vertical alignBottom ];
+		             attachTo: root.
+	bigContainer addChildren: {
+			root.
+			scrollbar }.
+	^ bigContainer
 ]
 
 { #category : #'as yet unclassified' }

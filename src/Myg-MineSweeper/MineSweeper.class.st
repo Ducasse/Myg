@@ -70,7 +70,7 @@ Have fun !'.
 				             c horizontal fitContent.
 				             c vertical fitContent ].
 		container addChild: lab.
-		space := OBlSpace new.
+		space := BlSpace new.
 		space root
 			layout: BlFrameLayout new;
 			addChild: container;
@@ -117,7 +117,7 @@ MineSweeper class >> open [
 
 	bar addMenu: playMenu.
 	bar addMenu: helpMenu.
-	space := OBlSpace new.
+	space := BlSpace new.
 
 
 	space root addChild: title.

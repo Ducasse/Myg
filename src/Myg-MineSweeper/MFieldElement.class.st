@@ -125,7 +125,7 @@ MFieldElement class >> openWithModel: aModel withMagnifier: aNumber [
 
 	"The space represents the window"
 
-	space addChild: aGameElement.
+	space root addChild: aGameElement.
 
 	"Calculate the extent of the game board for the first time, to set it to the window."
 	space pulse.

@@ -158,7 +158,8 @@ MygSkBoardElement >> initializeBackgroundLayer [
 				             c frame vertical alignCenter.
 				             c horizontal matchParent.
 				             c vertical fitContent ];
-			             addChild: boxElement.
+			             addChild: boxElement;
+			clipChildren: false.
 		layer addChild: container.
 		boxElement updateBackgroundColor ].
 
@@ -202,7 +203,8 @@ MygSkBoardElement >> initializeForegroundLayer [
 				             c frame vertical alignCenter.
 				             c horizontal matchParent.
 				             c vertical fitContent ];
-			             addChild: boxElement.
+			             addChild: boxElement;
+			clipChildren: false.
 
 		layer addChild: container as: aBox position asString.
 		boxElement updateBackgroundColor ].

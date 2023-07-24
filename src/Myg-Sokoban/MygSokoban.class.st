@@ -215,7 +215,8 @@ MygSokoban class >> pagingPack: aPack managedBy: aManager [
 				         columnCount: 5;
 				         cellSpacing: 10);
 		        constraintsDo: [ :c |
-		        c horizontal matchParent. c vertical fitContent ].
+			        c horizontal matchParent.
+			        c vertical fitContent ].
 
 	1 to: (MygSkGameManager perform: aPack asSymbol) size do: [ :i |
 		| stream |
@@ -226,7 +227,8 @@ MygSokoban class >> pagingPack: aPack managedBy: aManager [
 		grid
 			addChild: ((ToButton new
 					  labelText: stream;
-					  constraintsDo: [ :c | c horizontal matchParent ])
+					  constraintsDo: [ :c |
+						  c horizontal matchParent ])
 					 whenClickedDo: [
 						 | string |
 						 string := (MygSkGameManager perform: aPack asSymbol) at: i.

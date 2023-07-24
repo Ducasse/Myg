@@ -250,16 +250,17 @@ MygSkBoardElement >> openWithModel: aSkBoard [
 
 	| space |
 	space := BlSpace new.
+	space pulse
+		extent: 1000 @ 1000;
+		resizable: false.
+	space root addChild: self.
 
 	self board: aSkBoard.
 
-	space root addChild: self.
+	
 	space root background: Color red muchLighter.
 	space root layout: BlFrameLayout new.
-	space pulse
-		extent: 1000 @ 1000;
-		resizable: false;
-		show
+	space show
 ]
 
 { #category : #initialization }

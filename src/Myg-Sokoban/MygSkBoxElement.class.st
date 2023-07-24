@@ -260,11 +260,12 @@ MygSkBoxElement >> updateBackgroundColor [
 	| bg |
 	bg := self box backgroundRepresentation.
 	bg class = Form ifTrue: [
-		| size |
-		"magic numbers :
-		- 1000 is the size of the space
-		- 2 is the size of the cellSpacing"
-		size := 1000 / self parent parent parent board width - 2.
+		| size boardElement space |
+		
+		boardElement := self parent parent parent.
+		space := boardElement space.
+		size := space extent / boardElement board width
+		        - boardElement firstChild layout cellSpacing.
 		bg := bg scaledIntoFormOfSize: size ].
 	self background: bg
 ]

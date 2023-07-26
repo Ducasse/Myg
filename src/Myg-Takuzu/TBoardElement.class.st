@@ -65,7 +65,7 @@ TBoardElement class >> openWithModel: aTField [
 	aFieldElement := self new
 		                 board: aTField;
 		                 yourself.
-	space addChild: aFieldElement.
+	space root addChild: aFieldElement.
 	space pulse
 		extent: 500 @ 500;
 		resizable: false;

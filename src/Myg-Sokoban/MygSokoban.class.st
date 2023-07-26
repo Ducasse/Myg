@@ -23,7 +23,7 @@ Internal Representation and Key Implementation Points.
 Class {
 	#name : #MygSokoban,
 	#superclass : #Object,
-	#category : #'Myg-Sokoban-Model'
+	#category : #'Myg-Sokoban-Toplo'
 }
 
 { #category : #'as yet unclassified' }
@@ -33,9 +33,7 @@ MygSokoban class >> menuBar [
 	bar := ToMenuBar new
 		       hMatchParent;
 		       vFitContent.
-	bar
-		background: Color lightRed;
-		border: (BlBorder paint: Color red).
+	bar border: (BlBorder paint: Color red).
 	^ bar
 ]
 
@@ -136,21 +134,30 @@ MygSokoban class >> menuLevel [
 { #category : #'as yet unclassified' }
 MygSokoban class >> openWithMenuBar [
 
-	| space levelMenu helpMenu bar title |
+	| space container levelMenu helpMenu bar title paging |
 	levelMenu := self menuLevel.
 	helpMenu := self menuHelp.
 	bar := self menuBar.
 	title := self title.
+	paging := MygToploPaging levelPaging.
+	container := BlElement new
+		             background: Color lightRed;
+		             layout: BlLinearLayout vertical;
+		             constraintsDo: [ :c |
+			             c horizontal matchParent.
+			             c vertical matchParent ].
+	container addChildren: {
+			bar.
+			title.
+			paging }.
 
 	bar addMenu: levelMenu.
 	bar addMenu: helpMenu.
 	space := BlSpace new.
 
-
-	space root addChild: title.
-	space root addChild: bar.
+	space root addChild: container.
 	space extent: 1000 @ 1000.
-	space show.
+	space show
 ]
 
 { #category : #'as yet unclassified' }
@@ -348,10 +355,8 @@ MygSokoban class >> subMenuUAlberta: aManager [
 MygSokoban class >> title [
 
 	| title |
-	title := BlElement new background: Color lightRed.
-	title constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical matchParent ].
+	title := BlElement new size: 50 @ 200.
+	title constraintsDo: [ :c | c horizontal matchParent ].
 	title layout: BlFrameLayout new.
 	title addChild: ((BlTextElement new text: ('Sokoban' asRopedText
 				   fontName: 'Phosphate';
@@ -359,4 +364,8 @@ MygSokoban class >> title [
 			 c frame horizontal alignCenter.
 			 c frame vertical alignCenter ]).
 	^ title
+]
+
+{ #category : #'see class side' }
+MygSokoban >> seeClassSide [ 
 ]

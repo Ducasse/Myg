@@ -91,17 +91,17 @@ MygSkBoardElement >> elementsToUpdateAtPosition: aPoint goingIn: aCpDirection [
 
 	| layer elements playerElement neighborElement nextNeighborElement |
 	layer := self foregroundLayer.
-	playerElement := layer childNamed: aPoint asString.
-	neighborElement := layer childNamed:
-		                   (aCpDirection * aPoint) asString.
+	playerElement := (layer childNamed: aPoint asString) firstChild.
+	neighborElement := (layer childNamed:
+		                    (aCpDirection * aPoint) asString) firstChild.
 	elements := {
 		            playerElement.
 		            neighborElement } asOrderedCollection.
-	(neighborElement board grid at: neighborElement positionInField) class
-	= MygSkWall ifFalse: [
-		nextNeighborElement := layer childNamed:
+	(neighborElement board grid at: neighborElement positionInField)
+		class = MygSkWall ifFalse: [
+		nextNeighborElement := (layer childNamed:
 			                       (aCpDirection * (aCpDirection * aPoint))
-				                       asString.
+				                       asString) firstChild.
 		elements add: nextNeighborElement ].
 	^ elements
 ]
@@ -145,14 +145,22 @@ MygSkBoardElement >> initializeBackgroundLayer [
 			         c vertical fitContent ].
 	self addChild: layer.
 	self board do: [ :aBox |
-		| boxElement tmpBox |
+		| boxElement tmpBox container |
 		tmpBox := aBox.
 		(aBox class inheritsFrom: MygSkMovable) ifTrue: [
 			tmpBox := aBox background ].
 		boxElement := (MygSkBoxElement box: tmpBox)
 			              positionInField: aBox position;
 			              board: board.
-		layer addChild: boxElement.
+		container := BlElement new
+			             layout: BlSquaredLayout new;
+			             constraintsDo: [ :c |
+				             c frame vertical alignCenter.
+				             c horizontal matchParent.
+				             c vertical fitContent ];
+			             addChild: boxElement;
+			clipChildren: false.
+		layer addChild: container.
 		boxElement updateBackgroundColor ].
 
 	self backgroundLayer: layer
@@ -182,17 +190,24 @@ MygSkBoardElement >> initializeForegroundLayer [
 			         c vertical fitContent ].
 	self addChild: layer.
 	self board do: [ :aBox |
-		| boxElement tmpBox |
+		| boxElement tmpBox container |
 		tmpBox := aBox.
 		(aBox class inheritsFrom: MygSkMovable) ifFalse: [
 			tmpBox := MygSkGround new ].
 		boxElement := (MygSkBoxElement box: tmpBox)
 			              positionInField: aBox position;
 			              board: board.
-			             
+		container := BlElement new
+			             layout: BlSquaredLayout new;
+			             constraintsDo: [ :c |
+				             c frame vertical alignCenter.
+				             c horizontal matchParent.
+				             c vertical fitContent ];
+			             addChild: boxElement;
+			clipChildren: false.
 
-		layer addChild: boxElement as: aBox position asString.
-		boxElement  updateBackgroundColor ].
+		layer addChild: container as: aBox position asString.
+		boxElement updateBackgroundColor ].
 
 	self foregroundLayer: layer
 ]
@@ -212,7 +227,6 @@ MygSkBoardElement >> manageEvent: anEvent [
 	direction := self directionDict
 		             at: anEvent key name
 		             ifAbsent: [ ^ self ].
-
 	elements := self
 		            elementsToUpdateAtPosition: player position
 		            goingIn: direction.
@@ -236,16 +250,17 @@ MygSkBoardElement >> openWithModel: aSkBoard [
 
 	| space |
 	space := BlSpace new.
+	space pulse
+		extent: 1000 @ 1000;
+		resizable: false.
+	space root addChild: self.
 
 	self board: aSkBoard.
 
-	space root addChild: self.
+	
 	space root background: Color red muchLighter.
 	space root layout: BlFrameLayout new.
-	space pulse
-		extent: 1000 @ 1000;
-		resizable: false;
-		show
+	space show
 ]
 
 { #category : #initialization }

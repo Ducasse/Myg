@@ -7814,6 +7814,12 @@ MygSkGameManager class >> menu: aToMenu [
 ]
 
 { #category : #accessing }
+MygSkGameManager class >> notebook: aNotebook [
+
+	^ self new notebook: aNotebook 
+]
+
+{ #category : #accessing }
 MygSkGameManager >> currentBoardElement [
 
 	^ currentBoardElement 
@@ -7925,6 +7931,18 @@ MygSkGameManager >> menu: aToMenu [
 ]
 
 { #category : #accessing }
+MygSkGameManager >> notebook [ 
+	
+	^ notebook 
+]
+
+{ #category : #accessing }
+MygSkGameManager >> notebook: aNotebook [
+
+	notebook := aNotebook 
+]
+
+{ #category : #accessing }
 MygSkGameManager >> packDictionary [ 
 	
 	^ packDictionary 
@@ -7946,6 +7964,7 @@ MygSkGameManager >> registerLevel [
 		at: index
 		put: (MygSkLevelInformation count: self currentMoveCount).
 	self menu ifNotNil: [ self updateButton ].
+	self notebook ifNotNil: [ self updateNotebookButton ]
 ]
 
 { #category : #accessing }
@@ -7960,4 +7979,19 @@ MygSkGameManager >> updateButton [
 		       (Smalltalk ui icons iconNamed: #glamorousAccept).
 	elt size: elt background image extent.
 	button icon: elt
+]
+
+{ #category : #accessing }
+MygSkGameManager >> updateNotebookButton [
+
+	| button elt page string icon |
+	string := self currentLevel keys first withoutPrefix: 'mazes'.
+	page := notebook pageTitled: string.
+	elt := page bodyFactory value.
+	button := elt childWithId: self currentLevel values first asString.
+	icon := BlElement new background:
+		        (Smalltalk ui icons iconNamed: #glamorousAccept).
+	icon size: icon background image extent.
+	button icon:
+		(ToImage inner: (Smalltalk ui icons iconNamed: #glamorousAccept)).
 ]

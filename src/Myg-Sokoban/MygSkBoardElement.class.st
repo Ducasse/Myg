@@ -80,6 +80,21 @@ MygSkBoardElement >> board: aSkBoard [
 		initializeForegroundLayer
 ]
 
+{ #category : #initialization }
+MygSkBoardElement >> boardPreview: aSkBoard [
+
+	board := aSkBoard.
+	self loseFocus.
+	self constraintsDo: [ :c |
+		c frame vertical alignCenter.
+		c horizontal matchParent.
+		c vertical fitContent ].
+	self
+		initializeBackgroundLayerPreview;
+		initializeForegroundLayerPreview.
+	board := nil
+]
+
 { #category : #accessing }
 MygSkBoardElement >> directionDict [
 
@@ -166,6 +181,40 @@ MygSkBoardElement >> initializeBackgroundLayer [
 	self backgroundLayer: layer
 ]
 
+{ #category : #accessing }
+MygSkBoardElement >> initializeBackgroundLayerPreview [
+
+	| layer |
+	layer := BlElement new
+		         background: Color transparent;
+		         layout: (BlGridLayout horizontal
+				          columnCount: board width);
+		         constraintsDo: [ :c |
+			         c horizontal matchParent.
+			         c vertical fitContent ].
+	self addChild: layer.
+	self board do: [ :aBox |
+		| boxElement tmpBox container |
+		tmpBox := aBox.
+		(aBox class inheritsFrom: MygSkMovable) ifTrue: [
+			tmpBox := aBox background ].
+		boxElement := (MygSkBoxElement box: tmpBox)
+			              positionInField: aBox position;
+			              board: board.
+		container := BlElement new
+			             layout: BlSquaredLayout new;
+			             constraintsDo: [ :c |
+				             c frame vertical alignCenter.
+				             c horizontal matchParent.
+				             c vertical fitContent ];
+			             addChild: boxElement;
+			             clipChildren: false.
+		layer addChild: container.
+		boxElement updateBackgroundColor ].
+
+	self backgroundLayer: layer
+]
+
 { #category : #initialization }
 MygSkBoardElement >> initializeDirectionDict [
 
@@ -205,6 +254,41 @@ MygSkBoardElement >> initializeForegroundLayer [
 				             c vertical fitContent ];
 			             addChild: boxElement;
 			clipChildren: false.
+
+		layer addChild: container as: aBox position asString.
+		boxElement updateBackgroundColor ].
+
+	self foregroundLayer: layer
+]
+
+{ #category : #accessing }
+MygSkBoardElement >> initializeForegroundLayerPreview [
+
+	| layer |
+	layer := BlElement new
+		         background: Color transparent;
+		         layout: (BlGridLayout horizontal
+				          columnCount: board width);
+		         constraintsDo: [ :c |
+			         c horizontal matchParent.
+			         c vertical fitContent ].
+	self addChild: layer.
+	self board do: [ :aBox |
+		| boxElement tmpBox container |
+		tmpBox := aBox.
+		(aBox class inheritsFrom: MygSkMovable) ifFalse: [
+			tmpBox := MygSkGround new ].
+		boxElement := (MygSkBoxElement box: tmpBox)
+			              positionInField: aBox position;
+			              board: board.
+		container := BlElement new
+			             layout: BlSquaredLayout new;
+			             constraintsDo: [ :c |
+				             c frame vertical alignCenter.
+				             c horizontal matchParent.
+				             c vertical fitContent ];
+			             addChild: boxElement;
+			             clipChildren: false.
 
 		layer addChild: container as: aBox position asString.
 		boxElement updateBackgroundColor ].

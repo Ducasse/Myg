@@ -7995,12 +7995,14 @@ MygSkGameManager >> updateNotebookButton [
 
 	| button elt page string icon |
 	string := self currentLevel keys first withoutPrefix: 'mazes'.
-	page := notebook pageTitled: string.
+	"replace with 'page := notebook pageTitled: string' when pageTitled: added to Toplo"
+	page := notebook pages detect: [ :each |
+		        each titleElement labelElement text asString = string ].
 	elt := page bodyFactory value.
 	button := elt childWithId: self currentLevel values first asString.
 	icon := BlElement new background:
 		        (Smalltalk ui icons iconNamed: #glamorousAccept).
 	icon size: icon background image extent.
 	button icon:
-		(ToImage inner: (Smalltalk ui icons iconNamed: #glamorousAccept)).
+		(ToImage inner: (Smalltalk ui icons iconNamed: #glamorousAccept))
 ]

@@ -7,13 +7,14 @@ Class {
 { #category : #'accessing - structure variables' }
 MygToploPaging class >> buttonWithPack: aPack withManager: aManager andIndex: i [
 
-	| stream container button |
+	| stream container button previewForm |
 	stream := String streamContents: [ :out |
 		          out
 			          nextPutAll: 'Level ';
 			          print: i ].
-		
-	container := BlElement new layout: BlFrameLayout new; size: 150@150 ; addChild: (self previewForButtonWithPack: aPack at: i) .
+	" optimization to avoid having too much elements in a button "
+	previewForm := (self previewForButtonWithPack: aPack at: i) aeAsForm asElement.
+	container := BlElement new layout: BlFrameLayout new; size: 150@150 ; addChild: previewForm.
 	button := ToButton new beVertical
 		          iconImage: container;
 		          labelText: stream;
@@ -29,6 +30,7 @@ MygToploPaging class >> buttonWithPack: aPack withManager: aManager andIndex: i 
 				          launchFromString: string
 				          inDictionary: aPack
 				          at: i ].
+
 	^ button
 ]
 

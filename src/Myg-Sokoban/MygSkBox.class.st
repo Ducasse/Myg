@@ -36,7 +36,7 @@ MygSkBox class >> textualMapCharacter [
 MygSkBox >> backgroundRepresentation [
 
 	^ self background class = MygSkTarget
-		  ifTrue: [ MygSkBoxElement boxIcon darker darker ]
+		  ifTrue: [ MygSkBoxElement boxIconDarker ]
 		  ifFalse: [ MygSkBoxElement boxIcon ]
 ]
 

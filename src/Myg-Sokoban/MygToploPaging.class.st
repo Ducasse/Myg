@@ -54,32 +54,37 @@ MygToploPaging class >> pagingPack: aPack managedBy: aManager [
 			                c horizontal matchParent.
 			                c vertical matchParent ];
 		                yourself.
-	grid := BlElement new
-		        layout: (BlGridLayout horizontal
+	grid :=
+		BlElement new
+			layout: (BlGridLayout horizontal
 				         columnCount: 5;
 				         cellSpacing: 10);
-		        constraintsDo: [ :c |
-			        c horizontal matchParent.
-			        c vertical fitContent ].
+			constraintsDo: [ :c |
+				c horizontal matchParent.
+				c vertical fitContent ];
+			yourself.
 
-	1 to: (MygSkGameManager perform: aPack asSymbol) size do: [ :i |
+	(MygSkGameManager perform: aPack asSymbol) withIndexDo: [ :string :i |
 		| stream |
 		stream := String streamContents: [ :out |
 			          out
 				          nextPutAll: 'Level ';
 				          print: i ].
 		grid
-			addChild: ((ToButton new
-					  labelText: stream;
-					  constraintsDo: [ :c | c horizontal matchParent ])
-					 whenClickedDo: [
-						 | string |
-						 string := (MygSkGameManager perform: aPack asSymbol) at: i.
-						 aManager launchFromString: string inDictionary: aPack at: i ];
-					 layout: BlFrameLayout new;
-					 constraintsDo: [ :c |
-						 c frame vertical alignCenter.
-						 c frame horizontal alignCenter ])
+			addChild: 
+				(ToButton new
+					labelText: stream;
+					whenClickedDo: [
+						aManager
+							launchFromString: string
+							inDictionary: aPack
+							at: i ];
+					layout: BlFrameLayout new;
+					constraintsDo: [ :c |
+						c horizontal matchParent.
+						c frame vertical alignCenter.
+						c frame horizontal alignCenter ];
+					yourself)
 			as: i asString ].
 
 	root := grid asScrollableElement.
@@ -91,9 +96,9 @@ MygToploPaging class >> pagingPack: aPack managedBy: aManager [
 			             c ignored horizontal alignRight.
 			             c ignored vertical alignBottom ];
 		             attachTo: root.
-	bigContainer addChildren: {
-			root.
-			scrollbar }.
+	bigContainer
+		addChild: root;
+		addChild: scrollbar.
 	^ bigContainer
 ]
 

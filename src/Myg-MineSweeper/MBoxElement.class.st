@@ -160,14 +160,16 @@ MBoxElement >> explode [
 ]
 
 { #category : #accessing }
-MBoxElement >> field [ 
-	^field 
+MBoxElement >> field [
+
+	^ field
 ]
 
 { #category : #accessing }
 MBoxElement >> field: aMField [
+
 	field:= aMField.
-	self size: (75@75) * aMField magnifier.
+	self size: (75@75) * aMField magnifier
 ]
 
 { #category : #accessing }
@@ -185,7 +187,7 @@ MBoxElement >> flag [
 	self box isFlagged
 		ifFalse: [ self addChild: pngElement as: 'png' ]
 		ifTrue: [ self removeChildNamed: 'png' ].
-	self box flag.
+	self box flag
 ]
 
 { #category : #initialization }
@@ -208,8 +210,7 @@ MBoxElement >> initialize [
 
 	self addEventHandlerOn: BlMouseUpEvent do: [ :anEvent |
 		anEvent secondaryButtonPressed
-			ifTrue: [
-				self flag ]
+			ifTrue: [ self flag ]
 			ifFalse: [ self box isFlagged ifFalse: [ box click ] ] ]
 ]
 
@@ -229,8 +230,7 @@ MBoxElement >> initializeAnnouncements [
 { #category : #accessing }
 MBoxElement >> mine [
 
-
-	self background: (self class mine scaledToSize: self size).
+	self background: (self class mine scaledToSize: self size)
 ]
 
 { #category : #'as yet unclassified' }

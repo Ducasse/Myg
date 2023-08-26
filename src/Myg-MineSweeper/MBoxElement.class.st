@@ -146,7 +146,7 @@ MBoxElement >> explosion [
 			                         rotateBy: angle degreesToRadians
 			                         about: 0 @ 0.
 		anElement := self explosionStar.
-		self addChild: anElement.
+		self topMostParent addChild: anElement.
 		anElement
 			position: explosionCenter;
 			addAnimation: (BlTransformAnimation new

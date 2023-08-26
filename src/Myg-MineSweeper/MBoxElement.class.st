@@ -135,17 +135,17 @@ MBoxElement >> click: anAnnouncement [
 ]
 
 { #category : #'as yet unclassified' }
-MBoxElement >> explosion [
+MBoxElement >> explode [
 
 	| explosionCenter |
-	explosionCenter := self width / 2 @ (self height / 2).
+	explosionCenter := self position + ((self width / 2) @ (self height / 2)).
 
 	0 to: 359 by: 12 do: [ :angle |
 		| anElement relativeFinalPosition |
 		relativeFinalPosition := 0 @ 400
 			                         rotateBy: angle degreesToRadians
 			                         about: 0 @ 0.
-		anElement := self explosionStar.
+		anElement := self newExplosionStar.
 		self topMostParent addChild: anElement.
 		anElement
 			position: explosionCenter;
@@ -157,34 +157,6 @@ MBoxElement >> explosion [
 					 onFinishedDo: [
 						 anElement removeFromParent ];
 					 yourself) yourself ]
-]
-
-{ #category : #'as yet unclassified' }
-MBoxElement >> explosionStar [
-
-	| outerSize innerSize numberOfPoints angleStep vertices |
-	outerSize := 20.
-	innerSize := 8.
-	numberOfPoints := (4 to: 7) atRandom.
-	angleStep := 360.0 / numberOfPoints.
-
-	vertices := OrderedCollection new.
-	0 to: 360 by: angleStep do: [ :angle |
-		vertices
-			add: (0 @ innerSize
-					 rotateBy: (angle - (angleStep * 0.5)) degreesToRadians
-					 about: 0 asPoint);
-			add:
-				(0 @ outerSize rotateBy: angle degreesToRadians about: 0 asPoint);
-			add: (0 @ innerSize
-					 rotateBy: (angle + (angleStep * 0.5)) degreesToRadians
-					 about: 0 asPoint) ].
-
-	^ BlElement new
-		  geometry: (BlPolygonGeometry vertices: vertices);
-		  background: Color random;
-		  constraintsDo: [ :c | c ignoreByLayout ];
-		  yourself
 ]
 
 { #category : #accessing }
@@ -250,7 +222,7 @@ MBoxElement >> initializeAnnouncements [
 		to: self.
 	box announcer
 		when: MBoxExplosionAnnouncement
-		send: #explosion
+		send: #explode
 		to: self
 ]
 
@@ -259,6 +231,34 @@ MBoxElement >> mine [
 
 
 	self background: (self class mine scaledToSize: self size).
+]
+
+{ #category : #'as yet unclassified' }
+MBoxElement >> newExplosionStar [
+
+	| outerSize innerSize numberOfPoints angleStep vertices |
+	outerSize := 20.
+	innerSize := 8.
+	numberOfPoints := (4 to: 7) atRandom.
+	angleStep := 360.0 / numberOfPoints.
+
+	vertices := OrderedCollection new.
+	0 to: 360 by: angleStep do: [ :angle |
+		vertices
+			add: (0 @ innerSize
+					 rotateBy: (angle - (angleStep * 0.5)) degreesToRadians
+					 about: 0 asPoint);
+			add:
+				(0 @ outerSize rotateBy: angle degreesToRadians about: 0 asPoint);
+			add: (0 @ innerSize
+					 rotateBy: (angle + (angleStep * 0.5)) degreesToRadians
+					 about: 0 asPoint) ].
+
+	^ BlElement new
+		  geometry: (BlPolygonGeometry vertices: vertices);
+		  background: Color random;
+		  constraintsDo: [ :c | c ignoreByLayout ];
+		  yourself
 ]
 
 { #category : #accessing }

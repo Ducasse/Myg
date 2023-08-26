@@ -80,7 +80,7 @@ MFieldElement class >> open [
 		c vertical matchParent ].
 	elt layout columnCount: 2.
 
-	space := OBlSpace new.
+	space := BlSpace new.
 	elt addChild: (butSmall onWidget
 			 padding: (BlInsets all: 5);
 			 constraintsDo: [ :c |

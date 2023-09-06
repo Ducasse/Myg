@@ -329,19 +329,18 @@ MygSkBoardElement >> manageEvent: anEvent [
 		ifFalse: [ self updateElements: elements ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #opening }
 MygSkBoardElement >> openWithModel: aSkBoard [
 
 	| space |
 	space := BlSpace new.
-	space pulse
-		extent: 1000 @ 1000;
+	space
+		extent: 500 asPoint;
 		resizable: false.
 	space root addChild: self.
 
 	self board: aSkBoard.
 
-	
 	space root background: Color red muchLighter.
 	space root layout: BlFrameLayout new.
 	space show

@@ -132,7 +132,7 @@ MygSokoban class >> menuLevel [
 ]
 
 { #category : #'as yet unclassified' }
-MygSokoban class >> openWithMenuBar [
+MygSokoban class >> open [
 
 	| space container levelMenu helpMenu bar title paging |
 	levelMenu := self menuLevel.

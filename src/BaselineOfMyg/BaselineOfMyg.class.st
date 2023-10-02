@@ -18,7 +18,7 @@ BaselineOfMyg >> baseline: spec [
 
 	spec baseline: 'ContainersArray2D' with: [
 		spec repository:
-			'github://Enzo-Demeulenaere/Containers-Array2D:master/src' ].
+			'github://pharo-containers/Containers-Array2D:master/src' ].
 
 	spec
 		package: 'MygCore'

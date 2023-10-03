@@ -10,7 +10,7 @@ BaselineOfMyg >> baseline: spec [
 	<baseline>
 	spec
 		baseline: 'Bloc'
-		with: [ spec repository: 'github://pharo-graphics/Bloc:dev-1.0/src' ].
+		with: [ spec repository: 'github://pharo-graphics/Bloc:05e5b0e385811719537f8cd89966b150a07be985/src' ].
 
 	spec
 		baseline: 'Toplo'

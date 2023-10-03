@@ -90,7 +90,7 @@ MygToploPaging class >> pagingPack: aPack managedBy: aManager [
 			        c horizontal matchParent.
 			        c vertical fitContent ].
 
-	1 to: (MygSkGameManager perform: aPack asSymbol) size do: [ :i |
+	1 to: "(MygSkGameManager perform: aPack asSymbol) size" 10 do: [ :i |
 		grid addChild: (self buttonWithPack: aPack withManager: aManager andIndex: i ) as: i asString ].
 
 	root := grid asScrollableElement.

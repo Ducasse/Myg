@@ -14,7 +14,7 @@ BaselineOfMyg >> baseline: spec [
 
 	spec
 		baseline: 'Toplo'
-		with: [ spec repository: 'github://plantec/Toplo/src' ].
+		with: [ spec repository: 'github://plantec/Toplo:573bdc3e26b9a93954889db16fed838452034a16/src' ].
 
 	spec baseline: 'ContainersArray2D' with: [
 		spec repository:
@@ -30,7 +30,8 @@ BaselineOfMyg >> baseline: spec [
 		package: 'Myg-MineSweeper' with: [ spec requires: #( 'MygCore' ) ];
 		package: 'Myg-MineSweeper-Tests'
 		with: [ spec requires: #( 'Myg-MineSweeper' ) ];
-		package: 'Myg-Sokoban' with: [ spec requires: #( 'MygCore' 'Myg-Compass' ) ];
+		package: 'Myg-Sokoban'
+		with: [ spec requires: #( 'MygCore' 'Myg-Compass' ) ];
 		package: 'Myg-Sokoban-Tests'
 		with: [ spec requires: #( 'Myg-Sokoban' ) ];
 		package: 'Myg-Compass';

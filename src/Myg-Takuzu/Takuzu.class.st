@@ -181,3 +181,7 @@ Takuzu class >> title [
 			 c frame vertical alignCenter ]).
 	^ title
 ]
+
+{ #category : #'see class side' }
+Takuzu >> seeClassSide [
+]

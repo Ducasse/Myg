@@ -21,13 +21,13 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MygSokoban,
+	#name : #Sokoban,
 	#superclass : #Object,
 	#category : #'Myg-Sokoban-Toplo'
 }
 
 { #category : #'as yet unclassified' }
-MygSokoban class >> menuBar [
+Sokoban class >> menuBar [
 
 	| bar |
 	bar := ToMenuBar new
@@ -38,7 +38,7 @@ MygSokoban class >> menuBar [
 ]
 
 { #category : #'as yet unclassified' }
-MygSokoban class >> menuHelp [
+Sokoban class >> menuHelp [
 
 	| menu |
 	menu := ToMenu new.
@@ -97,7 +97,7 @@ Have fun !' asRopedText.
 ]
 
 { #category : #'as yet unclassified' }
-MygSokoban class >> menuLevel [
+Sokoban class >> menuLevel [
 
 	| menu manager subMenuMicroban subMenuLoma subMenuPack subMenuSasquatch subMenuSasquatchIII subMenuSasquatchIV subMenuSasquatchV subMenuSasquatchVI subMenuUAlberta |
 	menu := ToMenu new.
@@ -132,7 +132,7 @@ MygSokoban class >> menuLevel [
 ]
 
 { #category : #'as yet unclassified' }
-MygSokoban class >> openWithMenuBar [
+Sokoban class >> open [
 
 	| space container levelMenu helpMenu bar title paging |
 	levelMenu := self menuLevel.
@@ -161,7 +161,7 @@ MygSokoban class >> openWithMenuBar [
 ]
 
 { #category : #'as yet unclassified' }
-MygSokoban class >> subMenuLoma: aManager [
+Sokoban class >> subMenuLoma: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new label: (ToLabel new text: 'mazesLoma').
@@ -178,7 +178,7 @@ MygSokoban class >> subMenuLoma: aManager [
 ]
 
 { #category : #'as yet unclassified' }
-MygSokoban class >> subMenuMicroban: aManager [
+Sokoban class >> subMenuMicroban: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new label: (ToLabel new text: 'mazesMicroban').
@@ -198,7 +198,7 @@ MygSokoban class >> subMenuMicroban: aManager [
 ]
 
 { #category : #'as yet unclassified' }
-MygSokoban class >> subMenuPack: aManager [
+Sokoban class >> subMenuPack: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new label: (ToLabel new text: 'mazesPack').
@@ -215,7 +215,7 @@ MygSokoban class >> subMenuPack: aManager [
 ]
 
 { #category : #'as yet unclassified' }
-MygSokoban class >> subMenuSasquatch: aManager [
+Sokoban class >> subMenuSasquatch: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new label: (ToLabel new text: 'mazesSasquatch').
@@ -232,7 +232,7 @@ MygSokoban class >> subMenuSasquatch: aManager [
 ]
 
 { #category : #'as yet unclassified' }
-MygSokoban class >> subMenuSasquatchIII: aManager [
+Sokoban class >> subMenuSasquatchIII: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new label: (ToLabel new text: 'mazesSasquatchIII').
@@ -252,7 +252,7 @@ MygSokoban class >> subMenuSasquatchIII: aManager [
 ]
 
 { #category : #'as yet unclassified' }
-MygSokoban class >> subMenuSasquatchIV: aManager [
+Sokoban class >> subMenuSasquatchIV: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new label: (ToLabel new text: 'mazesSasquatchIV').
@@ -272,7 +272,7 @@ MygSokoban class >> subMenuSasquatchIV: aManager [
 ]
 
 { #category : #'as yet unclassified' }
-MygSokoban class >> subMenuSasquatchV: aManager [
+Sokoban class >> subMenuSasquatchV: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new label: (ToLabel new text: 'mazesSasquatchV').
@@ -292,7 +292,7 @@ MygSokoban class >> subMenuSasquatchV: aManager [
 ]
 
 { #category : #'as yet unclassified' }
-MygSokoban class >> subMenuSasquatchVI: aManager [
+Sokoban class >> subMenuSasquatchVI: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new label: (ToLabel new text: 'mazesSasquatchVI').
@@ -312,7 +312,7 @@ MygSokoban class >> subMenuSasquatchVI: aManager [
 ]
 
 { #category : #'as yet unclassified' }
-MygSokoban class >> subMenuTest: aManager [
+Sokoban class >> subMenuTest: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new label: (ToLabel new text: 'mazesTest').
@@ -332,7 +332,7 @@ MygSokoban class >> subMenuTest: aManager [
 ]
 
 { #category : #'as yet unclassified' }
-MygSokoban class >> subMenuUAlberta: aManager [
+Sokoban class >> subMenuUAlberta: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new label: (ToLabel new text: 'mazesUAlberta').
@@ -352,7 +352,7 @@ MygSokoban class >> subMenuUAlberta: aManager [
 ]
 
 { #category : #accessing }
-MygSokoban class >> title [
+Sokoban class >> title [
 
 	| title |
 	title := BlElement new size: 50 @ 200.
@@ -367,5 +367,5 @@ MygSokoban class >> title [
 ]
 
 { #category : #'see class side' }
-MygSokoban >> seeClassSide [ 
+Sokoban >> seeClassSide [ 
 ]

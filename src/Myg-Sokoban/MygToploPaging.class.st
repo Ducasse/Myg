@@ -4,6 +4,34 @@ Class {
 	#category : #'Myg-Sokoban-Toplo'
 }
 
+{ #category : #'accessing - structure variables' }
+MygToploPaging class >> buttonWithPack: aPack withManager: aManager andIndex: i [
+
+	| stream container button |
+	stream := String streamContents: [ :out |
+		          out
+			          nextPutAll: 'Level ';
+			          print: i ].
+		
+	container := BlElement new layout: BlFrameLayout new; size: 150@150 ; addChild: (self previewForButtonWithPack: aPack at: i) .
+	button := ToButton new beVertical
+		          iconImage: container;
+		          labelText: stream;
+		          constraintsDo: [ :c |
+			          c horizontal matchParent.
+			          c frame vertical alignCenter.
+			          c frame horizontal alignCenter ];
+		          whenClickedDo: [
+			          | string |
+			          string := (MygSkGameManager perform: aPack asSymbol) at:
+					                    i.
+			          aManager
+				          launchFromString: string
+				          inDictionary: aPack
+				          at: i ].
+	^ button
+]
+
 { #category : #'as yet unclassified' }
 MygToploPaging class >> levelPaging [
 
@@ -62,25 +90,8 @@ MygToploPaging class >> pagingPack: aPack managedBy: aManager [
 			        c horizontal matchParent.
 			        c vertical fitContent ].
 
-	1 to: (MygSkGameManager perform: aPack asSymbol) size do: [ :i |
-		| stream |
-		stream := String streamContents: [ :out |
-			          out
-				          nextPutAll: 'Level ';
-				          print: i ].
-		grid
-			addChild: ((ToButton new
-					  labelText: stream;
-					  constraintsDo: [ :c | c horizontal matchParent ])
-					 whenClickedDo: [
-						 | string |
-						 string := (MygSkGameManager perform: aPack asSymbol) at: i.
-						 aManager launchFromString: string inDictionary: aPack at: i ];
-					 layout: BlFrameLayout new;
-					 constraintsDo: [ :c |
-						 c frame vertical alignCenter.
-						 c frame horizontal alignCenter ])
-			as: i asString ].
+	1 to: "(MygSkGameManager perform: aPack asSymbol) size" 10 do: [ :i |
+		grid addChild: (self buttonWithPack: aPack withManager: aManager andIndex: i ) as: i asString ].
 
 	root := grid asScrollableElement.
 
@@ -95,6 +106,25 @@ MygToploPaging class >> pagingPack: aPack managedBy: aManager [
 			root.
 			scrollbar }.
 	^ bigContainer
+]
+
+{ #category : #'as yet unclassified' }
+MygToploPaging class >> previewForButtonWithPack: aPack at: i [
+
+	| iconImage string board space elt |
+	iconImage := MygSkBoardElement new.
+	space := BlSpace new extent: 150 @ 150.
+	space root addChild: iconImage.
+
+	string := (MygSkGameManager perform: aPack asSymbol) at: i.
+	board := MygSkBoard createWithBoard:
+		         (MygSkGameManager importFromString: string).
+	iconImage boardPreview: board.
+	iconImage parent: nil.
+	elt := BlElement new
+		       background: Color purple;
+		       size: 150 @ 150.
+	^ iconImage
 ]
 
 { #category : #'see class side' }

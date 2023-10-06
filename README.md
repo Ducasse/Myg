@@ -29,8 +29,14 @@ There is currently 3 games in Myg :
 - Takuzu
 - Sokoban
 
-You can play each game by executing this snippet :
+You can play each game by executing these snippets :
 
 ```Smalltalk
-[Game name] open
+MineSweeper open
+```
+```Smalltalk
+Takuzu open
+```
+```Smalltalk
+Sokoban open
 ```

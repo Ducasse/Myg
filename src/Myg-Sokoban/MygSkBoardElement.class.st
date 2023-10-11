@@ -101,7 +101,7 @@ MygSkBoardElement >> directionDict [
 	^ directionDict
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 MygSkBoardElement >> elementsToUpdateAtPosition: aPoint goingIn: aCpDirection [
 
 	| layer elements playerElement neighborElement nextNeighborElement |
@@ -301,11 +301,9 @@ MygSkBoardElement >> manageEvent: anEvent [
 
 	| player moved direction neighborElement elements |
 	anEvent key name = #SPACE ifTrue: [
-		self resetBoard.
-		^ self ].
+		^ self resetBoard ].
 	anEvent key name = #ESCAPE ifTrue: [
-		self space close.
-		^ self ].
+		^ self space close ].
 	board isFinished ifTrue: [ ^ self ].
 	player := self board player.
 	direction := self directionDict
@@ -353,7 +351,7 @@ MygSkBoardElement >> resetBoard [
 	self board reset
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 MygSkBoardElement >> updateElements: anOrderedCollection [
 
 	anOrderedCollection do: [ :each | each boxForForeground updateBackgroundColor ]

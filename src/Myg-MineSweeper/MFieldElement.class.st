@@ -32,49 +32,49 @@ Class {
 	#category : #'Myg-MineSweeper-UI'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 MFieldElement class >> launchLarge [
 	^ self withMatrixTest5x5WithMagnifier: 2
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 MFieldElement class >> launchRegular [
 	^ self withMatrixTest5x5 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 MFieldElement class >> launchSmall [
 	^ self withMatrixTest5x5WithMagnifier: 0.5
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 MFieldElement class >> launchVeryLarge [
 	^ self withMatrixTest5x5WithMagnifier: 4
 ]
 
 { #category : #'instance creation' }
 MFieldElement class >> open [
+	<script>
 
 	| butSmall butRegular butLarge butVeryLarge space elt |
-	butSmall := ToButtonModel new label:
-		            (ToLabel text: ('Small' asRopedText fontSize: 50)) matchParent
-			            alignCenter.
+	butSmall := ToButtonModel new.
+	butSmall labelText: ('Small' asRopedText fontSize: 50).
 	butSmall whenClickedDo: [ self launchSmall ].
-	butRegular := ToButtonModel new label:
-		              (ToLabel text: ('Regular' asRopedText fontSize: 50))
-			              matchParent alignCenter.
+
+	butRegular := ToButtonModel new.
+	butRegular labelText: ('Regular' asRopedText fontSize: 50).
 	butRegular whenClickedDo: [ self launchRegular ].
-	butLarge := ToButtonModel new label:
-		            (ToLabel text: ('Large' asRopedText fontSize: 50))
-			            matchParent alignCenter.
+
+	butLarge := ToButtonModel new.
+	butLarge labelText: ('Large' asRopedText fontSize: 50).
 	butLarge whenClickedDo: [ self launchLarge ].
-	butVeryLarge := ToButtonModel new label:
-		                (ToLabel text:
-			                 ('Very Large' asRopedText fontSize: 50))
-			                matchParent alignCenter.
+
+	butVeryLarge := ToButtonModel new.
+	butVeryLarge labelText: ('Very Large' asRopedText fontSize: 50).
 	butVeryLarge whenClickedDo: [ self launchVeryLarge ].
 
-	elt := BlElement new layout: (BlGridLayout horizontal cellSpacing: 5).
+	elt := BlElement new.
+	elt layout: (BlGridLayout horizontal cellSpacing: 5).
 	elt constraintsDo: [ :c |
 		c horizontal matchParent.
 		c vertical matchParent ].
@@ -85,35 +85,41 @@ MFieldElement class >> open [
 			 padding: (BlInsets all: 5);
 			 constraintsDo: [ :c |
 				 c horizontal matchParent.
-				 c vertical matchParent ]).
-	elt addChild: (butRegular onWidget
-			 padding: (BlInsets all: 5);
-			 constraintsDo: [ :c |
+				 c vertical matchParent ];
+			yourself).
+	elt addChild:
+		(butRegular onWidget
+			padding: (BlInsets all: 5);
+			constraintsDo: [ :c |
 				 c horizontal matchParent.
-				 c vertical matchParent ]).
-	elt addChild: (butLarge onWidget
-			 padding: (BlInsets all: 5);
-			 constraintsDo: [ :c |
+				 c vertical matchParent ];
+			yourself).
+	elt addChild:
+		(butLarge onWidget
+			padding: (BlInsets all: 5);
+			constraintsDo: [ :c |
 				 c horizontal matchParent.
-				 c vertical matchParent ]).
-	elt addChild: (butVeryLarge onWidget
-			 padding: (BlInsets all: 5);
-			 constraintsDo: [ :c |
-				 c horizontal matchParent.
-				 c vertical matchParent ]).
-
+				 c vertical matchParent ];
+			yourself).
+	elt addChild:
+		(butVeryLarge onWidget
+			padding: (BlInsets all: 5);
+			constraintsDo: [ :c |
+				c horizontal matchParent.
+				c vertical matchParent ];
+			yourself).
 	space root addChild: elt.
-	space extent: 300 @ 300.
+	space extent: 500 @ 250.
 	space show
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 MFieldElement class >> openWithModel: aModel [
 
 	^ self openWithModel: aModel withMagnifier: 1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 MFieldElement class >> openWithModel: aModel withMagnifier: aNumber [
 
 	| aGameElement space |

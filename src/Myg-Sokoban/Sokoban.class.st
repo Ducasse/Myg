@@ -21,13 +21,13 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #Sokoban,
+	#name : #MygSokoban,
 	#superclass : #Object,
 	#category : #'Myg-Sokoban-Toplo'
 }
 
-{ #category : #'as yet unclassified' }
-Sokoban class >> menuBar [
+{ #category : #'private - menu building' }
+MygSokoban class >> menuBar [
 
 	| bar |
 	bar := ToMenuBar new
@@ -37,14 +37,13 @@ Sokoban class >> menuBar [
 	^ bar
 ]
 
-{ #category : #'as yet unclassified' }
-Sokoban class >> menuHelp [
+{ #category : #'private - menu building' }
+MygSokoban class >> menuHelp [
 
 	| menu |
 	menu := ToMenu new.
-	menu label: (ToLabel text: 'Help').
-	menu icon:
-		(ToImage inner: (Smalltalk ui icons iconNamed: #glamorousHelp)).
+	menu labelText: 'Help'.
+	menu iconImage: (Smalltalk ui icons iconNamed: #glamorousHelp).
 	menu whenClickedDo: [
 		| container lab space |
 		lab := ToLabel text: 'How to play:
@@ -96,14 +95,13 @@ Have fun !' asRopedText.
 	^ menu
 ]
 
-{ #category : #'as yet unclassified' }
-Sokoban class >> menuLevel [
+{ #category : #'private - menu building' }
+MygSokoban class >> menuLevel [
 
 	| menu manager subMenuMicroban subMenuLoma subMenuPack subMenuSasquatch subMenuSasquatchIII subMenuSasquatchIV subMenuSasquatchV subMenuSasquatchVI subMenuUAlberta |
 	menu := ToMenu new.
-	menu label: (ToLabel text: 'Levels').
-	menu icon:
-		(ToImage inner: (Smalltalk ui icons iconNamed: #solidMenu)).
+	menu labelText: 'Levels'.
+	menu iconImage: (Smalltalk ui icons iconNamed: #solidMenu).
 
 	manager := MygSkGameManager menu: menu.
 
@@ -131,8 +129,9 @@ Sokoban class >> menuLevel [
 	^ menu
 ]
 
-{ #category : #'as yet unclassified' }
-Sokoban class >> open [
+{ #category : #opening }
+MygSokoban class >> open [
+	<script>
 
 	| space container levelMenu helpMenu bar title paging |
 	levelMenu := self menuLevel.
@@ -153,209 +152,249 @@ Sokoban class >> open [
 
 	bar addMenu: levelMenu.
 	bar addMenu: helpMenu.
-	space := BlSpace new.
 
+	space := BlSpace new.
 	space root addChild: container.
 	space extent: 1000 @ 1000.
 	space show
 ]
 
-{ #category : #'as yet unclassified' }
-Sokoban class >> subMenuLoma: aManager [
+{ #category : #'private - menu building' }
+MygSokoban class >> subMenuLoma: aManager [
 
 	| subMenu |
-	subMenu := ToMenu new label: (ToLabel new text: 'mazesLoma').
-	1 to: MygSkGameManager mazesLoma size do: [ :i |
+	subMenu := ToMenu new
+		labelText: 'mazesLoma';
+		yourself.
+	MygSkGameManager mazesLoma withIndexDo: [ :string :i |
 		| stream |
 		stream := String streamContents: [ :out | out print: i ].
-
 		subMenu addItem:
-			((ToButtonMenuItem new labelText: stream) whenClickedDo: [
-				 | string |
-				 string := MygSkGameManager mazesLoma at: i.
-				 aManager launchFromString: string inDictionary: 'mazesLoma' at: i ]) ].
+			(ToMenuItem new
+				labelText: stream;
+				whenClickedDo: [
+					aManager
+						launchFromString: string
+						inDictionary: 'mazesLoma'
+						at: i ];
+				yourself) ].
+
 	^ subMenu
 ]
 
-{ #category : #'as yet unclassified' }
-Sokoban class >> subMenuMicroban: aManager [
+{ #category : #'private - menu building' }
+MygSokoban class >> subMenuMicroban: aManager [
 
 	| subMenu |
-	subMenu := ToMenu new label: (ToLabel new text: 'mazesMicroban').
-	1 to: MygSkGameManager mazesMicroban size do: [ :i |
+	subMenu := ToMenu new
+		labelText: 'mazesMicroban';
+		yourself.
+	MygSkGameManager mazesMicroban withIndexDo: [ :string :i |
 		| stream |
 		stream := String streamContents: [ :out | out print: i ].
-
 		subMenu addItem:
-			((ToButtonMenuItem new labelText: stream) whenClickedDo: [
-				 | string |
-				 string := MygSkGameManager mazesMicroban at: i.
-				 aManager
-					 launchFromString: string
-					 inDictionary: 'mazesMicroban'
-					 at: i ]) ].
+			(ToMenuItem new
+				labelText: stream;
+				whenClickedDo: [
+					aManager
+						launchFromString: string
+						inDictionary: 'mazesMicroban'
+						at: i ];
+					yourself) ].
+
 	^ subMenu
 ]
 
-{ #category : #'as yet unclassified' }
-Sokoban class >> subMenuPack: aManager [
+{ #category : #'private - menu building' }
+MygSokoban class >> subMenuPack: aManager [
 
 	| subMenu |
-	subMenu := ToMenu new label: (ToLabel new text: 'mazesPack').
-	1 to: MygSkGameManager mazesPack size do: [ :i |
+	subMenu := ToMenu new
+		labelText: 'mazesPack';
+		yourself.
+	MygSkGameManager mazesPack withIndexDo: [ :string :i |
 		| stream |
 		stream := String streamContents: [ :out | out print: i ].
-
 		subMenu addItem:
-			((ToButtonMenuItem new labelText: stream) whenClickedDo: [
-				 | string |
-				 string := MygSkGameManager mazesPack at: i.
-				 aManager launchFromString: string inDictionary: 'mazesPack' at: i ]) ].
+			(ToMenuItem new
+				labelText: stream;
+				whenClickedDo: [
+					aManager
+						launchFromString: string
+						inDictionary: 'mazesPack'
+						at: i ];
+				yourself) ].
+
 	^ subMenu
 ]
 
-{ #category : #'as yet unclassified' }
-Sokoban class >> subMenuSasquatch: aManager [
+{ #category : #'private - menu building' }
+MygSokoban class >> subMenuSasquatch: aManager [
 
 	| subMenu |
-	subMenu := ToMenu new label: (ToLabel new text: 'mazesSasquatch').
-	1 to: MygSkGameManager mazesSasquatch size do: [ :i |
+	subMenu := ToMenu new
+		labelText: 'mazesSasquatch';
+		yourself.
+	MygSkGameManager mazesSasquatch withIndexDo: [ :string :i |
 		| stream |
 		stream := String streamContents: [ :out | out print: i ].
-
 		subMenu addItem:
-			((ToButtonMenuItem new labelText: stream) whenClickedDo: [
-				 | string |
-				 string := MygSkGameManager mazesSasquatch at: i.
-				 aManager launchFromString: string inDictionary: 'mazesSasquatch' at: i ]) ].
+			(ToMenuItem new
+				labelText: stream;
+				whenClickedDo: [
+					aManager
+						launchFromString: string
+						inDictionary: 'mazesSasquatch'
+						at: i ];
+				yourself) ].
+
 	^ subMenu
 ]
 
-{ #category : #'as yet unclassified' }
-Sokoban class >> subMenuSasquatchIII: aManager [
+{ #category : #'private - menu building' }
+MygSokoban class >> subMenuSasquatchIII: aManager [
 
 	| subMenu |
-	subMenu := ToMenu new label: (ToLabel new text: 'mazesSasquatchIII').
-	1 to: MygSkGameManager mazesSasquatchIII size do: [ :i |
+	subMenu := ToMenu new
+		labelText: 'mazesSasquatchIII';
+		yourself.
+	MygSkGameManager mazesSasquatchIII withIndexDo: [ :string :i |
 		| stream |
 		stream := String streamContents: [ :out | out print: i ].
-
 		subMenu addItem:
-			((ToButtonMenuItem new labelText: stream) whenClickedDo: [
-				 | string |
-				 string := MygSkGameManager mazesSasquatchIII at: i.
-				 aManager
-					 launchFromString: string
-					 inDictionary: 'mazesSasquatchIII'
-					 at: i ]) ].
+			(ToMenuItem new
+				labelText: stream;
+				whenClickedDo: [
+					aManager
+						launchFromString: string
+						inDictionary: 'mazesSasquatchIII'
+						at: i ];
+				yourself) ].
+
 	^ subMenu
 ]
 
-{ #category : #'as yet unclassified' }
-Sokoban class >> subMenuSasquatchIV: aManager [
+{ #category : #'private - menu building' }
+MygSokoban class >> subMenuSasquatchIV: aManager [
 
 	| subMenu |
-	subMenu := ToMenu new label: (ToLabel new text: 'mazesSasquatchIV').
-	1 to: MygSkGameManager mazesSasquatchIV size do: [ :i |
+	subMenu := ToMenu new
+		labelText: 'mazesSasquatchIV';
+		yourself.
+	MygSkGameManager mazesSasquatchIV withIndexDo: [ :string :i |
 		| stream |
 		stream := String streamContents: [ :out | out print: i ].
-
 		subMenu addItem:
-			((ToButtonMenuItem new labelText: stream) whenClickedDo: [
-				 | string |
-				 string := MygSkGameManager mazesSasquatchIV at: i.
-				 aManager
-					 launchFromString: string
-					 inDictionary: 'mazesSasquatchIV'
-					 at: i ]) ].
+			(ToMenuItem new
+				labelText: stream;
+				whenClickedDo: [
+					aManager
+						launchFromString: string
+						inDictionary: 'mazesSasquatchIV'
+						at: i ];
+				yourself) ].
+
 	^ subMenu
 ]
 
-{ #category : #'as yet unclassified' }
-Sokoban class >> subMenuSasquatchV: aManager [
+{ #category : #'private - menu building' }
+MygSokoban class >> subMenuSasquatchV: aManager [
 
 	| subMenu |
-	subMenu := ToMenu new label: (ToLabel new text: 'mazesSasquatchV').
-	1 to: MygSkGameManager mazesSasquatchV size do: [ :i |
+	subMenu := ToMenu new
+		labelText: 'mazesSasquatchV';
+		yourself.
+	MygSkGameManager mazesSasquatchV withIndexDo: [ :string :i |
 		| stream |
 		stream := String streamContents: [ :out | out print: i ].
-
 		subMenu addItem:
-			((ToButtonMenuItem new labelText: stream) whenClickedDo: [
-				 | string |
-				 string := MygSkGameManager mazesSasquatchV at: i.
-				 aManager
-					 launchFromString: string
-					 inDictionary: 'mazesSasquatchV'
-					 at: i ]) ].
+			(ToMenuItem new
+				labelText: stream;
+				whenClickedDo: [
+					aManager
+						launchFromString: string
+						inDictionary: 'mazesSasquatchV'
+						at: i ];
+				yourself) ].
+
 	^ subMenu
 ]
 
-{ #category : #'as yet unclassified' }
-Sokoban class >> subMenuSasquatchVI: aManager [
+{ #category : #'private - menu building' }
+MygSokoban class >> subMenuSasquatchVI: aManager [
 
 	| subMenu |
-	subMenu := ToMenu new label: (ToLabel new text: 'mazesSasquatchVI').
-	1 to: MygSkGameManager mazesSasquatchVI size do: [ :i |
+	subMenu := ToMenu new
+		labelText: 'mazesSasquatchVI';
+		yourself.
+	MygSkGameManager mazesSasquatchVI withIndexDo: [ :string :i |
 		| stream |
 		stream := String streamContents: [ :out | out print: i ].
-
 		subMenu addItem:
-			((ToButtonMenuItem new labelText: stream) whenClickedDo: [
-				 | string |
-				 string := MygSkGameManager mazesSasquatchVI at: i.
-				 aManager
-					 launchFromString: string
-					 inDictionary: 'mazesSasquatchVI'
-					 at: i ]) ].
+			(ToMenuItem new
+				labelText: stream;
+				whenClickedDo: [
+					aManager
+						launchFromString: string
+						inDictionary: 'mazesSasquatchVI'
+						at: i ];
+				yourself) ].
+
 	^ subMenu
 ]
 
-{ #category : #'as yet unclassified' }
-Sokoban class >> subMenuTest: aManager [
+{ #category : #'private - menu building' }
+MygSokoban class >> subMenuTest: aManager [
 
 	| subMenu |
-	subMenu := ToMenu new label: (ToLabel new text: 'mazesTest').
-	1 to: MygSkGameManager mazesTest size do: [ :i |
+	subMenu := ToMenu new
+		labelText: 'mazesTest';
+		yourself.
+	MygSkGameManager mazesTest withIndexDo: [ :string :i |
 		| stream |
 		stream := String streamContents: [ :out | out print: i ].
-
 		subMenu addItem:
-			((ToButtonMenuItem new labelText: stream) whenClickedDo: [
-				 | string |
-				 string := MygSkGameManager mazesTest at: i.
-				 aManager
-					 launchFromString: string
-					 inDictionary: 'mazesTest'
-					 at: i ]) ].
+			(ToMenuItem new
+				labelText: stream;
+				whenClickedDo: [
+					aManager
+						launchFromString: string
+						inDictionary: 'mazesTest'
+						at: i ];
+				yourself) ].
+
 	^ subMenu
 ]
 
-{ #category : #'as yet unclassified' }
-Sokoban class >> subMenuUAlberta: aManager [
+{ #category : #'private - menu building' }
+MygSokoban class >> subMenuUAlberta: aManager [
 
 	| subMenu |
-	subMenu := ToMenu new label: (ToLabel new text: 'mazesUAlberta').
-	1 to: MygSkGameManager mazesUAlberta size do: [ :i |
+	subMenu := ToMenu new
+		labelText: 'mazesUAlberta';
+		yourself.
+	MygSkGameManager mazesUAlberta withIndexDo: [ :string :i |
 		| stream |
 		stream := String streamContents: [ :out | out print: i ].
-
 		subMenu addItem:
-			((ToButtonMenuItem new labelText: stream) whenClickedDo: [
-				 | string |
-				 string := MygSkGameManager mazesUAlberta at: i.
-				 aManager
-					 launchFromString: string
-					 inDictionary: 'mazesUAlberta'
-					 at: i ]) ].
+			(ToMenuItem new
+				labelText: stream;
+				whenClickedDo: [
+					aManager
+						launchFromString: string
+						inDictionary: 'mazesUAlberta'
+						at: i ];
+				yourself) ].
+
 	^ subMenu
 ]
 
 { #category : #accessing }
-Sokoban class >> title [
+MygSokoban class >> title [
 
 	| title |
-	title := BlElement new size: 50 @ 200.
+	title := BlElement new.
+	title size: 50 @ 200.
 	title constraintsDo: [ :c | c horizontal matchParent ].
 	title layout: BlFrameLayout new.
 	title addChild: ((BlTextElement new text: ('Sokoban' asRopedText
@@ -367,5 +406,5 @@ Sokoban class >> title [
 ]
 
 { #category : #'see class side' }
-Sokoban >> seeClassSide [ 
+MygSokoban >> seeClassSide [ 
 ]

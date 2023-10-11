@@ -10,11 +10,11 @@ BaselineOfMyg >> baseline: spec [
 	<baseline>
 	spec
 		baseline: 'Toplo'
-		with: [ spec repository: 'github://plantec/Toplo:573bdc3e26b9a93954889db16fed838452034a16/src' ].
+		with: [ spec repository: 'github://plantec/Toplo:8daf74a/src' ].
 
 	spec
 		baseline: 'Bloc'
-		with: [ spec repository: 'github://pharo-graphics/Bloc:05e5b0e385811719537f8cd89966b150a07be985/src' ].
+		with: [ spec repository: 'github://pharo-graphics/Bloc:v2.0.0-alpha/src' ].
 
 
 	spec baseline: 'ContainersArray2D' with: [

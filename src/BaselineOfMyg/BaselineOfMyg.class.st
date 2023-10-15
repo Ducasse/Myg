@@ -14,7 +14,7 @@ BaselineOfMyg >> baseline: spec [
 
 	spec
 		baseline: 'Bloc'
-		with: [ spec repository: 'github://pharo-graphics/Bloc:v2.0.0-alpha/src' ].
+		with: [ spec repository: 'github://pharo-graphics/Bloc:34b48bbf1d1c1776c5abe5d44e5a11165a17dd60/src' ].
 
 
 	spec baseline: 'ContainersArray2D' with: [

@@ -1,10 +1,10 @@
 # Myg
 
-Myg is a project containing games and providing tools to create other games
+Myg is a project containing games and providing tools to create other games.
 
 ## Loading the project 
 
-To load a stable version of this project with this snippet in Pharo 11:
+Load a stable version of Myg with the following snippet, in Pharo 11:
 
 ```Smalltalk
 Author fullName: 'No'.
@@ -14,7 +14,7 @@ Metacello new
 	load.
 ```
 
-Otherwise, you can load master branch, for development:
+For development, load master branch:
 
 ```Smalltalk
 Author fullName: 'No'.

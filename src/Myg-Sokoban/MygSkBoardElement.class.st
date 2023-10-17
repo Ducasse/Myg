@@ -106,17 +106,17 @@ MygSkBoardElement >> elementsToUpdateAtPosition: aPoint goingIn: aCpDirection [
 
 	| layer elements playerElement neighborElement nextNeighborElement |
 	layer := self foregroundLayer.
-	playerElement := (layer childNamed: aPoint asString) firstChild.
-	neighborElement := (layer childNamed:
+	playerElement := (layer childWithId: aPoint asString) firstChild.
+	neighborElement := (layer childWithId:
 		                    (aCpDirection * aPoint) asString) firstChild.
 	elements := {
 		            playerElement.
 		            neighborElement } asOrderedCollection.
 	(neighborElement board grid at: neighborElement positionInField)
 		class = MygSkWall ifFalse: [
-		nextNeighborElement := (layer childNamed:
-			                       (aCpDirection * (aCpDirection * aPoint))
-				                       asString) firstChild.
+		nextNeighborElement := (layer childWithId:
+			                        (aCpDirection * (aCpDirection * aPoint))
+				                        asString) firstChild.
 		elements add: nextNeighborElement ].
 	^ elements
 ]

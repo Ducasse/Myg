@@ -9,6 +9,7 @@ BaselineOfMyg >> baseline: spec [
 
 	<baseline>
 	spec
+
 		baseline: 'Bloc'
 		with: [ spec repository: 'github://pharo-graphics/Bloc:34b48bb/src' ].
 
@@ -21,6 +22,7 @@ BaselineOfMyg >> baseline: spec [
 		with: [
 			spec repository:
 				'github://pharo-containers/Containers-Array2D:master/src' ].
+
 
 	spec
 		package: 'MygCore'

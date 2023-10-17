@@ -26,6 +26,7 @@ Class {
 	#category : #'Myg-Sokoban-Toplo'
 }
 
+
 { #category : #'private - menu building' }
 Sokoban class >> menuBar [
 
@@ -36,6 +37,7 @@ Sokoban class >> menuBar [
 	bar border: (BlBorder paint: Color red).
 	^ bar
 ]
+
 
 { #category : #'private - menu building' }
 Sokoban class >> menuHelp [

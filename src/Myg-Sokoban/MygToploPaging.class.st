@@ -7,13 +7,19 @@ Class {
 { #category : #'accessing - structure variables' }
 MygToploPaging class >> buttonWithPack: aPack withManager: aManager andIndex: i [
 
-	| stream container button |
+	| stream container button previewForm |
 	stream := String streamContents: [ :out |
 		          out
 			          nextPutAll: 'Level ';
 			          print: i ].
-		
-	container := BlElement new layout: BlFrameLayout new; size: 150@150 ; addChild: (self previewForButtonWithPack: aPack at: i) .
+	" optimization to avoid having too much elements in a button "
+	previewForm := (self previewForButtonWithPack: aPack at: i) aeAsForm
+		               asElement.
+	previewForm constraintsDo: [ :c | c frame vertical alignCenter ].
+	container := BlElement new
+		             layout: BlFrameLayout new;
+		             size: 150 @ 150;
+		             addChild: previewForm.
 	button := ToButton new beVertical
 		          iconImage: container;
 		          labelText: stream;
@@ -29,6 +35,7 @@ MygToploPaging class >> buttonWithPack: aPack withManager: aManager andIndex: i 
 				          launchFromString: string
 				          inDictionary: aPack
 				          at: i ].
+
 	^ button
 ]
 
@@ -92,7 +99,7 @@ MygToploPaging class >> pagingPack: aPack managedBy: aManager [
 				c vertical fitContent ];
 			yourself.
 
-	1 to: "(MygSkGameManager perform: aPack asSymbol) size" 10 do: [ :i |
+	1 to: (MygSkGameManager perform: aPack asSymbol) size "10" do: [ :i |
 		grid addChild: (self buttonWithPack: aPack withManager: aManager andIndex: i ) as: i asString ].
 
 	root := grid asScrollableElement.

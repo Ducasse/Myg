@@ -11,6 +11,7 @@ Author fullName: 'No'.
 Metacello new
 	repository: 'github://Ducasse/Myg:v1.0.1/src';
 	baseline: 'Myg';
+	onConflictUseLoaded;
 	load.
 ```
 
@@ -21,6 +22,7 @@ Author fullName: 'No'.
 Metacello new
 	repository: 'github://Ducasse/Myg';
 	baseline: 'Myg';
+	onConflictUseLoaded;
 	load.
 ```
 

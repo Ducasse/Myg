@@ -9,32 +9,34 @@ BaselineOfMyg >> baseline: spec [
 
 	<baseline>
 	spec
-		baseline: 'Toplo'
-		with: [ spec repository: 'github://plantec/Toplo:573bdc3e26b9a93954889db16fed838452034a16/src' ].
+
+		baseline: 'Bloc'
+		with: [ spec repository: 'github://pharo-graphics/Bloc:34b48bb/src' ].
 
 	spec
-		baseline: 'Bloc'
-		with: [ spec repository: 'github://pharo-graphics/Bloc:05e5b0e385811719537f8cd89966b150a07be985/src' ].
+		baseline: 'Toplo'
+		with: [ spec repository: 'github://plantec/Toplo:8daf74a/src' ].
 
+	spec
+		baseline: 'ContainersArray2D'
+		with: [
+			spec repository:
+				'github://pharo-containers/Containers-Array2D:master/src' ].
 
-	spec baseline: 'ContainersArray2D' with: [
-		spec repository:
-			'github://pharo-containers/Containers-Array2D:master/src' ].
 
 	spec
 		package: 'MygCore'
-		with: [ spec requires: #( 'Bloc' 'Toplo' 'ContainersArray2D' ) ];
+			with: [ spec requires: #( 'Bloc' 'Toplo' 'ContainersArray2D' ) ];
 		package: 'MygCore-Tests' with: [ spec requires: #( 'MygCore' ) ];
 		package: 'Myg-Takuzu' with: [ spec requires: #( 'MygCore' ) ];
 		package: 'Myg-Takuzu-Tests'
-		with: [ spec requires: #( 'Myg-Takuzu' ) ];
+			with: [ spec requires: #( 'Myg-Takuzu' ) ];
 		package: 'Myg-MineSweeper' with: [ spec requires: #( 'MygCore' ) ];
 		package: 'Myg-MineSweeper-Tests'
-		with: [ spec requires: #( 'Myg-MineSweeper' ) ];
+			with: [ spec requires: #( 'Myg-MineSweeper' ) ];
 		package: 'Myg-Sokoban'
-		with: [ spec requires: #( 'MygCore' 'Myg-Compass' ) ];
+			with: [ spec requires: #( 'MygCore' 'Myg-Compass' ) ];
 		package: 'Myg-Sokoban-Tests'
-		with: [ spec requires: #( 'Myg-Sokoban' ) ];
-		package: 'Myg-Compass';
-		yourself
+			with: [ spec requires: #( 'Myg-Sokoban' ) ];
+		package: 'Myg-Compass'
 ]

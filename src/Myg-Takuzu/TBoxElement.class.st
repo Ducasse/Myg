@@ -113,10 +113,10 @@ TBoxElement >> lock [
 
 	| elt |
 	elt := BlElement new size: self size.
-	elt background: (self class lockIcon scaledToSize: self size) .
+	elt background: (self class lockIcon scaledToSize: self size).
 	self children
 		ifEmpty: [ self addChild: elt as: 'lock' ]
-		ifNotEmpty: [ self removeChildNamed: 'lock' ]
+		ifNotEmpty: [ self removeChildWithId: 'lock' ]
 ]
 
 { #category : #'as yet unclassified' }

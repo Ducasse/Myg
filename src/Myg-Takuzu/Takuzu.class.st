@@ -11,7 +11,7 @@ Class {
 	#category : #'Myg-Takuzu-UI'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - menu building' }
 Takuzu class >> menuBar [
 
 	| bar |
@@ -24,14 +24,13 @@ Takuzu class >> menuBar [
 	^ bar
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - menu building' }
 Takuzu class >> menuHelp [
 
 	| menu |
 	menu := ToMenu new.
-	menu label: (ToLabel text: 'Help').
-	menu icon:
-		(ToImage inner: (Smalltalk ui icons iconNamed: #glamorousHelp)).
+	menu labelText: 'Help'.
+	menu iconImage: (Smalltalk ui icons iconNamed: #glamorousHelp).
 	menu whenClickedDo: [
 		| container lab space |
 		lab := ToLabel text: ('How to play:
@@ -75,25 +74,26 @@ Have fun !' asRopedText foreground: Color white).
 	^ menu
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - menu building' }
 Takuzu class >> menuLevel [
 
 	| menu |
 	menu := ToMenu new.
-	menu label: (ToLabel text: 'Levels').
-	menu icon:
-		(ToImage inner: (Smalltalk ui icons iconNamed: #solidMenu)).
+	menu labelText: 'Levels'.
+	menu iconImage: (Smalltalk ui icons iconNamed: #solidMenu).
 
 	4 to: 12 by: 2 do: [ :index |
 		| subMenu |
-		subMenu := ToMenu new label:
-			           (ToLabel new text: (String streamContents: [ :out |
+		subMenu :=
+			ToMenu new
+				labelText: (String streamContents: [ :out |
 					             out
 						             print: index;
 						             nextPut: $x;
-						             print: index ])).
+						             print: index ]);
+				yourself.
 		1 to: 5 do: [ :i |
-			| stream selector tmp |
+			| stream selector |
 			stream := String streamContents: [ :out |
 				          out
 					          nextPutAll: 'Level';
@@ -105,45 +105,50 @@ Takuzu class >> menuLevel [
 					            print: index;
 					            nextPutAll: 'Grid';
 					            print: i ].
-			tmp := TBoardElement class selectors select: [ :each |
-				       each = selector ].
 			subMenu addItem:
-				((ToButtonMenuItem new labelText: stream) whenClickedDo: [
-					 TBoardElement openWithModel: (TBoard perform: selector asSymbol) ]) ].
+				(ToMenuItem new
+					labelText: stream;
+					whenClickedDo: [
+						TBoardElement openWithModel: (TBoard perform: selector asSymbol) ];
+					yourself) ].
 		menu addItem: subMenu ].
 
 	^ menu
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - menu building' }
 Takuzu class >> menuRandom [
 
 	| menu |
 	menu := ToMenu new.
-	menu label: (ToLabel text: 'Random').
-	menu icon:
-		(ToImage inner: (Smalltalk ui icons iconNamed: #solidMenu)).
+	menu labelText: 'Random'.
+	menu iconImage: (Smalltalk ui icons iconNamed: #solidMenu).
 	menu addItem:
-		((ToButtonMenuItem new labelText: '4x4') whenClickedDo: [
-			 TBoardElement launch4 ]).
+		(ToMenuItem new
+			labelText: '4x4';
+			whenClickedDo: [ TBoardElement launch4 ];
+			yourself).
 	menu addItem:
-		((ToButtonMenuItem new labelText: '6x6') whenClickedDo: [
-			 TBoardElement launch6 ]).
+		(ToMenuItem new
+			labelText: '6x6';
+			whenClickedDo: [ TBoardElement launch6 ];
+			yourself).
 	"menu addItem:
-		((ToButtonMenuItem new labelText: '8x8') whenClickedDo: [
+		(ToMenuItem new labelText: '8x8'; whenClickedDo: [
 			 TFieldElement launch8 ]).
 	menu addItem:
-		((ToButtonMenuItem new labelText: '10x10') whenClickedDo: [
+		(ToMenuItem new labelText: '10x10'; whenClickedDo: [
 			 TFieldElement launch10 ]).
 	menu addItem:
-		((ToButtonMenuItem new labelText: '12x12') whenClickedDo: [
+		(ToMenuItem new labelText: '12x12'; whenClickedDo: [
 			 TFieldElement launch12 ])."
 
 	^ menu
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #opening }
 Takuzu class >> open [
+	<script>
 
 	| space randomMenu levelMenu helpMenu bar title |
 	randomMenu := self menuRandom.
@@ -155,9 +160,8 @@ Takuzu class >> open [
 	bar addMenu: levelMenu.
 	bar addMenu: randomMenu.
 	bar addMenu: helpMenu.
+
 	space := BlSpace new.
-
-
 	space root addChild: title.
 	space root addChild: bar.
 	space extent: 300 @ 300.
@@ -180,4 +184,8 @@ Takuzu class >> title [
 			 c frame horizontal alignCenter.
 			 c frame vertical alignCenter ]).
 	^ title
+]
+
+{ #category : #'see class side' }
+Takuzu >> seeClassSide [
 ]

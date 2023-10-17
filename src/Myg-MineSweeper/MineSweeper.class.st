@@ -44,9 +44,8 @@ MineSweeper class >> menuHelp [
 
 	| menu |
 	menu := ToMenu new.
-	menu label: (ToLabel text: 'Help').
-	menu icon:
-		(ToImage inner: (Smalltalk ui icons iconNamed: #glamorousHelp)).
+	menu labelText: 'Help'.
+	menu iconImage: (Smalltalk ui icons iconNamed: #glamorousHelp).
 	menu whenClickedDo: [
 		| container lab space |
 		lab := ToLabel text: 'How to play:
@@ -84,30 +83,39 @@ Have fun !'.
 ]
 
 { #category : #'as yet unclassified' }
-MineSweeper class >> menuPlay [ 
-	|menu|
+MineSweeper class >> menuPlay [
+
+	| menu |
 	menu := ToMenu new.
-	menu label: (ToLabel text: 'Play').
-	menu icon:
-		(ToImage inner: (Smalltalk ui icons iconNamed: #solidMenu)).
+	menu labelText: 'Play'.
+	menu iconImage: (Smalltalk ui icons iconNamed: #solidMenu).
 	menu addItem:
-		((ToButtonMenuItem new labelText: 'Small') whenClickedDo: [
-			 MFieldElement launchSmall ]).
+		(ToMenuItem new
+			labelText: 'Small';
+			whenClickedDo: [ MFieldElement launchSmall ];
+			yourself).
 	menu addItem:
-		((ToButtonMenuItem new labelText: 'Regular') whenClickedDo: [
-			 MFieldElement launchRegular ]).
+		(ToMenuItem new
+			labelText: 'Regular';
+			whenClickedDo: [ MFieldElement launchRegular ];
+			yourself).
 	menu addItem:
-		((ToButtonMenuItem new labelText: 'Large') whenClickedDo: [
-			 MFieldElement launchLarge ]).
+		(ToMenuItem new
+			labelText: 'Large';
+			whenClickedDo: [ MFieldElement launchLarge ];
+			yourself).
 	menu addItem:
-		((ToButtonMenuItem new labelText: 'Very Large') whenClickedDo: [
-			 MFieldElement launchVeryLarge ]).
-		
+		(ToMenuItem new
+			labelText: 'Very Large';
+			whenClickedDo: [ MFieldElement launchVeryLarge ];
+			yourself).
+
 	^ menu
 ]
 
 { #category : #'instance creation' }
 MineSweeper class >> open [
+	<script>
 
 	| space playMenu helpMenu bar title |
 	playMenu := self menuPlay.

@@ -27,7 +27,7 @@ Class {
 }
 
 { #category : #'private - menu building' }
-MygSokoban class >> menuBar [
+Sokoban class >> menuBar [
 
 	| bar |
 	bar := ToMenuBar new
@@ -38,7 +38,7 @@ MygSokoban class >> menuBar [
 ]
 
 { #category : #'private - menu building' }
-MygSokoban class >> menuHelp [
+Sokoban class >> menuHelp [
 
 	| menu |
 	menu := ToMenu new.
@@ -96,7 +96,7 @@ Have fun !' asRopedText.
 ]
 
 { #category : #'private - menu building' }
-MygSokoban class >> menuLevel [
+Sokoban class >> menuLevel [
 
 	| menu manager subMenuMicroban subMenuLoma subMenuPack subMenuSasquatch subMenuSasquatchIII subMenuSasquatchIV subMenuSasquatchV subMenuSasquatchVI subMenuUAlberta |
 	menu := ToMenu new.
@@ -130,7 +130,7 @@ MygSokoban class >> menuLevel [
 ]
 
 { #category : #opening }
-MygSokoban class >> open [
+Sokoban class >> open [
 	<script>
 
 	| space container levelMenu helpMenu bar title paging |
@@ -160,7 +160,7 @@ MygSokoban class >> open [
 ]
 
 { #category : #'private - menu building' }
-MygSokoban class >> subMenuLoma: aManager [
+Sokoban class >> subMenuLoma: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new
@@ -183,7 +183,7 @@ MygSokoban class >> subMenuLoma: aManager [
 ]
 
 { #category : #'private - menu building' }
-MygSokoban class >> subMenuMicroban: aManager [
+Sokoban class >> subMenuMicroban: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new
@@ -206,7 +206,7 @@ MygSokoban class >> subMenuMicroban: aManager [
 ]
 
 { #category : #'private - menu building' }
-MygSokoban class >> subMenuPack: aManager [
+Sokoban class >> subMenuPack: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new
@@ -229,7 +229,7 @@ MygSokoban class >> subMenuPack: aManager [
 ]
 
 { #category : #'private - menu building' }
-MygSokoban class >> subMenuSasquatch: aManager [
+Sokoban class >> subMenuSasquatch: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new
@@ -252,7 +252,7 @@ MygSokoban class >> subMenuSasquatch: aManager [
 ]
 
 { #category : #'private - menu building' }
-MygSokoban class >> subMenuSasquatchIII: aManager [
+Sokoban class >> subMenuSasquatchIII: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new
@@ -275,7 +275,7 @@ MygSokoban class >> subMenuSasquatchIII: aManager [
 ]
 
 { #category : #'private - menu building' }
-MygSokoban class >> subMenuSasquatchIV: aManager [
+Sokoban class >> subMenuSasquatchIV: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new
@@ -298,7 +298,7 @@ MygSokoban class >> subMenuSasquatchIV: aManager [
 ]
 
 { #category : #'private - menu building' }
-MygSokoban class >> subMenuSasquatchV: aManager [
+Sokoban class >> subMenuSasquatchV: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new
@@ -321,7 +321,7 @@ MygSokoban class >> subMenuSasquatchV: aManager [
 ]
 
 { #category : #'private - menu building' }
-MygSokoban class >> subMenuSasquatchVI: aManager [
+Sokoban class >> subMenuSasquatchVI: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new
@@ -344,7 +344,7 @@ MygSokoban class >> subMenuSasquatchVI: aManager [
 ]
 
 { #category : #'private - menu building' }
-MygSokoban class >> subMenuTest: aManager [
+Sokoban class >> subMenuTest: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new
@@ -367,7 +367,7 @@ MygSokoban class >> subMenuTest: aManager [
 ]
 
 { #category : #'private - menu building' }
-MygSokoban class >> subMenuUAlberta: aManager [
+Sokoban class >> subMenuUAlberta: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new
@@ -390,7 +390,7 @@ MygSokoban class >> subMenuUAlberta: aManager [
 ]
 
 { #category : #accessing }
-MygSokoban class >> title [
+Sokoban class >> title [
 
 	| title |
 	title := BlElement new.
@@ -406,5 +406,5 @@ MygSokoban class >> title [
 ]
 
 { #category : #'see class side' }
-MygSokoban >> seeClassSide [ 
+Sokoban >> seeClassSide [ 
 ]

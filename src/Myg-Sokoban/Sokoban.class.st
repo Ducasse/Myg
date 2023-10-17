@@ -21,7 +21,7 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MygSokoban,
+	#name : #Sokoban,
 	#superclass : #Object,
 	#category : #'Myg-Sokoban-Toplo'
 }

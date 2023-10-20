@@ -139,7 +139,7 @@ MygSkBoardElement >> initialize [
 	super initialize.
 	self initializeDirectionDict.
 	self
-		background: (BlBackground paint: Color veryLightGray);
+		background: (BlBackground paint: Color transparent);
 		layout: BlFrameLayout new;
 		addEventHandlerOn: BlKeyDownEvent
 		do: [ :anEvent | self manageEvent: anEvent ];

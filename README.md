@@ -1,36 +1,48 @@
 # Myg
 
-Myg is a project containing games and providing tools to create other games
+Myg is a project containing games and providing tools to create other games.
 
 ## Loading the project 
 
-To load the project you can copy and execute this snippet in Pharo 11 :
+Load a stable version of Myg with the following snippet, in Pharo 11:
 
 ```Smalltalk
+Author fullName: 'No'.
 Metacello new
-		baseline: 'Bloc';
-		repository: 'github://pharo-graphics/Bloc:05e5b0e385811719537f8cd89966b150a07be985/src';
-	onConflictUseIncoming;
-	load;
-	lock.
-
-Metacello new
-	repository: 'github://Ducasse/Myg';
+	repository: 'github://Ducasse/Myg:v1.0.1/src';
 	baseline: 'Myg';
-	onConflictUseIncoming;
+	onConflictUseLoaded;
 	load.
 ```
 
+For development, load master branch:
+
+```Smalltalk
+Author fullName: 'No'.
+Metacello new
+	repository: 'github://Ducasse/Myg';
+	baseline: 'Myg';
+	onConflictUseLoaded;
+	load.
+```
+
+
 ## Playing Games
 
-There is currently 3 games in Myg :
+There are currently 3 games in Myg :
 
 - MineSweeper
 - Takuzu
 - Sokoban
 
-You can play each game by executing this snippet :
+You can play each game by executing these snippets :
 
 ```Smalltalk
-[Game name] open
+MineSweeper open
+```
+```Smalltalk
+Takuzu open
+```
+```Smalltalk
+Sokoban open
 ```

@@ -135,18 +135,18 @@ MBoxElement >> click: anAnnouncement [
 ]
 
 { #category : #'as yet unclassified' }
-MBoxElement >> explosion [
+MBoxElement >> explode [
 
 	| explosionCenter |
-	explosionCenter := self width / 2 @ (self height / 2).
+	explosionCenter := self position + ((self width / 2) @ (self height / 2)).
 
 	0 to: 359 by: 12 do: [ :angle |
 		| anElement relativeFinalPosition |
 		relativeFinalPosition := 0 @ 400
 			                         rotateBy: angle degreesToRadians
 			                         about: 0 @ 0.
-		anElement := self explosionStar.
-		self addChild: anElement.
+		anElement := self newExplosionStar.
+		self topMostParent addChild: anElement.
 		anElement
 			position: explosionCenter;
 			addAnimation: (BlTransformAnimation new
@@ -159,8 +159,82 @@ MBoxElement >> explosion [
 					 yourself) yourself ]
 ]
 
+{ #category : #accessing }
+MBoxElement >> field [
+
+	^ field
+]
+
+{ #category : #accessing }
+MBoxElement >> field: aMField [
+
+	field:= aMField.
+	self size: (75@75) * aMField magnifier
+]
+
+{ #category : #accessing }
+MBoxElement >> flag [
+
+	| pngElement |
+	self box isClickedBox ifTrue: [ ^ self ].
+	pngElement := BlElement new.
+	pngElement background: (self class flag scaledToSize: self size).
+
+	pngElement constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical matchParent ].
+
+	self box isFlagged
+		ifFalse: [ self addChild: pngElement as: 'png' ]
+		ifTrue: [ self removeChildNamed: 'png' ].
+	self box flag
+]
+
+{ #category : #initialization }
+MBoxElement >> initialize [
+
+	super initialize.
+	self background: self backgroundPaint.
+	self geometry: (BlRoundedRectangleGeometry cornerRadius: 5).
+
+	self clipChildren: false.
+
+	text := BlTextElement new.
+	self addChild: text.
+	text text: '' asRopedText.
+	self layout: BlFrameLayout new.
+
+	text constraintsDo: [ :c |
+		c frame vertical alignCenter.
+		c frame horizontal alignCenter ].
+
+	self addEventHandlerOn: BlMouseUpEvent do: [ :anEvent |
+		anEvent secondaryButtonPressed
+			ifTrue: [ self flag ]
+			ifFalse: [ self box isFlagged ifFalse: [ box click ] ] ]
+]
+
+{ #category : #initialization }
+MBoxElement >> initializeAnnouncements [
+
+	box announcer
+		when: MBoxClickAndReplaceAnnouncement
+		send: #click:
+		to: self.
+	box announcer
+		when: MBoxExplosionAnnouncement
+		send: #explode
+		to: self
+]
+
+{ #category : #accessing }
+MBoxElement >> mine [
+
+	self background: (self class mine scaledToSize: self size)
+]
+
 { #category : #'as yet unclassified' }
-MBoxElement >> explosionStar [
+MBoxElement >> newExplosionStar [
 
 	| outerSize innerSize numberOfPoints angleStep vertices |
 	outerSize := 20.
@@ -185,80 +259,6 @@ MBoxElement >> explosionStar [
 		  background: Color random;
 		  constraintsDo: [ :c | c ignoreByLayout ];
 		  yourself
-]
-
-{ #category : #accessing }
-MBoxElement >> field [ 
-	^field 
-]
-
-{ #category : #accessing }
-MBoxElement >> field: aMField [
-	field:= aMField.
-	self size: (75@75) * aMField magnifier.
-]
-
-{ #category : #accessing }
-MBoxElement >> flag [
-
-	| pngElement |
-	self box isClickedBox ifTrue: [ ^ self ].
-	pngElement := BlElement new.
-	pngElement background: (self class flag scaledToSize: self size).
-
-	pngElement constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical matchParent ].
-
-	self box isFlagged
-		ifFalse: [ self addChild: pngElement as: 'png' ]
-		ifTrue: [ self removeChildNamed: 'png' ].
-	self box flag.
-]
-
-{ #category : #initialization }
-MBoxElement >> initialize [
-
-	super initialize.
-	self background: self backgroundPaint.
-	self geometry: (BlRoundedRectangleGeometry cornerRadius: 5).
-
-	self clipChildren: false.
-
-	text := BlTextElement new.
-	self addChild: text.
-	text text: '' asRopedText.
-	self layout: BlFrameLayout new.
-
-	text constraintsDo: [ :c |
-		c frame vertical alignCenter.
-		c frame horizontal alignCenter ].
-
-	self addEventHandlerOn: BlMouseUpEvent do: [ :anEvent |
-		anEvent secondaryButtonPressed
-			ifTrue: [
-				self flag ]
-			ifFalse: [ self box isFlagged ifFalse: [ box click ] ] ]
-]
-
-{ #category : #initialization }
-MBoxElement >> initializeAnnouncements [
-
-	box announcer
-		when: MBoxClickAndReplaceAnnouncement
-		send: #click:
-		to: self.
-	box announcer
-		when: MBoxExplosionAnnouncement
-		send: #explosion
-		to: self
-]
-
-{ #category : #accessing }
-MBoxElement >> mine [
-
-
-	self background: (self class mine scaledToSize: self size).
 ]
 
 { #category : #accessing }

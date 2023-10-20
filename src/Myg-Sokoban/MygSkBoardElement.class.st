@@ -101,22 +101,22 @@ MygSkBoardElement >> directionDict [
 	^ directionDict
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 MygSkBoardElement >> elementsToUpdateAtPosition: aPoint goingIn: aCpDirection [
 
 	| layer elements playerElement neighborElement nextNeighborElement |
 	layer := self foregroundLayer.
-	playerElement := (layer childNamed: aPoint asString) firstChild.
-	neighborElement := (layer childNamed:
+	playerElement := (layer childWithId: aPoint asString) firstChild.
+	neighborElement := (layer childWithId:
 		                    (aCpDirection * aPoint) asString) firstChild.
 	elements := {
 		            playerElement.
 		            neighborElement } asOrderedCollection.
 	(neighborElement board grid at: neighborElement positionInField)
 		class = MygSkWall ifFalse: [
-		nextNeighborElement := (layer childNamed:
-			                       (aCpDirection * (aCpDirection * aPoint))
-				                       asString) firstChild.
+		nextNeighborElement := (layer childWithId:
+			                        (aCpDirection * (aCpDirection * aPoint))
+				                        asString) firstChild.
 		elements add: nextNeighborElement ].
 	^ elements
 ]
@@ -301,11 +301,9 @@ MygSkBoardElement >> manageEvent: anEvent [
 
 	| player moved direction neighborElement elements |
 	anEvent key name = #SPACE ifTrue: [
-		self resetBoard.
-		^ self ].
+		^ self resetBoard ].
 	anEvent key name = #ESCAPE ifTrue: [
-		self space close.
-		^ self ].
+		^ self space close ].
 	board isFinished ifTrue: [ ^ self ].
 	player := self board player.
 	direction := self directionDict
@@ -329,19 +327,18 @@ MygSkBoardElement >> manageEvent: anEvent [
 		ifFalse: [ self updateElements: elements ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #opening }
 MygSkBoardElement >> openWithModel: aSkBoard [
 
 	| space |
 	space := BlSpace new.
-	space pulse
-		extent: 1000 @ 1000;
+	space
+		extent: 500 asPoint;
 		resizable: false.
 	space root addChild: self.
 
 	self board: aSkBoard.
 
-	
 	space root background: Color red muchLighter.
 	space root layout: BlFrameLayout new.
 	space show
@@ -354,7 +351,7 @@ MygSkBoardElement >> resetBoard [
 	self board reset
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 MygSkBoardElement >> updateElements: anOrderedCollection [
 
 	anOrderedCollection do: [ :each | each boxForForeground updateBackgroundColor ]

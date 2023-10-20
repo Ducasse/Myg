@@ -47,7 +47,6 @@ MygToploPaging class >> levelPaging [
 		             background: Color lightRed darker;
 		             margin: (BlInsets all: 50).
 	manager := MygSkGameManager notebook: aNotebook.
-
 	scrollbar := BlVerticalScrollbarElement new.
 	scrollbar
 		constraintsDo: [ :c | c margin: (BlInsets right: 5) ];
@@ -120,19 +119,9 @@ MygToploPaging class >> pagingPack: aPack managedBy: aManager [
 { #category : #'as yet unclassified' }
 MygToploPaging class >> previewForButtonWithPack: aPack at: i [
 
-	| iconImage string board space elt |
-	iconImage := MygSkBoardElement new.
-	space := BlSpace new extent: 150 @ 150.
-	space root addChild: iconImage.
-
-	string := (MygSkGameManager perform: aPack asSymbol) at: i.
-	board := MygSkBoard createWithBoard:
-		         (MygSkGameManager importFromString: string).
-	iconImage boardPreview: board.
-	iconImage parent: nil.
-	elt := BlElement new
-		       background: Color purple;
-		       size: 150 @ 150.
+	| iconImage packName |
+	packName := aPack withoutPrefix: 'mazes'.
+	iconImage := ((MygResources packs at: packName) at: i) asElement.
 	^ iconImage
 ]
 

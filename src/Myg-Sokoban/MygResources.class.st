@@ -18,15 +18,15 @@ MygResources class >> initializePacks [
 
 	self packs: Dictionary new.
 	self packs
-		at: 'Loma' put: self setUpLomaPack;
-		at: 'Microban' put: self setUpMicrobanPack;
-		at: 'Pack' put: self setUpPackPack;
-		at: 'Sasquatch' put: self setUpSasquatchPack;
-		at: 'SasquatchIII' put: self setUpSasquatchIIIPack;
-		at: 'SasquatchIV' put: self setUpSasquatchIVPack;
-		at: 'SasquatchV' put: self setUpSasquatchVPack;
-		at: 'SasquatchVI' put: self setUpSasquatchVIPack;
-		at: 'UAlberta' put: self setUpUAlbertaPack
+		at: 'Loma' put: (self setUpPack: 'mazesLoma') ;
+		at: 'Microban' put: (self setUpPack: 'mazesMicroban') ;
+		at: 'Pack' put: (self setUpPack: 'mazesPack');
+		at: 'Sasquatch' put: (self setUpPack: 'mazesSasquatch' );
+		at: 'SasquatchIII' put: (self setUpPack: 'mazesSasquatchIII');
+		at: 'SasquatchIV' put: (self setUpPack: 'mazesSasquatchIV');
+		at: 'SasquatchV' put: (self setUpPack: 'mazesSasquatchV');
+		at: 'SasquatchVI' put: (self setUpPack: 'mazesSasquatchVI');
+		at: 'UAlberta' put: (self setUpPack: 'mazesUAlberta')
 ]
 
 { #category : #initialization }
@@ -58,118 +58,13 @@ MygResources class >> previewForButtonWithPack: aPack at: i [
 ]
 
 { #category : #initialization }
-MygResources class >> setUpLomaPack [
+MygResources class >> setUpPack: aPack [
 
-	| dict pack |
+	| dict |
 	dict := Dictionary new.
-	pack := 'mazesLoma'.
-	1 to: (MygSkGameManager perform: pack asSymbol) size do: [ :i |
+	1 to: (MygSkGameManager perform: aPack asSymbol) size do: [ :i |
 		| form |
-		form := (self previewForButtonWithPack: pack at: i) aeAsForm.
-		dict at: i put: form ].
-	^ dict
-]
-
-{ #category : #initialization }
-MygResources class >> setUpMicrobanPack [
-
-	| dict pack |
-	dict := Dictionary new.
-	pack := 'mazesMicroban'.
-	1 to: (MygSkGameManager perform: pack asSymbol) size do: [ :i |
-		| form |
-		form := (self previewForButtonWithPack: pack at: i) aeAsForm.
-		dict at: i put: form ].
-	^ dict
-]
-
-{ #category : #initialization }
-MygResources class >> setUpPackPack [
-
-	| dict pack |
-	dict := Dictionary new.
-	pack := 'mazesPack'.
-	1 to: (MygSkGameManager perform: pack asSymbol) size do: [ :i |
-		| form |
-		form := (self previewForButtonWithPack: pack at: i) aeAsForm.
-		dict at: i put: form ].
-	^ dict
-]
-
-{ #category : #initialization }
-MygResources class >> setUpSasquatchIIIPack [
-
-	| dict pack |
-	dict := Dictionary new.
-	pack := 'mazesSasquatchIII'.
-	1 to: (MygSkGameManager perform: pack asSymbol) size do: [ :i |
-		| form |
-		form := (self previewForButtonWithPack: pack at: i) aeAsForm.
-		dict at: i put: form ].
-	^ dict
-]
-
-{ #category : #initialization }
-MygResources class >> setUpSasquatchIVPack [
-
-	| dict pack |
-	dict := Dictionary new.
-	pack := 'mazesSasquatchIV'.
-	1 to: (MygSkGameManager perform: pack asSymbol) size do: [ :i |
-		| form |
-		form := (self previewForButtonWithPack: pack at: i) aeAsForm.
-		dict at: i put: form ].
-	^ dict
-]
-
-{ #category : #initialization }
-MygResources class >> setUpSasquatchPack [
-
-	| dict pack |
-	dict := Dictionary new.
-	pack := 'mazesSasquatch'.
-	1 to: (MygSkGameManager perform: pack asSymbol) size do: [ :i |
-		| form |
-		form := (self previewForButtonWithPack: pack at: i) aeAsForm.
-		dict at: i put: form ].
-	^ dict
-]
-
-{ #category : #initialization }
-MygResources class >> setUpSasquatchVIPack [
-
-	| dict pack |
-	dict := Dictionary new.
-	pack := 'mazesSasquatchVI'.
-	1 to: (MygSkGameManager perform: pack asSymbol) size do: [ :i |
-		| form |
-		form := (self previewForButtonWithPack: pack at: i) aeAsForm.
-		dict at: i put: form ].
-	^ dict
-]
-
-{ #category : #initialization }
-MygResources class >> setUpSasquatchVPack [
-
-	| dict pack |
-	dict := Dictionary new.
-	pack := 'mazesSasquatchV'.
-	1 to: (MygSkGameManager perform: pack asSymbol) size do: [ :i |
-		| form |
-		form := (self previewForButtonWithPack: pack at: i) aeAsForm.
-		dict at: i put: form ].
-	^ dict
-]
-
-{ #category : #initialization }
-MygResources class >> setUpUAlbertaPack [
-
-	| dict pack |
-	dict := Dictionary new.
-	pack := 'mazesUAlberta'.
-	1 to: (MygSkGameManager perform: pack asSymbol) size do: [ :i |
-		| form |
-		form := (self previewForButtonWithPack: pack at: i) aeAsForm.
+		form := (self previewForButtonWithPack: aPack at: i) aeAsForm.
 		dict at: i put: form ].
 	^ dict
 ]

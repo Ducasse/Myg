@@ -97,6 +97,19 @@ MgdRawCardElement >> flippedSide: aBlElement [
 ]
 
 { #category : #initialization }
+MgdRawCardElement >> initialize [
+
+	super initialize.
+	self size: 80 @ 80.
+	self background: self backgroundPaint.
+	self geometry:
+		(BlRoundedRectangleGeometry cornerRadius: self cornerRadius).
+	self drawBackSide.
+	self layout: BlFrameLayout new.
+	self addEventHandlerOn: BlClickEvent do: [ :anEvent | self click ].
+]
+
+{ #category : #initialization }
 MgdRawCardElement >> initializeAnnouncements [
 
 	card announcer

@@ -51,9 +51,9 @@ MygSkBoardElement class >> openWithModel: aSkBoard [
 ]
 
 { #category : #accessing }
-MygSkBoardElement >> backgroundLayer [ 
+MygSkBoardElement >> backgroundLayer [
 
-	^ backgroundLayer
+	^ backgroundLayer ifNil: [ self initializeBackgroundLayer  ]
 ]
 
 { #category : #accessing }
@@ -77,7 +77,8 @@ MygSkBoardElement >> board: aSkBoard [
 		c vertical fitContent ].
 	self
 		initializeBackgroundLayer;
-		initializeForegroundLayer
+		initializeForegroundLayer;
+		setLayers.
 ]
 
 { #category : #initialization }
@@ -90,8 +91,8 @@ MygSkBoardElement >> boardPreview: aSkBoard [
 		c horizontal matchParent.
 		c vertical fitContent ].
 	self
-		initializeBackgroundLayerPreview;
-		initializeForegroundLayerPreview.
+		initializeBackgroundLayer;
+		initializeForegroundLayer.
 	board := nil
 ]
 
@@ -149,67 +150,23 @@ MygSkBoardElement >> initialize [
 { #category : #accessing }
 MygSkBoardElement >> initializeBackgroundLayer [
 
-	| layer |
-	layer := BlElement new
-		         background: Color transparent;
-		         layout: (BlGridLayout horizontal
-				          columnCount: board width;
-				          cellSpacing: 2);
-		         constraintsDo: [ :c |
-			         c horizontal matchParent.
-			         c vertical matchParent ].
+	| layer boxSize |
+	layer := BlElement new background: Color lightGreen .
+	layer size: self space extent.
+	boxSize := self space extent / board width.
 	self addChild: layer.
 	self board do: [ :aBox |
-		| boxElement tmpBox container |
+		| boxElement tmpBox |
 		tmpBox := aBox.
 		(aBox class inheritsFrom: MygSkMovable) ifTrue: [
 			tmpBox := aBox background ].
-		boxElement := (MygSkBoxElement box: tmpBox)
-			              positionInField: aBox position;
-			              board: board.
-		container := BlElement new
-			             layout: BlSquaredLayout new;
-			             constraintsDo: [ :c |
-				             c frame vertical alignCenter.
-				             c horizontal matchParent.
-				             c vertical matchParent ];
-			             addChild: boxElement;
-			             clipChildren: false.
-		layer addChild: container.
-		boxElement updateBackgroundColor ].
-
-	self backgroundLayer: layer
-]
-
-{ #category : #accessing }
-MygSkBoardElement >> initializeBackgroundLayerPreview [
-
-	| layer |
-	layer := BlElement new
-		         background: Color transparent;
-		         layout: (BlGridLayout horizontal columnCount: board width);
-		         constraintsDo: [ :c |
-			         c horizontal matchParent.
-			         c vertical fitContent ].
-	self addChild: layer.
-	self board do: [ :aBox |
-		| boxElement tmpBox container |
-		tmpBox := aBox.
-		(aBox class inheritsFrom: MygSkMovable) ifTrue: [
-			tmpBox := aBox background ].
-		boxElement := (MygSkBoxElement box: tmpBox)
-			              positionInField: aBox position;
-			              board: board.
-		container := BlElement new
-			             layout: BlSquaredLayout new;
-			             constraintsDo: [ :c |
-				             c frame vertical alignCenter.
-				             c horizontal matchParent.
-				             c vertical fitContent ];
-			             addChild: boxElement;
-			             clipChildren: false.
-		layer addChild: container.
-		boxElement updateBackgroundColor ].
+		tmpBox class = MygSkGround ifFalse: [
+			boxElement := (MygSkBoxElement box: tmpBox)
+				              positionInField: aBox position;
+				              board: board.
+			layer addChild: boxElement.
+			boxElement position: boxSize * (boxElement positionInField - 1).
+			boxElement updateBackgroundColor ] ].
 
 	self backgroundLayer: layer
 ]
@@ -227,70 +184,22 @@ MygSkBoardElement >> initializeDirectionDict [
 { #category : #accessing }
 MygSkBoardElement >> initializeForegroundLayer [
 
-	| layer |
-	layer := BlElement new
-		         background: Color transparent;
-		         layout: (BlGridLayout horizontal
-				          columnCount: board width;
-				          cellSpacing: 2);
-		         constraintsDo: [ :c |
-			         c horizontal matchParent.
-			         c vertical fitContent ].
+	| layer boxSize |
+	layer := BlElement new background: Color transparent.
+	layer size: self space extent.
+	boxSize := self space extent / board width.
 	self addChild: layer.
 	self board do: [ :aBox |
-		| boxElement tmpBox container |
+		| boxElement tmpBox |
 		tmpBox := aBox.
-		(aBox class inheritsFrom: MygSkMovable) ifFalse: [
-			tmpBox := MygSkGround new ].
-		boxElement := (MygSkBoxElement box: tmpBox)
-			              positionInField: aBox position;
-			              board: board.
-		container := BlElement new
-			             layout: BlSquaredLayout new;
-			             constraintsDo: [ :c |
-				             c frame vertical alignCenter.
-				             c horizontal matchParent.
-				             c vertical fitContent ];
-			             addChild: boxElement;
-			clipChildren: false.
+		(aBox class inheritsFrom: MygSkMovable) ifTrue: [
+			boxElement := (MygSkBoxElement box: tmpBox)
+				              positionInField: aBox position;
+				              board: board.
 
-		layer addChild: container as: aBox position asString.
-		boxElement updateBackgroundColor ].
-
-	self foregroundLayer: layer
-]
-
-{ #category : #accessing }
-MygSkBoardElement >> initializeForegroundLayerPreview [
-
-	| layer |
-	layer := BlElement new
-		         background: Color transparent;
-		         layout: (BlGridLayout horizontal
-				          columnCount: board width);
-		         constraintsDo: [ :c |
-			         c horizontal matchParent.
-			         c vertical fitContent ].
-	self addChild: layer.
-	self board do: [ :aBox |
-		| boxElement tmpBox container |
-		tmpBox := aBox.
-		(aBox class inheritsFrom: MygSkMovable) ifFalse: [
-			tmpBox := MygSkGround new ].
-		boxElement := (MygSkBoxElement box: tmpBox)
-			              positionInField: aBox position;
-			              board: board.
-		container := BlElement new
-			             layout: BlSquaredLayout new;
-			             constraintsDo: [ :c |
-				             c frame vertical alignCenter.
-				             c horizontal matchParent.
-				             c vertical fitContent ];
-			             addChild: boxElement;
-			             clipChildren: false.
-
-		layer addChild: container as: aBox position asString.
-		boxElement updateBackgroundColor ].
+			layer addChild: boxElement as: aBox position asString.
+			boxElement position: boxSize * (boxElement positionInField - 1).
+			boxElement updateBackgroundColor ] ].
 
 	self foregroundLayer: layer
 ]
@@ -348,6 +257,18 @@ MygSkBoardElement >> resetBoard [
 
 	self space close.
 	self board reset
+]
+
+{ #category : #adding }
+MygSkBoardElement >> setLayers [
+
+	| boxSize center |
+	boxSize := self space extent / self board width.
+	center := self space extent / 2 - (self board height / 2 * boxSize).
+	"self backgroundLayer position: 0 @ center y.
+	self foregroundLayer position: 0 @ center y."
+	self position: 0 @ center y.
+	self halt
 ]
 
 { #category : #private }

@@ -139,7 +139,7 @@ MygSkBoardElement >> initialize [
 	super initialize.
 	self initializeDirectionDict.
 	self
-		background: (BlBackground paint: Color veryLightGray);
+		background: (BlBackground paint: Color transparent);
 		layout: BlFrameLayout new;
 		addEventHandlerOn: BlKeyDownEvent
 		do: [ :anEvent | self manageEvent: anEvent ];
@@ -157,7 +157,7 @@ MygSkBoardElement >> initializeBackgroundLayer [
 				          cellSpacing: 2);
 		         constraintsDo: [ :c |
 			         c horizontal matchParent.
-			         c vertical fitContent ].
+			         c vertical matchParent ].
 	self addChild: layer.
 	self board do: [ :aBox |
 		| boxElement tmpBox container |
@@ -172,9 +172,9 @@ MygSkBoardElement >> initializeBackgroundLayer [
 			             constraintsDo: [ :c |
 				             c frame vertical alignCenter.
 				             c horizontal matchParent.
-				             c vertical fitContent ];
+				             c vertical matchParent ];
 			             addChild: boxElement;
-			clipChildren: false.
+			             clipChildren: false.
 		layer addChild: container.
 		boxElement updateBackgroundColor ].
 
@@ -187,8 +187,7 @@ MygSkBoardElement >> initializeBackgroundLayerPreview [
 	| layer |
 	layer := BlElement new
 		         background: Color transparent;
-		         layout: (BlGridLayout horizontal
-				          columnCount: board width);
+		         layout: (BlGridLayout horizontal columnCount: board width);
 		         constraintsDo: [ :c |
 			         c horizontal matchParent.
 			         c vertical fitContent ].

@@ -182,12 +182,7 @@ MygSkBoxElement >> board: aSkBoard [
 
 	self
 		constraintsDo: [ :c | c horizontal matchParent ]
-		"addEventHandlerOn: BlElementBackgroundChangedEvent do: [ :evt |
-			self transformDo: [ :builder |
-					builder
-						topLeftOrigin;
-						scaleBy: evt currentTarget extent / self background image extent.
-					self halt ] ]"
+		
 ]
 
 { #category : #accessing }
@@ -204,8 +199,13 @@ MygSkBoxElement >> box: aSkElement [
 { #category : #'as yet unclassified' }
 MygSkBoxElement >> boxAnimationMovingInDirection: aCpDirection [
 
+	| size boardElement space |
+	boardElement := self topMostParent firstChild.
+	space := boardElement space.
+	size := space extent / boardElement board width
+	        - boardElement firstChild layout cellSpacing.
 	^ (BlTransformAnimation translate:
-		   aCpDirection * (0 @ 0) * self width) duration: 150 milliSeconds
+		   aCpDirection * (0 @ 0) * size) duration: 150 milliSeconds
 ]
 
 { #category : #accessing }

@@ -78,7 +78,7 @@ MygSkBoardElement >> board: aSkBoard [
 	self
 		initializeBackgroundLayer;
 		initializeForegroundLayer;
-		setLayers.
+		setLayers
 ]
 
 { #category : #initialization }
@@ -151,8 +151,13 @@ MygSkBoardElement >> initialize [
 MygSkBoardElement >> initializeBackgroundLayer [
 
 	| layer boxSize |
-	layer := BlElement new background: Color lightGreen .
-	layer size: self space extent.
+	layer := BlElement new
+		         background: Color transparent;
+		         clipChildren: false;
+		         constraintsDo: [ :c |
+			         c horizontal matchParent.
+			         c vertical fitContent ].
+	"layer size: self space extent."
 	boxSize := self space extent / board width.
 	self addChild: layer.
 	self board do: [ :aBox |
@@ -167,7 +172,7 @@ MygSkBoardElement >> initializeBackgroundLayer [
 			layer addChild: boxElement.
 			boxElement position: boxSize * (boxElement positionInField - 1).
 			boxElement updateBackgroundColor ] ].
-
+	"layer halt."
 	self backgroundLayer: layer
 ]
 
@@ -265,9 +270,9 @@ MygSkBoardElement >> setLayers [
 	| boxSize center |
 	boxSize := self space extent / self board width.
 	center := self space extent / 2 - (self board height / 2 * boxSize).
-	"self backgroundLayer position: 0 @ center y.
-	self foregroundLayer position: 0 @ center y."
-	self position: 0 @ center y.
+	self backgroundLayer position: 0 @ center y.
+	self foregroundLayer position: 0 @ center y.
+	self forceLayout.
 	self halt
 ]
 

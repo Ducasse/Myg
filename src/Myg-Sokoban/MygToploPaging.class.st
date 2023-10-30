@@ -13,8 +13,7 @@ MygToploPaging class >> buttonWithPack: aPack withManager: aManager andIndex: i 
 			          nextPutAll: 'Level ';
 			          print: i ].
 	" optimization to avoid having too much elements in a button "
-	previewForm := (self previewForButtonWithPack: aPack at: i) aeAsForm
-		               asElement.
+	previewForm := (self previewForButtonWithPack: aPack at: i).
 	previewForm constraintsDo: [ :c | c frame vertical alignCenter ].
 	container := BlElement new
 		             layout: BlFrameLayout new;

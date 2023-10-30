@@ -46,9 +46,10 @@ MygResources class >> previewForButtonWithPack: aPack at: i [
 
 	| iconImage string board space |
 	iconImage := MygSkBoardElement new.
-	space := BlSpace new extent: 150 @ 150.
+	space := BlSpace new
+		         extent: 150 @ 150;
+		         resizable: false.
 	space root addChild: iconImage.
-
 	string := (MygSkGameManager perform: aPack asSymbol) at: i.
 	board := MygSkBoard createWithBoard:
 		         (MygSkGameManager importFromString: string).

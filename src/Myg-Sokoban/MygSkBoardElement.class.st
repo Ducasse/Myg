@@ -83,15 +83,8 @@ MygSkBoardElement >> board: aSkBoard [
 { #category : #initialization }
 MygSkBoardElement >> boardPreview: aSkBoard [
 
-	board := aSkBoard.
+	self board: aSkBoard.
 	self loseFocus.
-	self constraintsDo: [ :c |
-		c frame vertical alignCenter.
-		c horizontal matchParent.
-		c vertical fitContent ].
-	self
-		initializeBackgroundLayer;
-		initializeForegroundLayer.
 	board := nil
 ]
 
@@ -167,6 +160,7 @@ MygSkBoardElement >> initializeBackgroundLayer [
 		tmpBox class = MygSkGround ifFalse: [
 			boxElement := (MygSkBoxElement box: tmpBox)
 				              positionInField: aBox position;
+				              layout: BlSquaredLayout new;
 				              board: board.
 			boxElement constraintsDo: [ :c |
 				c horizontal matchParent.
@@ -177,7 +171,7 @@ MygSkBoardElement >> initializeBackgroundLayer [
 					alignTopAt: aBox position y - 1 / board height;
 					weight: 1.0 / board height ].
 			layer addChild: boxElement.
-			boxElement updateBackgroundColor ] ].
+			boxElement updateBackgroundColor.] ].
 	self backgroundLayer: layer
 ]
 
@@ -210,6 +204,7 @@ MygSkBoardElement >> initializeForegroundLayer [
 		(aBox class inheritsFrom: MygSkMovable) ifTrue: [
 			boxElement := (MygSkBoxElement box: tmpBox)
 				              positionInField: aBox position;
+				              layout: BlSquaredLayout new;
 				              board: board.
 			boxElement constraintsDo: [ :c |
 				c horizontal matchParent.

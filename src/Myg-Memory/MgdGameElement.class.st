@@ -35,7 +35,7 @@ MgdGameElement class >> openWithNumbers [
 MgdGameElement >> initialize [
 
 	super initialize.
-	self background: Color veryLightGray.
+	self background: Color lightOrange.
 	self layout: (BlGridLayout horizontal cellSpacing: 20).
 	self constraintsDo: [ :c |
 		c horizontal fitContent.

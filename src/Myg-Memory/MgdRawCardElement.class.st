@@ -29,7 +29,7 @@ MgdRawCardElement >> backSide: aBlElement [
 
 { #category : #'visual properties' }
 MgdRawCardElement >> backgroundPaint [ 
-	^ Color lightGray 
+	^ Color lightGreen  
 ]
 
 { #category : #'visual properties' }
@@ -102,6 +102,7 @@ MgdRawCardElement >> initialize [
 	super initialize.
 	self size: 80 @ 80.
 	self background: self backgroundPaint.
+	self border: (BlBorder paint: Color lightGray width: 2).
 	self geometry:
 		(BlRoundedRectangleGeometry cornerRadius: self cornerRadius).
 	self drawBackSide.
@@ -145,7 +146,7 @@ MgdRawCardElement >> initializeFirstLine [
 
 	| line |
 	line := BlElement new
-		        border: (BlBorder paint: Color lightGreen width: 3);
+		        border: (BlBorder paint: Color lightOrange width: 3);
 		        geometry: BlLineGeometry new;
 		        outskirts: BlOutskirts centered.
 	line when: BlElementLayoutComputedEvent do: [ :e | line geometry from: 0 @ 0 to: line parent extent ].
@@ -160,7 +161,6 @@ MgdRawCardElement >> initializeFlippedSide [
 	elt := BlTextElement new text: self card symbol asRopedText.
 	elt text fontName: 'Source Sans Pro'.
 	elt text fontSize: 50.
-	elt text foreground: Color white.
 	elt constraintsDo: [ :c |
 		c frame horizontal alignCenter.
 		c frame vertical alignCenter ].
@@ -172,7 +172,7 @@ MgdRawCardElement >> initializeSecondLine [
 
 	| line |
 	line := BlElement new
-		        border: (BlBorder paint: Color lightGreen width: 3);
+		        border: (BlBorder paint: Color lightOrange width: 3);
 		        geometry: BlLineGeometry new;
 		        outskirts: BlOutskirts centered.
 	

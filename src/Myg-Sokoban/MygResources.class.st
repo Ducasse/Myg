@@ -16,12 +16,11 @@ MygResources class >> initialize [
 { #category : #initialization }
 MygResources class >> initializePacks [
 
-	self packs: Dictionary new.
-	self packs
-		at: 'Loma' put: (self setUpPack: 'mazesLoma') ;
-		at: 'Microban' put: (self setUpPack: 'mazesMicroban') ;
+	packs := Dictionary new
+		at: 'Loma' put: (self setUpPack: 'mazesLoma');
+		at: 'Microban' put: (self setUpPack: 'mazesMicroban');
 		at: 'Pack' put: (self setUpPack: 'mazesPack');
-		at: 'Sasquatch' put: (self setUpPack: 'mazesSasquatch' );
+		at: 'Sasquatch' put: (self setUpPack: 'mazesSasquatch');
 		at: 'SasquatchIII' put: (self setUpPack: 'mazesSasquatchIII');
 		at: 'SasquatchIV' put: (self setUpPack: 'mazesSasquatchIV');
 		at: 'SasquatchV' put: (self setUpPack: 'mazesSasquatchV');
@@ -33,12 +32,6 @@ MygResources class >> initializePacks [
 MygResources class >> packs [
 
 	^ packs
-]
-
-{ #category : #initialization }
-MygResources class >> packs: aDictionary [
-
-	packs := aDictionary
 ]
 
 { #category : #initialization }

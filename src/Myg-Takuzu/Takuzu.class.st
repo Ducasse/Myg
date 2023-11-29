@@ -84,33 +84,29 @@ Takuzu class >> menuLevel [
 
 	4 to: 12 by: 2 do: [ :index |
 		| subMenu |
-		subMenu :=
-			ToMenu new
-				labelText: (String streamContents: [ :out |
-					             out
-						             print: index;
-						             nextPut: $x;
-						             print: index ]);
-				yourself.
+		subMenu := ToMenu new
+			           labelText: (String streamContents: [ :out |
+						            out
+							            print: index;
+							            nextPut: $x;
+							            print: index ]);
+			           yourself.
 		1 to: 5 do: [ :i |
-			| stream selector |
+			| stream levelString |
 			stream := String streamContents: [ :out |
 				          out
 					          nextPutAll: 'Level';
 					          space;
 					          print: i ].
-			selector := String streamContents: [ :out |
-				            out
-					            nextPutAll: 'level';
-					            print: index;
-					            nextPutAll: 'Grid';
-					            print: i ].
-			subMenu addItem:
-				(ToMenuItem new
-					labelText: stream;
-					whenClickedDo: [
-						TBoardElement openWithModel: (TBoard perform: selector asSymbol) ];
-					yourself) ].
+
+			levelString := (TBoard levels at: index) at: i.
+
+
+			subMenu addItem: (ToMenuItem new
+					 labelText: stream;
+					 whenClickedDo: [
+						 TBoardElement openWithModel: (TBoard level: levelString) ];
+					 yourself) ].
 		menu addItem: subMenu ].
 
 	^ menu

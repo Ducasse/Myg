@@ -1,6 +1,9 @@
 Class {
 	#name : #TBoard,
 	#superclass : #MygBoard,
+	#classInstVars : [
+		'levels'
+	],
 	#category : #'Myg-Takuzu-Core'
 }
 
@@ -47,11 +50,40 @@ TBoard class >> gridForTest [
 			   yourself)
 ]
 
-{ #category : #level10 }
-TBoard class >> level10Grid1 [
+{ #category : #'class initialization' }
+TBoard class >> initialize [ 
+	self initializeLevels 
+]
 
-	| level |
-	level := '_11__1__1_
+{ #category : #'class initialization' }
+TBoard class >> initializeLevels [
+
+	levels := Dictionary new
+		          at: 4 put: self levels4x4;
+		          at: 6 put: self levels6x6;
+		          at: 8 put: self levels8x8;
+		          at: 10 put: self levels10x10;
+		          at: 12 put: self levels12x12;
+		yourself
+]
+
+{ #category : #accessing }
+TBoard class >> level: aString [ 
+
+	^ self configureGrid:
+		  (MygLevelImporter fromString: aString fromPackage: self package)
+]
+
+{ #category : #accessing }
+TBoard class >> levels [ 
+	^ levels
+]
+
+{ #category : #levels }
+TBoard class >> levels10x10 [
+
+	^ IdentityDictionary new
+		  at: 1 put: '_11__1__1_
 _10__10_0_
 ___0______
 __1______1
@@ -60,18 +92,8 @@ ___0_10___
 1_1_____0_
 __1______0
 _0____1_1_
-1______11_'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level10 }
-TBoard class >> level10Grid2 [
-
-	| level |
-	level := '0_0__01_10
+1______11_';
+		  at: 2 put: '0_0__01_10
 _________1
 _1________
 _0_____1_0
@@ -80,18 +102,8 @@ ____11____
 _00______0
 ____0_____
 __0__1____
-_0__0_0___'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level10 }
-TBoard class >> level10Grid3 [
-
-	| level |
-	level := '_1______10
+_0__0_0___';
+		  at: 3 put: '_1______10
 ___1_1_0__
 __1_11____
 ____1____0
@@ -100,18 +112,8 @@ _0_____00_
 ___10_____
 11_____11_
 _____11___
-___0____1_'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level10 }
-TBoard class >> level10Grid4 [
-
-	| level |
-	level := '0_0___1___
+___0____1_';
+		  at: 4 put: '0_0___1___
 1_1___11__
 ____1_0_0_
 __00______
@@ -120,18 +122,8 @@ _11______1
 ____1__00_
 01___0_0__
 _____1__1_
-1_1_1_____'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level10 }
-TBoard class >> level10Grid5 [
-
-	| level |
-	level := '01_1______
+1_1_1_____';
+		  at: 5 put: '01_1______
 _00__0____
 ___01__1__
 0_____0___
@@ -140,18 +132,15 @@ _10_1____1
 ______1__0
 _0________
 __1___1_1_
-___0__1_1_'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
+___0__1_1_';
+		  yourself
 ]
 
-{ #category : #level12 }
-TBoard class >> level12Grid1 [
+{ #category : #levels }
+TBoard class >> levels12x12 [
 
-	| level |
-	level := '_1__11______
+	^ IdentityDictionary new
+		  at: 1 put: '_1__11______
 __11___1____
 11_________1
 __00___0_0__
@@ -162,18 +151,8 @@ ___1____0_1_
 1___0__0_1__
 __0_01_____0
 _______0__01
-____1__11___'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level12 }
-TBoard class >> level12Grid2 [
-
-	| level |
-	level := '_____0______
+____1__11___';
+		  at: 2 put: '_____0______
 0___1______1
 __1___1__0_1
 __11__1_____
@@ -184,18 +163,8 @@ _10____11__0
 _1___1____0_
 ______11_1__
 0__0_______0
-1______00___'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level12 }
-TBoard class >> level12Grid3 [
-
-	| level |
-	level := '0_01__01___1
+1______00___';
+		  at: 3 put: '0_01__01___1
 0____1_1__1_
 _0_0_____0__
 ___0___0_00_
@@ -206,18 +175,8 @@ _0_________1
 __1____1__1_
 0__0____1___
 _____0_0_0_1
-__0___1_____'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level12 }
-TBoard class >> level12Grid4 [
-
-	| level |
-	level := '__1_______0_
+__0___1_____';
+		  at: 4 put: '__1_______0_
 _0______1___
 ____1_00_0__
 __0_1_______
@@ -228,18 +187,8 @@ _1_1______1_
 ____0_0__0__
 11_0________
 ___1_1__00__
-1_0__1____0_'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level12 }
-TBoard class >> level12Grid5 [
-
-	| level |
-	level := '__1_1__0____
+1_0__1____0_';
+		  at: 5 put: '__1_1__0____
 ___0_0_0___0
 1________1__
 _0___1_0___0
@@ -250,251 +199,118 @@ ___0_01_10__
 0_____1_____
 __10__1_1___
 1___1__0__0_
-_____1____0_'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
+_____1____0_';
+		  yourself
 ]
 
-{ #category : #level4 }
-TBoard class >> level4Grid1 [
+{ #category : #levels }
+TBoard class >> levels4x4 [
 
-	| level |
-	level := '_1_1
+	^ IdentityDictionary new
+		  at: 1 put: '_1_1
 _00_
 0___
-____'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level4 }
-TBoard class >> level4Grid2 [
-
-	| level |
-	level := '___0
+____';
+		  at: 2 put: '___0
 _0_0
 ____
-_00_'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level4 }
-TBoard class >> level4Grid3 [
-
-	| level |
-	level := '1___
+_00_';
+		  at: 3 put: '1___
 _1__
 _10_
-___0'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level4 }
-TBoard class >> level4Grid4 [
-
-	| level |
-	level := '1___
+___0';
+		  at: 4 put: '1___
 1__1
 _0__
-____'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level4 }
-TBoard class >> level4Grid5 [
-
-	| level |
-	level := '_1_1
+____';
+		  at: 5 put: '_1_1
 _10_
 ____
-___0'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
+___0'; yourself
 ]
 
-{ #category : #level6 }
-TBoard class >> level6Grid1 [
+{ #category : #levels }
+TBoard class >> levels6x6 [
 
-	| level |
-	level := '______
+	^ IdentityDictionary new
+		  at: 1 put: '______
 _0_00_
 11__1_
 __0__0
 ______
-____1_'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level6 }
-TBoard class >> level6Grid2 [
-
-	| level |
-	level := '______
+____1_';
+		  at: 2 put: '______
 1_11__
 ___1__
 0____0
 0_____
-_0____'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level6 }
-TBoard class >> level6Grid3 [
-
-	| level |
-	level := '___0__
+_0____';
+		  at: 3 put: '___0__
 1_____
 _11___
 ____1_
 1___0_
-_11___'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level6 }
-TBoard class >> level6Grid4 [
-
-	| level |
-	level := '0____1
+_11___';
+		  at: 4 put: '0____1
 01_1__
 ____1_
 1__11_
 ______
-______'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level6 }
-TBoard class >> level6Grid5 [
-
-	| level |
-	level := '_____0
+______';
+		  at: 5 put: '_____0
 _1__0_
 _11_0_
 ______
 ___1__
-___1__'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
+___1__';
+		  yourself
 ]
 
-{ #category : #level8 }
-TBoard class >> level8Grid1 [
+{ #category : #levels }
+TBoard class >> levels8x8 [
 
-	| level |
-	level := '0__0____
+	^ IdentityDictionary new
+		  at: 1 put: '0__0____
 0______0
 __00____
 _1______
 _____0_0
 __0__00_
 _0______
-11___10_'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level8 }
-TBoard class >> level8Grid2 [
-
-	| level |
-	level := '____1___
+11___10_';
+		  at: 2 put: '____1___
 _1______
 0______1
 __0_1___
 _1_0_0_1
 ________
 __00____
-_1______'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level8 }
-TBoard class >> level8Grid3 [
-
-	| level |
-	level := '__11____
+_1______';
+		  at: 3 put: '__11____
 1_0__1__
 ___0___1
 __00___1
 00______
 ________
 __11__01
-______0_'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level8 }
-TBoard class >> level8Grid4 [
-
-	| level |
-	level := '__11____
+______0_';
+		  at: 4 put: '__11____
 ________
 _00__0_0
 ___0_0__
 1_1_____
 ________
 10__11__
-___1____'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
-]
-
-{ #category : #level8 }
-TBoard class >> level8Grid5 [
-
-	| level |
-	level := '___0___1
+___1____';
+		  at: 5 put: '___0___1
 __0_____
 0_00__0_
 ____11_0
 1______0
 ____0_0_
 ________
-0_____01'.
-
-
-	^ self configureGrid:
-		  (MygLevelImporter fromString: level fromPackage: self package)
+0_____01';
+		  yourself
 ]
 
 { #category : #'instance creation' }

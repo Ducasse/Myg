@@ -69,7 +69,7 @@ Memory class >> menuPlay [
 	menu addItem:
 		(ToMenuItem new
 			labelText: 'Small';
-			whenClickedDo: [ MgdGameElement openWithNumbers ];
+			whenClickedDo: [ MgdBoardElement openWithNumbers ];
 			yourself).
 
 	^ menu

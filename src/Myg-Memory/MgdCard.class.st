@@ -1,6 +1,6 @@
 Class {
-	#name : #MgdCardModel,
-	#superclass : #Object,
+	#name : #MgdCard,
+	#superclass : #MygAbstractBox,
 	#instVars : [
 		'symbol',
 		'flipped',
@@ -10,45 +10,45 @@ Class {
 }
 
 { #category : #accessing }
-MgdCardModel >> announcer [  
+MgdCard >> announcer [  
 
 	^ announcer ifNil: [ announcer := Announcer new ]
 ]
 
 { #category : #actions }
-MgdCardModel >> disappear [ 
+MgdCard >> disappear [ 
 	self notifyDisappear 
 ]
 
 { #category : #actions }
-MgdCardModel >> flip [ 
+MgdCard >> flip [ 
 	flipped := flipped not.
 	self notifyFlipped
 ]
 
 { #category : #initialization }
-MgdCardModel >> initialize [ 
+MgdCard >> initialize [ 
 	super initialize.
 	flipped := false
 ]
 
 { #category : #testing }
-MgdCardModel >> isFlipped [ 
+MgdCard >> isFlipped [ 
 	^ flipped 
 ]
 
 { #category : #notifying }
-MgdCardModel >> notifyDisappear [ 
+MgdCard >> notifyDisappear [ 
 	self announcer announce: MgdCardDisappearAnnouncement new
 ]
 
 { #category : #notifying }
-MgdCardModel >> notifyFlipped [ 
+MgdCard >> notifyFlipped [ 
 	self announcer announce: MgdCardFlipBackAnnouncement new
 ]
 
 { #category : #printing }
-MgdCardModel >> printOn: aStream [ 
+MgdCard >> printOn: aStream [ 
 	aStream 
 		nextPutAll: 'Card';
 		nextPut: Character space;
@@ -58,11 +58,11 @@ MgdCardModel >> printOn: aStream [
 ]
 
 { #category : #accessing }
-MgdCardModel >> symbol [
+MgdCard >> symbol [
 	^ symbol 
 ]
 
 { #category : #accessing }
-MgdCardModel >> symbol: aCharacter [
+MgdCard >> symbol: aCharacter [
 	symbol := aCharacter 
 ]

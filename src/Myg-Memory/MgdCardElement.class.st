@@ -1,5 +1,5 @@
 Class {
-	#name : #MgdRawCardElement,
+	#name : #MgdCardElement,
 	#superclass : #BlElement,
 	#instVars : [
 		'card',
@@ -10,67 +10,67 @@ Class {
 }
 
 { #category : #accessing }
-MgdRawCardElement class >> card: aMgdCardModel [
+MgdCardElement class >> card: aMgdCardModel [
 
 	^ self new card: aMgdCardModel
 ]
 
 { #category : #accessing }
-MgdRawCardElement >> backSide [
+MgdCardElement >> backSide [
 
 	^ backSide ifNil: [ self initializeBackSide ]
 ]
 
 { #category : #accessing }
-MgdRawCardElement >> backSide: aBlElement [
+MgdCardElement >> backSide: aBlElement [
 
 	backSide := aBlElement 
 ]
 
 { #category : #'visual properties' }
-MgdRawCardElement >> backgroundPaint [ 
+MgdCardElement >> backgroundPaint [ 
 	^ Color lightGreen  
 ]
 
 { #category : #'visual properties' }
-MgdRawCardElement >> card [ 
+MgdCardElement >> card [ 
 	^ card 
 ]
 
 { #category : #'visual properties' }
-MgdRawCardElement >> card: aMgdCard [
+MgdCardElement >> card: aMgdCard [
 
 	card := aMgdCard.
 	self initializeAnnouncements 
 ]
 
 { #category : #public }
-MgdRawCardElement >> click [
+MgdCardElement >> click [
 
-	self parent memoryGame chooseCard: self card.
+	self card board chooseCard: self card.
 	self drawCardElement
 ]
 
 { #category : #accessing }
-MgdRawCardElement >> cornerRadius [ 
+MgdCardElement >> cornerRadius [ 
 	^ 10
 ]
 
 { #category : #actions }
-MgdRawCardElement >> disappear [ 
+MgdCardElement >> disappear [ 
 
 	self visibility: BlVisibility hidden
 ]
 
 { #category : #drawing }
-MgdRawCardElement >> drawBackSide [
+MgdCardElement >> drawBackSide [
 
 	self removeChildren.
 	self addChild: self backSide.
 ]
 
 { #category : #drawing }
-MgdRawCardElement >> drawCardElement [
+MgdCardElement >> drawCardElement [
 
 	self card isFlipped
 		  ifTrue: [ self drawFlippedSide ]
@@ -78,26 +78,26 @@ MgdRawCardElement >> drawCardElement [
 ]
 
 { #category : #drawing }
-MgdRawCardElement >> drawFlippedSide [
+MgdCardElement >> drawFlippedSide [
 
 	self removeChildren.
 	self addChild: self flippedSide
 ]
 
 { #category : #accessing }
-MgdRawCardElement >> flippedSide [
+MgdCardElement >> flippedSide [
 
 	^ flippedSide ifNil: [ self initializeFlippedSide ]
 ]
 
 { #category : #accessing }
-MgdRawCardElement >> flippedSide: aBlElement [
+MgdCardElement >> flippedSide: aBlElement [
 
 	flippedSide := aBlElement 
 ]
 
 { #category : #initialization }
-MgdRawCardElement >> initialize [
+MgdCardElement >> initialize [
 
 	super initialize.
 	self size: 80 @ 80.
@@ -111,7 +111,7 @@ MgdRawCardElement >> initialize [
 ]
 
 { #category : #initialization }
-MgdRawCardElement >> initializeAnnouncements [
+MgdCardElement >> initializeAnnouncements [
 
 	card announcer
 		when: MgdCardDisappearAnnouncement
@@ -124,7 +124,7 @@ MgdRawCardElement >> initializeAnnouncements [
 ]
 
 { #category : #initialization }
-MgdRawCardElement >> initializeBackSide [
+MgdCardElement >> initializeBackSide [
 
 	| firstLine secondLine cross |
 	firstLine := self initializeFirstLine.
@@ -142,7 +142,7 @@ MgdRawCardElement >> initializeBackSide [
 ]
 
 { #category : #initialization }
-MgdRawCardElement >> initializeFirstLine [
+MgdCardElement >> initializeFirstLine [
 
 	| line |
 	line := BlElement new
@@ -155,7 +155,7 @@ MgdRawCardElement >> initializeFirstLine [
 ]
 
 { #category : #initialization }
-MgdRawCardElement >> initializeFlippedSide [
+MgdCardElement >> initializeFlippedSide [
 
 	| elt |
 	elt := BlTextElement new text: self card symbol asRopedText.
@@ -168,7 +168,7 @@ MgdRawCardElement >> initializeFlippedSide [
 ]
 
 { #category : #initialization }
-MgdRawCardElement >> initializeSecondLine [
+MgdCardElement >> initializeSecondLine [
 
 	| line |
 	line := BlElement new

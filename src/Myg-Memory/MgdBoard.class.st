@@ -1,6 +1,6 @@
 Class {
-	#name : #MgdGameModel,
-	#superclass : #Object,
+	#name : #MgdBoard,
+	#superclass : #MygBoard,
 	#instVars : [
 		'availableCards',
 		'chosenCards'
@@ -9,22 +9,22 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MgdGameModel class >> numbers [ 
+MgdBoard class >> numbers [ 
 	^ self new initializeForSymbols: { $1. $2. $3. $4. $5. $6. $7. $8 }
 ]
 
 { #category : #accessing }
-MgdGameModel >> availableCards [ 
+MgdBoard >> availableCards [ 
 	^ availableCards 
 ]
 
 { #category : #accessing }
-MgdGameModel >> cardsCount [ 
+MgdBoard >> cardsCount [ 
 	^ self gridSize * self gridSize 
 ]
 
 { #category : #accessing }
-MgdGameModel >> chooseCard: aCard [
+MgdBoard >> chooseCard: aCard [
 
 	(self chosenCards includes: aCard) ifTrue: [ ^ self ].
 	self chosenCards add: aCard.
@@ -34,7 +34,7 @@ MgdGameModel >> chooseCard: aCard [
 ]
 
 { #category : #asserting }
-MgdGameModel >> chosenCardMatch [ 
+MgdBoard >> chosenCardMatch [ 
 
 	|firstCard|
 	firstCard := self chosenCards first.
@@ -42,30 +42,30 @@ MgdGameModel >> chosenCardMatch [
 ]
 
 { #category : #accessing }
-MgdGameModel >> chosenCards [ 
+MgdBoard >> chosenCards [ 
 	^chosenCards 
 ]
 
 { #category : #asserting }
-MgdGameModel >> completeStep [ 
+MgdBoard >> completeStep [ 
 
 	self chosenCards do: [ :aCard | aCard disappear ];
 	removeAll
 ]
 
 { #category : #'as yet unclassified' }
-MgdGameModel >> extractCardFromAnnouncement: anAnnouncement [ 
+MgdBoard >> extractCardFromAnnouncement: anAnnouncement [ 
 
 	self chooseCard: anAnnouncement card
 ]
 
 { #category : #accessing }
-MgdGameModel >> gridSize [ 
+MgdBoard >> gridSize [ 
 	^ 4 
 ]
 
 { #category : #initialization }
-MgdGameModel >> initialize [
+MgdBoard >> initialize [
 
 	super initialize.
 	availableCards := OrderedCollection new.
@@ -73,28 +73,31 @@ MgdGameModel >> initialize [
 ]
 
 { #category : #accessing }
-MgdGameModel >> initializeForSymbols: characters [
+MgdBoard >> initializeForSymbols: characters [
 
+	| array |
 	self
 		assert: [ characters size = (self cardsCount / self matchesCount) ]
 		description: [
 			'Amount of characters must be equal to possible
           all combinations' ].
-	availableCards := (characters asArray collect: [ :aSymbol |
+	array := (characters asArray collect: [ :aSymbol |
 		                   (1 to: self matchesCount) collect: [ :i |
 			                   | card |
-			                   card := MgdCardModel new
+			                   card := MgdCard new
 				                   symbol: aSymbol ] ]) flattened shuffled
-		                  asOrderedCollection
+		                  asOrderedCollection.
+	self configureGrid: (CTNewArray2D fromArray: array width: self gridSize)
+
 ]
 
 { #category : #accessing }
-MgdGameModel >> matchesCount [ 
+MgdBoard >> matchesCount [ 
 	^ 2
 ]
 
 { #category : #asserting }
-MgdGameModel >> resetStep [ 
+MgdBoard >> resetStep [ 
 
 	|lastCard|
 	lastCard := self chosenCards last.
@@ -105,13 +108,13 @@ MgdGameModel >> resetStep [
 ]
 
 { #category : #asserting }
-MgdGameModel >> shouldCompleteStep [ 
+MgdBoard >> shouldCompleteStep [ 
 
 	^ self chosenCards size = self matchesCount
 	and: [ self chosenCardMatch ]
 ]
 
 { #category : #asserting }
-MgdGameModel >> shouldResetStep [ 
+MgdBoard >> shouldResetStep [ 
 	^ self chosenCards size > self matchesCount 
 ]

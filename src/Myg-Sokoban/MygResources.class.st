@@ -47,7 +47,7 @@ MygResources class >> previewForButtonWithPack: aPack at: i [
 	| iconImage string board space |
 	iconImage := MygSkBoardElement new.
 	space := BlSpace new
-		         extent: 150 @ 150;
+		         extent: 1000 @ 1000;
 		         resizable: false.
 	space root addChild: iconImage.
 	string := (MygSkGameManager perform: aPack asSymbol) at: i.
@@ -65,7 +65,7 @@ MygResources class >> setUpPack: aPack [
 	dict := Dictionary new.
 	1 to: (MygSkGameManager perform: aPack asSymbol) size do: [ :i |
 		| form |
-		form := (self previewForButtonWithPack: aPack at: i) aeAsForm.
+		form := (self previewForButtonWithPack: aPack at: i) aeAsForm scaledIntoFormOfSize: 150.
 		dict at: i put: form ].
 	^ dict
 ]

@@ -170,8 +170,9 @@ MygSkBoardElement >> initializeBackgroundLayer [
 				c frame vertical
 					alignTopAt: aBox position y - 1 / board height;
 					weight: 1.0 / board height ].
+			boxElement height: boxElement width.
 			layer addChild: boxElement.
-			boxElement updateBackgroundColor.] ].
+			boxElement updateBackgroundColor ] ].
 	self backgroundLayer: layer
 ]
 
@@ -215,6 +216,7 @@ MygSkBoardElement >> initializeForegroundLayer [
 					alignTopAt: aBox position y - 1 / board height;
 					weight: 1.0 / board height ].
 			layer addChild: boxElement as: aBox position asString.
+			boxElement height: boxElement width.
 			boxElement updateBackgroundColor ] ].
 	self foregroundLayer: layer
 ]

@@ -202,10 +202,9 @@ MygSkBoxElement >> boxAnimationMovingInDirection: aCpDirection [
 	| size boardElement space |
 	boardElement := self topMostParent firstChild.
 	space := boardElement space.
-	size := space extent / boardElement board width
-	        - boardElement firstChild layout cellSpacing.
-	^ (BlTransformAnimation translate:
-		   aCpDirection * (0 @ 0) * size) duration: 150 milliSeconds
+	size := space extent / boardElement board width.
+	^ (BlTransformAnimation translate: aCpDirection * (0 @ 0) * size)
+		  duration: 150 milliSeconds
 ]
 
 { #category : #accessing }

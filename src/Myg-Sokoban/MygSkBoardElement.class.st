@@ -99,9 +99,9 @@ MygSkBoardElement >> elementsToUpdateAtPosition: aPoint goingIn: aCpDirection [
 
 	| layer elements playerElement neighborElement nextNeighborElement |
 	layer := self foregroundLayer.
-	playerElement := (layer childWithId: aPoint asString) firstChild.
+	playerElement := (layer childWithId: aPoint asString).
 	neighborElement := (layer childWithId:
-		                    (aCpDirection * aPoint) asString) firstChild.
+		                    (aCpDirection * aPoint) asString).
 	elements := {
 		            playerElement.
 		            neighborElement } asOrderedCollection.
@@ -109,7 +109,7 @@ MygSkBoardElement >> elementsToUpdateAtPosition: aPoint goingIn: aCpDirection [
 		class = MygSkWall ifFalse: [
 		nextNeighborElement := (layer childWithId:
 			                        (aCpDirection * (aCpDirection * aPoint))
-				                        asString) firstChild.
+				                        asString).
 		elements add: nextNeighborElement ].
 	^ elements
 ]
@@ -195,19 +195,18 @@ MygSkBoardElement >> initializeForegroundLayer [
 		         layout: BlFrameLayout new;
 		         constraintsDo: [ :c |
 			         c horizontal matchParent.
-			         c vertical fitContent.
-			         c frame vertical alignCenter ].
-	boxSize := self space extent / board width.
+			         c vertical fitContent ].
+		boxSize := self space extent / board width.
 	self addChild: layer.
 	self board do: [ :aBox |
 		| boxElement tmpBox |
 		tmpBox := aBox.
-		(aBox class inheritsFrom: MygSkMovable) ifTrue: [
-			boxElement := (MygSkBoxElement box: tmpBox)
-				              positionInField: aBox position;
-				              layout: BlSquaredLayout new;
-				              board: board.
-			boxElement constraintsDo: [ :c |
+		(aBox class inheritsFrom: MygSkMovable) ifFalse: [
+			tmpBox := MygSkGround new ].
+		boxElement := (MygSkBoxElement box: tmpBox)
+			              positionInField: aBox position;
+			              board: board.
+	boxElement constraintsDo: [ :c |
 				c horizontal matchParent.
 				c frame horizontal
 					alignLeftAt: aBox position x - 1 / board width;
@@ -215,9 +214,9 @@ MygSkBoardElement >> initializeForegroundLayer [
 				c frame vertical
 					alignTopAt: aBox position y - 1 / board height;
 					weight: 1.0 / board height ].
-			layer addChild: boxElement as: aBox position asString.
-			boxElement height: boxElement width.
-			boxElement updateBackgroundColor ] ].
+		layer addChild: boxElement as: aBox position asString.
+		boxElement height: boxElement width.
+		boxElement updateBackgroundColor ].
 	self foregroundLayer: layer
 ]
 

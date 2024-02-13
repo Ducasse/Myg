@@ -114,16 +114,13 @@ MBoxElement >> box: aMBox [
 { #category : #public }
 MBoxElement >> click [
 
-	self box isFlagged ifTrue: [
-		self box board gameEnded
-			ifFalse: [ ^ self ]
-			ifTrue: [ self background: Color white darker darker ] ].
+	self box isFlagged ifTrue: [ 
+		self box board gameEnded ifTrue: [ 
+			self background: Color white darker darker.
+	self writeText ] ].
 
 	self background: Color white darker darker.
-
-	self box isMineBox
-		ifTrue: [ self mine ]
-		ifFalse: [ self writeText ]
+	self writeText
 ]
 
 { #category : #explosion }

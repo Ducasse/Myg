@@ -259,14 +259,9 @@ MBoard >> replaceBox: aBox by: aNewBox [
 MBoard >> revealBoard [
 
 	self boxesDoWithIndices: [ :aBox :i :j |
-		| newBox |
-		newBox := MClicked new
-			          position: i @ j;
-			          board: self.
-		aBox isSafeBox ifTrue: [
-			self replaceBox: aBox by: newBox].
-			aBox announcer announce:
-				(MBoxClickAndReplaceAnnouncement replaceBy: newBox)]
+		aBox isSafeBox
+			ifTrue: [ aBox announcer announce: MBoxClickedAnnouncement new ]
+			ifFalse: [ aBox announcer announce: MBoxExplosionAnnouncement new ] ]
 ]
 
 { #category : #accessing }

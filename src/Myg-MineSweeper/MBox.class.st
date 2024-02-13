@@ -13,11 +13,6 @@ Class {
 }
 
 { #category : #'subclass instance creation' }
-MBox class >> clicked [
-	^ MClicked new
-]
-
-{ #category : #'subclass instance creation' }
 MBox class >> mine [
 	^ MMineBox new
 ]
@@ -74,11 +69,6 @@ MBox >> initialize [
 MBox >> isClicked [ 
 
 	^ clicked
-]
-
-{ #category : #testing }
-MBox >> isClickedBox [
-	^ false
 ]
 
 { #category : #testing }

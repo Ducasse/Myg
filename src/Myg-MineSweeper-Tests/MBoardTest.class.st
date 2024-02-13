@@ -7,20 +7,6 @@ Class {
 	#category : #'Myg-MineSweeper-Tests'
 }
 
-{ #category : #tests }
-MBoardTest >> testAllClickedWhenLost [
-
-	field playerLoose.
-	field grid do: [ :each | self deny: each isSafeBox ]
-]
-
-{ #category : #tests }
-MBoardTest >> testAllClickedWhenWon [
-
-	field playerWin.
-	field grid do: [ :each | self deny: each isSafeBox ]
-]
-
 { #category : #'tests-accessing' }
 MBoardTest >> testBoxAtAt [
 
@@ -241,18 +227,6 @@ MBoardTest >> testPropagateWhenEnoughFlagsAround [
 	self assert: (field boxAt: 3 at: 4) isClicked.
 	self assert: (field boxAt: 3 at: 5) isClicked.
 	self assert: (field boxAt: 1 at: 5) isMineBox
-]
-
-{ #category : #'tests-box api' }
-MBoardTest >> testReplaceBoxAtRowColumnBy [
-
-	| actual new |
-	actual := field boxAt: 2 at: 2.
-	new := MBox clicked.
-	field replaceBox: actual by: new.
-	self
-		assert: (field boxAt: 2 at: 2) ~= actual;
-		assert: (field boxAt: 2 at: 2) equals: new
 ]
 
 { #category : #'tests-accessing' }

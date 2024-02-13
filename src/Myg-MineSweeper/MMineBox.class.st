@@ -12,7 +12,6 @@ Class {
 MMineBox >> click [
 
 	self isFlagged ifTrue: [ ^ self ].
-
 	self announcer announce: MBoxExplosionAnnouncement new.
 	self board gameEnded ifFalse: [ self board playerLoose ]
 ]

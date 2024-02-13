@@ -110,7 +110,8 @@ TBoxElement >> lock [
 { #category : #'as yet unclassified' }
 TBoxElement >> lockAll [
 
-	self parent children collect: [ :each | each box isTFixedBox ifTrue: [ each lock ] ]
+	self parent children do: [ :each |
+		each box isTFixedBox ifTrue: [ each lock ] ]
 ]
 
 { #category : #'as yet unclassified' }

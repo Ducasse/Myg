@@ -149,3 +149,7 @@ MineSweeper class >> title [
 				 c frame vertical alignCenter ]).
 	^ title 
 ]
+
+{ #category : #'see class side' }
+MineSweeper >> seeClassSide [ 
+]

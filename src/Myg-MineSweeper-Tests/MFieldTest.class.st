@@ -11,45 +11,45 @@ Class {
 MFieldTest >> testAllClickedWhenLost [
 
 	field playerLoose.
-	field grid do: [ :each | self deny: each isUnknownBox ]
+	field grid do: [ :each | self deny: each isSafeBox ]
 ]
 
 { #category : #tests }
 MFieldTest >> testAllClickedWhenWon [
 
 	field playerWin.
-	field grid do: [ :each | self deny: each isUnknownBox ]
+	field grid do: [ :each | self deny: each isSafeBox ]
 ]
 
 { #category : #'tests-accessing' }
 MFieldTest >> testBoxAtAt [
 
 	self
-		assert: (field boxAt: 1 at: 1) isUnknownBox;
-		assert: (field boxAt: 1 at: 2) isUnknownBox;
+		assert: (field boxAt: 1 at: 1) isSafeBox;
+		assert: (field boxAt: 1 at: 2) isSafeBox;
 		assert: (field boxAt: 1 at: 3) isMineBox;
-		assert: (field boxAt: 1 at: 4) isUnknownBox;
+		assert: (field boxAt: 1 at: 4) isSafeBox;
 		assert: (field boxAt: 1 at: 5) isMineBox;
-		assert: (field boxAt: 2 at: 1) isUnknownBox;
-		assert: (field boxAt: 2 at: 2) isUnknownBox;
+		assert: (field boxAt: 2 at: 1) isSafeBox;
+		assert: (field boxAt: 2 at: 2) isSafeBox;
 		assert: (field boxAt: 2 at: 3) isMineBox;
-		assert: (field boxAt: 2 at: 4) isUnknownBox;
-		assert: (field boxAt: 2 at: 5) isUnknownBox;
+		assert: (field boxAt: 2 at: 4) isSafeBox;
+		assert: (field boxAt: 2 at: 5) isSafeBox;
 		assert: (field boxAt: 3 at: 1) isMineBox;
 		assert: (field boxAt: 3 at: 2) isMineBox;
 		assert: (field boxAt: 3 at: 3) isMineBox;
-		assert: (field boxAt: 3 at: 4) isUnknownBox;
-		assert: (field boxAt: 3 at: 5) isUnknownBox;
-		assert: (field boxAt: 4 at: 1) isUnknownBox;
-		assert: (field boxAt: 4 at: 2) isUnknownBox;
-		assert: (field boxAt: 4 at: 3) isUnknownBox;
+		assert: (field boxAt: 3 at: 4) isSafeBox;
+		assert: (field boxAt: 3 at: 5) isSafeBox;
+		assert: (field boxAt: 4 at: 1) isSafeBox;
+		assert: (field boxAt: 4 at: 2) isSafeBox;
+		assert: (field boxAt: 4 at: 3) isSafeBox;
 		assert: (field boxAt: 4 at: 4) isMineBox;
-		assert: (field boxAt: 4 at: 5) isUnknownBox;
-		assert: (field boxAt: 5 at: 1) isUnknownBox;
-		assert: (field boxAt: 5 at: 2) isUnknownBox;
-		assert: (field boxAt: 5 at: 3) isUnknownBox;
+		assert: (field boxAt: 4 at: 5) isSafeBox;
+		assert: (field boxAt: 5 at: 1) isSafeBox;
+		assert: (field boxAt: 5 at: 2) isSafeBox;
+		assert: (field boxAt: 5 at: 3) isSafeBox;
 		assert: (field boxAt: 5 at: 4) isMineBox;
-		assert: (field boxAt: 5 at: 5) isUnknownBox
+		assert: (field boxAt: 5 at: 5) isSafeBox
 ]
 
 { #category : #'tests-enumerating' }
@@ -93,11 +93,11 @@ MFieldTest >> testClickOnFlaggedBox [
 
 	| box |
 	box := field boxAt: 1 at: 1.
-	self assert: box class equals: MUnknown.
+	self assert: box class equals: MSafeBox.
 	box flag.
 	self assert: box isFlagged.
 	box click.
-	self assert: box class equals: MUnknown 
+	self assert: box class equals: MSafeBox 
 ]
 
 { #category : #tests }
@@ -124,7 +124,7 @@ MFieldTest >> testHasClickedBoxAroundBoxAtAt [
 { #category : #'tests-testing' }
 MFieldTest >> testHasUnknownBox [
 
-	self assert: field hasUnknownBox.
+	self assert: field hasSafeBox.
 	field
 		clickOnBox: (field boxAt: 1 at: 1);
 		clickOnBox: (field boxAt: 1 at: 4);
@@ -135,7 +135,7 @@ MFieldTest >> testHasUnknownBox [
 		clickOnBox: (field boxAt: 4 at: 5);
 		clickOnBox: (field boxAt: 5 at: 1);
 		clickOnBox: (field boxAt: 5 at: 5).
-	self deny: field hasUnknownBox
+	self deny: field hasSafeBox
 ]
 
 { #category : #'tests-accessing' }

@@ -18,7 +18,7 @@ MBox class >> clicked [
 
 { #category : #'subclass instance creation' }
 MBox class >> mine [
-	^ MMine new
+	^ MMineBox new
 ]
 
 { #category : #'random subclass instance creation' }
@@ -30,7 +30,7 @@ MBox class >> randomCase [
 
 { #category : #'subclass instance creation' }
 MBox class >> unknown [
-	^ MUnknown new
+	^ MSafeBox new
 ]
 
 { #category : #accessing }
@@ -76,7 +76,7 @@ MBox >> isMineBox [
 ]
 
 { #category : #testing }
-MBox >> isUnknownBox [
+MBox >> isSafeBox [
 	^ false
 ]
 

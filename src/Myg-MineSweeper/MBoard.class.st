@@ -9,9 +9,7 @@ Class {
 	#name : #MBoard,
 	#superclass : #MygBoard,
 	#instVars : [
-		'round',
 		'gameEnded',
-		'playerWon',
 		'announcer',
 		'magnifier'
 	],
@@ -50,11 +48,6 @@ MBoard class >> matrixTest5x5 [
 	^ self createWithMatrix:
 		  (CTNewArray2D width: 5 height: 5 tabulate: [ :column :row |
 			   MBox randomCase ])
-]
-
-{ #category : #visiting }
-MBoard >> accept: aMFieldVisitor [
-	^ aMFieldVisitor visitMField: self
 ]
 
 { #category : #accessing }
@@ -181,8 +174,9 @@ MBoard >> hasMineBoxAroundBox: aBox [
 ]
 
 { #category : #testing }
-MBoard >> hasUnknownBox [
-	^ self anyBoxSatisfy: #isUnknownBox
+MBoard >> hasSafeBox [
+
+	^ self anyBoxSatisfy: #isSafeBox
 ]
 
 { #category : #accessing }
@@ -191,18 +185,11 @@ MBoard >> height [
 	^ grid height
 ]
 
-{ #category : #'box api' }
-MBoard >> incrementRound [
-	round := round + 1
-]
-
 { #category : #initialization }
 MBoard >> initialize [
 	super initialize.
-	round := 0.
 	announcer := Announcer new.
 	gameEnded := false.
-	playerWon := false
 ]
 
 { #category : #accessing }
@@ -232,29 +219,17 @@ MBoard >> mineCountAroundBox: aBox [
 { #category : #'box api' }
 MBoard >> playerLoose [
 
-	playerWon := false.
 	gameEnded := true.
 	self revealBoard.
 	
-]
-
-{ #category : #accessing }
-MBoard >> playerLost [
-	^ self playerWon not
 ]
 
 { #category : #'box api' }
 MBoard >> playerWin [
 
 	gameEnded ifTrue: [ ^ self ].
-	playerWon := true.
 	gameEnded := true.
 	self revealBoard
-]
-
-{ #category : #accessing }
-MBoard >> playerWon [
-	^ playerWon
 ]
 
 { #category : #printing }
@@ -288,7 +263,7 @@ MBoard >> revealBoard [
 		newBox := MClicked new
 			          position: i @ j;
 			          board: self.
-		aBox isUnknownBox ifTrue: [
+		aBox isSafeBox ifTrue: [
 			self replaceBox: aBox by: newBox].
 			aBox announcer announce:
 				(MBoxClickAndReplaceAnnouncement replaceBy: newBox)]
@@ -299,11 +274,6 @@ MBoard >> rightFlagCountAroundBox: aBox [
 
 	^ (self flagCountAroundBox: aBox)
 	  = (self mineCountAroundBox: aBox)
-]
-
-{ #category : #accessing }
-MBoard >> round [
-	^ round
 ]
 
 { #category : #accessing }

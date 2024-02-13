@@ -2,18 +2,13 @@
 I'm a box whose status is unknown. It did have been clicked yet.
 "
 Class {
-	#name : #MUnknown,
+	#name : #MSafeBox,
 	#superclass : #MBox,
 	#category : #'Myg-MineSweeper-Model'
 }
 
-{ #category : #visiting }
-MUnknown >> accept: aMFieldVisitor [
-	^ aMFieldVisitor visitMUnknown: self
-]
-
 { #category : #clicking }
-MUnknown >> click [
+MSafeBox >> click [
 
 	| box |
 	box := MClicked new
@@ -24,15 +19,15 @@ MUnknown >> click [
 	self board replaceBox: self by: box.
 
 	self propagateClick.
-	self board hasUnknownBox ifFalse: [ self board playerWin ]
+	self board hasSafeBox ifFalse: [ self board playerWin ]
 ]
 
 { #category : #testing }
-MUnknown >> isUnknownBox [
+MSafeBox >> isSafeBox [
 	^ true 
 ]
 
 { #category : #printing }
-MUnknown >> printOn: aStream [
+MSafeBox >> printOn: aStream [
 	aStream << '*'
 ]

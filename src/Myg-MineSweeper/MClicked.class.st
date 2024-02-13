@@ -7,11 +7,6 @@ Class {
 	#category : #'Myg-MineSweeper-Model'
 }
 
-{ #category : #visiting }
-MClicked >> accept: aMFieldVisitor [
-	^ aMFieldVisitor visitMClicked: self
-]
-
 { #category : #clicking }
 MClicked >> click [
 	"Nothing to be done, player should click somewhere else..."

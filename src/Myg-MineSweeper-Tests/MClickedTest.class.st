@@ -12,7 +12,7 @@ MClickedTest >> testClickInAtAt [
 
 	| box newBox|
 	box := field boxAt: 1 at: 1.
-	self assert: box class equals: MUnknown.
+	self assert: box class equals: MSafeBox.
 	box click.
 	newBox := field boxAt: 1 at: 1.
 	self assert: newBox class equals: MClicked.

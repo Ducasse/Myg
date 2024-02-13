@@ -31,9 +31,7 @@ Class {
 	#superclass : #BlElement,
 	#instVars : [
 		'box',
-		'field',
-		'text',
-		'positionInField'
+		'text'
 	],
 	#classVars : [
 		'Icons'
@@ -117,7 +115,7 @@ MBoxElement >> box: aMBox [
 MBoxElement >> click: anAnnouncement [
 
 	self box isFlagged ifTrue: [
-		self field gameEnded
+		self box board gameEnded
 			ifFalse: [ ^ self ]
 			ifTrue: [ self background: Color white darker darker ] ].
 
@@ -129,7 +127,7 @@ MBoxElement >> click: anAnnouncement [
 			self box announcer unsubscribe: self.
 			self box: anAnnouncement box.
 			text text:
-				(self field mineCountAroundBox: self box) asString asRopedText.
+				(self box board mineCountAroundBox: self box) asString asRopedText.
 			text text fontSize: (self width min: self height).
 			text text fontName: 'Source Sans Pro' ]
 ]
@@ -157,19 +155,6 @@ MBoxElement >> explode [
 					 onFinishedDo: [
 						 anElement removeFromParent ];
 					 yourself) yourself ]
-]
-
-{ #category : #accessing }
-MBoxElement >> field [
-
-	^ field
-]
-
-{ #category : #accessing }
-MBoxElement >> field: aMField [
-
-	field:= aMField.
-	self size: (75@75) * aMField magnifier
 ]
 
 { #category : #accessing }
@@ -259,16 +244,4 @@ MBoxElement >> newExplosionStar [
 		  background: Color random;
 		  constraintsDo: [ :c | c ignoreByLayout ];
 		  yourself
-]
-
-{ #category : #accessing }
-MBoxElement >> positionInField [ 
-
-	^ positionInField 
-]
-
-{ #category : #accessing }
-MBoxElement >> positionInField: aPoint [
-
-	positionInField := aPoint 
 ]

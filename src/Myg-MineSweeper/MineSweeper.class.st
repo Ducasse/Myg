@@ -92,22 +92,22 @@ MineSweeper class >> menuPlay [
 	menu addItem:
 		(ToMenuItem new
 			labelText: 'Small';
-			whenClickedDo: [ MFieldElement launchSmall ];
+			whenClickedDo: [ MBoardElement launchSmall ];
 			yourself).
 	menu addItem:
 		(ToMenuItem new
 			labelText: 'Regular';
-			whenClickedDo: [ MFieldElement launchRegular ];
+			whenClickedDo: [ MBoardElement launchRegular ];
 			yourself).
 	menu addItem:
 		(ToMenuItem new
 			labelText: 'Large';
-			whenClickedDo: [ MFieldElement launchLarge ];
+			whenClickedDo: [ MBoardElement launchLarge ];
 			yourself).
 	menu addItem:
 		(ToMenuItem new
 			labelText: 'Very Large';
-			whenClickedDo: [ MFieldElement launchVeryLarge ];
+			whenClickedDo: [ MBoardElement launchVeryLarge ];
 			yourself).
 
 	^ menu

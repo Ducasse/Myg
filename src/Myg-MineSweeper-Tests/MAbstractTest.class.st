@@ -16,7 +16,7 @@ MAbstractTest >> matrixForField [
 	^ (CTNewArray2D
 			    width: 5
 			    height: 5
-			    tabulate: [ :column :row | MBox unknown ])
+			    tabulate: [ :column :row | MBox safe ])
 			   at: 1 @ 3 put: MBox mine;
 			   at: 1 @ 5 put: MBox mine;
 			   at: 2 @ 3 put: MBox mine;

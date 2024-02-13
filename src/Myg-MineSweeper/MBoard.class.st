@@ -162,21 +162,21 @@ MBoard >> gameEnded [
 ]
 
 { #category : #testing }
+MBoard >> hasBeenCleared [
+
+	^ (self boxesSelect: #isSafeBox) allSatisfy: #isClicked
+]
+
+{ #category : #testing }
 MBoard >> hasClickedBoxAroundBox: aBox [
 
-	^ self boxesAroundBox: aBox anySatisfy: #isClickedBox
+	^ self boxesAroundBox: aBox anySatisfy: #isClicked
 ]
 
 { #category : #testing }
 MBoard >> hasMineBoxAroundBox: aBox [
 
 	^ self boxesAroundBox: aBox anySatisfy: #isMineBox 
-]
-
-{ #category : #testing }
-MBoard >> hasSafeBox [
-
-	^ self anyBoxSatisfy: #isSafeBox
 ]
 
 { #category : #accessing }

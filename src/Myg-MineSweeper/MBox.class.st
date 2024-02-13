@@ -101,6 +101,7 @@ MBox >> propagateClick [
 
 	((self board hasMineBoxAroundBox: self) not or: [
 		 self board rightFlagCountAroundBox: self ]) ifTrue: [
-		self board boxesAroundBox: self do: [ :box |
-			box isClickedBox ifFalse: [ box click ] ] ]
+		self board
+			boxesAroundBox: self
+			do: [ :box | box isClicked ifFalse: [ box click ] ] ]
 ]

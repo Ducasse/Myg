@@ -155,7 +155,7 @@ MBoxElement >> explode [
 MBoxElement >> flag [
 
 	| pngElement |
-	self box isClickedBox ifTrue: [ ^ self ].
+	self box isClicked ifTrue: [ ^ self ].
 	pngElement := BlElement new.
 	pngElement background: (self class flag scaledToSize: self size).
 

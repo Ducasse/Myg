@@ -10,14 +10,11 @@ Class {
 { #category : #clicking }
 MSafeBox >> click [
 
-
 	self clicked: true.
-	"self announcer announce:
-		(MBoxClickAndReplaceAnnouncement replaceBy: box)."
 	self announcer announce: MBoxClickedAnnouncement new.
 
-	self propagateClick.
-	self board hasSafeBox ifFalse: [ self board playerWin ]
+	self propagateClick. "Here it is usefull for when there is no bomb around"
+	self board hasBeenCleared ifTrue: [ self board playerWin ]
 ]
 
 { #category : #testing }

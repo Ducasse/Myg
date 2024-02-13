@@ -2,12 +2,11 @@ Class {
 	#name : #TBoxElement,
 	#superclass : #BlElement,
 	#instVars : [
-		'box',
-		'board'
+		'box'
 	],
 	#classVars : [
 		'ColorDictionary',
-		'icons'
+		'Icons'
 	],
 	#category : #'Myg-Takuzu-UI'
 }
@@ -54,18 +53,6 @@ TBoxElement >> backgroundPaint [
 ]
 
 { #category : #'as yet unclassified' }
-TBoxElement >> board [
-
-	^ board
-]
-
-{ #category : #'as yet unclassified' }
-TBoxElement >> board: aTBoard [
-
-	board := aTBoard
-]
-
-{ #category : #'as yet unclassified' }
 TBoxElement >> box [
 
 	^ box
@@ -84,7 +71,7 @@ TBoxElement >> click [
 	self box isTFixedBox
 		ifTrue: [ self lockAll ]
 		ifFalse: [
-			self board clickOnBox: self box.
+			self box click.
 			self updateBackgroundColor ]
 ]
 

@@ -91,7 +91,7 @@ TBoardElement >> board: aTBoard [
 	self layout columnCount: board grid width.
 	board grid do: [ :aBox |
 		| boxElement |
-		boxElement := (TBoxElement box: aBox) board: aTBoard.
+		boxElement := (TBoxElement box: aBox).
 		self addChild: boxElement ]
 ]
 

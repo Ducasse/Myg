@@ -330,16 +330,6 @@ TBoard >> checkIfFinished [
 ]
 
 { #category : #actions }
-TBoard >> clickOnBox: aTBox [
-
-	| box |
-	box := self grid atColumn: aTBox position x atRow: aTBox position y.
-
-	box configureValue.
-	self checkIfFinished
-]
-
-{ #category : #actions }
 TBoard >> endGame [
 
 	| container space |

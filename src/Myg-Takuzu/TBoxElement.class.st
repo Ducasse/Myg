@@ -19,7 +19,8 @@ TBoxElement class >> box: aMBox [
 
 { #category : #accessing }
 TBoxElement class >> icons [
-	^ icons ifNil: [ icons := Dictionary new ]
+
+	^ Icons ifNil: [ Icons := Dictionary new ]
 ]
 
 { #category : #'class initialization' }

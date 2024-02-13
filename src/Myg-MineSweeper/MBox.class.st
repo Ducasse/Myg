@@ -6,7 +6,8 @@ Class {
 	#superclass : #MygAbstractBox,
 	#instVars : [
 		'announcer',
-		'flagged'
+		'flagged',
+		'clicked'
 	],
 	#category : #'Myg-MineSweeper-Model'
 }
@@ -23,13 +24,14 @@ MBox class >> mine [
 
 { #category : #'random subclass instance creation' }
 MBox class >> randomCase [
-	^ (1 to: 7) atRandom > 6
-			ifTrue: [ self mine ]
-			ifFalse: [ self unknown ].
+
+	^ (1 to: 8) atRandom > 6
+		  ifTrue: [ self mine ]
+		  ifFalse: [ self safe ]
 ]
 
 { #category : #'subclass instance creation' }
-MBox class >> unknown [
+MBox class >> safe [
 	^ MSafeBox new
 ]
 
@@ -45,6 +47,12 @@ MBox >> click [
 ]
 
 { #category : #accessing }
+MBox >> clicked: aBoolean [
+
+	clicked := aBoolean 
+]
+
+{ #category : #accessing }
 MBox >> flag [
 
 	self flagged: self isFlagged not
@@ -56,8 +64,16 @@ MBox >> flagged: aBoolean [
 ]
 
 { #category : #initialization }
-MBox >> initialize [ 
-	flagged := false
+MBox >> initialize [
+
+	flagged := false.
+	clicked := false
+]
+
+{ #category : #testing }
+MBox >> isClicked [ 
+
+	^ clicked
 ]
 
 { #category : #testing }

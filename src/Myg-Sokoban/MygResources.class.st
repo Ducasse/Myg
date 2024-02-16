@@ -17,15 +17,19 @@ MygResources class >> initialize [
 MygResources class >> initializePacks [
 
 	packs := Dictionary new
-		at: 'Loma' put: (self setUpPack: 'mazesLoma');
-		at: 'Microban' put: (self setUpPack: 'mazesMicroban');
-		at: 'Pack' put: (self setUpPack: 'mazesPack');
-		at: 'Sasquatch' put: (self setUpPack: 'mazesSasquatch');
-		at: 'SasquatchIII' put: (self setUpPack: 'mazesSasquatchIII');
-		at: 'SasquatchIV' put: (self setUpPack: 'mazesSasquatchIV');
-		at: 'SasquatchV' put: (self setUpPack: 'mazesSasquatchV');
-		at: 'SasquatchVI' put: (self setUpPack: 'mazesSasquatchVI');
-		at: 'UAlberta' put: (self setUpPack: 'mazesUAlberta')
+		         at: 'Loma' put: (self setUpPack: 'mazesLoma');
+		         at: 'Microban' put: (self setUpPack: 'mazesMicroban');
+		         at: 'Pack' put: (self setUpPack: 'mazesPack');
+		         at: 'Sasquatch' put: (self setUpPack: 'mazesSasquatch');
+		         at: 'SasquatchIII'
+		         put: (self setUpPack: 'mazesSasquatchIII');
+		         at: 'SasquatchIV'
+		         put: (self setUpPack: 'mazesSasquatchIV');
+		         at: 'SasquatchV' put: (self setUpPack: 'mazesSasquatchV');
+		         at: 'SasquatchVI'
+		         put: (self setUpPack: 'mazesSasquatchVI');
+		         at: 'UAlberta' put: (self setUpPack: 'mazesUAlberta');
+		yourself
 ]
 
 { #category : #initialization }

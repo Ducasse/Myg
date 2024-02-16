@@ -8124,12 +8124,6 @@ MygSkBoard class >> mazesUAlberta [
 		yourself
 ]
 
-{ #category : #initialization }
-MygSkBoard >> addBox: aBox [
-
-	boxes add: aBox
-]
-
 { #category : #printing }
 MygSkBoard >> asciiString [ 
 
@@ -8165,6 +8159,18 @@ MygSkBoard >> atColumn: anInteger atRow: anInteger2 put: anElement [
 { #category : #accessing }
 MygSkBoard >> atPosition: aCpPositionable [ 
 	^ (grid at: aCpPositionable x @ aCpPositionable y)
+]
+
+{ #category : #accessing }
+MygSkBoard >> boxes [ 
+
+	^ boxes
+]
+
+{ #category : #accessing }
+MygSkBoard >> boxes: aCollection [
+
+	boxes := aCollection 
 ]
 
 { #category : #accessing }
@@ -8223,7 +8229,8 @@ MygSkBoard >> initialize [
 
 { #category : #testing }
 MygSkBoard >> isFinished [
-	^ boxes allSatisfy: [ :each | each background isTarget ]
+
+	^ self boxes allSatisfy: [ :each | each background isTarget ]
 ]
 
 { #category : #move }
@@ -8264,8 +8271,7 @@ MygSkBoard >> reset [
 { #category : #initialization }
 MygSkBoard >> setBoxes [
 
-	grid do: [ :each |
-		each class = MygSkBox ifTrue: [ self addBox: each ] ].
+	self boxes: (grid select: [ :e | e class = MygSkBox ]).
 ]
 
 { #category : #initialization }

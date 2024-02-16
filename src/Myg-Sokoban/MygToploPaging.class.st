@@ -52,31 +52,18 @@ MygToploPaging class >> levelPaging [
 		constraintsDo: [ :c | c margin: (BlInsets right: 5) ];
 		attachTo: aNotebook.
 
-	aNotebook
-		addPageTitle: 'Loma'
-		bodyFactory: [ self pagingPack: 'mazesLoma' managedBy: manager ];
-		addPageTitle: 'Microban'
-		bodyFactory: [ self pagingPack: 'mazesMicroban' managedBy: manager ];
-		addPageTitle: 'Pack'
-		bodyFactory: [ self pagingPack: 'mazesPack' managedBy: manager ];
-		addPageTitle: 'Sasquatch'
-		bodyFactory: [ self pagingPack: 'mazesSasquatch' managedBy: manager ];
-		addPageTitle: 'SasquatchIII'
-		bodyFactory: [
-			self pagingPack: 'mazesSasquatchIII' managedBy: manager ];
-		addPageTitle: 'SasquatchIV'
-		bodyFactory: [
-			self pagingPack: 'mazesSasquatchIV' managedBy: manager ];
-		addPageTitle: 'SasquatchV'
-		bodyFactory: [
-			self pagingPack: 'mazesSasquatchV' managedBy: manager ];
-		addPageTitle: 'SasquatchVI'
-		bodyFactory: [
-			self pagingPack: 'mazesSasquatchVI' managedBy: manager ];
-		addPageTitle: 'UAlberta'
-		bodyFactory: [ self pagingPack: 'mazesUAlberta' managedBy: manager ].
+	self packNames do: [ :e |
+		aNotebook
+			addPageTitle: e
+			bodyFactory: [ self pagingPack: 'mazes' , e managedBy: manager ] ].
 
 	^ aNotebook
+]
+
+{ #category : #'as yet unclassified' }
+MygToploPaging class >> packNames [ 
+
+	^ {'Loma' .'Microban' . 'Pack' . 'Sasquatch' . 'SasquatchIII'. 'SasquatchIV'. 'SasquatchV'. 'SasquatchVI'. 'UAlberta' }
 ]
 
 { #category : #'as yet unclassified' }

@@ -8188,7 +8188,7 @@ MygSkBoard >> do: aBlock [
 	grid do: aBlock
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #ending }
 MygSkBoard >> endGame [
 
 	ended ifTrue: [ ^ self ].
@@ -8251,13 +8251,15 @@ MygSkBoard >> printOn: aStream [
 		do: [ :rowNumber |
 			1 to: grid width do: [ :columnNumber |
 				| el elClass |
-				el := self atColumn: columnNumber atRow: rowNumber .
+				el := self atColumn: columnNumber atRow: rowNumber.
 				elClass := (el class inheritsFrom: MygSkMovable)
 					           ifFalse: [ el class ]
 					           ifTrue: [
 						           el background class = MygSkGround
 							           ifTrue: [ el class ]
-							           ifFalse: [ (el class asString , 'OnTarget') asClass ] ].
+							           ifFalse: [
+							           self class environment at:
+								           el class asString , 'OnTarget' ] ].
 				aStream nextPut: elClass textualMapCharacter ] ]
 		separatedBy: [ aStream cr ]
 ]

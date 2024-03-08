@@ -2,7 +2,9 @@ Class {
 	#name : #TBoardElement,
 	#superclass : #BlElement,
 	#instVars : [
-		'board'
+		'board',
+		'cellSpacing',
+		'width'
 	],
 	#category : #'Myg-Takuzu-UI'
 }
@@ -50,24 +52,15 @@ TBoardElement class >> openRandom [
 ]
 
 { #category : #'as yet unclassified' }
-TBoardElement class >> openRandomFromTestGrids [ 
-	| sel res |
-	sel := (TFieldTool class selectors select: [ :each | each  beginsWith: 'grid_' ]) atRandom.
-	res := TFieldTool perform: sel.
-	^ self openWithModel: res
-]
+TBoardElement class >> openWithModel: aTBoard [
 
-{ #category : #'as yet unclassified' }
-TBoardElement class >> openWithModel: aTField [
+	| aBoardElement space |
+	space := BlSpace new extent: 500@500.
+	aBoardElement := self new.
 
-	| aFieldElement space |
-	space := BlSpace new.
-	aFieldElement := self new
-		                 board: aTField;
-		                 yourself.
-	space root addChild: aFieldElement.
-	space pulse
-		extent: 500 @ 500;
+	space root addChild: aBoardElement.
+	aBoardElement board: aTBoard.
+	space
 		resizable: false;
 		show
 ]
@@ -81,24 +74,54 @@ TBoardElement >> board [
 { #category : #accessing }
 TBoardElement >> board: aTBoard [
 
+	| spaceWidth elementWidth |
 	board := aTBoard.
-	self layout:
-		(BlGridLayout horizontal cellSpacing: 5 - (board grid width // 5)).
-	self constraintsDo: [ :aLayoutConstraints |
-		aLayoutConstraints horizontal matchParent.
-		aLayoutConstraints vertical matchParent ].
-	self padding: (BlInsets all: 5).
-	self layout columnCount: board grid width.
+	self width: board grid width.
+	spaceWidth := self space width.
+	elementWidth := spaceWidth / self width - self cellSpacing.
+
 	board grid do: [ :aBox |
 		| boxElement |
-		boxElement := (TBoxElement box: aBox).
-		self addChild: boxElement ]
+		boxElement := TBoxElement box: aBox.
+		boxElement size: elementWidth asPoint.
+			boxElement position:
+				(elementWidth + self cellSpacing) * (aBox position - (1 @ 1)).
+		self addChild: boxElement.
+		].
+	self inspect
+]
+
+{ #category : #accessing }
+TBoardElement >> cellSpacing [ 
+	^ cellSpacing 
+]
+
+{ #category : #accessing }
+TBoardElement >> cellSpacing: aNumber [
+
+	cellSpacing := aNumber 
 ]
 
 { #category : #initialization }
 TBoardElement >> initialize [
 
 	super initialize.
+	"	self padding: (BlInsets all: 5)."
+	self cellSpacing: 3.
 	self background: (BlBackground paint: Color veryVeryDarkGray).
+	self constraintsDo: [ :c |
+		c vertical matchParent.
+		c horizontal matchParent ]
+]
+
+{ #category : #'api - bounds' }
+TBoardElement >> width [ 
+	^ width 
 	
+]
+
+{ #category : #'api - bounds' }
+TBoardElement >> width: aNumber [
+
+	width := aNumber 
 ]

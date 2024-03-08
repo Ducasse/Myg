@@ -68,7 +68,7 @@ TBoxElement >> box: aTBox [
 
 { #category : #public }
 TBoxElement >> click [
-
+self inspect.
 	self box isTFixedBox
 		ifTrue: [ self lockAll ]
 		ifFalse: [
@@ -89,11 +89,9 @@ TBoxElement >> initialize [
 
 	self background: self backgroundPaint.
 	self geometry: (BlRoundedRectangleGeometry cornerRadius: 5).
-	self constraintsDo: [ :aLayoutConstraints |
-		aLayoutConstraints horizontal matchParent.
-		aLayoutConstraints vertical matchParent ].
-
-	self addEventHandlerOn: BlMouseUpEvent do: [ :anEvent | self click ]
+	self addEventHandlerOn: BlMouseUpEvent do: [
+		self inspect.
+		self click ]
 ]
 
 { #category : #'actions api' }
@@ -116,5 +114,6 @@ TBoxElement >> lockAll [
 
 { #category : #'as yet unclassified' }
 TBoxElement >> updateBackgroundColor [
-	self background: (self colorDictionary at: self box value)
+
+	self background: (self colorDictionary at: self box value).
 ]

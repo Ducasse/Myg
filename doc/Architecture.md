@@ -10,7 +10,7 @@ and isolated in the sense that an element does not interact with its neighbors.
 
 - MineSweeper is static but not isolated since an element may influence its neighbors.
 
-- Sokoban is dynamic in the sense that elements such as boxes and the player change position during the course of the game.
+- Sokoban is dynamic in the sense that elements such as boxes and the player change position during the game.
 
 
 ### Basic relationships between domain and graphical elements

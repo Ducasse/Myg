@@ -1,21 +1,21 @@
-# Takuzu Documentation
+# Takuzu Architecture
 
 Takuzu is a game created with Myg, also known as 'binary-sudoku', you need to complete a grid following a set of rules.
+This game is inspired by [http://0hh1.com](http://0hh1.com).
 
-This game is greatly inspired by [0hh1](0hh1.com)
-
-This document aims to explain the implementation of this project and how was designed the architecture between Model and UI using Bloc.
+This document highlights some key points of the implementation of this project and how was designed the architecture between the domain model and UI using Bloc.
 
 ## Basics
 
-The model for Takuzu follows the basics of Myg architecture with a TBoard (inheriting MygBoard) containing many TBox (inheriting MygAbstractBox). There are different subclasses to TBox such as the TFixedBox which represents a Box with an unmodified value, and the TUnknownBox which value can change and is initialized to nil.
+The model for Takuzu follows the basics of Myg architecture with a class `TBoard` (inheriting from `MygBoard`) containing many `TBox` (inheriting from `MygAbstractBox`). There are different subclasses to `TBox` such as `TFixedBox` which represents a Box with an unmodified value, and  `TUnknownBox` whose value can change and is initialized to nil.
 
-- Note: The values of Boxes take one from [0, 1, nil], maybe we should have a different value for `nil`. 
-- Note: There are 2 subclasses of TFixedBox named `TFixedBox0` and `TFixedBox1` but these are only used for level importing.
+- Box values take one values from [0, 1, nil]. 
+- There are 2 subclasses of `TFixedBox` named `TFixedBox0` and `TFixedBox1` but these are only used for level importing.
 
-The UI side of the project also follows the basic Myg architecture but this game is considered "static" as a BoxElement will only apply changes to its Box and thus will not influence any of the other BoxElement constituting the UI, also no Box will change its position in the Board and so BoxElements will stay in the same place representing the same Boxes.
+The UI side of the project also follows the basic Myg architecture but this game is considered "static" as a box element will only apply changes to its box and thus will not influence any of the other box element constituting the UI, also no box will change its position in the board and so box elements will stay in the same place representing the same boxes.
 
-There is an exception in the `lockAll` method where it changes all other `BoxElement`s that represent a `TFixedBox` so a simple `do:` message on the `BoardElement` children will work. The method `lockAll` is written as such:
+There is an exception in the `lockAll` method where it changes all other box element's that represent a `TFixedBox`. A simple `do:` message on the `BoardElement` children will work. 
+The method `lockAll` is defined as follows: 
  
 ```smalltalk
 TBoxElement >> lockAll
@@ -24,18 +24,20 @@ TBoxElement >> lockAll
 		each box isTFixedBox ifTrue: [ each lock ] ]
 ```
 
+SD Question: why not just send lock and redefine lock on certain classes to do nothing. 
+
 ![Takuzu Architecture](Takuzu_Architecture.png)
 
 
 ## Event interaction
 
-The right question to ask is "How are the events handled and how is the UI updated ?" and this paragraph is here to explain it all.
+The right question to ask is "How are the events handled and how is the UI updated?" and this paragraph is here to explain it.
 
-First, let's talk about the events. In Takuzu the events are simple, there is just a ClickEvent (`BlMouseUpEvent` in the current implementation), and when a `BoxElement` receives a ClickEvent, it sends the 'click' message to its box which changes its value and asks the board the check if the game is finished. (If we clicked on a `TFixedBox`, only the UI will change with the lockAll method presented above).
+First, let's talk about the events. In Takuzu, the events are simple, there is just a `ClickEvent` (`BlMouseUpEvent` in the current implementation), and when a `BoxElement` receives a `ClickEvent`, it sends the 'click' message to its box which changes its value and asks the board to check if the game is finished. (If we clicked on a `TFixedBox`, only the UI will change with the `lockAll` method presented above).
 
 The UI will be updated in the same method that sent the click message to the box. Here we use the static property of the game that allows us to tell our BoxElement to update itself according to its Box value as the Box remains the same and only values change.
 
-So when a `BoxElement` receives a ClickEvent, it receives the `click` message that is defined like this: 
+So when a `BoxElement` receives a `ClickEvent`, it receives the `click` message that is defined like this: 
 
 ```smalltalk
 TBoxElement >> click
@@ -48,10 +50,12 @@ TBoxElement >> click
 ```
 
 
-And the whole process is represented in this diagram
+And the whole process is represented in this diagram *@takuzufig@*.
 
-![Takuzu Event](Takuzu_Event.png)
+![Takuzu Event](Takuzu_Event.png label=takuzufig)
 
+
+SD: How the self box click communicates to the UI?
 
 ## State of the project 
 

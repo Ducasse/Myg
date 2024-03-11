@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'board',
 		'cellSpacing',
-		'width'
+		'gridWidth'
 	],
 	#category : #'Myg-Takuzu-UI'
 }
@@ -76,9 +76,9 @@ TBoardElement >> board: aTBoard [
 
 	| spaceWidth elementWidth |
 	board := aTBoard.
-	self width: board grid width.
+	self gridWidth: board grid width.
 	spaceWidth := self space width.
-	elementWidth := spaceWidth / self width - self cellSpacing.
+	elementWidth := spaceWidth / self gridWidth - self cellSpacing.
 
 	board grid do: [ :aBox |
 		| boxElement |
@@ -102,6 +102,19 @@ TBoardElement >> cellSpacing: aNumber [
 	cellSpacing := aNumber 
 ]
 
+{ #category : #accessing }
+TBoardElement >> gridWidth [
+
+	^ gridWidth
+]
+
+{ #category : #accessing }
+TBoardElement >> gridWidth: aNumber [
+
+	gridWidth := aNumber
+
+]
+
 { #category : #initialization }
 TBoardElement >> initialize [
 
@@ -112,16 +125,4 @@ TBoardElement >> initialize [
 	self constraintsDo: [ :c |
 		c vertical matchParent.
 		c horizontal matchParent ]
-]
-
-{ #category : #'api - bounds' }
-TBoardElement >> width [ 
-	^ width 
-	
-]
-
-{ #category : #'api - bounds' }
-TBoardElement >> width: aNumber [
-
-	width := aNumber 
 ]

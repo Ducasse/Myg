@@ -58,17 +58,7 @@ MygSkGameManager class >> mazesLoma [
 	"hsasquatch/sokoban/loma.html"
 
 	^ IdentityDictionary new
-		  at: 1 put: '  #####
-  #   ##
-  # #  #
-###$.# #
-#  $.#@#
-# #$.# #
-# #    #
-#  # ###
-##   #
- #####';
-		  at: 2 put: '##### 
+		  at: 1 put: '##### 
 #   ####
 # #$.  #
 #  .$#@#
@@ -76,7 +66,7 @@ MygSkGameManager class >> mazesLoma [
   #  ###
   #  #
   ####';
-		  at: 3 put: '  ####
+		  at: 2 put: '  ####
  ##  #
  # . #
  # * #
@@ -85,7 +75,7 @@ MygSkGameManager class >> mazesLoma [
 #  @ #
 #  ###
 ####';
-		  at: 4 put: '#####
+		  at: 3 put: '#####
 #   ##
 #  . #
 #  $ ###
@@ -94,7 +84,7 @@ MygSkGameManager class >> mazesLoma [
   #.#  #
   #   ##
   #####';
-		  at: 5 put: ' ####
+		  at: 4 put: ' ####
  #  #
  #  #
  #  ####
@@ -104,7 +94,7 @@ MygSkGameManager class >> mazesLoma [
 # @# #
 ##   #
  #####';
-		  at: 6 put: '   ####
+		  at: 5 put: '   ####
   ##  #
 ###   #
 #  $  #
@@ -112,7 +102,7 @@ MygSkGameManager class >> mazesLoma [
 ## $ #
  ##@ #
   ####';
-		  at: 7 put: '#####
+		  at: 6 put: '#####
 #   ##
 #  $ ##
 ##$*. ##
@@ -120,7 +110,7 @@ MygSkGameManager class >> mazesLoma [
  #  #  #
  ####  #
     ####';
-		  at: 8 put: '  #####
+		  at: 7 put: '  #####
   #   #
 ###   #
 #  * ##
@@ -128,7 +118,7 @@ MygSkGameManager class >> mazesLoma [
 #  * #
 ##  ##
  ####';
-		  at: 9 put: '  ####
+		  at: 8 put: '  ####
   #  #
  ##  ###
 ## $*  #
@@ -136,7 +126,7 @@ MygSkGameManager class >> mazesLoma [
 #   ####
 #  ##
 ####';
-		  at: 10 put: '####
+		  at: 9 put: '####
 #@ ###
 # $$ ###
 # $ .  #

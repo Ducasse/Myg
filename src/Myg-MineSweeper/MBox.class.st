@@ -6,31 +6,28 @@ Class {
 	#superclass : #MygAbstractBox,
 	#instVars : [
 		'announcer',
-		'flagged'
+		'flagged',
+		'clicked'
 	],
 	#category : #'Myg-MineSweeper-Model'
 }
 
 { #category : #'subclass instance creation' }
-MBox class >> clicked [
-	^ MClicked new
-]
-
-{ #category : #'subclass instance creation' }
 MBox class >> mine [
-	^ MMine new
+	^ MMineBox new
 ]
 
 { #category : #'random subclass instance creation' }
 MBox class >> randomCase [
-	^ (1 to: 7) atRandom > 6
-			ifTrue: [ self mine ]
-			ifFalse: [ self unknown ].
+
+	^ (1 to: 8) atRandom > 6
+		  ifTrue: [ self mine ]
+		  ifFalse: [ self safe ]
 ]
 
 { #category : #'subclass instance creation' }
-MBox class >> unknown [
-	^ MUnknown new
+MBox class >> safe [
+	^ MSafeBox new
 ]
 
 { #category : #accessing }
@@ -45,6 +42,12 @@ MBox >> click [
 ]
 
 { #category : #accessing }
+MBox >> clicked: aBoolean [
+
+	clicked := aBoolean 
+]
+
+{ #category : #accessing }
 MBox >> flag [
 
 	self flagged: self isFlagged not
@@ -56,13 +59,16 @@ MBox >> flagged: aBoolean [
 ]
 
 { #category : #initialization }
-MBox >> initialize [ 
-	flagged := false
+MBox >> initialize [
+
+	flagged := false.
+	clicked := false
 ]
 
 { #category : #testing }
-MBox >> isClickedBox [
-	^ false
+MBox >> isClicked [ 
+
+	^ clicked
 ]
 
 { #category : #testing }
@@ -76,7 +82,7 @@ MBox >> isMineBox [
 ]
 
 { #category : #testing }
-MBox >> isUnknownBox [
+MBox >> isSafeBox [
 	^ false
 ]
 
@@ -85,6 +91,7 @@ MBox >> propagateClick [
 
 	((self board hasMineBoxAroundBox: self) not or: [
 		 self board rightFlagCountAroundBox: self ]) ifTrue: [
-		self board boxesAroundBox: self do: [ :box |
-			box isClickedBox ifFalse: [ box click ] ] ]
+		self board
+			boxesAroundBox: self
+			do: [ :box | box isClicked ifFalse: [ box click ] ] ]
 ]

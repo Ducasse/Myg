@@ -16,7 +16,8 @@ TUnknownBox >> click [
 	self value: (value ifNil: [ 0 ] ifNotNil: [
 			 value = 0
 				 ifTrue: [ 1 ]
-				 ifFalse: [ nil ] ])
+				 ifFalse: [ nil ] ]).
+	self board checkIfFinished
 ]
 
 { #category : #testing }

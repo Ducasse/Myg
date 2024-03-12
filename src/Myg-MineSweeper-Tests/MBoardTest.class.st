@@ -2,58 +2,44 @@
 A MFieldTest is a test class for testing the behavior of MField
 "
 Class {
-	#name : #MFieldTest,
+	#name : #MBoardTest,
 	#superclass : #MAbstractTest,
 	#category : #'Myg-MineSweeper-Tests'
 }
 
-{ #category : #tests }
-MFieldTest >> testAllClickedWhenLost [
-
-	field playerLoose.
-	field grid do: [ :each | self deny: each isUnknownBox ]
-]
-
-{ #category : #tests }
-MFieldTest >> testAllClickedWhenWon [
-
-	field playerWin.
-	field grid do: [ :each | self deny: each isUnknownBox ]
-]
-
 { #category : #'tests-accessing' }
-MFieldTest >> testBoxAtAt [
+MBoardTest >> testBoxAtAt [
 
 	self
-		assert: (field boxAt: 1 at: 1) isUnknownBox;
-		assert: (field boxAt: 1 at: 2) isUnknownBox;
+		assert: (field boxAt: 1 at: 1) isSafeBox;
+		assert: (field boxAt: 1 at: 2) isSafeBox;
 		assert: (field boxAt: 1 at: 3) isMineBox;
-		assert: (field boxAt: 1 at: 4) isUnknownBox;
+		assert: (field boxAt: 1 at: 4) isSafeBox;
 		assert: (field boxAt: 1 at: 5) isMineBox;
-		assert: (field boxAt: 2 at: 1) isUnknownBox;
-		assert: (field boxAt: 2 at: 2) isUnknownBox;
+		assert: (field boxAt: 2 at: 1) isSafeBox;
+		assert: (field boxAt: 2 at: 2) isSafeBox;
 		assert: (field boxAt: 2 at: 3) isMineBox;
-		assert: (field boxAt: 2 at: 4) isUnknownBox;
-		assert: (field boxAt: 2 at: 5) isUnknownBox;
+		assert: (field boxAt: 2 at: 4) isSafeBox;
+		assert: (field boxAt: 2 at: 5) isSafeBox;
 		assert: (field boxAt: 3 at: 1) isMineBox;
 		assert: (field boxAt: 3 at: 2) isMineBox;
 		assert: (field boxAt: 3 at: 3) isMineBox;
-		assert: (field boxAt: 3 at: 4) isUnknownBox;
-		assert: (field boxAt: 3 at: 5) isUnknownBox;
-		assert: (field boxAt: 4 at: 1) isUnknownBox;
-		assert: (field boxAt: 4 at: 2) isUnknownBox;
-		assert: (field boxAt: 4 at: 3) isUnknownBox;
+		assert: (field boxAt: 3 at: 4) isSafeBox;
+		assert: (field boxAt: 3 at: 5) isSafeBox;
+		assert: (field boxAt: 4 at: 1) isSafeBox;
+		assert: (field boxAt: 4 at: 2) isSafeBox;
+		assert: (field boxAt: 4 at: 3) isSafeBox;
 		assert: (field boxAt: 4 at: 4) isMineBox;
-		assert: (field boxAt: 4 at: 5) isUnknownBox;
-		assert: (field boxAt: 5 at: 1) isUnknownBox;
-		assert: (field boxAt: 5 at: 2) isUnknownBox;
-		assert: (field boxAt: 5 at: 3) isUnknownBox;
+		assert: (field boxAt: 4 at: 5) isSafeBox;
+		assert: (field boxAt: 5 at: 1) isSafeBox;
+		assert: (field boxAt: 5 at: 2) isSafeBox;
+		assert: (field boxAt: 5 at: 3) isSafeBox;
 		assert: (field boxAt: 5 at: 4) isMineBox;
-		assert: (field boxAt: 5 at: 5) isUnknownBox
+		assert: (field boxAt: 5 at: 5) isSafeBox
 ]
 
 { #category : #'tests-enumerating' }
-MFieldTest >> testBoxesAroundBoxAtAtDoWithIndexes [
+MBoardTest >> testBoxesAroundBoxAtAtDoWithIndexes [
 
 	| expected |
 	expected := {
@@ -89,19 +75,19 @@ MFieldTest >> testBoxesAroundBoxAtAtDoWithIndexes [
 ]
 
 { #category : #tests }
-MFieldTest >> testClickOnFlaggedBox [
+MBoardTest >> testClickOnFlaggedBox [
 
 	| box |
 	box := field boxAt: 1 at: 1.
-	self assert: box class equals: MUnknown.
+	self assert: box class equals: MSafeBox.
 	box flag.
 	self assert: box isFlagged.
 	box click.
-	self assert: box class equals: MUnknown 
+	self assert: box class equals: MSafeBox 
 ]
 
 { #category : #tests }
-MFieldTest >> testFlagIsWorking [
+MBoardTest >> testFlagIsWorking [
 
 	|box|
 	box := (field boxAt: 1 at: 1).
@@ -110,21 +96,10 @@ MFieldTest >> testFlagIsWorking [
 	self assert: box isFlagged
 ]
 
-{ #category : #'tests-testing' }
-MFieldTest >> testHasClickedBoxAroundBoxAtAt [
+{ #category : #'tests-box api' }
+MBoardTest >> testGameEndsWhenClickingOnAllSafe [
 
-	| box boxToClick|
-	box := field boxAt: 1 at: 2.
-	boxToClick := field boxAt: 1 at: 1. 
-	self deny: (field hasClickedBoxAroundBox: box).
-	boxToClick click.
-	self assert: (field hasClickedBoxAroundBox: box)
-]
-
-{ #category : #'tests-testing' }
-MFieldTest >> testHasUnknownBox [
-
-	self assert: field hasUnknownBox.
+	self deny: field gameEnded.
 	field
 		clickOnBox: (field boxAt: 1 at: 1);
 		clickOnBox: (field boxAt: 1 at: 4);
@@ -135,16 +110,52 @@ MFieldTest >> testHasUnknownBox [
 		clickOnBox: (field boxAt: 4 at: 5);
 		clickOnBox: (field boxAt: 5 at: 1);
 		clickOnBox: (field boxAt: 5 at: 5).
-	self deny: field hasUnknownBox
+	self assert: field gameEnded.
+]
+
+{ #category : #'tests-box api' }
+MBoardTest >> testGameEndsWhenClickingOnBomb [
+
+	self deny: field gameEnded.
+	(field boxAt: 3 at: 3) click.
+	self assert: field gameEnded.
+]
+
+{ #category : #'tests-testing' }
+MBoardTest >> testHasClickedBoxAroundBoxAtAt [
+
+	| box boxToClick|
+	box := field boxAt: 1 at: 2.
+	boxToClick := field boxAt: 1 at: 1. 
+	self deny: (field hasClickedBoxAroundBox: box).
+	boxToClick click.
+	self assert: (field hasClickedBoxAroundBox: box)
+]
+
+{ #category : #'tests-testing' }
+MBoardTest >> testHasUnknownBox [
+
+	self deny: field hasBeenCleared.
+	field
+		clickOnBox: (field boxAt: 1 at: 1);
+		clickOnBox: (field boxAt: 1 at: 4);
+		clickOnBox: (field boxAt: 2 at: 4);
+		clickOnBox: (field boxAt: 2 at: 5);
+		clickOnBox: (field boxAt: 3 at: 4);
+		clickOnBox: (field boxAt: 3 at: 5);
+		clickOnBox: (field boxAt: 4 at: 5);
+		clickOnBox: (field boxAt: 5 at: 1);
+		clickOnBox: (field boxAt: 5 at: 5).
+	self assert: field hasBeenCleared
 ]
 
 { #category : #'tests-accessing' }
-MFieldTest >> testHeight [
+MBoardTest >> testHeight [
 	self assert: field height equals: 5
 ]
 
 { #category : #'tests-box api' }
-MFieldTest >> testMineCountAroundBoxAtAt [
+MBoardTest >> testMineCountAroundBoxAtAt [
 
 	self
 		assert: (field mineCountAroundBox: (field boxAt: 1 at: 1))
@@ -199,65 +210,26 @@ MFieldTest >> testMineCountAroundBoxAtAt [
 		equals: 2
 ]
 
-{ #category : #'tests-box api' }
-MFieldTest >> testPlayerLoose [
-
-	self deny: field gameEnded.
-	(field boxAt: 3 at: 3) click.
-	self assert: field gameEnded.
-	self assert: field playerLost
-]
-
-{ #category : #'tests-box api' }
-MFieldTest >> testPlayerWin [
-
-	self deny: field gameEnded.
-	field
-		clickOnBox: (field boxAt: 1 at: 1);
-		clickOnBox: (field boxAt: 1 at: 4);
-		clickOnBox: (field boxAt: 2 at: 4);
-		clickOnBox: (field boxAt: 2 at: 5);
-		clickOnBox: (field boxAt: 3 at: 4);
-		clickOnBox: (field boxAt: 3 at: 5);
-		clickOnBox: (field boxAt: 4 at: 5);
-		clickOnBox: (field boxAt: 5 at: 1);
-		clickOnBox: (field boxAt: 5 at: 5).
-	self assert: field gameEnded.
-	self assert: field playerWon
-]
-
 { #category : #tests }
-MFieldTest >> testPropagateWhenEnoughFlagsAround [
+MBoardTest >> testPropagateWhenEnoughFlagsAround [
 
 	| box |
 	box := field boxAt: 2 at: 5.
 	box click.
 	(field boxAt: 1 at: 5) flag.
-	self deny: (field boxAt: 1 at: 4) isClickedBox.
-	self deny: (field boxAt: 2 at: 4) isClickedBox.
-	self deny: (field boxAt: 3 at: 4) isClickedBox.
-	self deny: (field boxAt: 3 at: 5) isClickedBox.
+	self deny: (field boxAt: 1 at: 4) isClicked.
+	self deny: (field boxAt: 2 at: 4) isClicked.
+	self deny: (field boxAt: 3 at: 4) isClicked.
+	self deny: (field boxAt: 3 at: 5) isClicked.
 	box click.
-	self assert: (field boxAt: 1 at: 4) isClickedBox.
-	self assert: (field boxAt: 2 at: 4) isClickedBox.
-	self assert: (field boxAt: 3 at: 4) isClickedBox.
-	self assert: (field boxAt: 3 at: 5) isClickedBox.
-	self assert: (field boxAt: 1 at: 5) isMineBox.
-]
-
-{ #category : #'tests-box api' }
-MFieldTest >> testReplaceBoxAtRowColumnBy [
-
-	| actual new |
-	actual := field boxAt: 2 at: 2.
-	new := MBox clicked.
-	field replaceBox: actual by: new.
-	self
-		assert: (field boxAt: 2 at: 2) ~= actual;
-		assert: (field boxAt: 2 at: 2) equals: new
+	self assert: (field boxAt: 1 at: 4) isClicked.
+	self assert: (field boxAt: 2 at: 4) isClicked.
+	self assert: (field boxAt: 3 at: 4) isClicked.
+	self assert: (field boxAt: 3 at: 5) isClicked.
+	self assert: (field boxAt: 1 at: 5) isMineBox
 ]
 
 { #category : #'tests-accessing' }
-MFieldTest >> testWidth [
+MBoardTest >> testWidth [
 	self assert: field width equals: 5
 ]

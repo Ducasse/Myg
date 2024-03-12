@@ -40,13 +40,6 @@ TBox >> click [
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
-TBox >> configureValue [
-
-	
-	self value: (self valueDictionary at: self value).
-]
-
 { #category : #testing }
 TBox >> isTFixedBox [ 
 	^ false

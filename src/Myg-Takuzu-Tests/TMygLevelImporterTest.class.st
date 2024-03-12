@@ -26,11 +26,11 @@ TMygLevelImporterTest >> testClassFor [
 			         (RPackageOrganizer default packageNamed: 'Myg-Takuzu')).
 
 	box0 := tool classFor: $0.
-	self assert: box0 equals: TSetBox0.
+	self assert: box0 equals: TFixedBox0.
 	self assert: box0 new value equals: 0.
 
 	box1 := tool classFor: $1.
-	self assert: box1 equals: TSetBox1.
+	self assert: box1 equals: TFixedBox1.
 	self assert: box1 new value equals: 1.
 
 	boxUnknownClass := tool classFor: $_.

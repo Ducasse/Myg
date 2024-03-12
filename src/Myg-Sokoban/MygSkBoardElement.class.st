@@ -224,10 +224,8 @@ MygSkBoardElement >> initializeForegroundLayer [
 MygSkBoardElement >> manageEvent: anEvent [
 
 	| player moved direction neighborElement elements |
-	anEvent key name = #SPACE ifTrue: [
-		^ self resetBoard ].
-	anEvent key name = #ESCAPE ifTrue: [
-		^ self space close ].
+	anEvent key name = #SPACE ifTrue: [ ^ self resetBoard ].
+	anEvent key name = #ESCAPE ifTrue: [ ^ self space close ].
 	board isFinished ifTrue: [ ^ self ].
 	player := self board player.
 	direction := self directionDict
@@ -236,9 +234,11 @@ MygSkBoardElement >> manageEvent: anEvent [
 	elements := self
 		            elementsToUpdateAtPosition: player position
 		            goingIn: direction.
+	neighborElement := elements second.
+	
 	moved := player move: direction.
 
-	neighborElement := elements second.
+	
 
 	(moved and: [ neighborElement box class = MygSkBox ])
 		ifTrue: [

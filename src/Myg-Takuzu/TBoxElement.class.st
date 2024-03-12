@@ -2,12 +2,11 @@ Class {
 	#name : #TBoxElement,
 	#superclass : #BlElement,
 	#instVars : [
-		'box',
-		'board'
+		'box'
 	],
 	#classVars : [
 		'ColorDictionary',
-		'icons'
+		'Icons'
 	],
 	#category : #'Myg-Takuzu-UI'
 }
@@ -20,7 +19,8 @@ TBoxElement class >> box: aMBox [
 
 { #category : #accessing }
 TBoxElement class >> icons [
-	^ icons ifNil: [ icons := Dictionary new ]
+
+	^ Icons ifNil: [ Icons := Dictionary new ]
 ]
 
 { #category : #'class initialization' }
@@ -54,18 +54,6 @@ TBoxElement >> backgroundPaint [
 ]
 
 { #category : #'as yet unclassified' }
-TBoxElement >> board [
-
-	^ board
-]
-
-{ #category : #'as yet unclassified' }
-TBoxElement >> board: aTBoard [
-
-	board := aTBoard
-]
-
-{ #category : #'as yet unclassified' }
 TBoxElement >> box [
 
 	^ box
@@ -84,7 +72,7 @@ TBoxElement >> click [
 	self box isTFixedBox
 		ifTrue: [ self lockAll ]
 		ifFalse: [
-			self board clickOnBox: self box.
+			self box click.
 			self updateBackgroundColor ]
 ]
 
@@ -101,11 +89,8 @@ TBoxElement >> initialize [
 
 	self background: self backgroundPaint.
 	self geometry: (BlRoundedRectangleGeometry cornerRadius: 5).
-	self constraintsDo: [ :aLayoutConstraints |
-		aLayoutConstraints horizontal matchParent.
-		aLayoutConstraints vertical matchParent ].
-
-	self addEventHandlerOn: BlMouseUpEvent do: [ :anEvent | self click ]
+	self addEventHandlerOn: BlMouseUpEvent do: [
+		self click ]
 ]
 
 { #category : #'actions api' }
@@ -122,10 +107,12 @@ TBoxElement >> lock [
 { #category : #'as yet unclassified' }
 TBoxElement >> lockAll [
 
-	self parent children collect: [ :each | each box isTFixedBox ifTrue: [ each lock ] ]
+	self parent children do: [ :each |
+		each box isTFixedBox ifTrue: [ each lock ] ]
 ]
 
 { #category : #'as yet unclassified' }
 TBoxElement >> updateBackgroundColor [
-	self background: (self colorDictionary at: self box value)
+
+	self background: (self colorDictionary at: self box value).
 ]

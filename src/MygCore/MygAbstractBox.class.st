@@ -2,20 +2,21 @@ Class {
 	#name : #MygAbstractBox,
 	#superclass : #Object,
 	#instVars : [
-		'field',
-		'position'
+		'position',
+		'board'
 	],
 	#category : #MygCore
 }
 
 { #category : #accessing }
 MygAbstractBox >> board [ 
-	^ field 
+	^ board 
 ]
 
 { #category : #accessing }
-MygAbstractBox >> board: aTField [ 
-	field := aTField 
+MygAbstractBox >> board: aMygBoard [
+
+	board := aMygBoard
 ]
 
 { #category : #accessing }

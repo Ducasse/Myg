@@ -28,6 +28,7 @@ BaselineOfMyg >> baseline: spec [
 		package: 'MygCore'
 			with: [ spec requires: #( 'Bloc' 'Toplo' 'ContainersArray2D' ) ];
 		package: 'MygCore-Tests' with: [ spec requires: #( 'MygCore' ) ];
+		package: 'Myg-Compass';
 		package: 'Myg-Takuzu' with: [ spec requires: #( 'MygCore' ) ];
 		package: 'Myg-Takuzu-Tests'
 			with: [ spec requires: #( 'Myg-Takuzu' ) ];
@@ -38,5 +39,5 @@ BaselineOfMyg >> baseline: spec [
 			with: [ spec requires: #( 'MygCore' 'Myg-Compass' ) ];
 		package: 'Myg-Sokoban-Tests'
 			with: [ spec requires: #( 'Myg-Sokoban' ) ];
-		package: 'Myg-Compass'
+		package: 'Myg-Memory' with: [spec requires: #('MygCore') ]
 ]

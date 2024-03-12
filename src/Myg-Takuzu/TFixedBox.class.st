@@ -10,6 +10,12 @@ TFixedBox class >> createBoxWithValue: aNumber [
 	^ self new value: aNumber
 ]
 
+{ #category : #converting }
+TFixedBox >> asNewElement [ 
+
+	^ TFixedBoxElement box: self
+]
+
 { #category : #interaction }
 TFixedBox >> click [
 	"will send an announcements for the ui to show other TBoxSet"

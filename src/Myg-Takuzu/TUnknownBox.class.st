@@ -9,6 +9,12 @@ TUnknownBox class >> textualMapCharacter [
 	^ $_
 ]
 
+{ #category : #converting }
+TUnknownBox >> asNewElement [
+
+	^ TUnknownBoxElement box: self
+]
+
 { #category : #interaction }
 TUnknownBox >> click [
 	"change the box value to its next state (nil -> 0 -> 1 -> nil)"

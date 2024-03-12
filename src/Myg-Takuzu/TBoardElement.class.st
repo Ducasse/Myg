@@ -82,11 +82,11 @@ TBoardElement >> board: aTBoard [
 
 	board grid do: [ :aBox |
 		| boxElement |
-		boxElement := TBoxElement box: aBox.
+		boxElement := aBox asNewElement.
 		boxElement size: elementWidth asPoint.
 		boxElement position:
 			elementWidth + self cellSpacing * (aBox position - (1 @ 1)).
-		self addChild: boxElement ].
+		self addChild: boxElement ]
 ]
 
 { #category : #accessing }

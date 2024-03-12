@@ -84,11 +84,9 @@ TBoardElement >> board: aTBoard [
 		| boxElement |
 		boxElement := TBoxElement box: aBox.
 		boxElement size: elementWidth asPoint.
-			boxElement position:
-				(elementWidth + self cellSpacing) * (aBox position - (1 @ 1)).
-		self addChild: boxElement.
-		].
-	self inspect
+		boxElement position:
+			elementWidth + self cellSpacing * (aBox position - (1 @ 1)).
+		self addChild: boxElement ].
 ]
 
 { #category : #accessing }

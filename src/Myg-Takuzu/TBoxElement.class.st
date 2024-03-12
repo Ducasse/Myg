@@ -68,7 +68,7 @@ TBoxElement >> box: aTBox [
 
 { #category : #public }
 TBoxElement >> click [
-self inspect.
+
 	self box isTFixedBox
 		ifTrue: [ self lockAll ]
 		ifFalse: [
@@ -90,7 +90,6 @@ TBoxElement >> initialize [
 	self background: self backgroundPaint.
 	self geometry: (BlRoundedRectangleGeometry cornerRadius: 5).
 	self addEventHandlerOn: BlMouseUpEvent do: [
-		self inspect.
 		self click ]
 ]
 

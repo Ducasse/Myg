@@ -2,8 +2,8 @@ Class {
 	#name : #TBoxElement,
 	#superclass : #BlElement,
 	#instVars : [
-		'box'
-    'board'
+		'box',
+    		'board'
 	],
 	#classVars : [
 		'ColorDictionary',

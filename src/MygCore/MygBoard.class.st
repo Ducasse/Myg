@@ -17,6 +17,7 @@ MygBoard class >> configureGrid: aCTNewArray2D [
 
 { #category : #'public api - configure' }
 MygBoard >> configureGrid: anArray2D [
+  
 	"anArray2D is filled up with elements. Make sure that each element has its backpointer set to the board."
 
 	self grid: anArray2D.

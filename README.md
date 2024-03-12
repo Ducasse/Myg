@@ -9,7 +9,7 @@ Load a stable version of Myg with the following snippet, in Pharo 11:
 ```Smalltalk
 Author fullName: 'No'.
 Metacello new
-	repository: 'github://Ducasse/Myg:v1.0.1/src';
+	repository: 'github://Ducasse/Myg:v1.0.2/src';
 	baseline: 'Myg';
 	onConflictUseLoaded;
 	load.

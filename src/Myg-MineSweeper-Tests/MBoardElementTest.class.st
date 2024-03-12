@@ -14,7 +14,7 @@ Class {
 MBoardElementTest >> setUp [
 
 	super setUp.
-	board := MFieldElement new game: (MBoard
+	board := MBoardElement new game: (MBoard
 			          matrixForField
 			          magnifier: 1)
 ]

@@ -2,13 +2,12 @@ Class {
 	#name : #TBoxElement,
 	#superclass : #BlElement,
 	#instVars : [
-		'box',
-		'board',
-		'colorDictionary'
+		'box'
+    'board'
 	],
 	#classVars : [
 		'ColorDictionary',
-		'icons'
+		'Icons'
 	],
 	#category : #'Myg-Takuzu-UI'
 }
@@ -21,7 +20,8 @@ TBoxElement class >> box: aMBox [
 
 { #category : #accessing }
 TBoxElement class >> icons [
-	^ icons ifNil: [ icons := Dictionary new ]
+
+	^ Icons ifNil: [ Icons := Dictionary new ]
 ]
 
 { #category : #'class initialization' }
@@ -85,7 +85,7 @@ TBoxElement >> click [
 	self box isTFixedBox
 		ifTrue: [ self lockAll ]
 		ifFalse: [
-			self board clickOnBox: self box.
+			self box click.
 			self updateBackgroundColor ]
 ]
 
@@ -95,11 +95,8 @@ TBoxElement >> initialize [
 	super initialize.
 	self background: self backgroundPaint.
 	self geometry: (BlRoundedRectangleGeometry cornerRadius: 5).
-	self constraintsDo: [ :aLayoutConstraints |
-		aLayoutConstraints horizontal matchParent.
-		aLayoutConstraints vertical matchParent ].
-
-	self addEventHandlerOn: BlMouseUpEvent do: [ :anEvent | self click ]
+	self addEventHandlerOn: BlMouseUpEvent do: [
+		self click ]
 ]
 
 { #category : #'actions api' }
@@ -122,6 +119,5 @@ TBoxElement >> lockAll [
 
 { #category : #'actions api' }
 TBoxElement >> updateBackgroundColor [
-
 	self background: (ColorDictionary at: self box value)
 ]

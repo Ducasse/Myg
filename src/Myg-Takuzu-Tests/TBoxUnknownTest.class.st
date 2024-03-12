@@ -6,8 +6,11 @@ Class {
 
 { #category : #tests }
 TBoxUnknownTest >> testBoxUnknownClick [
-	|box|
+
+	| box board |
 	box := TUnknownBox new.
+	board := TBoard new grid: (CTNewArray2D fromArray: { box } width: 1 ).
+	box board: board.
 	self assert: box value isNil.
 	box click.
 	self assert: box value equals: 0.

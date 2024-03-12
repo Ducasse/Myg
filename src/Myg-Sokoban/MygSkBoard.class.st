@@ -8124,12 +8124,6 @@ MygSkBoard class >> mazesUAlberta [
 		yourself
 ]
 
-{ #category : #initialization }
-MygSkBoard >> addBox: aBox [
-
-	boxes add: aBox
-]
-
 { #category : #printing }
 MygSkBoard >> asciiString [ 
 
@@ -8168,6 +8162,18 @@ MygSkBoard >> atPosition: aCpPositionable [
 ]
 
 { #category : #accessing }
+MygSkBoard >> boxes [ 
+
+	^ boxes
+]
+
+{ #category : #accessing }
+MygSkBoard >> boxes: aCollection [
+
+	boxes := aCollection 
+]
+
+{ #category : #accessing }
 MygSkBoard >> configureGrid: aCTNewArray2D [
 
 	super configureGrid: aCTNewArray2D.
@@ -8182,7 +8188,7 @@ MygSkBoard >> do: aBlock [
 	grid do: aBlock
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #ending }
 MygSkBoard >> endGame [
 
 	ended ifTrue: [ ^ self ].
@@ -8223,7 +8229,8 @@ MygSkBoard >> initialize [
 
 { #category : #testing }
 MygSkBoard >> isFinished [
-	^ boxes allSatisfy: [ :each | each background isTarget ]
+
+	^ self boxes allSatisfy: [ :each | each background isTarget ]
 ]
 
 { #category : #move }
@@ -8244,13 +8251,15 @@ MygSkBoard >> printOn: aStream [
 		do: [ :rowNumber |
 			1 to: grid width do: [ :columnNumber |
 				| el elClass |
-				el := self atColumn: columnNumber atRow: rowNumber .
+				el := self atColumn: columnNumber atRow: rowNumber.
 				elClass := (el class inheritsFrom: MygSkMovable)
 					           ifFalse: [ el class ]
 					           ifTrue: [
 						           el background class = MygSkGround
 							           ifTrue: [ el class ]
-							           ifFalse: [ (el class asString , 'OnTarget') asClass ] ].
+							           ifFalse: [
+							           self class environment at:
+								           el class asString , 'OnTarget' ] ].
 				aStream nextPut: elClass textualMapCharacter ] ]
 		separatedBy: [ aStream cr ]
 ]
@@ -8264,8 +8273,7 @@ MygSkBoard >> reset [
 { #category : #initialization }
 MygSkBoard >> setBoxes [
 
-	grid do: [ :each |
-		each class = MygSkBox ifTrue: [ self addBox: each ] ].
+	self boxes: (grid select: [ :e | e class = MygSkBox ]).
 ]
 
 { #category : #initialization }

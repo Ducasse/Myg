@@ -9,9 +9,7 @@ Class {
 	#name : #MBoard,
 	#superclass : #MygBoard,
 	#instVars : [
-		'round',
 		'gameEnded',
-		'playerWon',
 		'announcer',
 		'magnifier'
 	],
@@ -32,7 +30,7 @@ MBoard class >> matrixForField [
 	^ self createWithMatrix: ((CTNewArray2D
 			    width: 5
 			    height: 5
-			    tabulate: [ :column :row | MBox unknown ])
+			    tabulate: [ :column :row | MBox safe ])
 			   at: 1 @ 3 put: MBox mine;
 			at: 1 @ 5 put: MBox mine;
 			   at: 2 @ 3 put: MBox mine;
@@ -50,11 +48,6 @@ MBoard class >> matrixTest5x5 [
 	^ self createWithMatrix:
 		  (CTNewArray2D width: 5 height: 5 tabulate: [ :column :row |
 			   MBox randomCase ])
-]
-
-{ #category : #visiting }
-MBoard >> accept: aMFieldVisitor [
-	^ aMFieldVisitor visitMField: self
 ]
 
 { #category : #accessing }
@@ -169,9 +162,15 @@ MBoard >> gameEnded [
 ]
 
 { #category : #testing }
+MBoard >> hasBeenCleared [
+
+	^ (self boxesSelect: #isSafeBox) allSatisfy: #isClicked
+]
+
+{ #category : #testing }
 MBoard >> hasClickedBoxAroundBox: aBox [
 
-	^ self boxesAroundBox: aBox anySatisfy: #isClickedBox
+	^ self boxesAroundBox: aBox anySatisfy: #isClicked
 ]
 
 { #category : #testing }
@@ -180,29 +179,17 @@ MBoard >> hasMineBoxAroundBox: aBox [
 	^ self boxesAroundBox: aBox anySatisfy: #isMineBox 
 ]
 
-{ #category : #testing }
-MBoard >> hasUnknownBox [
-	^ self anyBoxSatisfy: #isUnknownBox
-]
-
 { #category : #accessing }
 MBoard >> height [
 
 	^ grid height
 ]
 
-{ #category : #'box api' }
-MBoard >> incrementRound [
-	round := round + 1
-]
-
 { #category : #initialization }
 MBoard >> initialize [
 	super initialize.
-	round := 0.
 	announcer := Announcer new.
 	gameEnded := false.
-	playerWon := false
 ]
 
 { #category : #accessing }
@@ -232,29 +219,17 @@ MBoard >> mineCountAroundBox: aBox [
 { #category : #'box api' }
 MBoard >> playerLoose [
 
-	playerWon := false.
 	gameEnded := true.
 	self revealBoard.
 	
-]
-
-{ #category : #accessing }
-MBoard >> playerLost [
-	^ self playerWon not
 ]
 
 { #category : #'box api' }
 MBoard >> playerWin [
 
 	gameEnded ifTrue: [ ^ self ].
-	playerWon := true.
 	gameEnded := true.
 	self revealBoard
-]
-
-{ #category : #accessing }
-MBoard >> playerWon [
-	^ playerWon
 ]
 
 { #category : #printing }
@@ -284,14 +259,9 @@ MBoard >> replaceBox: aBox by: aNewBox [
 MBoard >> revealBoard [
 
 	self boxesDoWithIndices: [ :aBox :i :j |
-		| newBox |
-		newBox := MClicked new
-			          position: i @ j;
-			          board: self.
-		aBox isUnknownBox ifTrue: [
-			self replaceBox: aBox by: newBox].
-			aBox announcer announce:
-				(MBoxClickAndReplaceAnnouncement replaceBy: newBox)]
+		aBox isSafeBox
+			ifTrue: [ aBox announcer announce: MBoxClickedAnnouncement new ]
+			ifFalse: [ aBox announcer announce: MBoxExplosionAnnouncement new ] ]
 ]
 
 { #category : #accessing }
@@ -299,11 +269,6 @@ MBoard >> rightFlagCountAroundBox: aBox [
 
 	^ (self flagCountAroundBox: aBox)
 	  = (self mineCountAroundBox: aBox)
-]
-
-{ #category : #accessing }
-MBoard >> round [
-	^ round
 ]
 
 { #category : #accessing }

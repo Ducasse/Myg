@@ -33,7 +33,7 @@ Sokoban class >> menuBar [
 	bar := ToMenuBar new
 		       hMatchParent;
 		       vFitContent.
-	bar border: (BlBorder paint: Color red).
+	bar border: (BlBorder paint: Color lightGray).
 	^ bar
 ]
 
@@ -98,33 +98,31 @@ Have fun !' asRopedText.
 { #category : #'private - menu building' }
 Sokoban class >> menuLevel [
 
-	| menu manager subMenuMicroban subMenuLoma subMenuPack subMenuSasquatch subMenuSasquatchIII subMenuSasquatchIV subMenuSasquatchV subMenuSasquatchVI subMenuUAlberta |
+	| menu manager |
 	menu := ToMenu new.
 	menu labelText: 'Levels'.
 	menu iconImage: (Smalltalk ui icons iconNamed: #solidMenu).
 
 	manager := MygSkGameManager menu: menu.
 
-	subMenuLoma := self subMenuLoma: manager.
-	subMenuMicroban := self subMenuMicroban: manager.
-	subMenuPack := self subMenuPack: manager.
-	subMenuSasquatch := self subMenuSasquatch: manager.
-	subMenuSasquatchIII := self subMenuSasquatchIII: manager.
-	subMenuSasquatchIV := self subMenuSasquatchIV: manager.
-	subMenuSasquatchV := self subMenuSasquatchV: manager.
-	subMenuSasquatchVI := self subMenuSasquatchVI: manager.
-	subMenuUAlberta := self subMenuUAlberta: manager.
-
-	menu addItem: subMenuLoma.
-	menu addItem: subMenuMicroban.
-	menu addItem: subMenuPack.
-	menu addItem: subMenuSasquatch.
-	menu addItem: subMenuSasquatchIII.
-	menu addItem: subMenuSasquatchIV.
-	menu addItem: subMenuSasquatchV.
-	menu addItem: subMenuSasquatchVI.
-	menu addItem: subMenuUAlberta.
-	menu addItem: (self subMenuTest: manager).
+	menu addItem:
+			(self subMenuPack: 'mazesLoma' withManager: manager);
+			addItem:
+			(self subMenuPack: 'mazesMicroban' withManager: manager);
+			addItem:
+			(self subMenuPack: 'mazesPack' withManager: manager);
+			addItem:
+			(self subMenuPack: 'mazesSasquatch' withManager: manager);
+			addItem:
+			(self subMenuPack: 'mazesSasquatchIII' withManager: manager);
+			addItem:
+			(self subMenuPack: 'mazesSasquatchIV' withManager: manager);
+			addItem:
+			(self subMenuPack: 'mazesSasquatchV' withManager: manager);
+			addItem:
+			(self subMenuPack: 'mazesSasquatchVI' withManager: manager);
+			addItem:
+			(self subMenuPack: 'mazesUAlberta' withManager: manager).
 
 	^ menu
 ]
@@ -160,13 +158,13 @@ Sokoban class >> open [
 ]
 
 { #category : #'private - menu building' }
-Sokoban class >> subMenuLoma: aManager [
+Sokoban class >> subMenuPack: aPack withManager: aManager [
 
 	| subMenu |
 	subMenu := ToMenu new
-		labelText: 'mazesLoma';
+		labelText: aPack;
 		yourself.
-	MygSkGameManager mazesLoma withIndexDo: [ :string :i |
+	(MygSkGameManager perform: aPack asSymbol) withIndexDo: [ :string :i |
 		| stream |
 		stream := String streamContents: [ :out | out print: i ].
 		subMenu addItem:
@@ -175,214 +173,7 @@ Sokoban class >> subMenuLoma: aManager [
 				whenClickedDo: [
 					aManager
 						launchFromString: string
-						inDictionary: 'mazesLoma'
-						at: i ];
-				yourself) ].
-
-	^ subMenu
-]
-
-{ #category : #'private - menu building' }
-Sokoban class >> subMenuMicroban: aManager [
-
-	| subMenu |
-	subMenu := ToMenu new
-		labelText: 'mazesMicroban';
-		yourself.
-	MygSkGameManager mazesMicroban withIndexDo: [ :string :i |
-		| stream |
-		stream := String streamContents: [ :out | out print: i ].
-		subMenu addItem:
-			(ToMenuItem new
-				labelText: stream;
-				whenClickedDo: [
-					aManager
-						launchFromString: string
-						inDictionary: 'mazesMicroban'
-						at: i ];
-					yourself) ].
-
-	^ subMenu
-]
-
-{ #category : #'private - menu building' }
-Sokoban class >> subMenuPack: aManager [
-
-	| subMenu |
-	subMenu := ToMenu new
-		labelText: 'mazesPack';
-		yourself.
-	MygSkGameManager mazesPack withIndexDo: [ :string :i |
-		| stream |
-		stream := String streamContents: [ :out | out print: i ].
-		subMenu addItem:
-			(ToMenuItem new
-				labelText: stream;
-				whenClickedDo: [
-					aManager
-						launchFromString: string
-						inDictionary: 'mazesPack'
-						at: i ];
-				yourself) ].
-
-	^ subMenu
-]
-
-{ #category : #'private - menu building' }
-Sokoban class >> subMenuSasquatch: aManager [
-
-	| subMenu |
-	subMenu := ToMenu new
-		labelText: 'mazesSasquatch';
-		yourself.
-	MygSkGameManager mazesSasquatch withIndexDo: [ :string :i |
-		| stream |
-		stream := String streamContents: [ :out | out print: i ].
-		subMenu addItem:
-			(ToMenuItem new
-				labelText: stream;
-				whenClickedDo: [
-					aManager
-						launchFromString: string
-						inDictionary: 'mazesSasquatch'
-						at: i ];
-				yourself) ].
-
-	^ subMenu
-]
-
-{ #category : #'private - menu building' }
-Sokoban class >> subMenuSasquatchIII: aManager [
-
-	| subMenu |
-	subMenu := ToMenu new
-		labelText: 'mazesSasquatchIII';
-		yourself.
-	MygSkGameManager mazesSasquatchIII withIndexDo: [ :string :i |
-		| stream |
-		stream := String streamContents: [ :out | out print: i ].
-		subMenu addItem:
-			(ToMenuItem new
-				labelText: stream;
-				whenClickedDo: [
-					aManager
-						launchFromString: string
-						inDictionary: 'mazesSasquatchIII'
-						at: i ];
-				yourself) ].
-
-	^ subMenu
-]
-
-{ #category : #'private - menu building' }
-Sokoban class >> subMenuSasquatchIV: aManager [
-
-	| subMenu |
-	subMenu := ToMenu new
-		labelText: 'mazesSasquatchIV';
-		yourself.
-	MygSkGameManager mazesSasquatchIV withIndexDo: [ :string :i |
-		| stream |
-		stream := String streamContents: [ :out | out print: i ].
-		subMenu addItem:
-			(ToMenuItem new
-				labelText: stream;
-				whenClickedDo: [
-					aManager
-						launchFromString: string
-						inDictionary: 'mazesSasquatchIV'
-						at: i ];
-				yourself) ].
-
-	^ subMenu
-]
-
-{ #category : #'private - menu building' }
-Sokoban class >> subMenuSasquatchV: aManager [
-
-	| subMenu |
-	subMenu := ToMenu new
-		labelText: 'mazesSasquatchV';
-		yourself.
-	MygSkGameManager mazesSasquatchV withIndexDo: [ :string :i |
-		| stream |
-		stream := String streamContents: [ :out | out print: i ].
-		subMenu addItem:
-			(ToMenuItem new
-				labelText: stream;
-				whenClickedDo: [
-					aManager
-						launchFromString: string
-						inDictionary: 'mazesSasquatchV'
-						at: i ];
-				yourself) ].
-
-	^ subMenu
-]
-
-{ #category : #'private - menu building' }
-Sokoban class >> subMenuSasquatchVI: aManager [
-
-	| subMenu |
-	subMenu := ToMenu new
-		labelText: 'mazesSasquatchVI';
-		yourself.
-	MygSkGameManager mazesSasquatchVI withIndexDo: [ :string :i |
-		| stream |
-		stream := String streamContents: [ :out | out print: i ].
-		subMenu addItem:
-			(ToMenuItem new
-				labelText: stream;
-				whenClickedDo: [
-					aManager
-						launchFromString: string
-						inDictionary: 'mazesSasquatchVI'
-						at: i ];
-				yourself) ].
-
-	^ subMenu
-]
-
-{ #category : #'private - menu building' }
-Sokoban class >> subMenuTest: aManager [
-
-	| subMenu |
-	subMenu := ToMenu new
-		labelText: 'mazesTest';
-		yourself.
-	MygSkGameManager mazesTest withIndexDo: [ :string :i |
-		| stream |
-		stream := String streamContents: [ :out | out print: i ].
-		subMenu addItem:
-			(ToMenuItem new
-				labelText: stream;
-				whenClickedDo: [
-					aManager
-						launchFromString: string
-						inDictionary: 'mazesTest'
-						at: i ];
-				yourself) ].
-
-	^ subMenu
-]
-
-{ #category : #'private - menu building' }
-Sokoban class >> subMenuUAlberta: aManager [
-
-	| subMenu |
-	subMenu := ToMenu new
-		labelText: 'mazesUAlberta';
-		yourself.
-	MygSkGameManager mazesUAlberta withIndexDo: [ :string :i |
-		| stream |
-		stream := String streamContents: [ :out | out print: i ].
-		subMenu addItem:
-			(ToMenuItem new
-				labelText: stream;
-				whenClickedDo: [
-					aManager
-						launchFromString: string
-						inDictionary: 'mazesUAlberta'
+						inDictionary: aPack
 						at: i ];
 				yourself) ].
 

@@ -24,7 +24,7 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MFieldElement,
+	#name : #MBoardElement,
 	#superclass : #BlElement,
 	#instVars : [
 		'game'
@@ -33,27 +33,27 @@ Class {
 }
 
 { #category : #'instance creation' }
-MFieldElement class >> launchLarge [
+MBoardElement class >> launchLarge [
 	^ self withMatrixTest5x5WithMagnifier: 2
 ]
 
 { #category : #'instance creation' }
-MFieldElement class >> launchRegular [
+MBoardElement class >> launchRegular [
 	^ self withMatrixTest5x5 
 ]
 
 { #category : #'instance creation' }
-MFieldElement class >> launchSmall [
+MBoardElement class >> launchSmall [
 	^ self withMatrixTest5x5WithMagnifier: 0.5
 ]
 
 { #category : #'instance creation' }
-MFieldElement class >> launchVeryLarge [
+MBoardElement class >> launchVeryLarge [
 	^ self withMatrixTest5x5WithMagnifier: 4
 ]
 
 { #category : #'instance creation' }
-MFieldElement class >> open [
+MBoardElement class >> open [
 	<script>
 
 	| butSmall butRegular butLarge butVeryLarge space elt |
@@ -114,13 +114,13 @@ MFieldElement class >> open [
 ]
 
 { #category : #'instance creation' }
-MFieldElement class >> openWithModel: aModel [
+MBoardElement class >> openWithModel: aModel [
 
 	^ self openWithModel: aModel withMagnifier: 1
 ]
 
 { #category : #'instance creation' }
-MFieldElement class >> openWithModel: aModel withMagnifier: aNumber [
+MBoardElement class >> openWithModel: aModel withMagnifier: aNumber [
 
 	| aGameElement space |
 	space := BlSpace new.
@@ -142,50 +142,48 @@ MFieldElement class >> openWithModel: aModel withMagnifier: aNumber [
 ]
 
 { #category : #execution }
-MFieldElement class >> withMatrixForField [
+MBoardElement class >> withMatrixForField [
 
 	^ self openWithModel: MBoard matrixForField
 ]
 
 { #category : #execution }
-MFieldElement class >> withMatrixForFieldWithMagnifier: aNumber [
+MBoardElement class >> withMatrixForFieldWithMagnifier: aNumber [
 
 	^ self openWithModel: MBoard matrixForField withMagnifier: aNumber 
 ]
 
 { #category : #execution }
-MFieldElement class >> withMatrixTest5x5 [
+MBoardElement class >> withMatrixTest5x5 [
 
 	^ self openWithModel: MBoard matrixTest5x5
 ]
 
 { #category : #execution }
-MFieldElement class >> withMatrixTest5x5WithMagnifier: aNumber [
+MBoardElement class >> withMatrixTest5x5WithMagnifier: aNumber [
 
 	^ self openWithModel: MBoard matrixTest5x5 withMagnifier: aNumber 
 ]
 
 { #category : #accessing }
-MFieldElement >> game [ 
+MBoardElement >> game [ 
 	^ game
 ]
 
 { #category : #accessing }
-MFieldElement >> game: aMField [
+MBoardElement >> game: aMBoard [
 
-	game := aMField.
+	game := aMBoard.
 	self padding: (BlInsets all: 5 * game magnifier).
 	self layout columnCount: game width.
 	game grid do: [ :aBox |
 		| boxElement |
-		boxElement := (MBoxElement createWithBox: aBox)
-			              field: aMField;
-			              positionInField: aBox position.
+		boxElement := MBoxElement createWithBox: aBox.
 		self addChild: boxElement ]
 ]
 
 { #category : #initialization }
-MFieldElement >> initialize [
+MBoardElement >> initialize [
 
 	super initialize.
 	self background: (BlBackground paint: Color veryVeryLightGray).

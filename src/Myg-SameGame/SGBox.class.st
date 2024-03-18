@@ -8,16 +8,40 @@ Class {
 	#category : #'Myg-SameGame-Model'
 }
 
+{ #category : #constants }
+SGBox class >> blue [ 
+
+	^ self withState: SGBlueState uniqueInstance 
+]
+
+{ #category : #constants }
+SGBox class >> green [
+
+	^ self withState: SGGreenState uniqueInstance
+]
+
 { #category : #factory }
 SGBox class >> null [
 
 	^ self withState: SGNullState uniqueInstance 
 ]
 
+{ #category : #constants }
+SGBox class >> red [
+
+	^ self withState: SGRedState uniqueInstance
+]
+
 { #category : #'as yet unclassified' }
 SGBox class >> withState: aState [ 
 
 	^ self new state: aState
+]
+
+{ #category : #constants }
+SGBox class >> yellow [
+
+	^ self withState: SGYellowState uniqueInstance
 ]
 
 { #category : #accessing }
@@ -51,6 +75,12 @@ SGBox >> draw: drawer [
 SGBox >> hasNullState [ 
 
 	^ self state isNull
+]
+
+{ #category : #accessing }
+SGBox >> literal [ 
+
+	^ state literal
 ]
 
 { #category : #clicking }

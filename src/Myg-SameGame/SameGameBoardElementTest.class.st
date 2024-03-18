@@ -15,26 +15,22 @@ SameGameBoardElementTest >> testClickAndCaseNothingAppend [
 	 | B | G | G | 
 
 	"
-	self skip.
-	"skip for now too hard to fix with current implementation"
 	game := SGGame new.
 	board := SGBoard new game: game.
 	board configureGrid: ((CTNewArray2D width: 3 height: 3)
-			 at: 1 @ 1 put: SGBlueState new;
-			 at: 2 @ 1 put: SGYellowState new;
-			 at: 3 @ 1 put: SGYellowState new;
-			 at: 1 @ 2 put: SGRedState new;
-			 at: 2 @ 2 put: SGRedState new;
-			 at: 3 @ 2 put: SGRedState new;
-			 at: 1 @ 3 put: SGBlueState new;
-			 at: 2 @ 3 put: SGGreenState new;
-			 at: 3 @ 3 put: SGGreenState new;
+			 at: 1 @ 1 put: SGBox blue;
+			 at: 2 @ 1 put: SGBox yellow;
+			 at: 3 @ 1 put: SGBox yellow;
+			 at: 1 @ 2 put: SGBox red;
+			 at: 2 @ 2 put: SGBox red;
+			 at: 3 @ 2 put: SGBox red;
+			 at: 1 @ 3 put: SGBox blue;
+			 at: 2 @ 3 put: SGBox green;
+			 at: 3 @ 3 put: SGBox green;
 			 yourself).
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid.
 	graphicBoard sameGameBoard: board.
-
-	board drawer: graphicBoard.
 
 	board hitBoxOnx: 1 y: 3.
 
@@ -55,31 +51,19 @@ SameGameBoardElementTest >> testClickAndMultipleCaseDisappear [
 	game := SGGame new.
 	board := SGBoard new game: game.
 	board configureGrid: ((CTNewArray2D width: 3 height: 3)
-			 at: 1 @ 1 put: (SGBlueState new
-					  
-					   );
-			 at: 2 @ 1 put: (SGYellowState new
-				  );
-			 at: 3 @ 1 put: (SGYellowState new
-				  );
-			 at: 1 @ 2 put: (SGRedState new
-				  );
-			 at: 2 @ 2 put: (SGRedState new
-				  );
-			 at: 3 @ 2 put: (SGRedState new
-				  );
-			 at: 1 @ 3 put: (SGBlueState new
-				 );
-			 at: 2 @ 3 put: (SGGreenState new
-				  );
-			 at: 3 @ 3 put: (SGGreenState new
-				  );
+			 at: 1 @ 1 put: SGBox blue;
+			 at: 2 @ 1 put: SGBox yellow;
+			 at: 3 @ 1 put: SGBox yellow;
+			 at: 1 @ 2 put: SGBox red;
+			 at: 2 @ 2 put: SGBox red;
+			 at: 3 @ 2 put: SGBox red;
+			 at: 1 @ 3 put: SGBox blue;
+			 at: 2 @ 3 put: SGBox green;
+			 at: 3 @ 3 put: SGBox green;
 			 yourself).
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
 	graphicBoard sameGameBoard: board.
-
-	board drawer: graphicBoard.
 
 	board hitBoxOnx: 1 y: 2.
 	"fonctionne jusque ici"
@@ -100,31 +84,20 @@ SameGameBoardElementTest >> testClickAndOneColumnDisappear [
 	game := SGGame new.
 	board := SGBoard new game: game.
 	board configureGrid: ((CTNewArray2D width: 3 height: 3)
-			 at: 1 @ 1 put: (SGRedState new
-					 );
-			 at: 2 @ 1 put: (SGYellowState new
-				  );
-			 at: 3 @ 1 put: (SGRedState new
-				 );
-			 at: 1 @ 2 put: (SGBlueState new
-				  );
-			 at: 2 @ 2 put: (SGYellowState new
-				  );
-			 at: 3 @ 2 put: (SGBlueState new
-				  );
-			 at: 1 @ 3 put: (SGGreenState new
-				  );
-			 at: 2 @ 3 put: (SGYellowState new
-				  );
-			 at: 3 @ 3 put: (SGGreenState new
-				  );
+			 at: 1 @ 1 put: SGBox red;
+			 at: 2 @ 1 put: SGBox yellow;
+			 at: 3 @ 1 put: SGBox red;
+			 at: 1 @ 2 put: SGBox blue;
+			 at: 2 @ 2 put: SGBox yellow;
+			 at: 3 @ 2 put: SGBox blue;
+			 at: 1 @ 3 put: SGBox green;
+			 at: 2 @ 3 put: SGBox yellow;
+			 at: 3 @ 3 put: SGBox green;
 			 yourself).
 
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
 	graphicBoard sameGameBoard: board.
-
-	board drawer: graphicBoard.
 
 	board hitBoxOnx: 2 y: 2.
 
@@ -146,62 +119,59 @@ SameGameBoardElementTest >> testClickOnBlueCase [
 	game := SGGame new.
 	board := SGBoard new game: game.
 	board configureGrid: ((CTNewArray2D width: 2 height: 2)
-			 at: 1 @ 1 put: SGBlueState new;
-			 at: 2 @ 1 put: SGBlueState new;
-			 at: 1 @ 2 put: SGGreenState new;
-			 at: 2 @ 2 put: SGRedState new;
+			 at: 1 @ 1 put: SGBox blue;
+			 at: 2 @ 1 put: SGBox blue;
+			 at: 1 @ 2 put: SGBox green;
+			 at: 2 @ 2 put: SGBox red;
 			 yourself).
 
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
 	graphicBoard sameGameBoard: board.
-	board drawer: graphicBoard.
 
 	resGrid := SGBoard new.
 	resGrid configureGrid: ((CTNewArray2D width: 2 height: 2)
-			 at: 1 @ 1 put: SGGreenState new;
-			 at: 2 @ 1 put: SGRedState new;
-			 at: 1 @ 2 put: SGNullState new;
-			 at: 2 @ 2 put: SGNullState new;
+			 at: 1 @ 1 put: SGBox green;
+			 at: 2 @ 1 put: SGBox red;
+			 at: 1 @ 2 put: SGBox null;
+			 at: 2 @ 2 put: SGBox null;
 			 yourself).
 
 	resgraphicBoard := SGBoardElement new.
 	resgraphicBoard grid: resGrid grid.
 	resgraphicBoard sameGameBoard: board.
-	resGrid drawer: resgraphicBoard.
 	board hitBoxOnx: 1 y: 1.
 
 	self assert: board grid size equals: resGrid grid size.
 	self
-		assert: (board grid at: 1 @ 1) class
-		equals: (resGrid grid at: 1 @ 1) class.
+		assert: (board grid at: 1 @ 1) state
+		equals: (resGrid grid at: 1 @ 1) state.
 	self
-		assert: (board grid at: 2 @ 1) class
-		equals: (resGrid grid at: 2 @ 1) class
+		assert: (board grid at: 2 @ 1) state
+		equals: (resGrid grid at: 2 @ 1) state
 ]
 
 { #category : #tests }
 SameGameBoardElementTest >> testColonneIsEmpty [
 
-	| board game graphicBoard | 
+	| board game graphicBoard |
 	game := SGGame new.
 	board := SGBoard new game: game.
 	board configureGrid: ((CTNewArray2D width: 3 height: 3)
-			 at: 1 @ 1 put: SGNullState new;
-			 at: 2 @ 1 put: SGYellowState new;
-			 at: 3 @ 1 put: SGYellowState new;
-			 at: 1 @ 2 put: SGNullState new;
-			 at: 2 @ 2 put: SGRedState new;
-			 at: 3 @ 2 put: SGRedState new;
-			 at: 1 @ 3 put: SGNullState new;
-			 at: 2 @ 3 put: SGGreenState new;
-			 at: 3 @ 3 put: SGGreenState new;
+			 at: 1 @ 1 put: SGBox null;
+			 at: 2 @ 1 put: SGBox yellow;
+			 at: 3 @ 1 put: SGBox yellow;
+			 at: 1 @ 2 put: SGBox null;
+			 at: 2 @ 2 put: SGBox red;
+			 at: 3 @ 2 put: SGBox red;
+			 at: 1 @ 3 put: SGBox null;
+			 at: 2 @ 3 put: SGBox green;
+			 at: 3 @ 3 put: SGBox green;
 			 yourself).
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
 	graphicBoard sameGameBoard: board.
 
-	board drawer: graphicBoard.
 	self assert: (board isColumnEmpty: 1).
 	self deny: (board isColumnEmpty: 2)
 ]
@@ -213,22 +183,21 @@ SameGameBoardElementTest >> testExchangeCase [
 	game := SGGame new.
 	board := SGBoard new game: game.
 	board configureGrid: ((CTNewArray2D width: 3 height: 3)
-			 at: 1 @ 1 put: SGNullState new;
-			 at: 2 @ 1 put: SGYellowState new;
-			 at: 3 @ 1 put: SGYellowState new;
-			 at: 1 @ 2 put: SGNullState new;
-			 at: 2 @ 2 put: SGRedState new;
-			 at: 3 @ 2 put: SGRedState new;
-			 at: 1 @ 3 put: SGNullState new;
-			 at: 2 @ 3 put: SGGreenState new;
-			 at: 3 @ 3 put: SGGreenState new;
+			 at: 1 @ 1 put: SGBox null;
+			 at: 2 @ 1 put: SGBox yellow;
+			 at: 3 @ 1 put: SGBox yellow;
+			 at: 1 @ 2 put: SGBox null;
+			 at: 2 @ 2 put: SGBox red;
+			 at: 3 @ 2 put: SGBox red;
+			 at: 1 @ 3 put: SGBox null;
+			 at: 2 @ 3 put: SGBox green;
+			 at: 3 @ 3 put: SGBox green;
 			 yourself).
 
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
 	graphicBoard sameGameBoard: board.
 
-	board drawer: graphicBoard.
 	case1 := board boxAt: 1 @ 1.
 	case2 := board boxAt: 2 @ 1.
 	self assert: case1 literal equals: 'N'.
@@ -250,22 +219,20 @@ SameGameBoardElementTest >> testExchangeColonne [
 	game := SGGame new.
 	board := SGBoard new game: game.
 	board configureGrid: ((CTNewArray2D width: 3 height: 3)
-			 at: 1 @ 1 put: SGNullState new;
-			 at: 2 @ 1 put: SGYellowState new;
-			 at: 3 @ 1 put: SGYellowState new;
-			 at: 1 @ 2 put: SGNullState new;
-			 at: 2 @ 2 put: SGRedState new;
-			 at: 3 @ 2 put: SGRedState new;
-			 at: 1 @ 3 put: SGNullState new;
-			 at: 2 @ 3 put: SGGreenState new;
-			 at: 3 @ 3 put: SGGreenState new;
+			 at: 1 @ 1 put: SGBox null;
+			 at: 2 @ 1 put: SGBox yellow;
+			 at: 3 @ 1 put: SGBox yellow;
+			 at: 1 @ 2 put: SGBox null;
+			 at: 2 @ 2 put: SGBox red;
+			 at: 3 @ 2 put: SGBox red;
+			 at: 1 @ 3 put: SGBox null;
+			 at: 2 @ 3 put: SGBox green;
+			 at: 3 @ 3 put: SGBox green;
 			 yourself).
 
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
 	graphicBoard sameGameBoard: board.
-
-	board drawer: graphicBoard.
 
 	board switchColumn: 1 withColumn: 2.
 	self assert: (board boxAt: 1 @ 1) literal equals: 'Y'.
@@ -278,43 +245,9 @@ SameGameBoardElementTest >> testExchangeColonne [
 ]
 
 { #category : #tests }
-SameGameBoardElementTest >> testNullCaseOn [
+SameGameBoardElementTest >> testReorganiseBoard [
 
 	| firstBoard game graphicBoard |
-	"| B G |   =>       | N G |
- | G R |            | G R |       "
-	game := SGGame new.
-	firstBoard := SGBoard new game: game.
-	firstBoard := firstBoard configureGrid:
-		              ((CTNewArray2D width: 2 height: 2)
-			               at: 1 @ 1 put: (SGBlueState new
-					             );
-			               at: 1 @ 2 put: (SGGreenState new
-				                );
-			               at: 2 @ 1 put: (SGGreenState new
-				              );
-			               at: 2 @ 2 put: (SGRedState new
-				                );
-			               yourself).
-	graphicBoard := SGBoardElement new.
-	graphicBoard grid: firstBoard grid.
-	graphicBoard sameGameBoard: firstBoard.
-
-	firstBoard drawer: graphicBoard.
-
-	firstBoard nullBoxOnx: 1 y: 1.
-
-	self assert: (firstBoard grid at: 1 @ 1) literal equals: 'N'.
-	self assert: (firstBoard grid at: 1 @ 2) literal equals: 'G'.
-	self assert: (firstBoard grid at: 2 @ 1) literal equals: 'G'.
-	self assert: (firstBoard grid at: 2 @ 2) literal equals: 'R'
-]
-
-{ #category : #tests }
-SameGameBoardElementTest >> testReorganiseBoard [ 
-
-	| firstBoard game graphicBoard |
-	self skip. "this was not working. See that later."
 	"| B |            | B |
  | N |            | Y |
  | Y |         => | B |
@@ -325,29 +258,17 @@ SameGameBoardElementTest >> testReorganiseBoard [
 	firstBoard := SGBoard new game: game.
 	firstBoard := firstBoard configureGrid:
 		              ((CTNewArray2D width: 1 height: 5)
-			               at: 1 @ 1 put: (SGBlueState new
-					                grid: firstBoard;
-					                position: 1 @ 1);
-			               at: 1 @ 2 put: (SGNullState new
-				                grid: firstBoard;
-				                position: 1 @ 2);
-			               at: 1 @ 3 put: (SGYellowState new
-				                grid: firstBoard;
-				                position: 1 @ 3);
-			               at: 1 @ 4 put: (SGNullState new
-				                grid: firstBoard;
-				                position: 1 @ 4);
-			               at: 1 @ 5 put: (SGGreenState new
-				                grid: firstBoard;
-				                position: 1 @ 5);
+			               at: 1 @ 1 put: SGBox blue;
+			               at: 1 @ 2 put: SGBox null;
+			               at: 1 @ 3 put: SGBox yellow;
+			               at: 1 @ 4 put: SGBox null;
+			               at: 1 @ 5 put: SGBox green;
 			               yourself).
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: firstBoard grid.
 	graphicBoard sameGameBoard: firstBoard.
 
-	firstBoard drawer: graphicBoard.
-
-	firstBoard reorganizeOnx: 1 y: 1.
+	firstBoard reorganizeColumn: 1.
 
 	self assert: (firstBoard grid at: 1 @ 1) literal equals: 'B'.
 	self assert: (firstBoard grid at: 1 @ 2) literal equals: 'Y'.
@@ -367,21 +288,20 @@ SameGameBoardElementTest >> testReorganiseWhenEmptyColonne [
 	game := SGGame new.
 	board := SGBoard new game: game.
 	board configureGrid: ((CTNewArray2D width: 3 height: 3)
-			 at: 1 @ 1 put: SGBlueState new;
-			 at: 2 @ 1 put: SGYellowState new;
-			 at: 3 @ 1 put: SGYellowState new;
-			 at: 1 @ 2 put: SGBlueState new;
-			 at: 2 @ 2 put: SGRedState new;
-			 at: 3 @ 2 put: SGRedState new;
-			 at: 1 @ 3 put: SGBlueState new;
-			 at: 2 @ 3 put: SGGreenState new;
-			 at: 3 @ 3 put: SGGreenState new;
+			 at: 1 @ 1 put: SGBox blue;
+			 at: 2 @ 1 put: SGBox yellow;
+			 at: 3 @ 1 put: SGBox yellow;
+			 at: 1 @ 2 put: SGBox blue;
+			 at: 2 @ 2 put: SGBox red;
+			 at: 3 @ 2 put: SGBox red;
+			 at: 1 @ 3 put: SGBox blue;
+			 at: 2 @ 3 put: SGBox green;
+			 at: 3 @ 3 put: SGBox green;
 			 yourself).
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
 	graphicBoard sameGameBoard: board.
 
-	board drawer: graphicBoard.
 	board hitBoxOnx: 1 y: 1.
 
 	self assert: (board boxAt: 1 @ 1) literal equals: 'Y'.

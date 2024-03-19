@@ -13,8 +13,7 @@ MygToploPaging class >> buttonWithPack: aPack withManager: aManager andIndex: i 
 			          nextPutAll: 'Level ';
 			          print: i ].
 	" optimization to avoid having too much elements in a button "
-	previewForm := (self previewForButtonWithPack: aPack at: i) aeAsForm
-		               asElement.
+	previewForm := (self previewForButtonWithPack: aPack at: i) asElement.
 	previewForm constraintsDo: [ :c | c frame vertical alignCenter ].
 	container := BlElement new
 		             layout: BlFrameLayout new;
@@ -103,9 +102,10 @@ MygToploPaging class >> pagingPack: aPack managedBy: aManager [
 { #category : #'as yet unclassified' }
 MygToploPaging class >> previewForButtonWithPack: aPack at: i [
 
-	| iconImage packName |
+	| iconImage packName methodName |
 	packName := aPack withoutPrefix: 'mazes'.
-	iconImage := ((MygResources packs at: packName) at: i) asElement.
+	methodName := 'pack' , packName , 'Level' , i asString.
+	iconImage := (MygResources perform: methodName asSymbol).
 	^ iconImage
 ]
 

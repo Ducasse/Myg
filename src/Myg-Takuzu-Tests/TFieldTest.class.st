@@ -167,8 +167,8 @@ TFieldTest >> testSolveTheFieldAtColumnAtRow [
 	| field box1 |
 	field := TBoard gridForTest.
 	box1 := TFixedBox createBoxWithValue: 1.
-	self assert: (field solveTheField: field atColumn: 1 atRow: 1).
+	self assert: (field solveTheBoard: field atColumn: 1 atRow: 1).
 	field := TBoard gridForTest.
 	field grid at: 1 @ 3 put: box1.
-	self deny: (field solveTheField: field atColumn: 1 atRow: 1)
+	self deny: (field solveTheBoard: field atColumn: 1 atRow: 1)
 ]

@@ -479,13 +479,13 @@ TBoard >> removeRandomBoxesWithRatio: aNumber [
 { #category : #actions }
 TBoard >> solve [
 
-	^ (self solveTheField: self atColumn: 1 atRow: 1) ifTrue: [ 
+	^ (self solveTheBoard: self atColumn: 1 atRow: 1) ifTrue: [ 
 		  self grid ]
 	ifFalse: [ Error signal: 'Field not solvable' ]
 ]
 
 { #category : #actions }
-TBoard >> solveTheField: aTField atColumn: columnIndex atRow: rowIndex [
+TBoard >> solveTheBoard: aTBoard atColumn: columnIndex atRow: rowIndex [
 
 	| box currentColumn currentRow |
 	currentColumn := columnIndex.
@@ -496,12 +496,12 @@ TBoard >> solveTheField: aTField atColumn: columnIndex atRow: rowIndex [
 		currentColumn := 1.
 		currentRow := rowIndex + 1 ].
 
-	box := aTField grid atColumn: currentColumn atRow: currentRow.
+	box := aTBoard grid atColumn: currentColumn atRow: currentRow.
 
 	box value
 		ifNotNil: [
 			^ self
-				  solveTheField: aTField
+				  solveTheBoard: aTBoard
 				  atColumn: currentColumn + 1
 				  atRow: currentRow ]
 		ifNil: [
@@ -510,7 +510,7 @@ TBoard >> solveTheField: aTField atColumn: columnIndex atRow: rowIndex [
 				self isValid
 					ifTrue: [
 						(self
-							 solveTheField: aTField
+							 solveTheBoard: aTBoard
 							 atColumn: currentColumn + 1
 							 atRow: currentRow) ifTrue: [ ^ true ] ]
 					ifFalse: [ box value: nil ] ].

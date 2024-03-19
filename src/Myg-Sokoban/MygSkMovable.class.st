@@ -45,6 +45,11 @@ MygSkMovable >> background: anObject [
 ]
 
 { #category : #accessing }
+MygSkMovable >> backgroundRepresentation [
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
 MygSkMovable >> board: aBoard [ 
 
 	super board: aBoard.

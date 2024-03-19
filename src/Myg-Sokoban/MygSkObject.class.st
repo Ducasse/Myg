@@ -42,6 +42,11 @@ MygSkObject class >> textualMapCharacter [
 ]
 
 { #category : #accessing }
+MygSkObject >> backgroundRepresentation [
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
 MygSkObject >> basicPosition: aPosition [
 	"A position is a x,y kind of object."
 	

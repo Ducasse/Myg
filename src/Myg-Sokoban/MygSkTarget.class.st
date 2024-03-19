@@ -22,7 +22,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : #MygSkTarget,
-	#superclass : #MygSkElement,
+	#superclass : #MygSkObject,
 	#category : #'Myg-Sokoban-Model'
 }
 

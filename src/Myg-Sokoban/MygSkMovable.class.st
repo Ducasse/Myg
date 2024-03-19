@@ -25,7 +25,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : #MygSkMovable,
-	#superclass : #MygSkElement,
+	#superclass : #MygSkObject,
 	#instVars : [
 		'background'
 	],

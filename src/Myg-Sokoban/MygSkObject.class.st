@@ -25,31 +25,31 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MygSkElement,
+	#name : #MygSkObject,
 	#superclass : #MygAbstractBox,
 	#category : #'Myg-Sokoban-Model'
 }
 
 { #category : #initialization }
-MygSkElement class >> configured [ 
+MygSkObject class >> configured [ 
 
 	^ self new configured
 ]
 
 { #category : #'default encoding' }
-MygSkElement class >> textualMapCharacter [
+MygSkObject class >> textualMapCharacter [
 	^ $Z
 ]
 
 { #category : #accessing }
-MygSkElement >> basicPosition: aPosition [
+MygSkObject >> basicPosition: aPosition [
 	"A position is a x,y kind of object."
 	
 	position := aPosition
 ]
 
 { #category : #action }
-MygSkElement >> bringIn: aSkMovable going: aDirection [
+MygSkObject >> bringIn: aSkMovable going: aDirection [
 	"By default when a movable wants to move in, we move it in. By default do not use the direction, it is only usd for case where we need to check the next element in that direction, e.g., Player push a Box and the box should check if there is a ground or a wall before moving in that direction."
 
 	| previousPosition |
@@ -63,30 +63,30 @@ MygSkElement >> bringIn: aSkMovable going: aDirection [
 ]
 
 { #category : #accessing }
-MygSkElement >> configureBoard: aBoard [
+MygSkObject >> configureBoard: aBoard [
 
 	self board: aBoard.
 	
 ]
 
 { #category : #initialization }
-MygSkElement >> configured [ 
+MygSkObject >> configured [ 
 
 	^self
 ]
 
 { #category : #move }
-MygSkElement >> isPlayer [
+MygSkObject >> isPlayer [
 	^ false
 ]
 
 { #category : #move }
-MygSkElement >> isTarget [
+MygSkObject >> isTarget [
 	^ false
 ]
 
 { #category : #move }
-MygSkElement >> moveIn: aNeighbor going: aDirection [
+MygSkObject >> moveIn: aNeighbor going: aDirection [
 	"To move in a position, we ask the entity where we want to get in to decide.
 	This is not a double dispatch per se because we do not have to discrimnate on the receiver."
 	
@@ -94,13 +94,13 @@ MygSkElement >> moveIn: aNeighbor going: aDirection [
 ]
 
 { #category : #action }
-MygSkElement >> postCreationAction [
+MygSkObject >> postCreationAction [
 
 	self
 ]
 
 { #category : #printing }
-MygSkElement >> printOn: aStream [ 
+MygSkObject >> printOn: aStream [ 
 
 	super printOn: aStream.
 	aStream nextPut: $-.

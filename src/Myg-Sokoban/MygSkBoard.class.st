@@ -8250,17 +8250,9 @@ MygSkBoard >> printOn: aStream [
 	(1 to: grid height)
 		do: [ :rowNumber |
 			1 to: grid width do: [ :columnNumber |
-				| el elClass |
+				| el |
 				el := self atColumn: columnNumber atRow: rowNumber.
-				elClass := (el class inheritsFrom: MygSkMovable)
-					           ifFalse: [ el class ]
-					           ifTrue: [
-						           el background class = MygSkGround
-							           ifTrue: [ el class ]
-							           ifFalse: [
-							           self class environment at:
-								           el class asString , 'OnTarget' ] ].
-				aStream nextPut: elClass textualMapCharacter ] ]
+				aStream nextPut: el textualMapCharacter ] ]
 		separatedBy: [ aStream cr ]
 ]
 

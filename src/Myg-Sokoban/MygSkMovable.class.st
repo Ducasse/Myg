@@ -69,6 +69,12 @@ MygSkMovable >> defaultBackground [
 	^ MygSkGround new
 ]
 
+{ #category : #testing }
+MygSkMovable >> isMovable [ 
+	
+	^ true
+]
+
 { #category : #move }
 MygSkMovable >> move: aCpDirection [
 

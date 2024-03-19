@@ -79,3 +79,11 @@ MygSkPlayer >> move: aCpDirection [
 	self facing: aCpDirection class.
 	^ super move: aCpDirection
 ]
+
+{ #category : #'default encoding' }
+MygSkPlayer >> textualMapCharacter [
+
+	^ self background class = MygSkTarget
+		  ifTrue: [ MygSkPlayerOnTarget textualMapCharacter ]
+		  ifFalse: [ self class textualMapCharacter ]
+]

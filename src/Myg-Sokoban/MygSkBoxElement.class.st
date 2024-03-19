@@ -211,11 +211,9 @@ MygSkBoxElement >> boxAnimationMovingInDirection: aCpDirection [
 { #category : #accessing }
 MygSkBoxElement >> boxForForeground [
 
-	|newBox|
+	| newBox |
 	newBox := self board atPosition: self positionInField.
-	self box:
-		((newBox class inheritsFrom:
-			  MygSkMovable)
+	self box: (newBox isMovable
 			 ifFalse: [ MygSkGround new ]
 			 ifTrue: [ newBox ])
 ]

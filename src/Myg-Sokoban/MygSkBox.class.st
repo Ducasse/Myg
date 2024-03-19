@@ -64,3 +64,11 @@ MygSkBox >> isBox [
 
 	^ true
 ]
+
+{ #category : #'default encoding' }
+MygSkBox >> textualMapCharacter [
+
+	^ self background class = MygSkTarget
+		  ifTrue: [ MygSkBoxOnTarget textualMapCharacter ]
+		  ifFalse: [ self class textualMapCharacter ]
+]

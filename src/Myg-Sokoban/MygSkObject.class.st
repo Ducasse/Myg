@@ -80,6 +80,12 @@ MygSkObject >> configured [
 	^self
 ]
 
+{ #category : #testing }
+MygSkObject >> isMovable [ 
+
+	^ false
+]
+
 { #category : #move }
 MygSkObject >> isPlayer [
 	^ false
@@ -110,4 +116,10 @@ MygSkObject >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $-.
 	position printOn: aStream
+]
+
+{ #category : #'default encoding' }
+MygSkObject >> textualMapCharacter [ 
+
+	^ self class textualMapCharacter 
 ]

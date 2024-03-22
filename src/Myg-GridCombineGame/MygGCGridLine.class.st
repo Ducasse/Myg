@@ -37,7 +37,6 @@ MygGCGridLine >> slideTilesToStartMovesDo: moveBlock combinesDo: combineBlock [
 	emptySlotIndex := nil.
 	combineCandidate := nil.
 	combineCandidateIndex := nil.
-
 	self withIndexDo: [ :each :index |
 		each
 			ifNil: [
@@ -71,7 +70,7 @@ MygGCGridLine >> slideTilesToStartMovesDo: moveBlock combinesDo: combineBlock [
 								"There is room to move."
 								moveBlock value: each value: emptySlotIndex.
 								combineCandidateIndex := emptySlotIndex.
-								emptySlotIndex := nil ]
+								emptySlotIndex := emptySlotIndex + 1 ]
 							ifNil: [
 								combineCandidateIndex := index ]
 					] ] ]

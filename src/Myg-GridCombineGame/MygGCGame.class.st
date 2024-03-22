@@ -89,7 +89,7 @@ MygGCGame >> initializeWithGridExtent: aPoint [
 	rows := (1 to: gridExtent y) collect: [ :each |
 		MygGCGridLine new: gridExtent x ].
 
-	self variant: MygGC2048Variant new
+	variant := MygGC2048Variant new
 ]
 
 { #category : #initialization }

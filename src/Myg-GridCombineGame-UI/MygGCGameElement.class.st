@@ -32,7 +32,7 @@ Class {
 MygGCGameElement class >> example2048 [
 
 	| game gameElement space skin |
-	game := GCGame new.
+	game := MygGCGame new.
 	skin := MygGCClassicSkin new.
 	gameElement := self on: game skin: skin.
 
@@ -40,8 +40,7 @@ MygGCGameElement class >> example2048 [
 	space root addChild: gameElement.
 	space
 		extent: game gridExtent * (skin cellSize + (2 * skin cellMarginSize));
-		show;
-		inspect
+		show
 ]
 
 { #category : #examples }
@@ -334,22 +333,22 @@ MygGCGameElement >> slotsContainer [
 MygGCGameElement >> subscribeToGameAnnouncements [
 
 	game announcer
-		when: GCInsertedTileAnnouncement
+		when: MygGCInsertedTileAnnouncement
 			send: #refreshOnInsertedTile:
 			to: self;
-		when: GCMovedTileAnnouncement
+		when: MygGCMovedTileAnnouncement
 			send: #refreshOnMovedTile:
 			to: self;
-		when: GCUpgradedTileAnnouncement
+		when: MygGCUpgradedTileAnnouncement
 			send: #refreshOnUpgradedTile:
 			to: self;
-		when: GCDeletedTileAnnouncement
+		when: MygGCDeletedTileAnnouncement
 			send: #refreshOnDeletedTile:
 			to: self;
-		when: GCSlideDoneAnnouncement
+		when: MygGCSlideDoneAnnouncement
 			send: #refreshOnSlideDone
 			to: self;
-		when: GCFinishedAnnouncement
+		when: MygGCFinishedAnnouncement
 			send: #refreshOnFinished:
 			to: self
 ]

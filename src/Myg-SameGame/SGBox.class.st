@@ -121,23 +121,7 @@ SGBox >> x [
 ]
 
 { #category : #'accessing - structure variables' }
-SGBox >> x: anInteger [
-
-	| pos |
-	pos := self position.
-	pos setX: anInteger setY: pos y
-]
-
-{ #category : #'accessing - structure variables' }
 SGBox >> y [
 
 	^ position y
-]
-
-{ #category : #'accessing - structure variables' }
-SGBox >> y: anInteger [
-
-	| pos |
-	pos := self position.
-	pos setX: pos x setY: anInteger
 ]

@@ -32,12 +32,6 @@ SGBoardElement >> grid: aSameGameBoardGrid [
 	self setGridLayout: aSameGameBoardGrid width
 ]
 
-{ #category : #accessing }
-SGBoardElement >> sameGameBoard: aSameGameBoard [
-
-	sameGameBoard := aSameGameBoard
-]
-
 { #category : #initialization }
 SGBoardElement >> setGridLayout: width [
 

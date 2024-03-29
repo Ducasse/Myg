@@ -30,7 +30,6 @@ SameGameBoardElementTest >> testClickAndCaseNothingAppend [
 			 yourself).
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid.
-	graphicBoard sameGameBoard: board.
 
 	board hitBoxOnx: 1 y: 3.
 
@@ -63,7 +62,6 @@ SameGameBoardElementTest >> testClickAndMultipleCaseDisappear [
 			 yourself).
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
-	graphicBoard sameGameBoard: board.
 
 	board hitBoxOnx: 1 y: 2.
 	"fonctionne jusque ici"
@@ -97,7 +95,6 @@ SameGameBoardElementTest >> testClickAndOneColumnDisappear [
 
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
-	graphicBoard sameGameBoard: board.
 
 	board hitBoxOnx: 2 y: 2.
 
@@ -127,7 +124,6 @@ SameGameBoardElementTest >> testClickOnBlueCase [
 
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
-	graphicBoard sameGameBoard: board.
 
 	resGrid := SGBoard new.
 	resGrid configureGrid: ((CTNewArray2D width: 2 height: 2)
@@ -139,7 +135,6 @@ SameGameBoardElementTest >> testClickOnBlueCase [
 
 	resgraphicBoard := SGBoardElement new.
 	resgraphicBoard grid: resGrid grid.
-	resgraphicBoard sameGameBoard: board.
 	board hitBoxOnx: 1 y: 1.
 
 	self assert: board grid size equals: resGrid grid size.
@@ -170,7 +165,6 @@ SameGameBoardElementTest >> testColonneIsEmpty [
 			 yourself).
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
-	graphicBoard sameGameBoard: board.
 
 	self assert: (board isColumnEmpty: 1).
 	self deny: (board isColumnEmpty: 2)
@@ -196,7 +190,6 @@ SameGameBoardElementTest >> testExchangeCase [
 
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
-	graphicBoard sameGameBoard: board.
 
 	case1 := board boxAt: 1 @ 1.
 	case2 := board boxAt: 2 @ 1.
@@ -232,7 +225,6 @@ SameGameBoardElementTest >> testExchangeColonne [
 
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
-	graphicBoard sameGameBoard: board.
 
 	board switchColumn: 1 withColumn: 2.
 	self assert: (board boxAt: 1 @ 1) literal equals: 'Y'.
@@ -253,7 +245,6 @@ SameGameBoardElementTest >> testReorganiseBoard [
  | Y |         => | B |
  | N |            | N |
  | B |            | N | "
-
 	game := SGGame new.
 	firstBoard := SGBoard new game: game.
 	firstBoard := firstBoard configureGrid:
@@ -266,7 +257,6 @@ SameGameBoardElementTest >> testReorganiseBoard [
 			               yourself).
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: firstBoard grid.
-	graphicBoard sameGameBoard: firstBoard.
 
 	firstBoard reorganizeColumn: 1.
 
@@ -300,7 +290,6 @@ SameGameBoardElementTest >> testReorganiseWhenEmptyColonne [
 			 yourself).
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
-	graphicBoard sameGameBoard: board.
 
 	board hitBoxOnx: 1 y: 1.
 

@@ -64,6 +64,12 @@ SGBox >> checkAndPropagateOnX: x y: y [
 	case state = self state ifTrue: [ case propagateClick ]
 ]
 
+{ #category : #public }
+SGBox >> click [
+
+	self board hitBox: self
+]
+
 { #category : #'drawing - general' }
 SGBox >> draw: drawer [
 

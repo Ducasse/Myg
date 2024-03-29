@@ -44,6 +44,23 @@ SGBoard >> generateGridWidth: width height: height [
 ]
 
 { #category : #hit }
+SGBoard >> hitBox: aBox [
+
+	aBox hasNullState ifTrue: [ ^ self ].
+	aBox propagateClick.
+	self hitList size > 1 ifTrue: [
+		self hitList do: [ :each | each state: SGNullState uniqueInstance ] ].
+
+	self game addPoints: self calculePoint.
+
+	self hitList do: [ :each | self reorganizeColumn: each x ].
+
+	self hitList removeAll.
+
+	self reorganizeForEmptyColumn
+]
+
+{ #category : #hit }
 SGBoard >> hitBoxOnx: x y: y [
 
 	(self grid at: x @ y) hasNullState ifTrue: [ ^ self ].

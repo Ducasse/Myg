@@ -47,7 +47,7 @@ SGBoxElement >> box: aSGBox [
 { #category : #public }
 SGBoxElement >> click [
 
-	self board clickOn: self gridPosition
+	self box click
 ]
 
 { #category : #accessing }

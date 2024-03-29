@@ -13,7 +13,6 @@ SameGame class >> open [
 	board generateGridWidth: 20 height: 20.
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
-	graphicBoard sameGameBoard: board.
 
 	space := BlSpace new.
 	space title: 'SameGame'.

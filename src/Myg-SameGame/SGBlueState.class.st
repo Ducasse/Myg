@@ -5,9 +5,9 @@ Class {
 }
 
 { #category : #accessing }
-SGBlueState >> backgroundRepresentation [ 
+SGBlueState >> backgroundRepresentation [
 
-	^ Color lightBlue 
+	^ Color lightBlue
 ]
 
 { #category : #accessing }

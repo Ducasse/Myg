@@ -8,12 +8,6 @@ Class {
 	#category : #'Myg-SameGame-UI'
 }
 
-{ #category : #clicking }
-SGBoardElement >> clickOn: aPosition [
-
-	self sameGameBoard hitBoxOnx: aPosition x y: aPosition y
-]
-
 { #category : #accessing }
 SGBoardElement >> grid [
 
@@ -36,12 +30,6 @@ SGBoardElement >> grid: aSameGameBoardGrid [
 			        elt ].
 
 	self setGridLayout: aSameGameBoardGrid width
-]
-
-{ #category : #accessing }
-SGBoardElement >> sameGameBoard [
-
-	^ sameGameBoard
 ]
 
 { #category : #accessing }

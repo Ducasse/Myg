@@ -3,8 +3,7 @@
 Takuzu is a game created with Myg, also known as 'binary-sudoku', you need to complete a grid following a set of rules.
 This game is inspired by [http://0hh1.com](http://0hh1.com).
 
-Add Here a visual
-
+![Takuzu visual. %width=60](figures/takuzuGame.png)
 
 This document highlights some key points of the implementation of this project and how was designed the architecture between the domain model and UI using Bloc.
 

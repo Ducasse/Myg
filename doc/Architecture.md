@@ -17,7 +17,7 @@ and isolated in the sense that an element does not interact with its neighbors.
 
 In this document and in the Myg Framework we follow the following vocabulary:
 
-SD: Add a figure about 
+![Elementary relationships.](figures/BoxBoard.pdf)
 
 ### Boxes and board
 

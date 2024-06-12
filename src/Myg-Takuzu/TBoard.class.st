@@ -1,19 +1,21 @@
 Class {
-	#name : #TBoard,
-	#superclass : #MygBoard,
+	#name : 'TBoard',
+	#superclass : 'MygBoard',
 	#classInstVars : [
 		'levels'
 	],
-	#category : #'Myg-Takuzu-Core'
+	#category : 'Myg-Takuzu-Core',
+	#package : 'Myg-Takuzu',
+	#tag : 'Core'
 }
 
-{ #category : #translating }
+{ #category : 'translating' }
 TBoard class >> generate [
 
 	^ self generateWithSize: 4
 ]
 
-{ #category : #translating }
+{ #category : 'translating' }
 TBoard class >> generateWithSize: aNumber [
 
 	^ (self newSquaredSize: aNumber)
@@ -21,7 +23,7 @@ TBoard class >> generateWithSize: aNumber [
 		  yourself
 ]
 
-{ #category : #'for tests' }
+{ #category : 'for tests' }
 TBoard class >> gridForTest [
 	"represents this grid: 
 	
@@ -50,12 +52,12 @@ TBoard class >> gridForTest [
 			   yourself)
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 TBoard class >> initialize [ 
 	self initializeLevels 
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 TBoard class >> initializeLevels [
 
 	levels := Dictionary new
@@ -67,19 +69,19 @@ TBoard class >> initializeLevels [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TBoard class >> level: aString [ 
 
 	^ self configureGrid:
 		  (MygLevelImporter fromString: aString fromPackage: self package)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TBoard class >> levels [ 
 	^ levels
 ]
 
-{ #category : #levels }
+{ #category : 'levels' }
 TBoard class >> levels10x10 [
 
 	^ IdentityDictionary new
@@ -136,7 +138,7 @@ ___0__1_1_';
 		  yourself
 ]
 
-{ #category : #levels }
+{ #category : 'levels' }
 TBoard class >> levels12x12 [
 
 	^ IdentityDictionary new
@@ -203,7 +205,7 @@ _____1____0_';
 		  yourself
 ]
 
-{ #category : #levels }
+{ #category : 'levels' }
 TBoard class >> levels4x4 [
 
 	^ IdentityDictionary new
@@ -229,7 +231,7 @@ ____
 ___0'; yourself
 ]
 
-{ #category : #levels }
+{ #category : 'levels' }
 TBoard class >> levels6x6 [
 
 	^ IdentityDictionary new
@@ -266,7 +268,7 @@ ___1__';
 		  yourself
 ]
 
-{ #category : #levels }
+{ #category : 'levels' }
 TBoard class >> levels8x8 [
 
 	^ IdentityDictionary new
@@ -313,7 +315,7 @@ ________
 		  yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 TBoard class >> newSquaredSize: aNumber [
 
 	^ self new
@@ -323,13 +325,13 @@ TBoard class >> newSquaredSize: aNumber [
 				   tabulate: [ :x :y | TFixedBox createBoxWithValue: nil ])
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TBoard >> checkIfFinished [
 
 	(self isFull and: [ self isValid ]) ifTrue: [ self endGame ]
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 TBoard >> endGame [
 
 	| container space |
@@ -356,7 +358,7 @@ TBoard >> endGame [
 	^ space
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 TBoard >> initializeRandomized [
 
 	self 
@@ -365,7 +367,7 @@ TBoard >> initializeRandomized [
 		  removeRandomBoxes
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TBoard >> isColumnUniqueAtIndex: aNumber [
 
 	| testedColumn columns |
@@ -377,7 +379,7 @@ TBoard >> isColumnUniqueAtIndex: aNumber [
 	^ self isThisLineUnique: testedColumn amongArray: columns
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TBoard >> isColumnValidAtIndex: aNumber [
 
 	| testedColumn |
@@ -385,13 +387,13 @@ TBoard >> isColumnValidAtIndex: aNumber [
 	^ testedColumn isValid
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TBoard >> isFull [ 
 	
 	^ (self grid contents anySatisfy: [ :each | each value isNil ]) not
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TBoard >> isRowUniqueAtIndex: aNumber [
 
 	| testedRow rows |
@@ -402,14 +404,14 @@ TBoard >> isRowUniqueAtIndex: aNumber [
 	^ self isThisLineUnique: testedRow amongArray: rows 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TBoard >> isRowValidAtIndex: aNumber [
 
 	^ (TLine new contents: (self grid atRow: aNumber)) isValid.
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TBoard >> isThisLineUnique: aTLine amongArray: anArray [
 		
 
@@ -417,7 +419,7 @@ TBoard >> isThisLineUnique: aTLine amongArray: anArray [
 		   aTLine isSimilarTo: line ]) not
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TBoard >> isValid [
 
 	| columnIndex rowIndex |
@@ -439,7 +441,7 @@ TBoard >> isValid [
 	^ true
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 TBoard >> permutateLine: aFirstNumber with: aSecondNumber [
 
 	| tmp |
@@ -449,7 +451,7 @@ TBoard >> permutateLine: aFirstNumber with: aSecondNumber [
 		self grid atRow: aSecondNumber put: tmp
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 TBoard >> permutateLines [
 
 	| array |
@@ -461,13 +463,13 @@ TBoard >> permutateLines [
 		self permutateLine: line1 with: line2 ]
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 TBoard >> removeRandomBoxes [
 
 	self removeRandomBoxesWithRatio: 65
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 TBoard >> removeRandomBoxesWithRatio: aNumber [
 
 	(aNumber > 0 and: [ aNumber < 100 ]) ifFalse: [ ^ self ].
@@ -476,7 +478,7 @@ TBoard >> removeRandomBoxesWithRatio: aNumber [
 			self grid at: column @ row put: (TUnknownBox new position: column @ row) ] ]
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 TBoard >> solve [
 
 	^ (self solveTheField: self atColumn: 1 atRow: 1) ifTrue: [ 
@@ -484,7 +486,7 @@ TBoard >> solve [
 	ifFalse: [ Error signal: 'Field not solvable' ]
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 TBoard >> solveTheField: aTField atColumn: columnIndex atRow: rowIndex [
 
 	| box currentColumn currentRow |

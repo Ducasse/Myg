@@ -1,26 +1,28 @@
 Class {
-	#name : #TBox,
-	#superclass : #MygAbstractBox,
+	#name : 'TBox',
+	#superclass : 'MygAbstractBox',
 	#instVars : [
 		'value'
 	],
 	#classVars : [
 		'ValueDictionary'
 	],
-	#category : #'Myg-Takuzu-Core'
+	#category : 'Myg-Takuzu-Core',
+	#package : 'Myg-Takuzu',
+	#tag : 'Core'
 }
 
-{ #category : #factory }
+{ #category : 'factory' }
 TBox class >> createFixedBox: aNumber [
 	^ TFixedBox createBoxWithValue: aNumber
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 TBox class >> createUnknownBox [
 	^ TUnknownBox new
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 TBox class >> initialize [
 	"self initialize"
 	ValueDictionary := {
@@ -29,29 +31,39 @@ TBox class >> initialize [
 		                   (nil -> 0) } asDictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'initialization' }
+TBox class >> set: aNumber [
+	^ TSetBox value: aNumber
+]
+
+{ #category : 'as yet unclassified' }
+TBox class >> unknown [
+	^ TUnknownBox new
+]
+
+{ #category : 'accessing' }
 TBox class >> valueDictionary [ 
 
 	^ ValueDictionary 
 ]
 
-{ #category : #interaction }
+{ #category : 'interaction' }
 TBox >> click [
 	self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TBox >> isTFixedBox [ 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TBox >> isTUnknownBox [
 
 	^ false
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 TBox >> printOn: aStream [
 
 	super printOn: aStream.
@@ -59,18 +71,18 @@ TBox >> printOn: aStream [
 	aStream print: self value
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 TBox >> value [ 
 	^ value 
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 TBox >> value: aNumber [
 
 	value := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TBox >> valueDictionary [
 
 	^ ValueDictionary

@@ -1,5 +1,6 @@
 Class {
-	#name : #MygMissingCharacterError,
-	#superclass : #Error,
-	#category : #MygCore
+	#name : 'MygMissingCharacterError',
+	#superclass : 'Error',
+	#category : 'MygCore',
+	#package : 'MygCore'
 }

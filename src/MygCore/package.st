@@ -1,1 +1,1 @@
-Package { #name : #MygCore }
+Package { #name : 'MygCore' }

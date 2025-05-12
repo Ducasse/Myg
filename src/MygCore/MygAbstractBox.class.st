@@ -1,31 +1,30 @@
 Class {
-	#name : 'MygAbstractBox',
-	#superclass : 'Object',
+	#name : #MygAbstractBox,
+	#superclass : #Object,
 	#instVars : [
 		'position',
 		'board'
 	],
-	#category : 'MygCore',
-	#package : 'MygCore'
+	#category : 'MygCore'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 MygAbstractBox >> board [ 
 	^ board 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 MygAbstractBox >> board: aMygBoard [
 
 	board := aMygBoard
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 MygAbstractBox >> position [ 
 	^ position
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 MygAbstractBox >> position: aPoint [ 
 	position := aPoint 
 ]

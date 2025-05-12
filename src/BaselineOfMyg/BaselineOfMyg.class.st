@@ -1,22 +1,21 @@
 Class {
-	#name : 'BaselineOfMyg',
-	#superclass : 'BaselineOf',
-	#category : 'BaselineOfMyg',
-	#package : 'BaselineOfMyg'
+	#name : #BaselineOfMyg,
+	#superclass : #BaselineOf,
+	#category : #BaselineOfMyg
 }
 
-{ #category : 'baselines' }
+{ #category : #baselines }
 BaselineOfMyg >> baseline: spec [
 
 	<baseline>
 	spec
 
 		baseline: 'Bloc'
-		with: [ spec repository: 'github://pharo-graphics/Bloc:master/src' ].
+		with: [ spec repository: 'github://pharo-graphics/Bloc:v2.3.0/src' ].
 
 	spec
 		baseline: 'Toplo'
-		with: [ spec repository: 'github://plantec/Toplo:master/src' ].
+		with: [ spec repository: 'github://pharo-graphics/Toplo:v0.4.0/src' ].
 
 	spec
 		baseline: 'ContainersArray2D'

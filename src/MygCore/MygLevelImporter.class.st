@@ -1,15 +1,14 @@
 Class {
-	#name : 'MygLevelImporter',
-	#superclass : 'Object',
+	#name : #MygLevelImporter,
+	#superclass : #Object,
 	#instVars : [
 		'lines',
 		'characterClassBinding'
 	],
-	#category : 'MygCore',
-	#package : 'MygCore'
+	#category : 'MygCore'
 }
 
-{ #category : 'helpers' }
+{ #category : #helpers }
 MygLevelImporter class >> createBindingDictionaryFromPackage: aRPackage [
 
 	| dictionary classes |
@@ -26,7 +25,7 @@ MygLevelImporter class >> createBindingDictionaryFromPackage: aRPackage [
 	^ dictionary
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 MygLevelImporter class >> fromString: aString fromPackage: aPackage [
 
 	| dictionary|
@@ -34,7 +33,7 @@ MygLevelImporter class >> fromString: aString fromPackage: aPackage [
 	^ self fromString: aString withBindings: dictionary
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 MygLevelImporter class >> fromString: aString withBindings: aDictionary [
 
 	| tool |
@@ -43,7 +42,7 @@ MygLevelImporter class >> fromString: aString withBindings: aDictionary [
 	^ tool buildGridFor: aString
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 MygLevelImporter >> buildCharacterArrayFor: aString [
 
 	| tmpArray array |
@@ -57,7 +56,7 @@ MygLevelImporter >> buildCharacterArrayFor: aString [
 	^ array
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 MygLevelImporter >> buildGridFor: aString [
 
 	| array2D |
@@ -67,7 +66,7 @@ MygLevelImporter >> buildGridFor: aString [
 	^ array2D
 ]
 
-{ #category : 'public api' }
+{ #category : #'public api' }
 MygLevelImporter >> classFor: aCharacter [
 
 	^ characterClassBinding
@@ -75,19 +74,19 @@ MygLevelImporter >> classFor: aCharacter [
 		  ifAbsent: [ MygMissingCharacterError signal: 'Unknown character please specify a class textualMapCharacter method in your box domain.' ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 MygLevelImporter >> fillBindingDictionary: aDictionary [
 
 	characterClassBinding := aDictionary
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 MygLevelImporter >> maxLineLength [
 
 	^ (lines max: [ :each | each size ]) 
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 MygLevelImporter >> splitLines: aString [
 	^ aString splitOn: Character cr
 ]

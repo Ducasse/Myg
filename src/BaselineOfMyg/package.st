@@ -1,1 +1,1 @@
-Package { #name : 'BaselineOfMyg' }
+Package { #name : #BaselineOfMyg }

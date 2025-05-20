@@ -7955,13 +7955,13 @@ MygSkGameManager >> registerLevel [
 MygSkGameManager >> updateButton [
 
 	| menuButton button elt |
-	menuButton := self menu items detect: [ :each |
+	menuButton := self menu items collection detect: [ :each |
 		              each label text asString
 		              = self currentLevel keys first ].
 	button := menuButton items at: self currentLevel values first.
-	elt := BlElement new background:
-		       (Smalltalk ui icons iconNamed: #glamorousAccept).
-	elt size: elt background image extent.
+	elt := ToImage new innerImage: (BlElement new background:
+		       (Smalltalk ui icons iconNamed: #glamorousAccept)).
+	elt size: elt firstChild background image extent.
 	button icon: elt
 ]
 
@@ -7971,13 +7971,14 @@ MygSkGameManager >> updateNotebookButton [
 	| button elt page string icon |
 	string := self currentLevel keys first withoutPrefix: 'mazes'.
 	"replace with 'page := notebook pageTitled: string' when pageTitled: added to Toplo"
-	page := notebook pages detect: [ :each |
-		        each titleElement labelElement text asString = string ].
-	elt := page bodyFactory value.
+	page := notebook tabs detect: [ :each |
+		        each firstChild text asString = string ].
+	elt := page body.
 	button := elt childWithId: self currentLevel values first asString.
-	icon := BlElement new background:
+	"icon := BlElement new background:
 		        (Smalltalk ui icons iconNamed: #glamorousAccept).
 	icon size: icon background image extent.
 	button icon:
-		(ToImage inner: (Smalltalk ui icons iconNamed: #glamorousAccept))
+		(ToImage inner: (Smalltalk ui icons iconNamed: #glamorousAccept))"
+	button background: Color lightGreen
 ]

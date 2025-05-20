@@ -1,17 +1,15 @@
 Class {
-	#name : 'TFixedBox1',
-	#superclass : 'TFixedBox',
-	#category : 'Myg-Takuzu-Core',
-	#package : 'Myg-Takuzu',
-	#tag : 'Core'
+	#name : #TFixedBox1,
+	#superclass : #TFixedBox,
+	#category : 'Myg-Takuzu-Core'
 }
 
-{ #category : 'description' }
+{ #category : #description }
 TFixedBox1 class >> textualMapCharacter [ 
 	^ $1
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 TFixedBox1 >> initialize [
 
 	super initialize.

@@ -27,7 +27,7 @@ MygToploPaging class >> buttonWithPack: aPack withManager: aManager andIndex: i 
 			          c horizontal matchParent.
 			          c frame vertical alignCenter.
 			          c frame horizontal alignCenter ];
-		          whenClickedDo: [
+		          clickAction: [
 			          | string |
 			          string := (MygSkGameManager perform: aPack asSymbol) at:
 					                    i.
@@ -43,7 +43,7 @@ MygToploPaging class >> buttonWithPack: aPack withManager: aManager andIndex: i 
 MygToploPaging class >> levelPaging [
 
 	| aNotebook manager scrollbar |
-	aNotebook := ToNotebook new
+	aNotebook := ToTabPane new
 		             background: Color lightRed darker;
 		             margin: (BlInsets all: 50).
 	manager := MygSkGameManager notebook: aNotebook.
@@ -54,8 +54,9 @@ MygToploPaging class >> levelPaging [
 
 	self packNames do: [ :e |
 		aNotebook
-			addPageTitle: e
-			bodyFactory: [ self pagingPack: 'mazes' , e managedBy: manager ] ].
+			addTabWithText: e
+			builder: [ :pane :notebook |
+				pane addChild: (self pagingPack: 'mazes' , e managedBy: manager) ] ].
 
 	^ aNotebook
 ]

@@ -1,17 +1,16 @@
 Class {
-	#name : 'TakuzuCommandLineHandler',
-	#superclass : 'CommandLineHandler',
-	#category : 'Myg-Takuzu',
-	#package : 'Myg-Takuzu'
+	#name : #TakuzuCommandLineHandler,
+	#superclass : #CommandLineHandler,
+	#category : 'Myg-Takuzu'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 TakuzuCommandLineHandler class >> commandName [
 
 	^ 'takuzu'
 ]
 
-{ #category : 'activation' }
+{ #category : #activation }
 TakuzuCommandLineHandler >> activate [
 
 	OSWindowDriver current startUp: true.

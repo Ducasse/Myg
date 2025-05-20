@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'levels'
 	],
-	#category : 'Myg-Takuzu-Core'
+	#category : #'Myg-Takuzu-Core'
 }
 
 { #category : #translating }
@@ -473,7 +473,7 @@ TBoard >> removeRandomBoxesWithRatio: aNumber [
 	(aNumber > 0 and: [ aNumber < 100 ]) ifFalse: [ ^ self ].
 	self grid withIndexes: [ :column :row |
 		100 atRandom < aNumber ifTrue: [
-			self grid at: column @ row put: (TUnknownBox new position: column @ row) ] ]
+			self grid at: column @ row put: (TUnknownBox new position: column @ row; board: self) ] ]
 ]
 
 { #category : #actions }

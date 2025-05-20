@@ -211,7 +211,7 @@ MygSkBoard >> printOn: aStream [
 							           ifTrue: [ el class ]
 							           ifFalse: [
 							           self class environment at:
-								           el class asString , 'OnTarget' ] ].
+								           (el class asString , 'OnTarget') asSymbol] ].
 				aStream nextPut: elClass textualMapCharacter ] ]
 		separatedBy: [ aStream cr ]
 ]

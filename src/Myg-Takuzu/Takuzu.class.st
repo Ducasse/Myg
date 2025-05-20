@@ -8,7 +8,7 @@ Takuzu openWithMenuBar
 Class {
 	#name : #Takuzu,
 	#superclass : #Object,
-	#category : 'Myg-Takuzu-UI'
+	#category : #'Myg-Takuzu-UI'
 }
 
 { #category : #'as yet unclassified' }
@@ -80,7 +80,7 @@ Takuzu class >> menuHelp [
 	menu label: (ToLabel text: 'Help').
 	menu icon:
 		(ToImage inner: (Smalltalk ui icons iconNamed: #glamorousHelp)).
-	menu whenClickedDo: [ self showHelp ].
+	menu clickAction: [ self showHelp ].
 	^ menu
 ]
 
@@ -109,7 +109,7 @@ Takuzu class >> menuLevel [
 					          space;
 					          print: i ].
 			subMenu addItem:
-				((ToButtonMenuItem new labelText: stream) whenClickedDo: [
+				((ToMenuItem new labelText: stream) clickAction: [
 					|model levelString methodName|
 					methodName := String streamContents: [ :out | out nextPutAll: 'levels'; print: index; nextPutAll: 'x'; print: index  ].
 					levelString := (TBoard perform: methodName asSymbol) at: i.
@@ -129,10 +129,10 @@ Takuzu class >> menuRandom [
 	menu icon:
 		(ToImage inner: (Smalltalk ui icons iconNamed: #solidMenu)).
 	menu addItem:
-		((ToButtonMenuItem new labelText: '4x4') whenClickedDo: [
+		((ToMenuItem new labelText: '4x4') clickAction: [
 			 TBoardElement launch4 ]).
 	menu addItem:
-		((ToButtonMenuItem new labelText: '6x6') whenClickedDo: [
+		((ToMenuItem new labelText: '6x6') clickAction: [
 			 TBoardElement launch6 ]).
 	"menu addItem:
 		((ToButtonMenuItem new labelText: '8x8') whenClickedDo: [
@@ -149,8 +149,8 @@ Takuzu class >> menuRandom [
 
 { #category : #opening }
 Takuzu class >> open [
-	<script>
 
+	<script>
 	| space randomMenu levelMenu helpMenu bar title |
 	randomMenu := self menuRandom.
 	levelMenu := self menuLevel.
@@ -158,9 +158,9 @@ Takuzu class >> open [
 	bar := self menuBar.
 	title := self title.
 
-	bar addMenu: levelMenu.
-	bar addMenu: randomMenu.
-	bar addMenu: helpMenu.
+	bar addItem: levelMenu.
+	bar addItem: randomMenu.
+	bar addItem: helpMenu.
 
 	space := BlSpace new.
 	space root addChild: title.

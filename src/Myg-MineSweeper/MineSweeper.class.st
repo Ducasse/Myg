@@ -46,7 +46,7 @@ MineSweeper class >> menuHelp [
 	menu := ToMenu new.
 	menu labelText: 'Help'.
 	menu iconImage: (Smalltalk ui icons iconNamed: #glamorousHelp).
-	menu whenClickedDo: [
+	menu clickAction: [
 		| container lab space |
 		lab := ToLabel text: 'How to play:
 		 
@@ -115,16 +115,16 @@ MineSweeper class >> menuPlay [
 
 { #category : #'instance creation' }
 MineSweeper class >> open [
-	<script>
 
+	<script>
 	| space playMenu helpMenu bar title |
 	playMenu := self menuPlay.
 	helpMenu := self menuHelp.
 	bar := self menuBar.
 	title := self title.
 
-	bar addMenu: playMenu.
-	bar addMenu: helpMenu.
+	bar addItem: playMenu.
+	bar addItem: helpMenu.
 	space := BlSpace new.
 
 

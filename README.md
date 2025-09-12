@@ -7,7 +7,6 @@ Myg is a project containing games and providing tools to create other games.
 Load a stable version of Myg with the following snippet, in Pharo 11:
 
 ```Smalltalk
-Author fullName: 'No'.
 Metacello new
 	repository: 'github://Ducasse/Myg:v1.0.3/src';
 	baseline: 'Myg';
@@ -17,7 +16,6 @@ Metacello new
 For development, load master branch:
 
 ```Smalltalk
-Author fullName: 'No'.
 Metacello new
 	repository: 'github://Ducasse/Myg';
 	baseline: 'Myg';
@@ -44,4 +42,8 @@ Takuzu open
 ```
 ```Smalltalk
 Sokoban open
+```
+
+```Smalltalk
+SameGame open
 ```

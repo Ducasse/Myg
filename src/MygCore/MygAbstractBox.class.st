@@ -5,7 +5,7 @@ Class {
 		'position',
 		'board'
 	],
-	#category : #MygCore
+	#category : 'MygCore'
 }
 
 { #category : #accessing }

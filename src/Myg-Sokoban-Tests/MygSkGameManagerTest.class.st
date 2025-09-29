@@ -4,13 +4,33 @@ This class contains tests
 Class {
 	#name : #MygSkGameManagerTest,
 	#superclass : #TestCase,
+	#instVars : [
+		'space'
+	],
 	#category : #'Myg-Sokoban-Tests'
 }
+
+{ #category : #running }
+MygSkGameManagerTest >> ensureClose: aSpace [
+
+	self assert: (BlSpace pulseUntilEmptyTaskQueue: aSpace timeout: 200 milliSeconds).
+
+	aSpace close.
+
+	self assert: (BlSpace pulseUntilEmptyTaskQueue: aSpace timeout: 200 milliSeconds).
+]
+
+{ #category : #running }
+MygSkGameManagerTest >> tearDown [
+
+	space ifNotNil: [ self ensureClose: space ].
+	super tearDown 
+]
 
 { #category : #tests }
 MygSkGameManagerTest >> testIsBoardReset [
 
-	| string manager boardElement space|
+	| string manager boardElement |
 	string := '#@$ .#'.
 	manager := MygSkGameManager new.
 	manager launchFromString: string.
@@ -24,13 +44,12 @@ MygSkGameManagerTest >> testIsBoardReset [
 	boardElement := manager currentBoardElement.
 	self assert: boardElement board printString equals: '#@$ .#'.
 	space := manager currentBoardElement space.
-	space universe closeSpaceSynchronously: space
 ]
 
 { #category : #tests }
 MygSkGameManagerTest >> testMoveCount [
 
-	| string manager boardElement space |
+	| string manager boardElement |
 	string := '#@$ .#'.
 	manager := MygSkGameManager new.
 	manager launchFromString: string.
@@ -45,13 +64,14 @@ MygSkGameManagerTest >> testMoveCount [
 	self assert: boardElement board printString equals: '# @$.#'.
 	self assert: manager currentMoveCount equals: 1.
 	space := manager currentBoardElement space.
-	space universe closeSpaceSynchronously: space
+
+
 ]
 
 { #category : #tests }
 MygSkGameManagerTest >> testRegisterLevel [
 
-	| manager board string space |
+	| manager board string |
 	manager := MygSkGameManager new.
 	string := MygSkGameManager mazesTest at: 1.
 	manager launchFromString: string inDictionary: 'mazesTest' at: 1.
@@ -69,13 +89,12 @@ MygSkGameManagerTest >> testRegisterLevel [
 			isNotNil.
 	self assert: ((manager packDictionary at: 'mazesTest') levelDictionary at: 1) bestCount equals: 2.
 	space := manager currentBoardElement space.
-	space universe closeSpaceSynchronously: space
 ]
 
 { #category : #tests }
 MygSkGameManagerTest >> testRegisterLevelWithBetterMoveCount [
 
-	| manager board string registered space |
+	| manager board string registered |
 	manager := MygSkGameManager new.
 	string := MygSkGameManager mazesTest at: 1.
 	manager launchFromString: string inDictionary: 'mazesTest' at: 1.
@@ -97,7 +116,8 @@ MygSkGameManagerTest >> testRegisterLevelWithBetterMoveCount [
 	self assert: registered bestCount equals: 4.
 
 	space := manager currentBoardElement space.
-	space universe closeSpaceSynchronously: space.
+	self ensureClose: space.
+	Toplo closeAllSpaces.
 	manager launchAgain.
 
 	board := manager currentBoardElement board.
@@ -110,13 +130,12 @@ MygSkGameManagerTest >> testRegisterLevelWithBetterMoveCount [
 				bestCount
 		equals: 2.
 	space := manager currentBoardElement space.
-	space universe closeSpaceSynchronously: space
 ]
 
 { #category : #tests }
 MygSkGameManagerTest >> testRegisterLevelWithWorseMoveCount [
 
-	| manager board string registered space |
+	| manager board string registered |
 	manager := MygSkGameManager new.
 	string := MygSkGameManager mazesTest at: 1.
 	manager launchFromString: string inDictionary: 'mazesTest' at: 1.
@@ -138,7 +157,8 @@ MygSkGameManagerTest >> testRegisterLevelWithWorseMoveCount [
 	self assert: registered bestCount equals: 2.
 
 	space := manager currentBoardElement space.
-	space universe closeSpaceSynchronously: space.
+	self ensureClose: space.
+
 	manager launchAgain.
 	board := manager currentBoardElement board.
 
@@ -154,5 +174,5 @@ MygSkGameManagerTest >> testRegisterLevelWithWorseMoveCount [
 				bestCount
 		equals: 2.
 	space := manager currentBoardElement space.
-	space universe closeSpaceSynchronously: space
+
 ]

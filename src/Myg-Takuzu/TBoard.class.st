@@ -183,7 +183,7 @@ __0_1_______
 __0____0_1_0
 1____0_0____
 ______1_00__
-_1_1______1_	
+_1_1______1_
 ____0_0__0__
 11_0________
 ___1_1__00__
@@ -473,7 +473,7 @@ TBoard >> removeRandomBoxesWithRatio: aNumber [
 	(aNumber > 0 and: [ aNumber < 100 ]) ifFalse: [ ^ self ].
 	self grid withIndexes: [ :column :row |
 		100 atRandom < aNumber ifTrue: [
-			self grid at: column @ row put: (TUnknownBox new position: column @ row) ] ]
+			self grid at: column @ row put: (TUnknownBox new position: column @ row; board: self) ] ]
 ]
 
 { #category : #actions }

@@ -5,7 +5,7 @@ Class {
 		'lines',
 		'characterClassBinding'
 	],
-	#category : #MygCore
+	#category : 'MygCore'
 }
 
 { #category : #helpers }

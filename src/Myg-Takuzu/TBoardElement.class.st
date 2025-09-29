@@ -6,7 +6,7 @@ Class {
 		'cellSpacing',
 		'gridWidth'
 	],
-	#category : #'Myg-Takuzu-UI'
+	#category : 'Myg-Takuzu-UI'
 }
 
 { #category : #'as yet unclassified' }
@@ -52,15 +52,16 @@ TBoardElement class >> openRandom [
 ]
 
 { #category : #'as yet unclassified' }
-TBoardElement class >> openWithModel: aTBoard [
+TBoardElement class >> openWithModel: aTField [
 
-	| aBoardElement space |
-	space := BlSpace new extent: 500@500.
-	aBoardElement := self new.
-
-	space root addChild: aBoardElement.
-	aBoardElement board: aTBoard.
-	space
+	| aFieldElement space |
+	space := BlSpace new.
+	aFieldElement := self new
+		                 board: aTField;
+		                 yourself.
+	space root addChild: aFieldElement.
+	space pulse
+		extent: 500 @ 500;
 		resizable: false;
 		show
 ]

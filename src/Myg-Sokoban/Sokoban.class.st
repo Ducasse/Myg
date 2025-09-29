@@ -30,7 +30,7 @@ Class {
 Sokoban class >> menuBar [
 
 	| bar |
-	bar := ToMenuBar new
+	bar := ToMenuPane new
 		       hMatchParent;
 		       vFitContent.
 	bar border: (BlBorder paint: Color lightGray).
@@ -44,7 +44,7 @@ Sokoban class >> menuHelp [
 	menu := ToMenu new.
 	menu labelText: 'Help'.
 	menu iconImage: (Smalltalk ui icons iconNamed: #glamorousHelp).
-	menu whenClickedDo: [
+	menu clickAction: [
 		| container lab space |
 		lab := ToLabel text: 'How to play:
 		 
@@ -129,8 +129,8 @@ Sokoban class >> menuLevel [
 
 { #category : #opening }
 Sokoban class >> open [
-	<script>
 
+	<script>
 	| space container levelMenu helpMenu bar title paging |
 	levelMenu := self menuLevel.
 	helpMenu := self menuHelp.
@@ -148,8 +148,8 @@ Sokoban class >> open [
 			title.
 			paging }.
 
-	bar addMenu: levelMenu.
-	bar addMenu: helpMenu.
+	bar addItem: levelMenu.
+	bar addItem: helpMenu.
 
 	space := BlSpace new.
 	space root addChild: container.
@@ -160,21 +160,25 @@ Sokoban class >> open [
 { #category : #'private - menu building' }
 Sokoban class >> subMenuPack: aPack withManager: aManager [
 
-	| subMenu |
+	| subMenu dict keys |
 	subMenu := ToMenu new
 		labelText: aPack;
 		yourself.
-	(MygSkGameManager perform: aPack asSymbol) withIndexDo: [ :string :i |
-		| stream |
-		stream := String streamContents: [ :out | out print: i ].
+		
+	dict := (MygSkGameManager perform: aPack asSymbol).
+	keys := dict keys sorted.
+	keys do: [ :key |
+		| stream string |
+		string := dict at: key.
+		stream := String streamContents: [ :out | out print: key ].
 		subMenu addItem:
 			(ToMenuItem new
 				labelText: stream;
-				whenClickedDo: [
+				clickAction:  [
 					aManager
 						launchFromString: string
 						inDictionary: aPack
-						at: i ];
+						at: key  ];
 				yourself) ].
 
 	^ subMenu

@@ -8,7 +8,7 @@ Class {
 	#classVars : [
 		'ColorDictionary'
 	],
-	#category : #'Myg-Takuzu-UI'
+	#category : 'Myg-Takuzu-UI'
 }
 
 { #category : #accessing }

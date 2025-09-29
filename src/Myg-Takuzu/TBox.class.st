@@ -7,7 +7,7 @@ Class {
 	#classVars : [
 		'ValueDictionary'
 	],
-	#category : #'Myg-Takuzu-Core'
+	#category : 'Myg-Takuzu-Core'
 }
 
 { #category : #factory }
@@ -27,6 +27,16 @@ TBox class >> initialize [
 		                   (0 -> 1).
 		                   (1 -> nil).
 		                   (nil -> 0) } asDictionary
+]
+
+{ #category : #initialization }
+TBox class >> set: aNumber [
+	^ TSetBox value: aNumber
+]
+
+{ #category : #'as yet unclassified' }
+TBox class >> unknown [
+	^ TUnknownBox new
 ]
 
 { #category : #accessing }

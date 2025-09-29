@@ -5,7 +5,7 @@ Class {
 	#instVars : [
 		'contents'
 	],
-	#category : #'Myg-Takuzu-Core'
+	#category : 'Myg-Takuzu-Core'
 }
 
 { #category : #'filter streaming' }

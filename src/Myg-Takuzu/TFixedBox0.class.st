@@ -1,7 +1,7 @@
 Class {
 	#name : #TFixedBox0,
 	#superclass : #TFixedBox,
-	#category : #'Myg-Takuzu-Core'
+	#category : 'Myg-Takuzu-Core'
 }
 
 { #category : #description }

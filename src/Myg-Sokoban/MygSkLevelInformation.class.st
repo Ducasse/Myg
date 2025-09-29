@@ -25,41 +25,43 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MygSkLevelInformation,
-	#superclass : #Object,
+	#name : 'MygSkLevelInformation',
+	#superclass : 'Object',
 	#instVars : [
 		'finished',
 		'bestCount'
 	],
-	#category : #'Myg-Sokoban-Model'
+	#category : 'Myg-Sokoban-Model',
+	#package : 'Myg-Sokoban',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkLevelInformation class >> count: aNumber [
 
 	^ (self new bestCount: aNumber) 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkLevelInformation >> bestCount [ 
 
 	^ bestCount
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkLevelInformation >> bestCount: aNumber [
 
 	bestCount := aNumber 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkLevelInformation >> initialize [
 
 	super initialize.
 	finished := true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MygSkLevelInformation >> isFinished [ 
 	
 	^ finished

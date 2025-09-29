@@ -24,47 +24,60 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MygSkMovable,
-	#superclass : #MygSkElement,
+	#name : 'MygSkMovable',
+	#superclass : 'MygSkObject',
 	#instVars : [
 		'background'
 	],
-	#category : #'Myg-Sokoban-Model'
+	#category : 'Myg-Sokoban-Model',
+	#package : 'Myg-Sokoban',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkMovable >> background [
 
 	^ background
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkMovable >> background: anObject [
 
 	background := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
+MygSkMovable >> backgroundRepresentation [
+	^ self subclassResponsibility
+]
+
+{ #category : 'accessing' }
 MygSkMovable >> board: aBoard [ 
 
 	super board: aBoard.
 	self background board: aBoard
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkMovable >> configured [
 
 	self background: self defaultBackground.
 	^ self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkMovable >> defaultBackground [
 
 	^ MygSkGround new
 ]
 
-{ #category : #move }
+{ #category : 'testing' }
+MygSkMovable >> isMovable [ 
+	
+	^ true
+]
+
+{ #category : 'move' }
 MygSkMovable >> move: aCpDirection [
 
 	| newPosition neighbor |
@@ -73,31 +86,31 @@ MygSkMovable >> move: aCpDirection [
 	^ self moveIn: neighbor going: aCpDirection
 ]
 
-{ #category : #move }
+{ #category : 'move' }
 MygSkMovable >> moveEast [
 
 	^ self move: CpDirection east
 ]
 
-{ #category : #move }
+{ #category : 'move' }
 MygSkMovable >> moveNorth [
 
 	^ self move: CpDirection north
 ]
 
-{ #category : #move }
+{ #category : 'move' }
 MygSkMovable >> moveSouth [
 
 	^ self move: CpDirection south
 ]
 
-{ #category : #move }
+{ #category : 'move' }
 MygSkMovable >> moveWest [
 
 	^ self move: CpDirection west
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkMovable >> position: aPoint [
 
 	position := aPoint.

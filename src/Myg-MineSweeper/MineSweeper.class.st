@@ -62,7 +62,7 @@ Have fun !'.
 		lab beMultiLine.
 		lab hMatchParent.
 		container := BlElement new
-			             background: Color lightGreen;
+			             background: Color lightBlue;
 			             padding: (BlInsets all: 15);
 			             layout: BlLinearLayout vertical;
 			             constraintsDo: [ :c |

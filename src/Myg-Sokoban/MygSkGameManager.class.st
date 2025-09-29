@@ -29,8 +29,8 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MygSkGameManager,
-	#superclass : #Object,
+	#name : 'MygSkGameManager',
+	#superclass : 'Object',
 	#instVars : [
 		'menu',
 		'notebook',
@@ -40,10 +40,12 @@ Class {
 		'currentLevel',
 		'packDictionary'
 	],
-	#category : #'Myg-Sokoban-Model'
+	#category : 'Myg-Sokoban-Model',
+	#package : 'Myg-Sokoban',
+	#tag : 'Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygSkGameManager class >> importFromString: aString [
 
 	| tmp |
@@ -53,7 +55,7 @@ MygSkGameManager class >> importFromString: aString [
 	^ tmp
 ]
 
-{ #category : #mazes }
+{ #category : 'mazes' }
 MygSkGameManager class >> mazesLoma [
 	"hsasquatch/sokoban/loma.html"
 
@@ -135,7 +137,7 @@ MygSkGameManager class >> mazesLoma [
 		  yourself
 ]
 
-{ #category : #mazes }
+{ #category : 'mazes' }
 MygSkGameManager class >> mazesMicroban [
 	"sasquatch/sokoban/microban.html"
 
@@ -1501,7 +1503,7 @@ MygSkGameManager class >> mazesMicroban [
 		  yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygSkGameManager class >> mazesPack [
 	"sasquatch/sokoban/masmicroban.html"
 
@@ -2911,7 +2913,7 @@ MygSkGameManager class >> mazesPack [
 		  yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygSkGameManager class >> mazesSasquatch [
 	"sasquatch/sokoban/massasquatch.html"
 
@@ -3660,7 +3662,7 @@ MygSkGameManager class >> mazesSasquatch [
 		  yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygSkGameManager class >> mazesSasquatchIII [
 	"sasquatch/sokoban/sasquatchiii.html"
 
@@ -4416,7 +4418,7 @@ MygSkGameManager class >> mazesSasquatchIII [
 		  yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygSkGameManager class >> mazesSasquatchIV [
 	"sasquatch/sokoban/sasquatchiv.html"
 
@@ -5082,7 +5084,7 @@ MygSkGameManager class >> mazesSasquatchIV [
 		  yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygSkGameManager class >> mazesSasquatchV [
 	"sasquatch/sokoban/sasquatchv.html"
 
@@ -5806,7 +5808,7 @@ MygSkGameManager class >> mazesSasquatchV [
 		  yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygSkGameManager class >> mazesSasquatchVI [
 	"sasquatch/sokoban/sasquatchvi.html"
 
@@ -6558,13 +6560,13 @@ MygSkGameManager class >> mazesSasquatchVI [
 		  yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygSkGameManager class >> mazesTest [
 
 	^ IdentityDictionary new at: 1 put: '#@$ .#'; yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygSkGameManager class >> mazesUAlberta [
 
 	^ IdentityDictionary new
@@ -7791,68 +7793,68 @@ MygSkGameManager class >> mazesUAlberta [
 		  yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager class >> menu: aToMenu [
 
 	^ self new menu: aToMenu 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager class >> notebook: aNotebook [
 
 	^ self new notebook: aNotebook 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager >> currentBoardElement [
 
 	^ currentBoardElement 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager >> currentBoardElement: aSkBoardElement [
 
 	currentBoardElement:= aSkBoardElement 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager >> currentLevel [ 
 	
 	^ currentLevel 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager >> currentLevel: aDictionary [
 
 	currentLevel := aDictionary 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager >> currentLevelString [
 
 	^ currentLevelString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager >> currentLevelString: aString [
 
 	currentLevelString := aString
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager >> currentMoveCount [ 
 	
 	^ currentMoveCount 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager >> currentMoveCount: aNumber [
 
 	currentMoveCount:= aNumber 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkGameManager >> initialize [
 
 	super initialize.
@@ -7860,7 +7862,7 @@ MygSkGameManager >> initialize [
 	self initializePackDictionary
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkGameManager >> initializePackDictionary [
 
 	self packDictionary: {
@@ -7876,13 +7878,13 @@ MygSkGameManager >> initializePackDictionary [
 			('mazesUAlberta' -> MygSkLevelPack new) } asDictionary
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygSkGameManager >> launchAgain [
 
 	self launchFromString: self currentLevelString
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygSkGameManager >> launchFromString: aString [
 
 	| board |
@@ -7895,50 +7897,50 @@ MygSkGameManager >> launchFromString: aString [
 	self currentBoardElement openWithModel: board
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygSkGameManager >> launchFromString: aString inDictionary: aDictionaryName at: aNumber [
 
 	self currentLevel: { aDictionaryName -> aNumber } asDictionary.
 	self launchFromString: aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager >> menu [ 
 
 	^ menu
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager >> menu: aToMenu [
 
 	menu := aToMenu
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager >> notebook [ 
 	
 	^ notebook 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager >> notebook: aNotebook [
 
 	notebook := aNotebook 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager >> packDictionary [ 
 	
 	^ packDictionary 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager >> packDictionary: aDictionary [
 
 	packDictionary := aDictionary
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygSkGameManager >> registerLevel [
 
 	| pack index |
@@ -7951,7 +7953,7 @@ MygSkGameManager >> registerLevel [
 	self notebook ifNotNil: [ self updateNotebookButton ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager >> updateButton [
 
 	| menuButton button elt |
@@ -7965,7 +7967,7 @@ MygSkGameManager >> updateButton [
 	button icon: elt
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGameManager >> updateNotebookButton [
 
 	| button elt page string icon |

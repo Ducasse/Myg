@@ -1,10 +1,12 @@
 Class {
-	#name : #MygToploPaging,
-	#superclass : #Object,
-	#category : #'Myg-Sokoban-Toplo'
+	#name : 'MygToploPaging',
+	#superclass : 'Object',
+	#category : 'Myg-Sokoban-Toplo',
+	#package : 'Myg-Sokoban',
+	#tag : 'Toplo'
 }
 
-{ #category : #'accessing - structure variables' }
+{ #category : 'accessing - structure variables' }
 MygToploPaging class >> buttonWithPack: aPack withManager: aManager andIndex: i [
 
 	| stream container button previewForm |
@@ -13,8 +15,7 @@ MygToploPaging class >> buttonWithPack: aPack withManager: aManager andIndex: i 
 			          nextPutAll: 'Level ';
 			          print: i ].
 	" optimization to avoid having too much elements in a button "
-	previewForm := (self previewForButtonWithPack: aPack at: i) aeAsForm
-		               asElement.
+	previewForm := (self previewForButtonWithPack: aPack at: i) asElement.
 	previewForm constraintsDo: [ :c | c frame vertical alignCenter ].
 	container := BlElement new
 		             layout: BlFrameLayout new;
@@ -39,7 +40,7 @@ MygToploPaging class >> buttonWithPack: aPack withManager: aManager andIndex: i 
 	^ button
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygToploPaging class >> levelPaging [
 
 	| aNotebook manager scrollbar |
@@ -61,13 +62,13 @@ MygToploPaging class >> levelPaging [
 	^ aNotebook
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygToploPaging class >> packNames [ 
 
 	^ {'Loma' .'Microban' . 'Pack' . 'Sasquatch' . 'SasquatchIII'. 'SasquatchIV'. 'SasquatchV'. 'SasquatchVI'. 'UAlberta' }
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygToploPaging class >> pagingPack: aPack managedBy: aManager [
 
 	| grid root scrollbar |
@@ -101,16 +102,17 @@ MygToploPaging class >> pagingPack: aPack managedBy: aManager [
 	^ root
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygToploPaging class >> previewForButtonWithPack: aPack at: i [
 
-	| iconImage packName |
+	| iconImage packName methodName |
 	packName := aPack withoutPrefix: 'mazes'.
-	iconImage := ((MygResources packs at: packName) at: i) asElement.
+	methodName := 'pack' , packName , 'Level' , i asString.
+	iconImage := (MygResources perform: methodName asSymbol).
 	^ iconImage
 ]
 
-{ #category : #'see class side' }
+{ #category : 'see class side' }
 MygToploPaging >> seeClassSide [
 
 	

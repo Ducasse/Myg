@@ -26,11 +26,13 @@ Metacello new
 
 ## Playing Games
 
-There are currently 3 games in Myg :
+There are currently 5 games in Myg :
 
 - MineSweeper
 - Takuzu
 - Sokoban
+- Memory
+- SameGame
 
 You can play each game by executing these snippets :
 
@@ -43,7 +45,9 @@ Takuzu open
 ```Smalltalk
 Sokoban open
 ```
-
+```Smalltalk
+Memory open
+```
 ```Smalltalk
 SameGame open
 ```

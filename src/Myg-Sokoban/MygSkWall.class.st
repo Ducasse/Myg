@@ -21,24 +21,26 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MygSkWall,
-	#superclass : #MygSkElement,
-	#category : #'Myg-Sokoban-Model'
+	#name : 'MygSkWall',
+	#superclass : 'MygSkObject',
+	#category : 'Myg-Sokoban-Model',
+	#package : 'Myg-Sokoban',
+	#tag : 'Model'
 }
 
-{ #category : #'default encoding' }
+{ #category : 'default encoding' }
 MygSkWall class >> textualMapCharacter [ 
 
 	^ $#
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkWall >> backgroundRepresentation [
 
 	^ MygSkBoxElement wallIcon
 ]
 
-{ #category : #move }
+{ #category : 'move' }
 MygSkWall >> bringIn: anActor going: aDirection [
 	"anActor does not move in a wall. Nothing enter a wall."
 	

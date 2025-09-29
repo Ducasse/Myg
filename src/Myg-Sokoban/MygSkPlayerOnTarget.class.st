@@ -21,23 +21,25 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MygSkPlayerOnTarget,
-	#superclass : #MygSkPlayer,
-	#category : #'Myg-Sokoban-Model'
+	#name : 'MygSkPlayerOnTarget',
+	#superclass : 'MygSkPlayer',
+	#category : 'Myg-Sokoban-Model',
+	#package : 'Myg-Sokoban',
+	#tag : 'Model'
 }
 
-{ #category : #'default encoding' }
+{ #category : 'default encoding' }
 MygSkPlayerOnTarget class >> textualMapCharacter [
 	^ $+
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkPlayerOnTarget >> configured [
 
 	^ MygSkPlayer new background: self defaultBackground
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkPlayerOnTarget >> defaultBackground [
 
 	^ MygSkTarget

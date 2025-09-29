@@ -21,12 +21,14 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #Sokoban,
-	#superclass : #Object,
-	#category : #'Myg-Sokoban-Toplo'
+	#name : 'Sokoban',
+	#superclass : 'Object',
+	#category : 'Myg-Sokoban-Toplo',
+	#package : 'Myg-Sokoban',
+	#tag : 'Toplo'
 }
 
-{ #category : #'private - menu building' }
+{ #category : 'private - menu building' }
 Sokoban class >> menuBar [
 
 	| bar |
@@ -37,7 +39,7 @@ Sokoban class >> menuBar [
 	^ bar
 ]
 
-{ #category : #'private - menu building' }
+{ #category : 'private - menu building' }
 Sokoban class >> menuHelp [
 
 	| menu |
@@ -95,7 +97,7 @@ Have fun !' asRopedText.
 	^ menu
 ]
 
-{ #category : #'private - menu building' }
+{ #category : 'private - menu building' }
 Sokoban class >> menuLevel [
 
 	| menu manager |
@@ -127,7 +129,7 @@ Sokoban class >> menuLevel [
 	^ menu
 ]
 
-{ #category : #opening }
+{ #category : 'opening' }
 Sokoban class >> open [
 
 	<script>
@@ -157,7 +159,7 @@ Sokoban class >> open [
 	space show
 ]
 
-{ #category : #'private - menu building' }
+{ #category : 'private - menu building' }
 Sokoban class >> subMenuPack: aPack withManager: aManager [
 
 	| subMenu dict keys |
@@ -184,7 +186,7 @@ Sokoban class >> subMenuPack: aPack withManager: aManager [
 	^ subMenu
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Sokoban class >> title [
 
 	| title |
@@ -200,6 +202,6 @@ Sokoban class >> title [
 	^ title
 ]
 
-{ #category : #'see class side' }
+{ #category : 'see class side' }
 Sokoban >> seeClassSide [ 
 ]

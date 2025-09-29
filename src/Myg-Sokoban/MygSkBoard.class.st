@@ -13,24 +13,26 @@ Extensions
 - Support game replay or revert.
 "
 Class {
-	#name : #MygSkBoard,
-	#superclass : #MygBoard,
+	#name : 'MygSkBoard',
+	#superclass : 'MygBoard',
 	#instVars : [
 		'player',
 		'boxes',
 		'ended',
 		'gameManager'
 	],
-	#category : #'Myg-Sokoban-Model'
+	#category : 'Myg-Sokoban-Model',
+	#package : 'Myg-Sokoban',
+	#tag : 'Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygSkBoard class >> boardTest [
 
 	^ self createWithBoard: (MygSkGameManager importFromString: self microban1TestBoard).
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkBoard class >> createWithBoard: aCTNewArray2D [
 
 	^ self new
@@ -38,7 +40,7 @@ MygSkBoard class >> createWithBoard: aCTNewArray2D [
 		  yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkBoard class >> createWithBoard: aCTNewArray2D managedBy: aSkGameManager [
 
 	^ (self createWithBoard: aCTNewArray2D)
@@ -46,7 +48,7 @@ MygSkBoard class >> createWithBoard: aCTNewArray2D managedBy: aSkGameManager [
 		  yourself
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 MygSkBoard class >> example [ 
 	<sampleInstance>
 	
@@ -63,7 +65,7 @@ MygSkBoard class >> example [
     #######' fromPackage: self package
 ]
 
-{ #category : #mazes }
+{ #category : 'mazes' }
 MygSkBoard class >> microban1TestBoard [
 	"sasquatch/sokoban/microban.html"
 
@@ -76,7 +78,7 @@ MygSkBoard class >> microban1TestBoard [
 ####'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MygSkBoard >> asciiString [ 
 
 	^ String streamContents: [ :st |
@@ -84,48 +86,48 @@ MygSkBoard >> asciiString [
 
 ]
 
-{ #category : #'low level access' }
+{ #category : 'low level access' }
 MygSkBoard >> at: anInteger at: anInteger2 [
 
 	^ grid at: anInteger @ anInteger2
 ]
 
-{ #category : #'low level access' }
+{ #category : 'low level access' }
 MygSkBoard >> at: anInteger at: anInteger2 put: anElement [
 
 	grid at: anInteger @ anInteger2 put: anElement
 ]
 
-{ #category : #'low level access' }
+{ #category : 'low level access' }
 MygSkBoard >> atColumn: anInteger atRow: anInteger2 [
 
 	^ grid at: anInteger @ anInteger2
 ]
 
-{ #category : #'low level access' }
+{ #category : 'low level access' }
 MygSkBoard >> atColumn: anInteger atRow: anInteger2 put: anElement [
 
 	grid at: anInteger @ anInteger2 put: anElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoard >> atPosition: aCpPositionable [ 
 	^ (grid at: aCpPositionable x @ aCpPositionable y)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoard >> boxes [ 
 
 	^ boxes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoard >> boxes: aCollection [
 
 	boxes := aCollection 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoard >> configureGrid: aCTNewArray2D [
 
 	super configureGrid: aCTNewArray2D.
@@ -134,13 +136,13 @@ MygSkBoard >> configureGrid: aCTNewArray2D [
 		setPlayer
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 MygSkBoard >> do: aBlock [
 
 	grid do: aBlock
 ]
 
-{ #category : #ending }
+{ #category : 'ending' }
 MygSkBoard >> endGame [
 
 	ended ifTrue: [ ^ self ].
@@ -148,30 +150,30 @@ MygSkBoard >> endGame [
 	gameManager ifNotNil: [ gameManager registerLevel ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoard >> ended [ 
 
 	^ ended 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoard >> gameManager [ 
 	
 	^ gameManager 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoard >> gameManager: aSkGameManager [
 
 	gameManager:= aSkGameManager 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoard >> height [
 	^ grid height
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkBoard >> initialize [
 
 	super initialize.
@@ -179,30 +181,30 @@ MygSkBoard >> initialize [
 	boxes := OrderedCollection new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MygSkBoard >> isFinished [
 
 	^ self boxes allSatisfy: [ :each | each background isTarget ]
 ]
 
-{ #category : #move }
+{ #category : 'move' }
 MygSkBoard >> moveSteps: aCollectionOfDirection [
 
 	aCollectionOfDirection do: [ :each | player move: each ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoard >> player [
 	^ player
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MygSkBoard >> printOn: aStream [
 
 	(1 to: grid height)
 		do: [ :rowNumber |
 			1 to: grid width do: [ :columnNumber |
-				| el |
+				| el elClass |
 				el := self atColumn: columnNumber atRow: rowNumber.
 				elClass := (el class inheritsFrom: MygSkMovable)
 					           ifFalse: [ el class ]
@@ -216,25 +218,25 @@ MygSkBoard >> printOn: aStream [
 		separatedBy: [ aStream cr ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkBoard >> reset [
 
 	self gameManager launchAgain
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkBoard >> setBoxes [
 
 	self boxes: (grid select: [ :e | e class = MygSkBox ]).
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkBoard >> setPlayer [
 
 	player := grid contents detect: #isPlayer
 ]
 
-{ #category : #move }
+{ #category : 'move' }
 MygSkBoard >> updatePositionOf: aSkMovable from: previousPosition [
 	"Put back the previous position element."
 
@@ -253,7 +255,7 @@ MygSkBoard >> updatePositionOf: aSkMovable from: previousPosition [
 	self isFinished ifTrue: [ self endGame ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoard >> width [
 	^ grid width
 ]

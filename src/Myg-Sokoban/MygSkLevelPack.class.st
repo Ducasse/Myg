@@ -24,15 +24,17 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MygSkLevelPack,
-	#superclass : #Object,
+	#name : 'MygSkLevelPack',
+	#superclass : 'Object',
 	#instVars : [
 		'levelDictionary'
 	],
-	#category : #'Myg-Sokoban-Model'
+	#category : 'Myg-Sokoban-Model',
+	#package : 'Myg-Sokoban',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkLevelPack >> at: anIndex isBetterThan: aSkLevelInformation [
 
 	| registeredCount newCount|
@@ -41,7 +43,7 @@ MygSkLevelPack >> at: anIndex isBetterThan: aSkLevelInformation [
 	^ registeredCount < newCount 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkLevelPack >> at: anIndex put: aSkLevelInformation [
 
 	self levelDictionary at: anIndex ifPresent: [
@@ -50,20 +52,20 @@ MygSkLevelPack >> at: anIndex put: aSkLevelInformation [
 	self levelDictionary at: anIndex put: aSkLevelInformation
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkLevelPack >> initialize [ 
 
 	super initialize.
 	levelDictionary := Dictionary new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkLevelPack >> levelDictionary [
 
 	^ levelDictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkLevelPack >> levelDictionary: aDictionary [
 
 	levelDictionary := aDictionary 

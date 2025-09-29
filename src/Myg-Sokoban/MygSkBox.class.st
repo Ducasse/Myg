@@ -21,18 +21,20 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MygSkBox,
-	#superclass : #MygSkMovable,
-	#category : #'Myg-Sokoban-Model'
+	#name : 'MygSkBox',
+	#superclass : 'MygSkMovable',
+	#category : 'Myg-Sokoban-Model',
+	#package : 'Myg-Sokoban',
+	#tag : 'Model'
 }
 
-{ #category : #'default encoding' }
+{ #category : 'default encoding' }
 MygSkBox class >> textualMapCharacter [ 
 	
 	^ $$
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBox >> backgroundRepresentation [
 
 	^ self background class = MygSkTarget
@@ -40,7 +42,7 @@ MygSkBox >> backgroundRepresentation [
 		  ifFalse: [ MygSkBoxElement boxIcon ]
 ]
 
-{ #category : #move }
+{ #category : 'move' }
 MygSkBox >> bringIn: aPlayer going: aDirection [
 
 	| boxPreviousPosition neighbor didMove |
@@ -59,13 +61,13 @@ MygSkBox >> bringIn: aPlayer going: aDirection [
 	^ didMove
 ]
 
-{ #category : #move }
+{ #category : 'move' }
 MygSkBox >> isBox [ 
 
 	^ true
 ]
 
-{ #category : #'default encoding' }
+{ #category : 'default encoding' }
 MygSkBox >> textualMapCharacter [
 
 	^ self background class = MygSkTarget

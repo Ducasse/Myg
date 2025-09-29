@@ -21,22 +21,24 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MygSkBoxOnTarget,
-	#superclass : #MygSkBox,
-	#category : #'Myg-Sokoban-Model'
+	#name : 'MygSkBoxOnTarget',
+	#superclass : 'MygSkBox',
+	#category : 'Myg-Sokoban-Model',
+	#package : 'Myg-Sokoban',
+	#tag : 'Model'
 }
 
-{ #category : #'default encoding' }
+{ #category : 'default encoding' }
 MygSkBoxOnTarget class >> textualMapCharacter [
 	^ $*
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkBoxOnTarget >> configured [
 	^ MygSkBox new background: self defaultBackground
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkBoxOnTarget >> defaultBackground [
 
 	^ MygSkTarget new

@@ -1,10 +1,12 @@
 Class {
-	#name : #MygToploPaging,
-	#superclass : #Object,
-	#category : #'Myg-Sokoban-Toplo'
+	#name : 'MygToploPaging',
+	#superclass : 'Object',
+	#category : 'Myg-Sokoban-Toplo',
+	#package : 'Myg-Sokoban',
+	#tag : 'Toplo'
 }
 
-{ #category : #'accessing - structure variables' }
+{ #category : 'accessing - structure variables' }
 MygToploPaging class >> buttonWithPack: aPack withManager: aManager andIndex: i [
 
 	| stream container button previewForm |
@@ -38,7 +40,7 @@ MygToploPaging class >> buttonWithPack: aPack withManager: aManager andIndex: i 
 	^ button
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygToploPaging class >> levelPaging [
 
 	| aNotebook manager scrollbar |
@@ -60,13 +62,13 @@ MygToploPaging class >> levelPaging [
 	^ aNotebook
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygToploPaging class >> packNames [ 
 
 	^ {'Loma' .'Microban' . 'Pack' . 'Sasquatch' . 'SasquatchIII'. 'SasquatchIV'. 'SasquatchV'. 'SasquatchVI'. 'UAlberta' }
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygToploPaging class >> pagingPack: aPack managedBy: aManager [
 
 	| grid root scrollbar |
@@ -100,7 +102,7 @@ MygToploPaging class >> pagingPack: aPack managedBy: aManager [
 	^ root
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygToploPaging class >> previewForButtonWithPack: aPack at: i [
 
 	| iconImage packName methodName |
@@ -110,7 +112,7 @@ MygToploPaging class >> previewForButtonWithPack: aPack at: i [
 	^ iconImage
 ]
 
-{ #category : #'see class side' }
+{ #category : 'see class side' }
 MygToploPaging >> seeClassSide [
 
 	

@@ -27,47 +27,49 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MygSkBoardElement,
-	#superclass : #BlElement,
+	#name : 'MygSkBoardElement',
+	#superclass : 'BlElement',
 	#instVars : [
 		'board',
 		'backgroundLayer',
 		'foregroundLayer',
 		'directionDict'
 	],
-	#category : #'Myg-Sokoban-UI'
+	#category : 'Myg-Sokoban-UI',
+	#package : 'Myg-Sokoban',
+	#tag : 'UI'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygSkBoardElement class >> openBoardTest [
 
 	^ self openWithModel: MygSkBoard boardTest
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MygSkBoardElement class >> openWithModel: aSkBoard [
 
 	self new openWithModel: aSkBoard.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoardElement >> backgroundLayer [ 
 
 	^ backgroundLayer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoardElement >> backgroundLayer: aBlElement [
 
 	backgroundLayer := aBlElement 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkBoardElement >> board [ 
 	^ board
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkBoardElement >> board: aSkBoard [
 
 	board := aSkBoard.
@@ -80,7 +82,7 @@ MygSkBoardElement >> board: aSkBoard [
 		initializeForegroundLayer
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkBoardElement >> boardPreview: aSkBoard [
 
 	board := aSkBoard.
@@ -95,13 +97,13 @@ MygSkBoardElement >> boardPreview: aSkBoard [
 	board := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoardElement >> directionDict [
 
 	^ directionDict
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MygSkBoardElement >> elementsToUpdateAtPosition: aPoint goingIn: aCpDirection [
 
 	| layer elements playerElement neighborElement nextNeighborElement |
@@ -121,19 +123,19 @@ MygSkBoardElement >> elementsToUpdateAtPosition: aPoint goingIn: aCpDirection [
 	^ elements
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoardElement >> foregroundLayer [
 
 	^ foregroundLayer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoardElement >> foregroundLayer: aBlElement [
 
 	foregroundLayer := aBlElement 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkBoardElement >> initialize [
 
 	super initialize.
@@ -146,7 +148,7 @@ MygSkBoardElement >> initialize [
 		requestFocus
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoardElement >> initializeBackgroundLayer [
 
 	| layer |
@@ -181,7 +183,7 @@ MygSkBoardElement >> initializeBackgroundLayer [
 	self backgroundLayer: layer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoardElement >> initializeBackgroundLayerPreview [
 
 	| layer |
@@ -214,7 +216,7 @@ MygSkBoardElement >> initializeBackgroundLayerPreview [
 	self backgroundLayer: layer
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkBoardElement >> initializeDirectionDict [
 
 	directionDict := {
@@ -224,7 +226,7 @@ MygSkBoardElement >> initializeDirectionDict [
 		        (#RIGHT -> CpDirection east) } asDictionary.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoardElement >> initializeForegroundLayer [
 
 	| layer |
@@ -260,7 +262,7 @@ MygSkBoardElement >> initializeForegroundLayer [
 	self foregroundLayer: layer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkBoardElement >> initializeForegroundLayerPreview [
 
 	| layer |
@@ -295,7 +297,7 @@ MygSkBoardElement >> initializeForegroundLayerPreview [
 	self foregroundLayer: layer
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkBoardElement >> manageEvent: anEvent [
 
 	| player moved direction neighborElement elements |
@@ -326,7 +328,7 @@ MygSkBoardElement >> manageEvent: anEvent [
 		ifFalse: [ self updateElements: elements ]
 ]
 
-{ #category : #opening }
+{ #category : 'opening' }
 MygSkBoardElement >> openWithModel: aSkBoard [
 
 	| space |
@@ -343,14 +345,14 @@ MygSkBoardElement >> openWithModel: aSkBoard [
 	space show
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkBoardElement >> resetBoard [
 
 	self space close.
 	self board reset
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MygSkBoardElement >> updateElements: anOrderedCollection [
 
 	anOrderedCollection do: [ :each | each boxForForeground updateBackgroundColor ]

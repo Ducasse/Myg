@@ -1,6 +1,6 @@
 Class {
-	#name : #TBoxElement,
-	#superclass : #BlElement,
+	#name : 'TBoxElement',
+	#superclass : 'BlElement',
 	#instVars : [
 		'box',
 		'board'
@@ -8,16 +8,18 @@ Class {
 	#classVars : [
 		'ColorDictionary'
 	],
-	#category : 'Myg-Takuzu-UI'
+	#category : 'Myg-Takuzu-UI',
+	#package : 'Myg-Takuzu',
+	#tag : 'UI'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TBoxElement class >> box: aMBox [
 
 	^ self new box: aMBox
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 TBoxElement class >> initialize [ 
 
 
@@ -27,48 +29,57 @@ TBoxElement class >> initialize [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TBoxElement >> backgroundPaint [
 
 	^ Color veryDarkGray 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TBoxElement >> board [
 
 	^ board
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TBoxElement >> board: aTBoard [
 
 	board := aTBoard
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TBoxElement >> box [
 
 	^ box
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TBoxElement >> box: aTBox [
 
 	box := aTBox.
 	self updateBackgroundColor
 ]
 
-{ #category : #initialization }
+{ #category : 'public' }
+TBoxElement >> click [ 
+
+	self subclassResponsibility 
+]
+
+{ #category : 'initialization' }
 TBoxElement >> initialize [
 
 	super initialize.
 	self background: self backgroundPaint.
 	self geometry: (BlRoundedRectangleGeometry cornerRadius: 5).
+	self constraintsDo: [ :c | 
+		c vertical matchParent.
+		c horizontal matchParent ].
 	self addEventHandlerOn: BlMouseUpEvent do: [
 		self click ]
 ]
 
-{ #category : #'actions api' }
+{ #category : 'actions api' }
 TBoxElement >> updateBackgroundColor [
 	self background: (ColorDictionary at: self box value)
 ]

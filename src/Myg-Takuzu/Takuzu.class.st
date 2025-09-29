@@ -6,12 +6,14 @@ Takuzu openWithMenuBar
 ```
 "
 Class {
-	#name : #Takuzu,
-	#superclass : #Object,
-	#category : #'Myg-Takuzu-UI'
+	#name : 'Takuzu',
+	#superclass : 'Object',
+	#category : 'Myg-Takuzu-UI',
+	#package : 'Myg-Takuzu',
+	#tag : 'UI'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Takuzu class >> generateOSXPackage [
 
 	AppGeneratorOSXGenerator new
@@ -28,7 +30,7 @@ Takuzu class >> generateOSXPackage [
 		generate
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Takuzu class >> generateWindowsPackage [
 
 	AppGeneratorWindowsGenerator new
@@ -47,19 +49,19 @@ Takuzu class >> generateWindowsPackage [
 		generate
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Takuzu class >> iconFile [
 
 	^ (IceRepository repositoryNamed: 'Takuzu') location / 'resources' / 'Takuzu.ico'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Takuzu class >> iconSetFile [
 
 	^ (IceRepository repositoryNamed: 'Takuzu') location / 'resources' / 'Takuzu.icns'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Takuzu class >> menuBar [
 
 	| bar |
@@ -72,7 +74,7 @@ Takuzu class >> menuBar [
 	^ bar
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Takuzu class >> menuHelp [
 
 	| menu |
@@ -84,7 +86,7 @@ Takuzu class >> menuHelp [
 	^ menu
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Takuzu class >> menuLevel [
 
 	| menu |
@@ -120,7 +122,7 @@ Takuzu class >> menuLevel [
 	^ menu
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Takuzu class >> menuRandom [
 
 	| menu |
@@ -147,7 +149,7 @@ Takuzu class >> menuRandom [
 	^ menu
 ]
 
-{ #category : #opening }
+{ #category : 'opening' }
 Takuzu class >> open [
 
 	<script>
@@ -169,7 +171,7 @@ Takuzu class >> open [
 	space show
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Takuzu class >> openWithMenuBar [
 
 	| space randomMenu levelMenu helpMenu bar title |
@@ -196,7 +198,7 @@ Takuzu class >> openWithMenuBar [
 	^ space
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Takuzu class >> showHelp [
 
 	| space container lab |
@@ -240,7 +242,7 @@ Have fun !' asRopedText foreground: Color white).
 	^ space show
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Takuzu class >> title [
 
 	| title |
@@ -258,6 +260,6 @@ Takuzu class >> title [
 	^ title
 ]
 
-{ #category : #'see class side' }
+{ #category : 'see class side' }
 Takuzu >> seeClassSide [
 ]

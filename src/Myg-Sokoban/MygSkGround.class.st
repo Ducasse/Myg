@@ -21,17 +21,19 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MygSkGround,
-	#superclass : #MygSkObject,
-	#category : #'Myg-Sokoban-Model'
+	#name : 'MygSkGround',
+	#superclass : 'MygSkObject',
+	#category : 'Myg-Sokoban-Model',
+	#package : 'Myg-Sokoban',
+	#tag : 'Model'
 }
 
-{ #category : #'default encoding' }
+{ #category : 'default encoding' }
 MygSkGround class >> textualMapCharacter [
 	^ Character space
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkGround >> backgroundRepresentation [
 
 	^ Color transparent

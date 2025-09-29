@@ -25,35 +25,37 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MygSkObject,
-	#superclass : #MygAbstractBox,
-	#category : #'Myg-Sokoban-Model'
+	#name : 'MygSkObject',
+	#superclass : 'MygAbstractBox',
+	#category : 'Myg-Sokoban-Model',
+	#package : 'Myg-Sokoban',
+	#tag : 'Model'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkObject class >> configured [ 
 
 	^ self new configured
 ]
 
-{ #category : #'default encoding' }
+{ #category : 'default encoding' }
 MygSkObject class >> textualMapCharacter [
 	^ $Z
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkObject >> backgroundRepresentation [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkObject >> basicPosition: aPosition [
 	"A position is a x,y kind of object."
 	
 	position := aPosition
 ]
 
-{ #category : #action }
+{ #category : 'action' }
 MygSkObject >> bringIn: aSkMovable going: aDirection [
 	"By default when a movable wants to move in, we move it in. By default do not use the direction, it is only usd for case where we need to check the next element in that direction, e.g., Player push a Box and the box should check if there is a ground or a wall before moving in that direction."
 
@@ -67,36 +69,36 @@ MygSkObject >> bringIn: aSkMovable going: aDirection [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkObject >> configureBoard: aBoard [
 
 	self board: aBoard.
 	
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkObject >> configured [ 
 
 	^self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MygSkObject >> isMovable [ 
 
 	^ false
 ]
 
-{ #category : #move }
+{ #category : 'move' }
 MygSkObject >> isPlayer [
 	^ false
 ]
 
-{ #category : #move }
+{ #category : 'move' }
 MygSkObject >> isTarget [
 	^ false
 ]
 
-{ #category : #move }
+{ #category : 'move' }
 MygSkObject >> moveIn: aNeighbor going: aDirection [
 	"To move in a position, we ask the entity where we want to get in to decide.
 	This is not a double dispatch per se because we do not have to discrimnate on the receiver."
@@ -104,13 +106,13 @@ MygSkObject >> moveIn: aNeighbor going: aDirection [
 	^ aNeighbor bringIn: self going: aDirection
 ]
 
-{ #category : #action }
+{ #category : 'action' }
 MygSkObject >> postCreationAction [
 
 	self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MygSkObject >> printOn: aStream [ 
 
 	super printOn: aStream.
@@ -118,7 +120,7 @@ MygSkObject >> printOn: aStream [
 	position printOn: aStream
 ]
 
-{ #category : #'default encoding' }
+{ #category : 'default encoding' }
 MygSkObject >> textualMapCharacter [ 
 
 	^ self class textualMapCharacter 

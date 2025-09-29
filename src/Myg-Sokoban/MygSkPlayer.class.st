@@ -24,20 +24,22 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MygSkPlayer,
-	#superclass : #MygSkMovable,
+	#name : 'MygSkPlayer',
+	#superclass : 'MygSkMovable',
 	#instVars : [
 		'facing'
 	],
-	#category : #'Myg-Sokoban-Model'
+	#category : 'Myg-Sokoban-Model',
+	#package : 'Myg-Sokoban',
+	#tag : 'Model'
 }
 
-{ #category : #'default encoding' }
+{ #category : 'default encoding' }
 MygSkPlayer class >> textualMapCharacter [ 
 	^ $@
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkPlayer >> backgroundRepresentation [
 
 	| dict |
@@ -49,38 +51,38 @@ MygSkPlayer >> backgroundRepresentation [
 	^ dict at: self facing
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkPlayer >> facing [ 
 
 	^ facing
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MygSkPlayer >> facing: aCpDirection [
 	
 	facing := aCpDirection 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MygSkPlayer >> initialize [ 
 
 	super initialize.
 	facing := CpSouthDirection
 ]
 
-{ #category : #move }
+{ #category : 'move' }
 MygSkPlayer >> isPlayer [ 
 	^ true
 ]
 
-{ #category : #move }
+{ #category : 'move' }
 MygSkPlayer >> move: aCpDirection [
 
 	self facing: aCpDirection class.
 	^ super move: aCpDirection
 ]
 
-{ #category : #'default encoding' }
+{ #category : 'default encoding' }
 MygSkPlayer >> textualMapCharacter [
 
 	^ self background class = MygSkTarget

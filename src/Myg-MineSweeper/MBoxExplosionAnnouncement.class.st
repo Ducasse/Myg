@@ -21,7 +21,9 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MBoxExplosionAnnouncement,
-	#superclass : #Announcement,
-	#category : #'Myg-MineSweeper-Announcements'
+	#name : 'MBoxExplosionAnnouncement',
+	#superclass : 'Announcement',
+	#category : 'Myg-MineSweeper-Announcements',
+	#package : 'Myg-MineSweeper',
+	#tag : 'Announcements'
 }

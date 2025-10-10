@@ -1,10 +1,11 @@
 Class {
-	#name : #TLineTest,
-	#superclass : #TAbstractTest,
-	#category : #'Myg-Takuzu-Tests'
+	#name : 'TLineTest',
+	#superclass : 'TAbstractTest',
+	#category : 'Myg-Takuzu-Tests',
+	#package : 'Myg-Takuzu-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 TLineTest >> testIsSimilarTo [
 
 	| line1 line2 box0 box1 boxNil |
@@ -44,7 +45,7 @@ TLineTest >> testIsSimilarTo [
 	self assert: (line1 isSimilarTo: line2).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TLineTest >> testIsValid [
 
 	| line box0 box1 |

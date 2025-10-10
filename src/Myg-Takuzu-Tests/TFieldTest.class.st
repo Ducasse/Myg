@@ -1,10 +1,11 @@
 Class {
-	#name : #TFieldTest,
-	#superclass : #TAbstractTest,
-	#category : #'Myg-Takuzu-Tests'
+	#name : 'TFieldTest',
+	#superclass : 'TAbstractTest',
+	#category : 'Myg-Takuzu-Tests',
+	#package : 'Myg-Takuzu-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 TFieldTest >> testConfigureGridIsOK [
 
 	| field |
@@ -18,7 +19,7 @@ TFieldTest >> testConfigureGridIsOK [
 	self assert: (field grid at: 2 @ 1) position equals: 2 @ 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TFieldTest >> testIsColumnUniqueAtIndex [
 
 	| field box0 box1 |
@@ -31,7 +32,7 @@ TFieldTest >> testIsColumnUniqueAtIndex [
 	self assert: (field isColumnUniqueAtIndex: 3)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TFieldTest >> testIsColumnValidAtIndex [
 
 	| field box0 box1 |
@@ -48,7 +49,7 @@ TFieldTest >> testIsColumnValidAtIndex [
 	self deny: (field isColumnValidAtIndex: 2).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TFieldTest >> testIsFull [
 
 	| field |
@@ -62,7 +63,7 @@ TFieldTest >> testIsFull [
 	self deny: field isFull
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TFieldTest >> testIsRowUniqueAtIndex [
 
 	| field box0 box1 |
@@ -76,7 +77,7 @@ TFieldTest >> testIsRowUniqueAtIndex [
 		(field isRowUniqueAtIndex: 3).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TFieldTest >> testIsRowValidAtIndex [
 
 	| field box0 box1 |
@@ -93,7 +94,7 @@ TFieldTest >> testIsRowValidAtIndex [
 	self deny: (field isRowValidAtIndex: 2)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TFieldTest >> testIsThisLineUniqueAmongArray [
 
 	| field box0 box1 boxNil originalLine line1 line2 line3 |
@@ -129,7 +130,7 @@ TFieldTest >> testIsThisLineUniqueAmongArray [
 		(field isThisLineUnique: originalLine amongArray: { line3 })
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TFieldTest >> testIsValid [
 
 	| field box0 box1 |
@@ -150,7 +151,7 @@ TFieldTest >> testIsValid [
 	self deny: field isValid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TFieldTest >> testPermutateLineWith [ 
 	|field line1 line2|
 	field := TBoard gridForTest.
@@ -161,7 +162,7 @@ TFieldTest >> testPermutateLineWith [
 	self assert: line2 equals: (field grid atRow: 1). 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TFieldTest >> testSolveTheFieldAtColumnAtRow [
 
 	| field box1 |

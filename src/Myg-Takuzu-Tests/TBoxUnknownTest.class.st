@@ -1,10 +1,11 @@
 Class {
-	#name : #TBoxUnknownTest,
-	#superclass : #TAbstractTest,
-	#category : #'Myg-Takuzu-Tests'
+	#name : 'TBoxUnknownTest',
+	#superclass : 'TAbstractTest',
+	#category : 'Myg-Takuzu-Tests',
+	#package : 'Myg-Takuzu-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBoxUnknownTest >> testBoxUnknownClick [
 
 	| box board |

@@ -1,10 +1,11 @@
 Class {
-	#name : #TBoardElementTest,
-	#superclass : #TestCase,
-	#category : #'Myg-Takuzu-Tests'
+	#name : 'TBoardElementTest',
+	#superclass : 'TestCase',
+	#category : 'Myg-Takuzu-Tests',
+	#package : 'Myg-Takuzu-Tests'
 }
 
-{ #category : #'tests - ui' }
+{ #category : 'tests - ui' }
 TBoardElementTest >> testClickChangeBackground [
 
 	| board unk |
@@ -16,7 +17,7 @@ TBoardElementTest >> testClickChangeBackground [
 	self assert: unk background paint color equals: Color red.
 ]
 
-{ #category : #'tests - ui' }
+{ #category : 'tests - ui' }
 TBoardElementTest >> testClickDoesntChangeBackground [
 
 	| board unk |
@@ -28,7 +29,7 @@ TBoardElementTest >> testClickDoesntChangeBackground [
 	self assert: unk background paint color equals: Color lightBlue.
 ]
 
-{ #category : #'tests - model' }
+{ #category : 'tests - model' }
 TBoardElementTest >> testClickOnUnknowElementGetItKnown [
 
 	| board unk |
@@ -39,7 +40,7 @@ TBoardElementTest >> testClickOnUnknowElementGetItKnown [
 	self assert: unk box value equals: 0
 ]
 
-{ #category : #'tests - model' }
+{ #category : 'tests - model' }
 TBoardElementTest >> testClickThreeTimesReturnFirstState [
 
 	| board unk startState | 
@@ -52,7 +53,7 @@ TBoardElementTest >> testClickThreeTimesReturnFirstState [
 	self assert: unk box value equals: startState
 ]
 
-{ #category : #'tests - model' }
+{ #category : 'tests - model' }
 TBoardElementTest >> testClickTwiceOnUnknowElementGetItKnown [
 
 	| board unk |
@@ -64,7 +65,7 @@ TBoardElementTest >> testClickTwiceOnUnknowElementGetItKnown [
 	self assert: unk box value equals: 1
 ]
 
-{ #category : #'tests - model' }
+{ #category : 'tests - model' }
 TBoardElementTest >> testElementGetCorrectPosition [
 
 	| board unk |
@@ -74,7 +75,7 @@ TBoardElementTest >> testElementGetCorrectPosition [
 	self assert: unk box position equals: 2 @ 1
 ]
 
-{ #category : #'tests - ui' }
+{ #category : 'tests - ui' }
 TBoardElementTest >> testMouseClickChangeBackground [
 
 	| board unk elt |
@@ -88,7 +89,7 @@ TBoardElementTest >> testMouseClickChangeBackground [
 	self assert: unk background paint color equals: Color red
 ]
 
-{ #category : #'tests - ui' }
+{ #category : 'tests - ui' }
 TBoardElementTest >> testMouseClickDoesntChangeBackground [
 
 	| board unk elt |

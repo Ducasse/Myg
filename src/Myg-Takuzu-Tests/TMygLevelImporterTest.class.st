@@ -1,10 +1,11 @@
 Class {
-	#name : #TMygLevelImporterTest,
-	#superclass : #TAbstractTest,
-	#category : #'Myg-Takuzu-Tests'
+	#name : 'TMygLevelImporterTest',
+	#superclass : 'TAbstractTest',
+	#category : 'Myg-Takuzu-Tests',
+	#package : 'Myg-Takuzu-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 TMygLevelImporterTest >> testBuildArrayFor [
 
 	| tool string res |
@@ -17,13 +18,13 @@ __'.
 	self assert: res contents equals: #($0 $1 $_ $_)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TMygLevelImporterTest >> testClassFor [
 
 	| tool box0 box1   boxUnknownClass boxOtherClass |
 	tool := MygLevelImporter new fillBindingDictionary:
 		        (MygLevelImporter createBindingDictionaryFromPackage:
-			         (RPackageOrganizer default packageNamed: 'Myg-Takuzu')).
+			         (PackageOrganizer default packageNamed: 'Myg-Takuzu')).
 
 	box0 := tool classFor: $0.
 	self assert: box0 equals: TFixedBox0.
@@ -38,13 +39,13 @@ TMygLevelImporterTest >> testClassFor [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TMygLevelImporterTest >> testClassForMissingCharacterIsRaisingAnError [
 
 	| tool |
 	tool := MygLevelImporter new fillBindingDictionary:
 		        (MygLevelImporter createBindingDictionaryFromPackage:
-			         (RPackageOrganizer default packageNamed: 'Myg-Takuzu')).
+			         (PackageOrganizer default packageNamed: 'Myg-Takuzu')).
 
 	self should: [ tool classFor: $x ] raise: MygMissingCharacterError 
 ]

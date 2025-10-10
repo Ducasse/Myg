@@ -1,10 +1,11 @@
 Class {
-	#name : #TAbstractTest,
-	#superclass : #TestCase,
-	#category : #'Myg-Takuzu-Tests'
+	#name : 'TAbstractTest',
+	#superclass : 'TestCase',
+	#category : 'Myg-Takuzu-Tests',
+	#package : 'Myg-Takuzu-Tests'
 }
 
-{ #category : #'helpers for setup' }
+{ #category : 'helpers for setup' }
 TAbstractTest >> gridForTest [
 	"represents this grid: 
 	

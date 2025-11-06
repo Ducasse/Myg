@@ -4,11 +4,11 @@ Myg is a project containing games and providing tools to create other games.
 
 ## Loading the project 
 
-Load a stable version of Myg with the following snippet, in Pharo 11:
+Load a stable version of Myg with the following snippet, in Pharo 13:
 
 ```Smalltalk
 Metacello new
-	repository: 'github://Ducasse/Myg:v1.0.3/src';
+	repository: 'github://Ducasse/Myg:v1.0.5/src';
 	baseline: 'Myg';
 	load.
 ```

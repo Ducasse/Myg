@@ -1,14 +1,16 @@
 Class {
-	#name : #SGBoardElementTest,
-	#superclass : #TestCase,
+	#name : 'SGBoardElementTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'board',
 		'graphicBoard'
 	],
-	#category : #'Myg-SameGame-UI-Tests'
+	#category : 'Myg-SameGame-UI-Tests',
+	#package : 'Myg-SameGame',
+	#tag : 'UI-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SGBoardElementTest >> setUp [
 
 	super setUp.
@@ -37,7 +39,7 @@ SGBoardElementTest >> setUp [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SGBoardElementTest >> testClickOn2BlueBoxesColumnRearrange [
 	
 	board hitBoxOnx: 1 y: 1.
@@ -53,7 +55,7 @@ SGBoardElementTest >> testClickOn2BlueBoxesColumnRearrange [
 		equals: Color gray.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SGBoardElementTest >> testClickOn3YellowBoxesSwitchEmptyColumn [
 
 	board hitBoxOnx: 2 y: 1.
@@ -78,7 +80,7 @@ SGBoardElementTest >> testClickOn3YellowBoxesSwitchEmptyColumn [
 		equals: Color gray
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SGBoardElementTest >> testClickOnIsolatedBoxNothingChanges [
 
 		self
@@ -92,7 +94,7 @@ SGBoardElementTest >> testClickOnIsolatedBoxNothingChanges [
 		equals: Color lightRed.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SGBoardElementTest >> testClickOnNullNothingChanges [
 
 		self
@@ -106,7 +108,7 @@ SGBoardElementTest >> testClickOnNullNothingChanges [
 		equals: Color gray
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SGBoardElementTest >> testExchangeCase [
 
 	self
@@ -128,7 +130,7 @@ self
 		equals: Color lightBlue.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SGBoardElementTest >> testGridSetUp [
 
 	self

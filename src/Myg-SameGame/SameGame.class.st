@@ -1,10 +1,12 @@
 Class {
-	#name : #SameGame,
-	#superclass : #Object,
-	#category : #'Myg-SameGame-Model'
+	#name : 'SameGame',
+	#superclass : 'Object',
+	#category : 'Myg-SameGame-Model',
+	#package : 'Myg-SameGame',
+	#tag : 'Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SameGame class >> open [
 
 	<script>
@@ -22,6 +24,6 @@ SameGame class >> open [
 	space show
 ]
 
-{ #category : #'see class side' }
+{ #category : 'see class side' }
 SameGame >> seeClassSide [ 
 ]

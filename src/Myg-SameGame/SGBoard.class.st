@@ -1,38 +1,40 @@
 Class {
-	#name : #SGBoard,
-	#superclass : #MygBoard,
+	#name : 'SGBoard',
+	#superclass : 'MygBoard',
 	#instVars : [
 		'game',
 		'hitList'
 	],
-	#category : #'Myg-SameGame-Model'
+	#category : 'Myg-SameGame-Model',
+	#package : 'Myg-SameGame',
+	#tag : 'Model'
 }
 
-{ #category : #compute }
+{ #category : 'compute' }
 SGBoard >> boxAt: aPoint [
 
 	^ self grid at: aPoint x @ aPoint y
 ]
 
-{ #category : #compute }
+{ #category : 'compute' }
 SGBoard >> calculePoint [
 
 	^ hitList size * hitList size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBoard >> game [
 
 	^ game
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBoard >> game: aGame [
 
 	game := aGame
 ]
 
-{ #category : #reorganize }
+{ #category : 'reorganize' }
 SGBoard >> generateGridWidth: width height: height [
 
 	| array2D |
@@ -43,7 +45,7 @@ SGBoard >> generateGridWidth: width height: height [
 	self configureGrid: array2D
 ]
 
-{ #category : #hit }
+{ #category : 'hit' }
 SGBoard >> hitBox: aBox [
 
 	aBox hasNullState ifTrue: [ ^ self ].
@@ -60,7 +62,7 @@ SGBoard >> hitBox: aBox [
 	self reorganizeForEmptyColumn
 ]
 
-{ #category : #hit }
+{ #category : 'hit' }
 SGBoard >> hitBoxOnx: x y: y [
 
 	(self grid at: x @ y) hasNullState ifTrue: [ ^ self ].
@@ -77,13 +79,13 @@ SGBoard >> hitBoxOnx: x y: y [
 	self reorganizeForEmptyColumn
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBoard >> hitList [ 
 
 	^ hitList 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SGBoard >> initialize [
 
 	super initialize.
@@ -92,7 +94,7 @@ SGBoard >> initialize [
 	"stock les cases touchées"
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBoard >> isColumnEmpty: x [
 
 	1 to: self grid height do: [ :i |
@@ -100,7 +102,7 @@ SGBoard >> isColumnEmpty: x [
 	^ true
 ]
 
-{ #category : #'random subclass instance creation' }
+{ #category : 'random subclass instance creation' }
 SGBoard >> randomBox [
 
 	| states |
@@ -112,7 +114,7 @@ SGBoard >> randomBox [
 	^ SGBox withState: states atRandom uniqueInstance 
 ]
 
-{ #category : #reorganize }
+{ #category : 'reorganize' }
 SGBoard >> reorganizeColumn: x [
 
 	| col newCol |
@@ -123,7 +125,7 @@ SGBoard >> reorganizeColumn: x [
 	(col at: j) state: SGNullState uniqueInstance ]
 ]
 
-{ #category : #reorganize }
+{ #category : 'reorganize' }
 SGBoard >> reorganizeForEmptyColumn [
 
 	| cpt |
@@ -135,7 +137,7 @@ SGBoard >> reorganizeForEmptyColumn [
 			cpt := cpt + 1 ] ]
 ]
 
-{ #category : #compute }
+{ #category : 'compute' }
 SGBoard >> switchBox: aPoint1 with: aPoint2 [
 
 	| box1 box2 tmpState |
@@ -148,7 +150,7 @@ SGBoard >> switchBox: aPoint1 with: aPoint2 [
 	box2 state: tmpState 
 ]
 
-{ #category : #compute }
+{ #category : 'compute' }
 SGBoard >> switchColumn: firstColumn withColumn: secondColumn [
 
 	1 to: self grid height do: [ :i |

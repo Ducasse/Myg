@@ -1,1 +1,1 @@
-Package { #name : #'Myg-SameGame' }
+Package { #name : 'Myg-SameGame' }

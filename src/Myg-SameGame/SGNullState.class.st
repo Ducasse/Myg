@@ -7,20 +7,11 @@ I am part of a Board of a Same Game
 "
 Class {
 	#name : 'SGNullState',
-	#superclass : 'Object',
-	#classInstVars : [
-		'uniqueInstance'
-	],
+	#superclass : 'SGAbstractState',
 	#category : 'Myg-SameGame-Model',
 	#package : 'Myg-SameGame',
 	#tag : 'Model'
 }
-
-{ #category : 'accessing' }
-SGNullState class >> uniqueInstance [
-
-	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
-]
 
 { #category : 'accessing' }
 SGNullState >> backgroundRepresentation [

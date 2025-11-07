@@ -1,6 +1,6 @@
 Class {
 	#name : 'SGGreenState',
-	#superclass : 'SGNullState',
+	#superclass : 'SGAbstractState',
 	#category : 'Myg-SameGame-Model',
 	#package : 'Myg-SameGame',
 	#tag : 'Model'
@@ -10,12 +10,6 @@ Class {
 SGGreenState >> backgroundRepresentation [
 
 	^ Color lightGreen 
-]
-
-{ #category : 'accessing' }
-SGGreenState >> isNull [
-
-	^ false
 ]
 
 { #category : 'testing' }

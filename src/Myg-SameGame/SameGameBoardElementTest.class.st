@@ -1,13 +1,15 @@
 Class {
-	#name : #SameGameBoardElementTest,
-	#superclass : #TestCase,
+	#name : 'SameGameBoardElementTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'board'
 	],
-	#category : #'Myg-SameGame-Model-Tests'
+	#category : 'Myg-SameGame-Model-Tests',
+	#package : 'Myg-SameGame',
+	#tag : 'Model-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SameGameBoardElementTest >> setUp [
 
 	super setUp.
@@ -32,7 +34,7 @@ SameGameBoardElementTest >> setUp [
 			 yourself).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SameGameBoardElementTest >> testClickAndCaseNothingAppend [
 
 	| board game graphicBoard |
@@ -64,7 +66,7 @@ SameGameBoardElementTest >> testClickAndCaseNothingAppend [
 	self assert: (board grid at: 1 @ 3) literal equals: 'B'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SameGameBoardElementTest >> testClickAndMultipleCaseDisappear [
 
 	| board game graphicBoard |
@@ -97,7 +99,7 @@ SameGameBoardElementTest >> testClickAndMultipleCaseDisappear [
 	self assert: (board grid at: 1 @ 1) literal equals: 'B'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SameGameBoardElementTest >> testClickAndOneColumnDisappear [
 
 	| board game graphicBoard |
@@ -135,7 +137,7 @@ SameGameBoardElementTest >> testClickAndOneColumnDisappear [
 	self assert: (board grid at: 2 @ 3) literal equals: 'G'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SameGameBoardElementTest >> testClickOn2BlueBoxesColumnRearrange [
 
 	self assert: (board grid at: 1 @ 1) literal equals: 'B'.
@@ -161,7 +163,7 @@ SameGameBoardElementTest >> testClickOn2BlueBoxesColumnRearrange [
 	self assert: (board grid at: 3 @ 3) literal equals: 'N'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SameGameBoardElementTest >> testClickOn3YellowBoxesSwitchEmptyColumn [
 
 	self assert: (board grid at: 1 @ 1) literal equals: 'B'.
@@ -187,7 +189,7 @@ SameGameBoardElementTest >> testClickOn3YellowBoxesSwitchEmptyColumn [
 	self assert: (board grid at: 3 @ 3) literal equals: 'N'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SameGameBoardElementTest >> testClickOnBlueCase [
 
 	| board resGrid game graphicBoard resgraphicBoard |
@@ -226,7 +228,7 @@ SameGameBoardElementTest >> testClickOnBlueCase [
 		equals: (resGrid grid at: 2 @ 1) state
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SameGameBoardElementTest >> testClickOnIsolatedBoxNothingChanges [
 
 	self assert: (board grid at: 1 @ 1) literal equals: 'B'.
@@ -252,7 +254,7 @@ SameGameBoardElementTest >> testClickOnIsolatedBoxNothingChanges [
 	self assert: (board grid at: 3 @ 3) literal equals: 'N'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SameGameBoardElementTest >> testClickOnNullNothingChanges [
 
 	self assert: (board grid at: 1 @ 1) literal equals: 'B'.
@@ -278,7 +280,7 @@ SameGameBoardElementTest >> testClickOnNullNothingChanges [
 	self assert: (board grid at: 3 @ 3) literal equals: 'N'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SameGameBoardElementTest >> testColonneIsEmpty [
 
 	| board game graphicBoard |
@@ -302,7 +304,7 @@ SameGameBoardElementTest >> testColonneIsEmpty [
 	self deny: (board isColumnEmpty: 2)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SameGameBoardElementTest >> testExchangeCase [
 
 	| board case1 case2 game graphicBoard |
@@ -337,7 +339,7 @@ SameGameBoardElementTest >> testExchangeCase [
 	self assert: case2 literal equals: 'N'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SameGameBoardElementTest >> testExchangeColonne [
 
 	| board game graphicBoard |
@@ -368,7 +370,7 @@ SameGameBoardElementTest >> testExchangeColonne [
 	self assert: (board boxAt: 2 @ 3) literal equals: 'N'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SameGameBoardElementTest >> testReorganiseBoard [
 
 	| firstBoard game graphicBoard |
@@ -399,7 +401,7 @@ SameGameBoardElementTest >> testReorganiseBoard [
 	self assert: (firstBoard grid at: 1 @ 5) literal equals: 'N'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SameGameBoardElementTest >> testReorganiseWhenEmptyColonne [
 	"
 | B Y Y |        | Y Y N |

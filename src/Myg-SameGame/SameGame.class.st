@@ -1,16 +1,18 @@
 Class {
-	#name : #SameGame,
-	#superclass : #Object,
-	#category : #'Myg-SameGame-Model'
+	#name : 'SameGame',
+	#superclass : 'Object',
+	#category : 'Myg-SameGame-Model',
+	#package : 'Myg-SameGame',
+	#tag : 'Model'
 }
 
-{ #category : #'instance creation' }
-SameGame class >> open [
+{ #category : 'instance creation' }
+SameGame class >> gameWithSize: size [
 
 	<script>
 	| board graphicBoard space |
 	board := SGBoard new game: SGGame new.
-	board generateGridWidth: 20 height: 20.
+	board generateGridWidth: size height: size.
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
 
@@ -18,10 +20,22 @@ SameGame class >> open [
 	space title: 'SameGame'.
 	space root addChild: graphicBoard.
 	space extent: 1000 @ 1000.
-
-	space show
+	^ space
 ]
 
-{ #category : #'see class side' }
+{ #category : 'instance creation' }
+SameGame class >> open [
+	self openWithSize:20
+]
+
+{ #category : 'instance creation' }
+SameGame class >> openWithSize: size [
+
+	<script>
+
+	(self gameWithSize: size) show
+]
+
+{ #category : 'see class side' }
 SameGame >> seeClassSide [ 
 ]

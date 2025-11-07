@@ -1,62 +1,64 @@
 Class {
-	#name : #SGBox,
-	#superclass : #MygAbstractBox,
+	#name : 'SGBox',
+	#superclass : 'MygAbstractBox',
 	#instVars : [
 		'state',
 		'announcer'
 	],
-	#category : #'Myg-SameGame-Model'
+	#category : 'Myg-SameGame-Model',
+	#package : 'Myg-SameGame',
+	#tag : 'Model'
 }
 
-{ #category : #constants }
+{ #category : 'constants' }
 SGBox class >> blue [ 
 
 	^ self withState: SGBlueState uniqueInstance 
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 SGBox class >> green [
 
 	^ self withState: SGGreenState uniqueInstance
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 SGBox class >> null [
 
 	^ self withState: SGNullState uniqueInstance 
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 SGBox class >> red [
 
 	^ self withState: SGRedState uniqueInstance
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SGBox class >> withState: aState [ 
 
 	^ self new state: aState
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 SGBox class >> yellow [
 
 	^ self withState: SGYellowState uniqueInstance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBox >> announcer [
 
 	^ announcer ifNil: [ announcer := Announcer new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBox >> backgroundRepresentation [
 
 	^ self state backgroundRepresentation 
 ]
 
-{ #category : #clicking }
+{ #category : 'clicking' }
 SGBox >> checkAndPropagateOnX: x y: y [
 
 	| case |
@@ -64,32 +66,32 @@ SGBox >> checkAndPropagateOnX: x y: y [
 	case state = self state ifTrue: [ case propagateClick ]
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 SGBox >> click [
 
 	self board hitBox: self
 ]
 
-{ #category : #'drawing - general' }
+{ #category : 'drawing - general' }
 SGBox >> draw: drawer [
 
 	(drawer grid at: self x @ self y) background:
 		self backgroundRepresentation
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SGBox >> hasNullState [ 
 
 	^ self state isNull
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBox >> literal [ 
 
 	^ state literal
 ]
 
-{ #category : #clicking }
+{ #category : 'clicking' }
 SGBox >> propagateClick [
 
 	| x y |
@@ -105,13 +107,13 @@ SGBox >> propagateClick [
 		self checkAndPropagateOnX: x y: y + 1 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBox >> state [
 
 	^ state 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBox >> state: aState [
 	"(aState class inheritsFrom: SGNullState) ifFalse: [ self halt ]."
 
@@ -120,13 +122,13 @@ SGBox >> state: aState [
 	self announcer announce: SGStateChangedAnnouncement new.
 ]
 
-{ #category : #'accessing - structure variables' }
+{ #category : 'accessing - structure variables' }
 SGBox >> x [
 
 	^ position x
 ]
 
-{ #category : #'accessing - structure variables' }
+{ #category : 'accessing - structure variables' }
 SGBox >> y [
 
 	^ position y

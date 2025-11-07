@@ -6,33 +6,26 @@ I have the responsabilities of my coordinates
 I am part of a Board of a Same Game
 "
 Class {
-	#name : #SGNullState,
-	#superclass : #Object,
-	#classInstVars : [
-		'uniqueInstance'
-	],
-	#category : #'Myg-SameGame-Model'
+	#name : 'SGNullState',
+	#superclass : 'SGAbstractState',
+	#category : 'Myg-SameGame-Model',
+	#package : 'Myg-SameGame',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
-SGNullState class >> uniqueInstance [
-
-	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGNullState >> backgroundRepresentation [
 
 	^ Color gray
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGNullState >> isNull [
 
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGNullState >> literal [
 
 	^ 'N'

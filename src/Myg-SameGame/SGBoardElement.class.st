@@ -1,20 +1,22 @@
 Class {
-	#name : #SGBoardElement,
-	#superclass : #BlElement,
+	#name : 'SGBoardElement',
+	#superclass : 'BlElement',
 	#instVars : [
 		'grid',
 		'sameGameBoard'
 	],
-	#category : #'Myg-SameGame-UI'
+	#category : 'Myg-SameGame-UI',
+	#package : 'Myg-SameGame',
+	#tag : 'UI'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBoardElement >> grid [
 
 	^ grid
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBoardElement >> grid: aSameGameBoardGrid [
 
 	grid := CTNewArray2D
@@ -32,7 +34,7 @@ SGBoardElement >> grid: aSameGameBoardGrid [
 	self setGridLayout: aSameGameBoardGrid width
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SGBoardElement >> setGridLayout: width [
 
 	self layout: (BlGridLayout horizontal

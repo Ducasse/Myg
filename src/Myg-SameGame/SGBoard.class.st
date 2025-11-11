@@ -3,7 +3,8 @@ Class {
 	#superclass : 'MygBoard',
 	#instVars : [
 		'game',
-		'hitList'
+		'hitList',
+		'buildBoxStrategy'
 	],
 	#category : 'Myg-SameGame-Model',
 	#package : 'Myg-SameGame',
@@ -14,6 +15,18 @@ Class {
 SGBoard >> boxAt: aPoint [
 
 	^ self grid at: aPoint x @ aPoint y
+]
+
+{ #category : 'accessing' }
+SGBoard >> buildBoxStrategy [
+
+	^ buildBoxStrategy
+]
+
+{ #category : 'accessing' }
+SGBoard >> buildBoxStrategy: strategy [
+
+	buildBoxStrategy := strategy
 ]
 
 { #category : 'compute' }
@@ -41,7 +54,7 @@ SGBoard >> generateGridWidth: width height: height [
 	array2D := CTNewArray2D
 		           width: width
 		           height: height
-		           tabulate: [ :col :row | self randomBox ].
+		           tabulate: [ :col :row | self buildBoxStrategy buildBox ].
 	self configureGrid: array2D
 ]
 
@@ -90,6 +103,7 @@ SGBoard >> initialize [
 
 	super initialize.
 	hitList := OrderedCollection new.
+	buildBoxStrategy := SGBuildRandom new
 	"stackHit := Stack new -> has no reference"
 	"stock les cases touchées"
 ]

@@ -107,6 +107,30 @@ SGBox >> propagateClick [
 		self checkAndPropagateOnX: x y: y + 1 ]
 ]
 
+{ #category : 'as yet unclassified' }
+SGBox >> propagateClickOnlyAround [
+	"comment stating purpose of instance-side method"
+	"scope: class-variables  &  instance-variables"
+	| x y |
+	x := self x.
+	y := self y.
+	(self board hitList includes: self) ifTrue: [ ^ self ].
+	self board hitList add: self.
+	x - 1 > 0 ifTrue: [ self removeBox:( board boxAt: x - 1@y) ].
+	x + 1 <= self board grid width ifTrue: [
+		self removeBox:(self board boxAt: x + 1@y )].
+	y - 1 > 0 ifTrue: [ self removeBox:(self board boxAt: x @(y-1) )].
+	y + 1 <= self board grid height ifTrue: [
+		self removeBox:(self board boxAt: x @(y+1)  )]
+	
+]
+
+{ #category : 'removing' }
+SGBox >> removeBox: aBox [
+	self board hitList add: aBox.
+	
+]
+
 { #category : 'accessing' }
 SGBox >> state [
 

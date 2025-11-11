@@ -15,6 +15,14 @@ SGAbstractState class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
+{ #category : 'as yet unclassified' }
+SGAbstractState >> canPropagate: aState [
+	"comment stating purpose of instance-side method"
+	"scope: class-variables  &  instance-variables"
+
+	^ self = aState 
+]
+
 { #category : 'testing' }
 SGAbstractState >> isNull [
 	^ false
@@ -23,4 +31,10 @@ SGAbstractState >> isNull [
 { #category : 'testing' }
 SGAbstractState >> literal [
 	self subclassResponsibility 
+]
+
+{ #category : 'as yet unclassified' }
+SGAbstractState >> propagateFromASquare: aSquare [
+
+	^ aSquare propagateClick
 ]

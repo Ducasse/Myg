@@ -13,9 +13,9 @@ SameGameTest >> testSameGameGameWithHeightReturnABoardWithTheExpectedSize [
 
 	| space board |
 	
-	space:=SameGame gameWithSize: 20.
+	space:=SameGame gameWithSize: 30.
 	board:= space root children first.
-	self assert: board grid height equals: 20.
+	self assert: board grid height equals: 30.
 	
 ]
 
@@ -26,8 +26,8 @@ SameGameTest >> testSameGameGameWithSizeReturnABoardWithTheExpectedSize [
 
 	| space board |
 	
-	space:=SameGame gameWithSize: 20.
+	space:=SameGame gameWithSize: 30.
 	board:= space root children first.
-	self assert: board grid width equals: 20.
+	self assert: board grid width equals: 30.
 	
 ]

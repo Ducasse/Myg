@@ -10,8 +10,7 @@ Class {
 SameGame class >> gameWithSize: size [
 
 	<script>
-	| game board graphicBoard graphicScore space container |
-
+	| game board graphicBoard graphicScore container |
 	game := SGGame new.
 	board := SGBoard new game: game.
 	board generateGridWidth: size height: size.
@@ -32,12 +31,7 @@ SameGame class >> gameWithSize: size [
 			graphicScore.
 			graphicBoard }.
 
-	space := BlSpace new.
-	space title: 'SameGame'.
-	space root addChild: container.
-	space extent: 1000 @ 1000.
-
-	^ space
+	^ container
 ]
 
 { #category : 'instance creation' }
@@ -50,8 +44,12 @@ SameGame class >> open [
 SameGame class >> openWithSize: size [
 
 	<script>
-
-	(self gameWithSize: size) show
+	| space |
+	space := BlSpace new.
+	space title: 'SameGame'.
+	space root addChild: (self gameWithSize: size).
+	space extent: 1000 @ 1000.
+	space show
 ]
 
 { #category : 'see class side' }

@@ -3,7 +3,11 @@ Class {
 	#superclass : 'BlElement',
 	#instVars : [
 		'game',
-		'score'
+		'blScore',
+		'score',
+		'blLastMove',
+		'blLastMoveScore',
+		'blLastMoveHits'
 	],
 	#category : 'Myg-SameGame-UI',
 	#package : 'Myg-SameGame',
@@ -11,28 +15,57 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
+SGScoreElement >> blScore [
+	^ blScore
+]
+
+{ #category : 'as yet unclassified' }
 SGScoreElement >> game: aSGGame [
 
 	game := aSGGame.
-
+	score := game points.
 	self initializeAnnouncements
 ]
 
 { #category : 'as yet unclassified' }
 SGScoreElement >> initialize [
-
 	super initialize.
+	
+	"Initialize variables"
+	score := 0.
+	blScore := BlTextElement new.
+	blLastMoveScore := BlTextElement new.
+	blLastMoveHits := BlTextElement new.
+	blLastMove := BlElement new.
+	
+	"Configure main container"
 	self layout: BlFrameLayout new.
-
-	score := BlTextElement new.
-
 	self constraintsDo: [ :c |
-			c horizontal resizer: BlLayoutFitContentResizer new.
-			c vertical resizer: BlLayoutFitContentResizer new ].
-		
-	"Set the score at 0"
-	self updateScore.
-	self addChild: score
+		c horizontal matchParent.
+		c vertical fitContent ].
+	
+	"Configure left side: total score"
+	blScore constraintsDo: [ :c |
+		c frame horizontal alignLeft.
+		c frame vertical alignCenter ].
+	
+	"Configure right side: last move info (vertical stack)"
+	blLastMove layout: BlLinearLayout vertical.
+	blLastMove constraintsDo: [ :c |
+		c horizontal fitContent.
+		c vertical fitContent.
+		c frame horizontal alignRight.
+		c frame vertical alignCenter ].
+	blLastMove
+		addChild: blLastMoveScore;
+		addChild: blLastMoveHits.
+	
+	"Build UI"
+	self
+		addChild: blScore;
+		addChild: blLastMove.
+	
+	self updateScore
 ]
 
 { #category : 'as yet unclassified' }
@@ -44,7 +77,10 @@ SGScoreElement >> initializeAnnouncements [
 { #category : 'as yet unclassified' }
 SGScoreElement >> updateScore [
 
-	| s |
-	s := (game ifNil: [ 0 ] ifNotNil: [ game points ]) asString.
-	score text: ((BlRopedText string: 'Score: ' , s) fontSize: 50). 
+	| newScore |
+	newScore := game ifNil: [ 0 ] ifNotNil: [ game points ].
+	blScore text: ((BlRopedText string: 'Total score: ' , newScore asString) fontSize: 50).
+	blLastMoveScore text: ((BlRopedText string: 'Score: ' , (newScore - score) asString) fontSize: 50).
+	blLastMoveHits text: ((BlRopedText string: 'Hits: ' , 5 asString) fontSize: 50).
+	score := newScore
 ]

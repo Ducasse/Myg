@@ -30,8 +30,8 @@ SGScoreElementTest >> setUp [
 SGScoreElementTest >> testScoreChangesWhenGamePointsAreUpdated [
 
 	| before |
-	before := graphicScore children first text asString.
+	before := graphicScore blScore text asString.
 	
 	game addPoints: 7.
-	self deny: graphicScore children first text asString equals: before
+	self deny: graphicScore blScore text asString equals: before
 ]

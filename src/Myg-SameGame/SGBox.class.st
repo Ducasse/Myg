@@ -63,7 +63,7 @@ SGBox >> checkAndPropagateOnX: x y: y [
 
 	| case |
 	case := self board boxAt: x @ y.
-	case state = self state ifTrue: [ case propagateClick ]
+	(state canPropagate: case state) ifTrue: [ case propagateClick ]
 ]
 
 { #category : 'public' }
@@ -116,12 +116,11 @@ SGBox >> propagateClickOnlyAround [
 	y := self y.
 	(self board hitList includes: self) ifTrue: [ ^ self ].
 	self board hitList add: self.
-	x - 1 > 0 ifTrue: [ self removeBox:( board boxAt: x - 1@y) ].
-	x + 1 <= self board grid width ifTrue: [
-		self removeBox:(self board boxAt: x + 1@y )].
-	y - 1 > 0 ifTrue: [ self removeBox:(self board boxAt: x @(y-1) )].
-	y + 1 <= self board grid height ifTrue: [
-		self removeBox:(self board boxAt: x @(y+1)  )]
+	((x@y) eightNeighbors select: [:aPoint| aPoint isInsideRectangle: 
+		(Rectangle  point: 0@0 point:  (board grid width + 1 )@(board grid height +1 ))]	)
+	 do:[ :aPoint| 
+		self removeBox:( board boxAt:aPoint ) 
+		].
 	
 ]
 

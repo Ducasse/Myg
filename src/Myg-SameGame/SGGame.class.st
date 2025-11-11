@@ -12,8 +12,7 @@ Class {
 
 { #category : 'accessing' }
 SGGame >> addPoints: numberOfPoints [
-
-	points := points + numberOfPoints
+	points := points + numberOfPoints.
 ]
 
 { #category : 'accessing' }
@@ -43,6 +42,5 @@ SGGame >> points [
 
 { #category : 'accessing' }
 SGGame >> points: numberOfPoints [
-
 	points := numberOfPoints
 ]

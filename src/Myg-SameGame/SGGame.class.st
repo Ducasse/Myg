@@ -1,45 +1,47 @@
 Class {
-	#name : #SGGame,
-	#superclass : #Object,
+	#name : 'SGGame',
+	#superclass : 'Object',
 	#instVars : [
 		'board',
 		'points'
 	],
-	#category : #'Myg-SameGame-Model'
+	#category : 'Myg-SameGame-Model',
+	#package : 'Myg-SameGame',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGGame >> addPoints: numberOfPoints [
 
 	points := points + numberOfPoints
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGGame >> grid [
 
 	^ board
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGGame >> grid: aBoard [
 
 	board := aBoard
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SGGame >> initialize [
 
 	super initialize.
 	self points: 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGGame >> points [
 
 	^ points
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGGame >> points: numberOfPoints [
 
 	points := numberOfPoints

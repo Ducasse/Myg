@@ -1,15 +1,17 @@
 Class {
-	#name : #SGBoxElement,
-	#superclass : #BlElement,
+	#name : 'SGBoxElement',
+	#superclass : 'BlElement',
 	#instVars : [
 		'gridPosition',
 		'board',
 		'box'
 	],
-	#category : #'Myg-SameGame-UI'
+	#category : 'Myg-SameGame-UI',
+	#package : 'Myg-SameGame',
+	#tag : 'UI'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBoxElement class >> createWithBox: aSGBox [
 
 	^ self new
@@ -18,25 +20,25 @@ SGBoxElement class >> createWithBox: aSGBox [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBoxElement >> board [
 
 	^ board
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBoxElement >> board: aSGBoardElement [
 
 	board := aSGBoardElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBoxElement >> box [ 
 	
 	^ box
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBoxElement >> box: aSGBox [ 
 
 	box := aSGBox.
@@ -44,25 +46,25 @@ SGBoxElement >> box: aSGBox [
 	self initializeAnnouncements
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 SGBoxElement >> click [
 
 	self box click
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBoxElement >> gridPosition [
 
 	^ gridPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SGBoxElement >> gridPosition: aPosition [
 
 	gridPosition := aPosition
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SGBoxElement >> initialize [
 
 	super initialize.
@@ -75,13 +77,13 @@ SGBoxElement >> initialize [
 	self addEventHandlerOn: BlClickEvent do: [ :anEvent | self click ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SGBoxElement >> initializeAnnouncements [ 
 
 	self box announcer when: SGStateChangedAnnouncement send: #updateBackgroundColor to: self
 ]
 
-{ #category : #'change reporting' }
+{ #category : 'change reporting' }
 SGBoxElement >> updateBackgroundColor [
 
 	^ self background: self box backgroundRepresentation

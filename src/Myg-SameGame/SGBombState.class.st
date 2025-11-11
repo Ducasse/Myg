@@ -1,5 +1,5 @@
 Class {
-	#name : 'SGMultiColorState',
+	#name : 'SGBombState',
 	#superclass : 'SGAbstractState',
 	#category : 'Myg-SameGame-Model',
 	#package : 'Myg-SameGame',
@@ -7,13 +7,13 @@ Class {
 }
 
 { #category : 'accessing' }
-SGMultiColorState >> backgroundRepresentation [
+SGBombState >> backgroundRepresentation [
 
 	^ Color black 
 ]
 
 { #category : 'as yet unclassified' }
-SGMultiColorState >> canPropagate: aState [
+SGBombState >> canPropagate: aState [
 	"comment stating purpose of instance-side method"
 	"scope: class-variables  &  instance-variables"
 
@@ -21,12 +21,12 @@ SGMultiColorState >> canPropagate: aState [
 ]
 
 { #category : 'testing' }
-SGMultiColorState >> literal [
-	^ 'Mu'
+SGBombState >> literal [
+	^ 'Bo'
 ]
 
 { #category : 'as yet unclassified' }
-SGMultiColorState >> propagateFromASquare: aSquare [
+SGBombState >> propagateFromASquare: aSquare [
 
 	^ aSquare propagateClickOnlyAround
 ]

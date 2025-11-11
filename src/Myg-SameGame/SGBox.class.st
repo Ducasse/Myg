@@ -16,18 +16,18 @@ SGBox class >> blue [
 	^ self withState: SGBlueState uniqueInstance 
 ]
 
+{ #category : 'as yet unclassified' }
+SGBox class >> bomb [
+	"comment stating purpose of class-side method"
+	"scope: class-variables  &  class-instance-variables"
+
+	^ self withState: SGBombState uniqueInstance
+]
+
 { #category : 'constants' }
 SGBox class >> green [
 
 	^ self withState: SGGreenState uniqueInstance
-]
-
-{ #category : 'as yet unclassified' }
-SGBox class >> multiColor [
-	"comment stating purpose of class-side method"
-	"scope: class-variables  &  class-instance-variables"
-
-	^ self withState: SGMultiColorState uniqueInstance
 ]
 
 { #category : 'factory' }

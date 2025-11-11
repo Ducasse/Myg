@@ -229,40 +229,14 @@ SameGameBoardElementTest >> testClickOnBlueCase [
 ]
 
 { #category : 'tests' }
-SameGameBoardElementTest >> testClickOnIsolatedBoxNothingChanges [
-
-	self assert: (board grid at: 1 @ 1) literal equals: 'B'.
-	self assert: (board grid at: 1 @ 2) literal equals: 'B'.
-	self assert: (board grid at: 1 @ 3) literal equals: 'R'.
-	self assert: (board grid at: 2 @ 1) literal equals: 'Y'.
-	self assert: (board grid at: 2 @ 2) literal equals: 'Y'.
-	self assert: (board grid at: 2 @ 3) literal equals: 'Y'.
-	self assert: (board grid at: 3 @ 1) literal equals: 'G'.
-	self assert: (board grid at: 3 @ 2) literal equals: 'G'.
-	self assert: (board grid at: 3 @ 3) literal equals: 'N'.
-	
-	board hitBoxOnx: 1 y: 3.
-
-	self assert: (board grid at: 1 @ 1) literal equals: 'B'.
-	self assert: (board grid at: 1 @ 2) literal equals: 'B'.
-	self assert: (board grid at: 1 @ 3) literal equals: 'R'.
-	self assert: (board grid at: 2 @ 1) literal equals: 'Y'.
-	self assert: (board grid at: 2 @ 2) literal equals: 'Y'.
-	self assert: (board grid at: 2 @ 3) literal equals: 'Y'.
-	self assert: (board grid at: 3 @ 1) literal equals: 'G'.
-	self assert: (board grid at: 3 @ 2) literal equals: 'G'.
-	self assert: (board grid at: 3 @ 3) literal equals: 'N'
-]
-
-{ #category : 'tests' }
-SameGameBoardElementTest >> testClickOnMultiColorAndAllAroundDisappear [
+SameGameBoardElementTest >> testClickOnBombAndAllAroundDisappear [
 
 	| board game graphicBoard |
 	"Y: Yellow , B: Blue , G: Green , R: Red , Mu : Multicolor
 	represents this grid:
 	 | R | Y | r  | r | r |
 	 | B | y | b  | r | r |
-	 | G | y | Mu | r | r |
+	 | G | y | Bo | r | r |
 	 | B | y | b  | r | r |
 	 | B | g | y  | b | r |
 	"
@@ -283,7 +257,7 @@ SameGameBoardElementTest >> testClickOnMultiColorAndAllAroundDisappear [
 						
 			 at: 1 @ 3 put: SGBox green;
 			 at: 2 @ 3 put: SGBox yellow;
-			 at: 3 @ 3 put: SGBox multiColor ;
+			 at: 3 @ 3 put: SGBox bomb ;
 			 at: 4 @ 3 put: SGBox red;
 			 at: 5 @ 3 put: SGBox red;
 			
@@ -309,7 +283,7 @@ SameGameBoardElementTest >> testClickOnMultiColorAndAllAroundDisappear [
 	represents this grid:
 	 | R | Y | r  | r | r |
 	 | B | y | b  | r | r |
-	 | G | y | Mu | r | r |
+	 | G | y | Bo | r | r |
 	 | B | y | b  | r | r |
 	 | B | g | y  | b | r |
 	"
@@ -325,6 +299,32 @@ SameGameBoardElementTest >> testClickOnMultiColorAndAllAroundDisappear [
 	self assert: (board grid at: 4 @ 1) literal equals: 'R'.
 	self assert: (board grid at: 4 @ 2) literal equals: 'B'.
 	self assert: (board grid at: 4 @ 3) literal equals: 'N'.
+]
+
+{ #category : 'tests' }
+SameGameBoardElementTest >> testClickOnIsolatedBoxNothingChanges [
+
+	self assert: (board grid at: 1 @ 1) literal equals: 'B'.
+	self assert: (board grid at: 1 @ 2) literal equals: 'B'.
+	self assert: (board grid at: 1 @ 3) literal equals: 'R'.
+	self assert: (board grid at: 2 @ 1) literal equals: 'Y'.
+	self assert: (board grid at: 2 @ 2) literal equals: 'Y'.
+	self assert: (board grid at: 2 @ 3) literal equals: 'Y'.
+	self assert: (board grid at: 3 @ 1) literal equals: 'G'.
+	self assert: (board grid at: 3 @ 2) literal equals: 'G'.
+	self assert: (board grid at: 3 @ 3) literal equals: 'N'.
+	
+	board hitBoxOnx: 1 y: 3.
+
+	self assert: (board grid at: 1 @ 1) literal equals: 'B'.
+	self assert: (board grid at: 1 @ 2) literal equals: 'B'.
+	self assert: (board grid at: 1 @ 3) literal equals: 'R'.
+	self assert: (board grid at: 2 @ 1) literal equals: 'Y'.
+	self assert: (board grid at: 2 @ 2) literal equals: 'Y'.
+	self assert: (board grid at: 2 @ 3) literal equals: 'Y'.
+	self assert: (board grid at: 3 @ 1) literal equals: 'G'.
+	self assert: (board grid at: 3 @ 2) literal equals: 'G'.
+	self assert: (board grid at: 3 @ 3) literal equals: 'N'
 ]
 
 { #category : 'tests' }

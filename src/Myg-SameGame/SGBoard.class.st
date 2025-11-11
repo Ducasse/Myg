@@ -101,7 +101,7 @@ SGBoard >> randomBox [
 		          SGRedState.
 		          SGGreenState.
 		          SGYellowState.
-					 SGMultiColorState }.
+					 SGBombState }.
 	^ SGBox withState: states atRandom uniqueInstance 
 ]
 

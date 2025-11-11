@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'instance creation' }
-SameGame class >> open [
+SameGame class >> gameWithSize: size [
 
 	<script>
 	| board graphicBoard space |
@@ -26,6 +26,7 @@ SameGame class >> open [
 { #category : 'instance creation' }
 SameGame class >> open [
 	self openWithSize:20
+
 ]
 
 { #category : 'instance creation' }

@@ -66,18 +66,51 @@ SGBox >> backgroundRepresentation [
 	^ self state backgroundRepresentation 
 ]
 
+{ #category : 'as yet unclassified' }
+SGBox >> bombPropagate [
+	"comment stating purpose of instance-side method"
+	"scope: class-variables  &  instance-variables"
+	| x y |
+	x := self x.
+	y := self y.
+	(self board hitList includes: self) ifTrue: [ ^ self ].
+	self board hitList add: self.
+	((x@y) eightNeighbors select: [:aPoint| aPoint isInsideRectangle: 
+		(Rectangle  point: 0@0 point:  (board grid width + 1 )@(board grid height +1 ))]	)
+	 do:[ :aPoint| 
+		self removeBox:( board boxAt:aPoint ) 
+		].
+	
+]
+
 { #category : 'clicking' }
 SGBox >> checkAndPropagateOnX: x y: y [
 
 	| case |
 	case := self board boxAt: x @ y.
-	(state canPropagate: case state) ifTrue: [ case propagateClick ]
+	(state canPropagate: case state) ifTrue: [ case defaultPropagate ]
 ]
 
 { #category : 'public' }
 SGBox >> click [
 
 	self board hitBox: self
+]
+
+{ #category : 'clicking' }
+SGBox >> defaultPropagate [
+
+	| x y |
+	x := self x.
+	y := self y.
+	(self board hitList includes: self) ifTrue: [ ^ self ].
+	self board hitList add: self.
+	x - 1 > 0 ifTrue: [ self checkAndPropagateOnX: x - 1 y: y ].
+	x + 1 <= self board grid width ifTrue: [
+		self checkAndPropagateOnX: x + 1 y: y ].
+	y - 1 > 0 ifTrue: [ self checkAndPropagateOnX: x y: y - 1 ].
+	y + 1 <= self board grid height ifTrue: [
+		self checkAndPropagateOnX: x y: y + 1 ]
 ]
 
 { #category : 'drawing - general' }
@@ -99,36 +132,40 @@ SGBox >> literal [
 	^ state literal
 ]
 
-{ #category : 'clicking' }
-SGBox >> propagateClick [
-
-	| x y |
-	x := self x.
-	y := self y.
-	(self board hitList includes: self) ifTrue: [ ^ self ].
-	self board hitList add: self.
-	x - 1 > 0 ifTrue: [ self checkAndPropagateOnX: x - 1 y: y ].
-	x + 1 <= self board grid width ifTrue: [
-		self checkAndPropagateOnX: x + 1 y: y ].
-	y - 1 > 0 ifTrue: [ self checkAndPropagateOnX: x y: y - 1 ].
-	y + 1 <= self board grid height ifTrue: [
-		self checkAndPropagateOnX: x y: y + 1 ]
+{ #category : 'as yet unclassified' }
+SGBox >> propagate [
+	self state propagateFromASquare: self.
 ]
 
 { #category : 'as yet unclassified' }
-SGBox >> propagateClickOnlyAround [
+SGBox >> propagateBlueState [
 	"comment stating purpose of instance-side method"
 	"scope: class-variables  &  instance-variables"
-	| x y |
-	x := self x.
-	y := self y.
-	(self board hitList includes: self) ifTrue: [ ^ self ].
-	self board hitList add: self.
-	((x@y) eightNeighbors select: [:aPoint| aPoint isInsideRectangle: 
-		(Rectangle  point: 0@0 point:  (board grid width + 1 )@(board grid height +1 ))]	)
-	 do:[ :aPoint| 
-		self removeBox:( board boxAt:aPoint ) 
-		].
+	^ self defaultPropagate.
+	
+]
+
+{ #category : 'as yet unclassified' }
+SGBox >> propagateGreenState [
+	"comment stating purpose of instance-side method"
+	"scope: class-variables  &  instance-variables"
+	^ self defaultPropagate.
+	
+]
+
+{ #category : 'as yet unclassified' }
+SGBox >> propagateRedState [
+	"comment stating purpose of instance-side method"
+	"scope: class-variables  &  instance-variables"
+	^ self defaultPropagate.
+	
+]
+
+{ #category : 'as yet unclassified' }
+SGBox >> propagateYellowState [
+	"comment stating purpose of instance-side method"
+	"scope: class-variables  &  instance-variables"
+	^ self defaultPropagate.
 	
 ]
 

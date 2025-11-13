@@ -17,3 +17,9 @@ SGYellowState >> literal [
 
 	^ 'Y'
 ]
+
+{ #category : 'as yet unclassified' }
+SGYellowState >> propagateFromASquare: aSquare [
+
+	^ aSquare propagateYellowState.
+]

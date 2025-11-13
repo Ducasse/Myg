@@ -76,7 +76,7 @@ SGBox >> bombPropagate [
 	(self board hitList includes: self) ifTrue: [ ^ self ].
 	self board hitList add: self.
 	((x@y) eightNeighbors select: [:aPoint| aPoint isInsideRectangle: 
-		(Rectangle  point: 0@0 point:  (board grid width + 1 )@(board grid height +1 ))]	)
+		(Rectangle  point: 1@1 point:  (board grid width + 1 )@(board grid height +1 ))]	)
 	 do:[ :aPoint| 
 		self removeBox:( board boxAt:aPoint ) 
 		].

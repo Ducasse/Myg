@@ -302,6 +302,29 @@ SameGameBoardElementTest >> testClickOnBombAndAllAroundDisappear [
 ]
 
 { #category : 'tests' }
+SameGameBoardElementTest >> testClickOnBombWithNullAroundDoesNotThrowAnyThing [
+	| board game graphicBoard |
+	"Y: Yellow , B: Blue , G: Green , R: Red , Bo : Bomb
+	represents this grid:
+
+	 | Bo |
+
+	"
+	game := SGGame new.
+	board := SGBoard new game: game.
+	board configureGrid: ((CTNewArray2D width: 1 height:1)
+			 at: 1 @ 1 put: SGBox bomb;
+			 yourself).
+
+	graphicBoard := SGBoardElement new.
+	graphicBoard grid: board grid.
+	board hitBoxOnx: 1 y:1.
+
+
+
+]
+
+{ #category : 'tests' }
 SameGameBoardElementTest >> testClickOnIsolatedBoxNothingChanges [
 
 	self assert: (board grid at: 1 @ 1) literal equals: 'B'.

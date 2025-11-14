@@ -28,5 +28,5 @@ SGBombState >> literal [
 { #category : 'as yet unclassified' }
 SGBombState >> propagateFromASquare: aSquare [
 
-	^ aSquare bombPropagate
+	^ aSquare propagateBombState
 ]

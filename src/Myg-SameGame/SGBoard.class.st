@@ -49,7 +49,7 @@ SGBoard >> generateGridWidth: width height: height [
 SGBoard >> hitBox: aBox [
 
 	aBox hasNullState ifTrue: [ ^ self ].
-	aBox propagate.
+	aBox propagateClick.
 	self hitList size > 1 ifTrue: [
 		self hitList do: [ :each | each state: SGNullState uniqueInstance ] ].
 

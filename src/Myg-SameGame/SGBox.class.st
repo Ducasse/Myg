@@ -77,7 +77,7 @@ SGBox >> defaultCheckAndPropagateOnX: x y: y [
 
 	| case |
 	case := self board boxAt: x @ y.
-	(state = case state) ifTrue: [ case propagate ]
+	case state = self state ifTrue: [ case propagateClick ]
 ]
 
 { #category : 'clicking' }
@@ -116,11 +116,6 @@ SGBox >> literal [
 ]
 
 { #category : 'as yet unclassified' }
-SGBox >> propagate [
-	self state propagateFromASquare: self.
-]
-
-{ #category : 'as yet unclassified' }
 SGBox >> propagateBlueState [
 	"comment stating purpose of instance-side method"
 	"scope: class-variables  &  instance-variables"
@@ -143,6 +138,11 @@ SGBox >> propagateBombState [
 		self removeBox:( board boxAt:aPoint ) 
 		].
 	
+]
+
+{ #category : 'as yet unclassified' }
+SGBox >> propagateClick [
+	self state propagateFromASquare: self.
 ]
 
 { #category : 'as yet unclassified' }

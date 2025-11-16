@@ -4,6 +4,7 @@ Class {
 	#instVars : [
 		'game',
 		'hitList',
+		'scoreStrategyCalculator',
 		'buildBoxStrategy'
 	],
 	#category : 'Myg-SameGame-Model',
@@ -31,8 +32,7 @@ SGBoard >> buildBoxStrategy: strategy [
 
 { #category : 'compute' }
 SGBoard >> calculePoint [
-
-	^ hitList size * hitList size
+	^ self scoreStrategyCalculator calculePoint: hitList.
 ]
 
 { #category : 'accessing' }
@@ -64,9 +64,8 @@ SGBoard >> hitBox: aBox [
 	aBox hasNullState ifTrue: [ ^ self ].
 	aBox propagateClick.
 	self hitList size > 1 ifTrue: [
+		self game addPoints: self calculePoint.
 		self hitList do: [ :each | each state: SGNullState uniqueInstance ] ].
-
-	self game addPoints: self calculePoint.
 
 	self hitList do: [ :each | self reorganizeColumn: each x ].
 
@@ -92,6 +91,7 @@ SGBoard >> initialize [
 
 	super initialize.
 	hitList := OrderedCollection new.
+	scoreStrategyCalculator := SGCalculeScoreDefault new.
 	buildBoxStrategy := SGBuildRandom new
 	"stackHit := Stack new -> has no reference"
 	"stock les cases touchées"
@@ -138,6 +138,16 @@ SGBoard >> reorganizeForEmptyColumn [
 			i - cpt to: self grid width - 1 - cpt do: [ :j |
 				self switchColumn: j withColumn: j + 1 ].
 			cpt := cpt + 1 ] ]
+]
+
+{ #category : 'accessing' }
+SGBoard >> scoreStrategyCalculator [
+	^scoreStrategyCalculator.
+]
+
+{ #category : 'accessing' }
+SGBoard >> scoreStrategyCalculator:strategy [
+	^scoreStrategyCalculator:=strategy.
 ]
 
 { #category : 'compute' }

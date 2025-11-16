@@ -7,9 +7,9 @@ Class {
 	#instVars : [
 		'count'
 	],
-	#category : 'Myg-SameGame-Model-Tests',
-	#package : 'Myg-SameGame',
-	#tag : 'Model-Tests'
+	#category : 'Myg-SameGame-Tests-Model',
+	#package : 'Myg-SameGame-Tests',
+	#tag : 'Model'
 }
 
 { #category : 'as yet unclassified' }

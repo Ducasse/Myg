@@ -9,9 +9,9 @@ Class {
 		'board',
 		'graphicScore'
 	],
-	#category : 'Myg-SameGame-UI-Tests',
-	#package : 'Myg-SameGame',
-	#tag : 'UI-Tests'
+	#category : 'Myg-SameGame-Tests-UI',
+	#package : 'Myg-SameGame-Tests',
+	#tag : 'UI'
 }
 
 { #category : 'running' }

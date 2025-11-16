@@ -97,19 +97,6 @@ SGBoard >> isColumnEmpty: x [
 	^ true
 ]
 
-{ #category : 'random subclass instance creation' }
-SGBoard >> randomBox [
-
-	| states |
-	states := {
-		          SGBlueState.
-		          SGRedState.
-		          SGGreenState.
-		          SGYellowState.
-					 SGBombState }.
-	^ SGBox withState: states atRandom uniqueInstance 
-]
-
 { #category : 'reorganize' }
 SGBoard >> reorganizeColumn: x [
 

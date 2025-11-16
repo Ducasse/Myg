@@ -32,15 +32,16 @@ SGGame >> announcer [
 ]
 
 { #category : 'accessing' }
-SGGame >> grid [
+SGGame >> board [
 
 	^ board
 ]
 
 { #category : 'accessing' }
-SGGame >> grid: aBoard [
+SGGame >> board: aBoard [
 
-	board := aBoard
+	board := aBoard.
+	board game: self
 ]
 
 { #category : 'initialization' }

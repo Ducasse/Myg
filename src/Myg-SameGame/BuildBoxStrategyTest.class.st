@@ -1,5 +1,5 @@
 Class {
-	#name : 'BuildBoxStrategy',
+	#name : 'BuildBoxStrategyTest',
 	#superclass : 'TestCase',
 	#category : 'Myg-SameGame-Model-Tests',
 	#package : 'Myg-SameGame',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'tests' }
-BuildBoxStrategy >> testMockStrategyIsReallyCalled [
+BuildBoxStrategyTest >> testMockStrategyIsReallyCalled [
 	"Actually we dont have a specific strategy without random so i created a mock strat to test it properly"
 	|board strat|
 	board:=SGBoard new.

@@ -72,7 +72,7 @@ SGBox >> click [
 	self board hitBox: self
 ]
 
-{ #category : 'clicking' }
+{ #category : 'propagating' }
 SGBox >> defaultCheckAndPropagateOnX: x y: y [
 
 	| case |
@@ -80,7 +80,7 @@ SGBox >> defaultCheckAndPropagateOnX: x y: y [
 	case state = self state ifTrue: [ case propagateClick ]
 ]
 
-{ #category : 'clicking' }
+{ #category : 'propagating' }
 SGBox >> defaultPropagate [
 
 	| x y |
@@ -115,7 +115,7 @@ SGBox >> literal [
 	^ state literal
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'propagating' }
 SGBox >> propagateBombState [
 	"comment stating purpose of instance-side method"
 	"scope: class-variables  &  instance-variables"
@@ -132,17 +132,23 @@ SGBox >> propagateBombState [
 	
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'propagating' }
 SGBox >> propagateClick [
 	self state propagateFromASquare: self.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'propagating' }
 SGBox >> propagateNormalState [
 	"comment stating purpose of instance-side method"
 	"scope: class-variables  &  instance-variables"
 	^ self defaultPropagate.
 	
+]
+
+{ #category : 'accessing' }
+SGBox >> propagateNullState [
+
+	^ self
 ]
 
 { #category : 'removing' }

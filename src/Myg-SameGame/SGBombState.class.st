@@ -1,6 +1,6 @@
 Class {
 	#name : 'SGBombState',
-	#superclass : 'SGAbstractState',
+	#superclass : 'SGSpecialState',
 	#category : 'Myg-SameGame-Model',
 	#package : 'Myg-SameGame',
 	#tag : 'Model'

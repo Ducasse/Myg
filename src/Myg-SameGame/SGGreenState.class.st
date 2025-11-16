@@ -1,6 +1,6 @@
 Class {
 	#name : 'SGGreenState',
-	#superclass : 'SGAbstractState',
+	#superclass : 'SGNormalState',
 	#category : 'Myg-SameGame-Model',
 	#package : 'Myg-SameGame',
 	#tag : 'Model'
@@ -16,10 +16,4 @@ SGGreenState >> backgroundRepresentation [
 SGGreenState >> literal [
 
 	^ 'G'
-]
-
-{ #category : 'as yet unclassified' }
-SGGreenState >> propagateFromASquare: aSquare [
-
-	^ aSquare propagateGreenState.
 ]

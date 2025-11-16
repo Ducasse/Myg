@@ -116,14 +116,6 @@ SGBox >> literal [
 ]
 
 { #category : 'as yet unclassified' }
-SGBox >> propagateBlueState [
-	"comment stating purpose of instance-side method"
-	"scope: class-variables  &  instance-variables"
-	^ self defaultPropagate.
-	
-]
-
-{ #category : 'as yet unclassified' }
 SGBox >> propagateBombState [
 	"comment stating purpose of instance-side method"
 	"scope: class-variables  &  instance-variables"
@@ -146,23 +138,7 @@ SGBox >> propagateClick [
 ]
 
 { #category : 'as yet unclassified' }
-SGBox >> propagateGreenState [
-	"comment stating purpose of instance-side method"
-	"scope: class-variables  &  instance-variables"
-	^ self defaultPropagate.
-	
-]
-
-{ #category : 'as yet unclassified' }
-SGBox >> propagateRedState [
-	"comment stating purpose of instance-side method"
-	"scope: class-variables  &  instance-variables"
-	^ self defaultPropagate.
-	
-]
-
-{ #category : 'as yet unclassified' }
-SGBox >> propagateYellowState [
+SGBox >> propagateNormalState [
 	"comment stating purpose of instance-side method"
 	"scope: class-variables  &  instance-variables"
 	^ self defaultPropagate.

@@ -1,5 +1,5 @@
 Class {
-	#name : 'SGNormalState',
+	#name : 'SGBasicState',
 	#superclass : 'SGAbstractState',
 	#category : 'Myg-SameGame-Model',
 	#package : 'Myg-SameGame',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-SGNormalState >> propagateFromASquare: aSquare [
+SGBasicState >> propagateFromASquare: aSquare [
 	"comment stating purpose of instance-side method"
 	"scope: class-variables  &  instance-variables"
 

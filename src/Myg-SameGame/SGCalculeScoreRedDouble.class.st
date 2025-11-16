@@ -1,16 +1,19 @@
 Class {
 	#name : 'SGCalculeScoreRedDouble',
 	#superclass : 'SGCalculeScoreStrategy',
-	#category : 'Myg-SameGame',
-	#package : 'Myg-SameGame'
+	#category : 'Myg-SameGame-Model',
+	#package : 'Myg-SameGame',
+	#tag : 'Model'
 }
 
 { #category : 'as yet unclassified' }
 SGCalculeScoreRedDouble >> calculePoint: hitlist [
-	| score |
-	score := hitlist size * hitlist size.
-	hitlist
-		detect: [ :each | each state class = SGRedState ]
-		ifFound: [ ^ score * 2 ]
-		ifNone: [ ^ score ]
+
+	| nbBloc |
+	nbBloc := 0.
+	hitlist do: [ :each |
+			nbBloc := each state class= SGRedState
+				          ifTrue: [ nbBloc + 2 ]
+				          ifFalse: [ nbBloc + 1 ] ].
+	^ nbBloc * nbBloc
 ]

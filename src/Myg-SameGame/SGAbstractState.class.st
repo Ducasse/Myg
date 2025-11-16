@@ -24,3 +24,9 @@ SGAbstractState >> isNull [
 SGAbstractState >> literal [
 	self subclassResponsibility 
 ]
+
+{ #category : 'as yet unclassified' }
+SGAbstractState >> propagateFromASquare: aSquare [
+
+	self subclassResponsibility
+]

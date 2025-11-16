@@ -76,8 +76,9 @@ SGBoard >> hitBox: aBox [
 
 { #category : 'hit' }
 SGBoard >> hitBoxOnx: x y: y [
-
-	self hitBox: (self grid at: x @ y)
+	
+	 ^ self hitBox: (self boxAt: x@y )
+	
 ]
 
 { #category : 'accessing' }
@@ -113,7 +114,8 @@ SGBoard >> randomBox [
 		          SGBlueState.
 		          SGRedState.
 		          SGGreenState.
-		          SGYellowState }.
+		          SGYellowState.
+					 SGBombState }.
 	^ SGBox withState: states atRandom uniqueInstance 
 ]
 

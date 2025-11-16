@@ -16,6 +16,14 @@ SGBox class >> blue [
 	^ self withState: SGBlueState uniqueInstance 
 ]
 
+{ #category : 'as yet unclassified' }
+SGBox class >> bomb [
+	"comment stating purpose of class-side method"
+	"scope: class-variables  &  class-instance-variables"
+
+	^ self withState: SGBombState uniqueInstance
+]
+
 { #category : 'constants' }
 SGBox class >> green [
 
@@ -58,18 +66,34 @@ SGBox >> backgroundRepresentation [
 	^ self state backgroundRepresentation 
 ]
 
-{ #category : 'clicking' }
-SGBox >> checkAndPropagateOnX: x y: y [
+{ #category : 'public' }
+SGBox >> click [
+
+	self board hitBox: self
+]
+
+{ #category : 'propagating' }
+SGBox >> defaultCheckAndPropagateOnX: x y: y [
 
 	| case |
 	case := self board boxAt: x @ y.
 	case state = self state ifTrue: [ case propagateClick ]
 ]
 
-{ #category : 'public' }
-SGBox >> click [
+{ #category : 'propagating' }
+SGBox >> defaultPropagate [
 
-	self board hitBox: self
+	| x y |
+	x := self x.
+	y := self y.
+	(self board hitList includes: self) ifTrue: [ ^ self ].
+	self board hitList add: self.
+	x - 1 > 0 ifTrue: [ self defaultCheckAndPropagateOnX: x - 1 y: y ].
+	x + 1 <= self board grid width ifTrue: [
+		self defaultCheckAndPropagateOnX: x + 1 y: y ].
+	y - 1 > 0 ifTrue: [ self defaultCheckAndPropagateOnX: x y: y - 1 ].
+	y + 1 <= self board grid height ifTrue: [
+		self defaultCheckAndPropagateOnX: x y: y + 1 ]
 ]
 
 { #category : 'drawing - general' }
@@ -91,20 +115,46 @@ SGBox >> literal [
 	^ state literal
 ]
 
-{ #category : 'clicking' }
-SGBox >> propagateClick [
-
+{ #category : 'propagating' }
+SGBox >> propagateBombState [
+	"comment stating purpose of instance-side method"
+	"scope: class-variables  &  instance-variables"
 	| x y |
 	x := self x.
 	y := self y.
 	(self board hitList includes: self) ifTrue: [ ^ self ].
 	self board hitList add: self.
-	x - 1 > 0 ifTrue: [ self checkAndPropagateOnX: x - 1 y: y ].
-	x + 1 <= self board grid width ifTrue: [
-		self checkAndPropagateOnX: x + 1 y: y ].
-	y - 1 > 0 ifTrue: [ self checkAndPropagateOnX: x y: y - 1 ].
-	y + 1 <= self board grid height ifTrue: [
-		self checkAndPropagateOnX: x y: y + 1 ]
+	((x@y) eightNeighbors select: [:aPoint| aPoint isInsideRectangle: 
+		(Rectangle  point: 1@1 point:  (board grid width + 1 )@(board grid height +1 ))]	)
+	 do:[ :aPoint| 
+		self removeBox:( board boxAt:aPoint ) 
+		].
+	
+]
+
+{ #category : 'propagating' }
+SGBox >> propagateClick [
+	self state propagateFromASquare: self.
+]
+
+{ #category : 'propagating' }
+SGBox >> propagateNormalState [
+	"comment stating purpose of instance-side method"
+	"scope: class-variables  &  instance-variables"
+	^ self defaultPropagate.
+	
+]
+
+{ #category : 'accessing' }
+SGBox >> propagateNullState [
+
+	^ self
+]
+
+{ #category : 'removing' }
+SGBox >> removeBox: aBox [
+	self board hitList add: aBox.
+	
 ]
 
 { #category : 'accessing' }

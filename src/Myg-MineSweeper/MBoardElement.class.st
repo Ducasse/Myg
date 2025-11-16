@@ -24,35 +24,37 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MBoardElement,
-	#superclass : #BlElement,
+	#name : 'MBoardElement',
+	#superclass : 'BlElement',
 	#instVars : [
 		'game'
 	],
-	#category : #'Myg-MineSweeper-UI'
+	#category : 'Myg-MineSweeper-UI',
+	#package : 'Myg-MineSweeper',
+	#tag : 'UI'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MBoardElement class >> launchLarge [
 	^ self withMatrixTest5x5WithMagnifier: 2
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MBoardElement class >> launchRegular [
 	^ self withMatrixTest5x5 
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MBoardElement class >> launchSmall [
 	^ self withMatrixTest5x5WithMagnifier: 0.5
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MBoardElement class >> launchVeryLarge [
 	^ self withMatrixTest5x5WithMagnifier: 4
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MBoardElement class >> open [
 	<script>
 
@@ -113,13 +115,13 @@ MBoardElement class >> open [
 	space show
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MBoardElement class >> openWithModel: aModel [
 
 	^ self openWithModel: aModel withMagnifier: 1
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MBoardElement class >> openWithModel: aModel withMagnifier: aNumber [
 
 	| aGameElement space |
@@ -141,36 +143,36 @@ MBoardElement class >> openWithModel: aModel withMagnifier: aNumber [
 	^ space
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 MBoardElement class >> withMatrixForField [
 
 	^ self openWithModel: MBoard matrixForField
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 MBoardElement class >> withMatrixForFieldWithMagnifier: aNumber [
 
 	^ self openWithModel: MBoard matrixForField withMagnifier: aNumber 
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 MBoardElement class >> withMatrixTest5x5 [
 
 	^ self openWithModel: MBoard matrixTest5x5
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 MBoardElement class >> withMatrixTest5x5WithMagnifier: aNumber [
 
 	^ self openWithModel: MBoard matrixTest5x5 withMagnifier: aNumber 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MBoardElement >> game [ 
 	^ game
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MBoardElement >> game: aMBoard [
 
 	game := aMBoard.
@@ -182,7 +184,7 @@ MBoardElement >> game: aMBoard [
 		self addChild: boxElement ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MBoardElement >> initialize [
 
 	super initialize.

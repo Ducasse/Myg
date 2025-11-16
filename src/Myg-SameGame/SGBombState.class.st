@@ -12,14 +12,6 @@ SGBombState >> backgroundRepresentation [
 	^ Color black 
 ]
 
-{ #category : 'as yet unclassified' }
-SGBombState >> canPropagate: aState [
-	"comment stating purpose of instance-side method"
-	"scope: class-variables  &  instance-variables"
-
-	^ true
-]
-
 { #category : 'testing' }
 SGBombState >> literal [
 	^ 'Bo'

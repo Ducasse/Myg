@@ -10,17 +10,28 @@ Class {
 SameGame class >> gameWithSize: size [
 
 	<script>
-	| board graphicBoard space |
-	board := SGBoard new game: SGGame new.
+	| game board graphicBoard graphicScore container |
+	game := SGGame new.
+	board := SGBoard new game: game.
 	board generateGridWidth: size height: size.
+
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
 
-	space := BlSpace new.
-	space title: 'SameGame'.
-	space root addChild: graphicBoard.
-	space extent: 1000 @ 1000.
-	^ space
+	graphicScore := SGScoreElement new.
+	graphicScore game: game.
+
+	container := BlElement new
+		             layout: BlLinearLayout vertical;
+		             constraintsDo: [ :c |
+				             c horizontal matchParent.
+				             c vertical matchParent ].
+
+	container addChildren: {
+			graphicScore.
+			graphicBoard }.
+
+	^ container
 ]
 
 { #category : 'instance creation' }
@@ -33,8 +44,12 @@ SameGame class >> open [
 SameGame class >> openWithSize: size [
 
 	<script>
-
-	(self gameWithSize: size) show
+	| space |
+	space := BlSpace new.
+	space title: 'SameGame'.
+	space root addChild: (self gameWithSize: size).
+	space extent: 1000 @ 1000.
+	space show
 ]
 
 { #category : 'see class side' }

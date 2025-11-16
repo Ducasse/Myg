@@ -91,7 +91,7 @@ SGBoard >> initialize [
 
 	super initialize.
 	hitList := OrderedCollection new.
-	scoreStrategyCalculator := SGCalculeScoreDefault new
+	scoreStrategyCalculator := SGCalculeScoreDefault new.
 	buildBoxStrategy := SGBuildRandom new
 	"stackHit := Stack new -> has no reference"
 	"stock les cases touchées"

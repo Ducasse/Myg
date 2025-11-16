@@ -22,6 +22,17 @@ SGBoardTest >> testAddingBoardToGameAlsoAddGameToBoard [
 ]
 
 { #category : 'tests' }
+SGBoardTest >> testAddingBoardToGameKnowingAnotherBoardDontWork [
+
+	| game |
+	game := SGGame new. 
+	game board: SGBoard new.
+
+	self should: [ SGBoard new game: game] raise: Error
+	
+]
+
+{ #category : 'tests' }
 SGBoardTest >> testSetGameWithGameKnowingTheBoard [
 
 	| board game |

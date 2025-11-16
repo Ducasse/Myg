@@ -38,7 +38,7 @@ SGBoard >> game [
 SGBoard >> game: aSGGame [
 
 	game := aSGGame.
-	game board ifNil: [ self error: 'Consistency error: the game must be know the board before the board can reference it.' ]
+	game board = self ifFalse: [ self error: 'Consistency error: the game must be know the board before the board can reference it.' ]
 ]
 
 { #category : 'reorganize' }

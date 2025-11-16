@@ -3,7 +3,9 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'height',
-		'width'
+		'width',
+		'buildBoxStrategy',
+		'calculeScoreStrategy'
 	],
 	#category : 'Myg-SameGame-Model',
 	#package : 'Myg-SameGame',
@@ -30,25 +32,68 @@ SameGame class >> width: aInteger height: anotherInteger [
 		  height: anotherInteger
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 SameGame >> baseHeight [
 	^ 20
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 SameGame >> baseWidth [
 	^ 20
 ]
 
-{ #category : 'as yet unclassified' }
-SameGame >> graphicGame [
+{ #category : 'accessing' }
+SameGame >> buildBoxStrategy [
 
-	| graphicBoard graphicScore container game board |
+	^ buildBoxStrategy
+]
+
+{ #category : 'settings' }
+SameGame >> buildBoxStrategy: aSGBuildBoxStrategy [
+
+	buildBoxStrategy := aSGBuildBoxStrategy
+]
+
+{ #category : 'accessing' }
+SameGame >> calculeScoreStrategy [
+
+	^ calculeScoreStrategy 
+]
+
+{ #category : 'settings' }
+SameGame >> calculeScoreStrategy: aSGCalculeScoreStrategy [
+
+	calculeScoreStrategy := aSGCalculeScoreStrategy
+]
+
+{ #category : 'opening' }
+SameGame >> createGameAndBoard [
+
+	| game board |
 	game := SGGame new.
 	board := SGBoard new game: game.
+	self buildBoxStrategy ifNotNil: [ :strat | board buildBoxStrategy: buildBoxStrategy ].
+	self calculeScoreStrategy ifNotNil: [ :strat | board scoreStrategyCalculator: buildBoxStrategy ].
+	
 	board generateGridWidth: self width height: self height.
+	^ {
+		  game.
+		  board }
+]
 
+{ #category : 'opening' }
+SameGame >> graphicGame [
+
+	| gameAndBoard |
+	gameAndBoard := self createGameAndBoard.
+	^ self graphicGame: gameAndBoard first board: gameAndBoard second
+]
+
+{ #category : 'opening' }
+SameGame >> graphicGame: game board: board [
+
+	| graphicBoard graphicScore container |
 	graphicBoard := SGBoardElement new.
 	graphicBoard grid: board grid.
 
@@ -67,23 +112,18 @@ SameGame >> graphicGame [
 	^ container
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 SameGame >> height [
 	^ height ifNil:[self baseHeight]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'settings' }
 SameGame >> height: anInteger [
 
 	height := anInteger
 ]
 
-{ #category : 'as yet unclassified' }
-SameGame >> initialize [ 
-	
-]
-
-{ #category : 'as yet unclassified' }
+{ #category : 'opening' }
 SameGame >> open [
 
 	| space |
@@ -94,12 +134,12 @@ SameGame >> open [
 	space show
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 SameGame >> width [
 	^ width ifNil:[ self baseWidth ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'settings' }
 SameGame >> width: anInteger [
 
 	width := anInteger

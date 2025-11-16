@@ -3,7 +3,8 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'board',
-		'points'
+		'points',
+		'announcer'
 	],
 	#category : 'Myg-SameGame-Model',
 	#package : 'Myg-SameGame',
@@ -12,7 +13,14 @@ Class {
 
 { #category : 'accessing' }
 SGGame >> addPoints: numberOfPoints [
-	points := points + numberOfPoints.
+
+	self points: points + numberOfPoints
+]
+
+{ #category : 'accessing' }
+SGGame >> announcer [
+
+	^ announcer ifNil: [ announcer := Announcer new ]
 ]
 
 { #category : 'accessing' }
@@ -42,5 +50,8 @@ SGGame >> points [
 
 { #category : 'accessing' }
 SGGame >> points: numberOfPoints [
-	points := numberOfPoints
+
+	points := numberOfPoints.
+	
+	self announcer announce: SGScoreChangedAnnouncement new.
 ]

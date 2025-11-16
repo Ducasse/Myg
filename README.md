@@ -8,7 +8,7 @@ Load a stable version of Myg with the following snippet, in Pharo 13:
 
 ```Smalltalk
 Metacello new
-	repository: 'github://Ducasse/Myg:v1.0.5/src';
+	repository: 'github://LeoDefossez/Myg:v1.0.5/src';
 	baseline: 'Myg';
 	load.
 ```
@@ -17,7 +17,7 @@ For development, load master branch:
 
 ```Smalltalk
 Metacello new
-	repository: 'github://Ducasse/Myg';
+	repository: 'github://LeoDefossez/Myg';
 	baseline: 'Myg';
 	onConflictUseLoaded;
 	load.

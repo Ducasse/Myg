@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'game',
 		'hitList',
-		'scoreStrategyCalculator'
+		'scoreStrategyCalculator',
+		'buildBoxStrategy'
 	],
 	#category : 'Myg-SameGame-Model',
 	#package : 'Myg-SameGame',
@@ -15,6 +16,18 @@ Class {
 SGBoard >> boxAt: aPoint [
 
 	^ self grid at: aPoint x @ aPoint y
+]
+
+{ #category : 'accessing' }
+SGBoard >> buildBoxStrategy [
+
+	^ buildBoxStrategy
+]
+
+{ #category : 'accessing' }
+SGBoard >> buildBoxStrategy: strategy [
+
+	buildBoxStrategy := strategy
 ]
 
 { #category : 'compute' }
@@ -41,7 +54,7 @@ SGBoard >> generateGridWidth: width height: height [
 	array2D := CTNewArray2D
 		           width: width
 		           height: height
-		           tabulate: [ :col :row | self randomBox ].
+		           tabulate: [ :col :row | self buildBoxStrategy buildBox ].
 	self configureGrid: array2D
 ]
 
@@ -64,18 +77,7 @@ SGBoard >> hitBox: aBox [
 { #category : 'hit' }
 SGBoard >> hitBoxOnx: x y: y [
 
-	(self grid at: x @ y) hasNullState ifTrue: [ ^ self ].
-	(self grid at: x @ y) propagateClick.
-	self hitList size > 1 ifTrue: [
-		self hitList do: [ :each | each state: SGNullState uniqueInstance  ] ].
-
-	self game addPoints: self calculePoint.
-
-	self hitList do: [ :each | self reorganizeColumn: each x ].
-
-	self hitList removeAll.
-
-	self reorganizeForEmptyColumn
+	self hitBox: (self grid at: x @ y)
 ]
 
 { #category : 'accessing' }
@@ -90,6 +92,7 @@ SGBoard >> initialize [
 	super initialize.
 	hitList := OrderedCollection new.
 	scoreStrategyCalculator := SGCalculeScoreDefault new
+	buildBoxStrategy := SGBuildRandom new
 	"stackHit := Stack new -> has no reference"
 	"stock les cases touchées"
 ]

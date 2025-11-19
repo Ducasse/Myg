@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'game',
 		'hitList',
-		'scoreStrategyCalculator',
 		'buildBoxStrategy'
 	],
 	#category : 'Myg-SameGame-Model',
@@ -30,21 +29,16 @@ SGBoard >> buildBoxStrategy: strategy [
 	buildBoxStrategy := strategy
 ]
 
-{ #category : 'compute' }
-SGBoard >> calculePoint [
-	^ self scoreStrategyCalculator calculePoint: hitList.
-]
-
 { #category : 'accessing' }
 SGBoard >> game [
-
 	^ game
 ]
 
 { #category : 'accessing' }
-SGBoard >> game: aGame [
+SGBoard >> game: aSGGame [
 
-	game := aGame
+	game := aSGGame.
+	game board = self ifFalse: [ self error: 'Consistency error: the game must be know the board before the board can reference it.' ]
 ]
 
 { #category : 'reorganize' }
@@ -64,7 +58,7 @@ SGBoard >> hitBox: aBox [
 	aBox hasNullState ifTrue: [ ^ self ].
 	aBox propagateClick.
 	self hitList size > 1 ifTrue: [
-		self game addPoints: self calculePoint.
+		self game addPointsFor: self hitList.
 		self hitList do: [ :each | each state: SGNullState uniqueInstance ] ].
 
 	self hitList do: [ :each | self reorganizeColumn: each x ].
@@ -92,7 +86,6 @@ SGBoard >> initialize [
 
 	super initialize.
 	hitList := OrderedCollection new.
-	scoreStrategyCalculator := SGCalculeScoreDefault new.
 	buildBoxStrategy := SGBuildRandom new
 	"stackHit := Stack new -> has no reference"
 	"stock les cases touchées"
@@ -104,19 +97,6 @@ SGBoard >> isColumnEmpty: x [
 	1 to: self grid height do: [ :i |
 	(self boxAt: x @ i) hasNullState ifFalse: [ ^ false ] ].
 	^ true
-]
-
-{ #category : 'random subclass instance creation' }
-SGBoard >> randomBox [
-
-	| states |
-	states := {
-		          SGBlueState.
-		          SGRedState.
-		          SGGreenState.
-		          SGYellowState.
-					 SGBombState }.
-	^ SGBox withState: states atRandom uniqueInstance 
 ]
 
 { #category : 'reorganize' }
@@ -140,16 +120,6 @@ SGBoard >> reorganizeForEmptyColumn [
 			i - cpt to: self grid width - 1 - cpt do: [ :j |
 				self switchColumn: j withColumn: j + 1 ].
 			cpt := cpt + 1 ] ]
-]
-
-{ #category : 'accessing' }
-SGBoard >> scoreStrategyCalculator [
-	^scoreStrategyCalculator.
-]
-
-{ #category : 'accessing' }
-SGBoard >> scoreStrategyCalculator:strategy [
-	^scoreStrategyCalculator:=strategy.
 ]
 
 { #category : 'compute' }

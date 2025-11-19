@@ -27,6 +27,16 @@ SGScoreElementTest >> setUp [
 ]
 
 { #category : 'tests' }
+SGScoreElementTest >> testHitsChangesWhenGamePointsAreUpdated [
+
+	| before |
+	before := graphicScore blLastMoveHits text asString. "Should start at 0"
+	
+	game addPointsFor: { SGBox red }.
+	self deny: graphicScore blLastMoveHits text asString equals: before
+]
+
+{ #category : 'tests' }
 SGScoreElementTest >> testScoreChangesWhenGamePointsAreUpdated [
 
 	| before |

@@ -15,6 +15,11 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
+SGScoreElement >> blLastMoveHits [
+	^ blLastMoveHits
+]
+
+{ #category : 'as yet unclassified' }
 SGScoreElement >> blScore [
 	^ blScore
 ]
@@ -77,10 +82,11 @@ SGScoreElement >> initializeAnnouncements [
 { #category : 'as yet unclassified' }
 SGScoreElement >> updateScore [
 
-	| newScore |
+	| newScore hits |
 	newScore := game ifNil: [ 0 ] ifNotNil: [ game points ].
+	hits := game ifNil: [ 0 ] ifNotNil: [ game lastHitList size ].
 	blScore text: ((BlRopedText string: 'Total score: ' , newScore asString) fontSize: 50).
 	blLastMoveScore text: ((BlRopedText string: 'Score: ' , (newScore - score) asString) fontSize: 50).
-	blLastMoveHits text: ((BlRopedText string: 'Hits: ' , 5 asString) fontSize: 50).
+	blLastMoveHits text: ((BlRopedText string: 'Hits: ' , hits asString) fontSize: 50).
 	score := newScore
 ]

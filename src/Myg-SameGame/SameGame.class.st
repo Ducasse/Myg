@@ -12,7 +12,8 @@ SameGame class >> gameWithSize: size [
 	<script>
 	| game board graphicBoard graphicScore container |
 	game := SGGame new.
-	board := SGBoard new game: game.
+	board := SGBoard new.
+	game board: board.
 	board generateGridWidth: size height: size.
 
 	graphicBoard := SGBoardElement new.

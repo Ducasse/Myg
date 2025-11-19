@@ -21,7 +21,9 @@ SGBoardElementTest >> setUp [
 	 | R | Y | N | 
 
 	"
-	board := SGBoard new game: SGGame new.
+	
+	board := SGBoard new.
+	SGGame new board: board.
 	board configureGrid: ((CTNewArray2D width: 3 height: 3)
 			 at: 1 @ 1 put: SGBox blue;
 			 at: 2 @ 1 put: SGBox yellow;

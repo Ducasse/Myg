@@ -1,6 +1,12 @@
 Class {
 	#name : 'SameGame',
 	#superclass : 'Object',
+	#instVars : [
+		'buildBoxStrategy',
+		'calculeScoreStrategy',
+		'height',
+		'width'
+	],
 	#category : 'Myg-SameGame-Model',
 	#package : 'Myg-SameGame',
 	#tag : 'Model'
@@ -40,7 +46,7 @@ SameGame >> baseWidth [
 { #category : 'accessing' }
 SameGame >> buildBoxStrategy [
 
-	^ buildBoxStrategy
+	^ buildBoxStrategy 
 ]
 
 { #category : 'settings' }
@@ -58,7 +64,7 @@ SameGame >> calculeScoreStrategy [
 { #category : 'settings' }
 SameGame >> calculeScoreStrategy: aSGCalculeScoreStrategy [
 
-	calculeScoreStrategy := aSGCalculeScoreStrategy
+	calculeScoreStrategy := aSGCalculeScoreStrategy 
 ]
 
 { #category : 'opening' }
@@ -66,7 +72,8 @@ SameGame >> createGameAndBoard [
 
 	| game board |
 	game := SGGame new.
-	board := SGBoard new game: game.
+	board := SGBoard new .
+	game board: board.
 	self buildBoxStrategy ifNotNil: [ :strat | board buildBoxStrategy: buildBoxStrategy ].
 	self calculeScoreStrategy ifNotNil: [ :strat | board scoreStrategyCalculator: buildBoxStrategy ].
 	
@@ -114,7 +121,7 @@ SameGame >> height [
 { #category : 'settings' }
 SameGame >> height: anInteger [
 
-	height := anInteger
+	height := anInteger 
 ]
 
 { #category : 'opening' }
@@ -129,7 +136,7 @@ SameGame >> open [
 ]
 
 { #category : 'accessing' }
-SameGame >> width [
+SameGame >> width [ 
 	^ width ifNil:[ self baseWidth ]
 ]
 

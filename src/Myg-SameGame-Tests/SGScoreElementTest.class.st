@@ -9,10 +9,21 @@ Class {
 		'board',
 		'graphicScore'
 	],
-	#category : 'Myg-SameGame-Tests-UI',
+	#category : 'Myg-SameGame-Tests-Model',
 	#package : 'Myg-SameGame-Tests',
-	#tag : 'UI'
+	#tag : 'Model'
 }
+
+{ #category : 'running' }
+SGScoreElementTest >> setUp [
+
+	super setUp.
+
+	game := SGGame new.
+
+	graphicScore := SGScoreElement new.
+	graphicScore game: game
+]
 
 { #category : 'tests' }
 SGScoreElementTest >> testHitsChangesWhenGamePointsAreUpdated [
@@ -22,4 +33,14 @@ SGScoreElementTest >> testHitsChangesWhenGamePointsAreUpdated [
 	
 	game addPointsFor: { SGBox red }.
 	self deny: graphicScore blLastMoveHits text asString equals: before
+]
+
+{ #category : 'tests' }
+SGScoreElementTest >> testScoreChangesWhenGamePointsAreUpdated [
+
+	| before |
+	before := graphicScore blScore text asString.
+
+	game addPoints: 7.
+	self deny: graphicScore blScore text asString equals: before
 ]

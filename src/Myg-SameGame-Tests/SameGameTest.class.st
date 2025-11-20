@@ -20,6 +20,21 @@ SameGameTest >> testBasicSize [
 ]
 
 { #category : 'tests' }
+SameGameTest >> testCreateGameAndBoardKnownEachOther [
+
+	| gameAndBoard game board |
+	gameAndBoard := SameGame new createGameAndBoard.
+	game := 
+	gameAndBoard first.
+	board := gameAndBoard second.
+	
+	self assert: game  equals: board game.
+	self assert: board  equals: game board.
+	
+	
+]
+
+{ #category : 'tests' }
 SameGameTest >> testCreateGraphicGameWithoutDefiningHeight [
 
 	| sameGame game board |

@@ -1,7 +1,7 @@
 Class {
 	#name : 'SGStateChangedAnnouncement',
 	#superclass : 'Announcement',
-	#category : 'Myg-SameGame-Model',
+	#category : 'Myg-SameGame-Announcements',
 	#package : 'Myg-SameGame',
-	#tag : 'Model'
+	#tag : 'Announcements'
 }

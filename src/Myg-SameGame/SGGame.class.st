@@ -4,7 +4,9 @@ Class {
 	#instVars : [
 		'board',
 		'points',
-		'announcer'
+		'announcer',
+		'scoreStrategyCalculator',
+		'lastHitList'
 	],
 	#category : 'Myg-SameGame-Model',
 	#package : 'Myg-SameGame',
@@ -18,28 +20,42 @@ SGGame >> addPoints: numberOfPoints [
 ]
 
 { #category : 'accessing' }
+SGGame >> addPointsFor: hitList [
+	lastHitList := hitList.
+	self addPoints: (self scoreStrategyCalculator calculePoint: hitList)
+]
+
+{ #category : 'accessing' }
 SGGame >> announcer [
 
 	^ announcer ifNil: [ announcer := Announcer new ]
 ]
 
 { #category : 'accessing' }
-SGGame >> grid [
+SGGame >> board [
 
 	^ board
 ]
 
 { #category : 'accessing' }
-SGGame >> grid: aBoard [
+SGGame >> board: aBoard [
 
-	board := aBoard
+	board := aBoard.
+	board game: self
 ]
 
 { #category : 'initialization' }
 SGGame >> initialize [
 
 	super initialize.
-	self points: 0
+	self points: 0.
+	lastHitList := {  }.
+	scoreStrategyCalculator := SGCalculeScoreDefault new
+]
+
+{ #category : 'accessing' }
+SGGame >> lastHitList [
+	^ lastHitList
 ]
 
 { #category : 'accessing' }
@@ -54,4 +70,10 @@ SGGame >> points: numberOfPoints [
 	points := numberOfPoints.
 	
 	self announcer announce: SGScoreChangedAnnouncement new.
+]
+
+{ #category : 'accessing' }
+SGGame >> scoreStrategyCalculator [
+
+	^ scoreStrategyCalculator
 ]

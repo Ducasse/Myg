@@ -1,30 +1,6 @@
-"
-I offer an simple API to create and parametrise SameGame games
-
-## Simple usage 
-```
-SameGame open.
-SameGame openWithSize: anInteger.
-```
-
-## For richer parametrisation
-Use this and check the methods tagged with `settings` to understand everything you can do
-```
-(SameGame width: anInteger height: anotherInteger)
-	setting1: aSetting;
-	setting2: anotherSetting;
-	open
-```
-"
 Class {
 	#name : 'SameGame',
 	#superclass : 'Object',
-	#instVars : [
-		'height',
-		'width',
-		'buildBoxStrategy',
-		'calculeScoreStrategy'
-	],
 	#category : 'Myg-SameGame-Model',
 	#package : 'Myg-SameGame',
 	#tag : 'Model'

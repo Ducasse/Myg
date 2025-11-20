@@ -86,7 +86,7 @@ SGBoard >> initialize [
 
 	super initialize.
 	hitList := OrderedCollection new.
-	buildBoxStrategy := SGBuildRandom new
+	buildBoxStrategy := SGBuildRandomAll new
 	"stackHit := Stack new -> has no reference"
 	"stock les cases touchées"
 ]

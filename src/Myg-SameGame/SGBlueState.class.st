@@ -1,6 +1,6 @@
 Class {
 	#name : 'SGBlueState',
-	#superclass : 'SGNormalState',
+	#superclass : 'SGBasicState',
 	#category : 'Myg-SameGame-Model',
 	#package : 'Myg-SameGame',
 	#tag : 'Model'

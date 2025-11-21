@@ -37,6 +37,12 @@ SameGame class >> open [
 ]
 
 { #category : 'instance creation' }
+SameGame class >> openWidth: aInteger height: anotherInteger [
+
+	^ (self width: aInteger height: anotherInteger) open
+]
+
+{ #category : 'instance creation' }
 SameGame class >> openWithSize: size [
 
 	(self width: size height: size) open

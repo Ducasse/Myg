@@ -18,7 +18,7 @@ SGAbstractState class >> uniqueInstance [
 { #category : 'accessing' }
 SGAbstractState >> backgroundRepresentation [
 
-	^ SubclassResponsibility
+	^ self subclassResponsibility
 ]
 
 { #category : 'testing' }

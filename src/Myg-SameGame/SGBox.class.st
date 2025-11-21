@@ -30,6 +30,14 @@ SGBox class >> green [
 	^ self withState: SGGreenState uniqueInstance
 ]
 
+{ #category : 'as yet unclassified' }
+SGBox class >> lineKiller [
+	"comment stating purpose of class-side method"
+	"scope: class-variables  &  class-instance-variables"
+
+	^ self withState: SGLineKillerState uniqueInstance
+]
+
 { #category : 'factory' }
 SGBox class >> null [
 
@@ -135,6 +143,23 @@ SGBox >> propagateBombState [
 { #category : 'propagating' }
 SGBox >> propagateClick [
 	self state propagateFromABox: self.
+]
+
+{ #category : 'as yet unclassified' }
+SGBox >> propagateLineKillerState [
+	"comment stating purpose of instance-side method"
+
+	"scope: class-variables  &  instance-variables"
+
+	| x y xMaxBoard xMinBoard targetLine |
+	x := self x.
+	y := self y.
+	xMaxBoard := board grid width.
+	xMinBoard := 1.
+	(self board hitList includes: self) ifTrue: [ ^ self ].
+	self board hitList add: self.
+	targetLine := (LineSegment new) from: (xMinBoard @ y) to: (xMaxBoard @ y).
+	targetLine do: [ :aPoint | self removeBox: (board boxAt: aPoint) ]
 ]
 
 { #category : 'propagating' }

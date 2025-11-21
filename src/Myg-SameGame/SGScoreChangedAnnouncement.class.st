@@ -1,7 +1,7 @@
 Class {
 	#name : 'SGScoreChangedAnnouncement',
 	#superclass : 'Announcement',
-	#category : 'Myg-SameGame-Model',
+	#category : 'Myg-SameGame-Announcements',
 	#package : 'Myg-SameGame',
-	#tag : 'Model'
+	#tag : 'Announcements'
 }

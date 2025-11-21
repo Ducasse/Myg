@@ -15,6 +15,12 @@ SGAbstractState class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
+{ #category : 'accessing' }
+SGAbstractState >> backgroundRepresentation [
+
+	^ self subclassResponsibility
+]
+
 { #category : 'testing' }
 SGAbstractState >> isNull [
 	^ false
@@ -26,7 +32,7 @@ SGAbstractState >> literal [
 ]
 
 { #category : 'as yet unclassified' }
-SGAbstractState >> propagateFromASquare: aSquare [
+SGAbstractState >> propagateFromABox: aSquare [
 
 	self subclassResponsibility
 ]

@@ -32,7 +32,7 @@ SGNullState >> literal [
 ]
 
 { #category : 'accessing' }
-SGNullState >> propagateFromASquare: aSGBox [ 
+SGNullState >> propagateFromABox: aSGBox [ 
 	
 	^ aSGBox propagateNullState
 ]

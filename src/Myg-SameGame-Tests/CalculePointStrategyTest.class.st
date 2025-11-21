@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'tests' }
-CalculePointStrategyTest >> testRedDoublePointStrat [
+CalculePointStrategyTest >> testRedDoublePointStrat [ 
 
 	| hitlist score strat |
 	strat := SGCalculeScoreRedDouble new.

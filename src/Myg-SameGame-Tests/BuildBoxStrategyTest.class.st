@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'tests' }
-BuildBoxStrategyTest >> testMockStrategyIsReallyCalled [
+BuildBoxStrategyTest >> testMockStrategyIsReallyCalled [ 
 	"Actually we dont have a specific strategy without random so i created a mock strat to test it properly"
 	|board strat|
 	board:=SGBoard new.
@@ -15,11 +15,6 @@ BuildBoxStrategyTest >> testMockStrategyIsReallyCalled [
 	strat := SGBuildBoxStrategyMock new.
 	board buildBoxStrategy: strat.
 	board generateGridWidth: 5 height:5.
-	
+
 	self assert: strat count equals: 25.
-	
-	
-	
-	
-	
 ]

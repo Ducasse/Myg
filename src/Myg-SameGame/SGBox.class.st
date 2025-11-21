@@ -136,7 +136,7 @@ SGBox >> propagateBombState [
 		(Rectangle  point: 1@1 point:  (board grid width + 1 )@(board grid height +1 ))]	)
 	 do:[ :aPoint| 
 		self removeBox:( board boxAt:aPoint ) 
-		].
+		]. 
 	
 ]
 
@@ -151,15 +151,14 @@ SGBox >> propagateLineKillerState [
 
 	"scope: class-variables  &  instance-variables"
 
-	| x y xMaxBoard xMinBoard targetLine |
-	x := self x.
+	| y xMaxBoard xMinBoard |
 	y := self y.
 	xMaxBoard := board grid width.
 	xMinBoard := 1.
 	(self board hitList includes: self) ifTrue: [ ^ self ].
 	self board hitList add: self.
-	targetLine := (LineSegment new) from: (xMinBoard @ y) to: (xMaxBoard @ y).
-	targetLine do: [ :aPoint | self removeBox: (board boxAt: aPoint) ]
+	xMinBoard to: xMaxBoard do: [ :x |
+	self removeBox: (board boxAt: x @ y) ]
 ]
 
 { #category : 'propagating' }

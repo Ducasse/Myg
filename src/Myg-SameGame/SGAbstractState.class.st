@@ -15,6 +15,12 @@ SGAbstractState class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
+{ #category : 'accessing' }
+SGAbstractState >> backgroundRepresentation [
+
+	^ SubclassResponsibility
+]
+
 { #category : 'testing' }
 SGAbstractState >> isNull [
 	^ false

@@ -18,12 +18,11 @@ Class {
 SGScoreElementTest >> setUp [
 
 	super setUp.
-	
-	game := SGGame new.
-	
-	graphicScore := SGScoreElement new.
-	graphicScore game: game.
 
+	game := SGGame new.
+
+	graphicScore := SGScoreElement new.
+	graphicScore game: game
 ]
 
 { #category : 'tests' }
@@ -41,7 +40,7 @@ SGScoreElementTest >> testScoreChangesWhenGamePointsAreUpdated [
 
 	| before |
 	before := graphicScore blScore text asString.
-	
+
 	game addPoints: 7.
 	self deny: graphicScore blScore text asString equals: before
 ]

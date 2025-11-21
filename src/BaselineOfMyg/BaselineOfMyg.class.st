@@ -39,5 +39,7 @@ BaselineOfMyg >> baseline: spec [
 		package: 'Myg-Memory' 
 		with: [ spec requires: #( 'MygCore' ) ];
 		package: 'Myg-SameGame' 
-		with: [ spec requires: #( 'MygCore' ) ]
+		with: [ spec requires: #( 'MygCore' ) ];
+		package: 'Myg-SameGame-tests' 
+		with: [ spec requires: #( 'Myg-SameGame' ) ]
 ]

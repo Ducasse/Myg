@@ -1,6 +1,3 @@
-"
-Mocked Class of build strategy
-"
 Class {
 	#name : 'SGBuildBoxStrategyMock',
 	#superclass : 'Object',
@@ -13,25 +10,26 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-SGBuildBoxStrategyMock >> buildBox [
+SGBuildBoxStrategyMock >> buildBox [ 
 
 	count := count + 1.
 	^ SGBox new
 ]
 
-{ #category : 'accessing' }
-SGBuildBoxStrategyMock >> count [
+{ #category : 'as yet unclassified' }
+SGBuildBoxStrategyMock >> count [ 
 
 	^ count
 ]
 
-{ #category : 'accessing' }
-SGBuildBoxStrategyMock >> count:aValue [ 
-	count:=aValue.
+{ #category : 'as yet unclassified' }
+SGBuildBoxStrategyMock >> count: aValue [
+
+	count := aValue
 ]
 
-{ #category : 'initialization' }
-SGBuildBoxStrategyMock >> initialize [
+{ #category : 'as yet unclassified' }
+SGBuildBoxStrategyMock >> initialize [ 
 
 	count := 0
 ]

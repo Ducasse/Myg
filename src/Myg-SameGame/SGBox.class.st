@@ -134,7 +134,7 @@ SGBox >> propagateBombState [
 
 { #category : 'propagating' }
 SGBox >> propagateClick [
-	self state propagateFromASquare: self.
+	self state propagateFromABox: self.
 ]
 
 { #category : 'propagating' }

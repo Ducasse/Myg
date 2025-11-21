@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-SGBasicState >> propagateFromASquare: aSquare [
+SGBasicState >> propagateFromABox: aSquare [
 	"comment stating purpose of instance-side method"
 	"scope: class-variables  &  instance-variables"
 

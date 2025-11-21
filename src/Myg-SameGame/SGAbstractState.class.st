@@ -26,7 +26,7 @@ SGAbstractState >> literal [
 ]
 
 { #category : 'as yet unclassified' }
-SGAbstractState >> propagateFromASquare: aSquare [
+SGAbstractState >> propagateFromABox: aSquare [
 
 	self subclassResponsibility
 ]

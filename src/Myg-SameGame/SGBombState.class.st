@@ -18,7 +18,7 @@ SGBombState >> literal [
 ]
 
 { #category : 'as yet unclassified' }
-SGBombState >> propagateFromASquare: aSquare [
+SGBombState >> propagateFromABox: aSGBox [
 
-	^ aSquare propagateBombState
+	^ aSGBox propagateBombState
 ]
